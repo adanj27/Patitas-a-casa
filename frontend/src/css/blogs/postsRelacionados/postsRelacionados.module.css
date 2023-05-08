@@ -1,0 +1,17 @@
+.postsRelacionados__container {
+  margin: 50px 0;
+}
+
+.postsRelacionados__container>h4 {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.05em;
+}
+
+.postsRelacionados__card {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,113 @@
+.card {
+  width: 220px;
+  height: 220px;
+  padding: 15px 15px 15px 45px;
+  /* background: linear-gradient(120deg, #de523f, #ffffff 100%); */
+  background-color: rgba(238, 238, 238, 0.73);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  z-index: 1;
+  transition: all 400ms ease-in-out;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.card:hover {
+  width: 400px;
+  transition: all 400ms ease-in-out;
+  background-color: #de523f;
+}
+
+  .card:hover h3{
+  font-size: 23px;
+}
+.card:hover p{
+  font-size: 25px;
+}
+
+.cardNoExtended {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cardNoExtended>p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 15%;
+  text-align: center;
+  background-color: #de523f;
+  border-radius: 8px;
+  color: #FAFAFA;
+}
+
+.cardNoExtended>img {
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cardExtended {
+  display: none;
+  text-align: left;
+  margin: 4%;
+}
+
+.card:hover>.cardExtended {
+  display: block;
+}
+
+.cardExtended>h3 {
+  padding: 2px 0px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #de523f;
+  border-radius: 8px;
+  color: #FAFAFA;
+}
+
+
+.cardExtended>ul {
+  list-style: none;
+}
+
+.cardButton {
+  padding: 0;
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
+.cardButton>img {
+  width: fit-content;
+  height: fit-content;
+  transition: all 200ms ease;
+}
+
+.cardButton>img:hover {
+  transform: scale(1.3);
+}
+
+.arrow {
+  rotate: 90deg;
+}
+
+@media (max-width: 500px){
+  .card {
+    padding: 15px 15px 15px 70px;
+  }
+  .card:hover {
+    width: 340px;
+    padding: 30px 10px 30px 15px;
+  }
+  .cardNoExtended img {
+    height: 140px;
+    width: 140px;
+  }
+}

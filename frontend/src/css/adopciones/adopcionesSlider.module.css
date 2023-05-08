@@ -1,0 +1,104 @@
+.carousel {
+  position: relative;
+  width: 700px;
+  padding: 160px 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  /* background-color: #fff; */
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.prev {
+  left: 0;
+
+}
+
+.next {
+  right: 0;
+}
+
+.arrow-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.carousel-items {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.pet {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pet img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+@media (max-width: 1000px){
+  .carousel {
+    padding: 60px 0px;
+    width: 400px;
+  }
+  .carousel-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+}
+@media (max-width: 500px){
+  .carousel {
+    width: 340px;
+  }
+}
+@media (max-width: 400px){
+  .carousel {
+    width: 300px;
+  }
+}

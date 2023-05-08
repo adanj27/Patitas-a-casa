@@ -1,0 +1,28 @@
+.blogContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2% 0;
+  transition: all 300ms ease;
+  animation: slide 16s infinite alternate ease-in-out;
+}
+
+.blogMegaContainer {
+  display: flex;
+  margin: 1%;
+}
+
+
+@keyframes slide {
+  0% { margin-left: 0%;}
+  20% { margin-left: 0%;}
+
+  25% { margin-left: -50%;}
+  45% { margin-left: -50%;}
+
+  50% { margin-left: -75%;}
+  70% { margin-left: -75%;}
+
+  75% { margin-left: -100%;}
+  95% { margin-left: -100%;}
+}
