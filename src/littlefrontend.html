@@ -1,0 +1,31 @@
+<!-- este es código de chatgpt, solo queria probar si las imagenes se podían previsualizar facilmente.
+si quieres hacer pruebas para ver como los frontends interactuarían con la api envez de usar
+postman/swagger usa esto, así yo también puedo probarlo xD.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Download Image Example</title>
+    </head>
+    <body>
+        <button onclick="downloadImage()">Download Image</button>
+        <br />
+        <img id="preview" />
+        <script>
+            function downloadImage() {
+                fetch("http://localhost:5192/api/images/1683526889359.jpg")
+                    .then((response) => response.blob())
+                    .then((blob) => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = "image.jpg";
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        document.getElementById("preview").src = url;
+                    });
+            }
+        </script>
+    </body>
+</html>

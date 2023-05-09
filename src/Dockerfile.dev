@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0-bulleye-slim AS build-env
+
+WORKDIR /app
+
+COPY backendtest.csproj ./
+RUN dotnet restore
+
+COPY . ./
+
+EXPOSE 5192
+
+ENTRYPOINT ["dotnet", "watch", "run"]

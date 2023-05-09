@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+    backendtest:
+        container_name: backendtest-dev
+        build: .
+        ports:
+            - "5192:5192"
+        depends_on:
+            - db-dev
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+    db:
+        container_name: db-dev
+        ports:
+            - "3306:3306"
+        image: mariadb:10.11.2
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=dogs
+        volumes:
+            - maria-data-dev:/var/lib/mysql
+volumes:
+    maria-data-dev:
+        name: maria-data-dev
