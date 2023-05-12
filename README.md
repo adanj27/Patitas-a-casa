@@ -1,4 +1,4 @@
-<img url:"https://cdn.discordapp.com/attachments/1086317081865228361/1106240884166627429/image.png"></img>
+<img src:"https://cdn.discordapp.com/attachments/1086317081865228361/1106240884166627429/image.png"></img>
 # Patitas-a-casa
 ---
 ## Este es el repo de Patitas a Casa un proyecto desarrollador por un grupo de desarrolladores tanto back como front end, todo el proyecto está hecho a voluntad y todo lo que recaudemos está destinado al proyecto tanto como a refugios
