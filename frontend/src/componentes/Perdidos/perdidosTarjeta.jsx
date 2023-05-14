@@ -5,9 +5,25 @@ import twitter from '../../iconos/twitterSubdata.png';
 import facebook from '../../iconos/facebookSubdata.png';
 import styles from '../../css/Perdidos/perdidosTarjeta.module.css';
 
+//Animate On Scroll
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
+
 export default function PerdidosTarjeta({ url_img, nombre, tam, zona, fecha, contacto, desc, encontrado }) {
+
+	useEffect(() => {
+		AOS.init({
+			offset: 200,
+			duration: 600,
+			easing: 'ease-in-sine',
+			delay: 50,
+			once: true,
+		});
+	}, []);
+
 	return (
-		<div className={styles.perdidosTarjeta}>
+		<div className={styles.perdidosTarjeta} data-aos='fade'>
 			<img
 				className={styles.perdidosTarjeta__img}
 				src={url_img}
