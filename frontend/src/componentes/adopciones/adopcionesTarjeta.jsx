@@ -9,9 +9,9 @@ const adopcionesTarjeta = ({ imagen, nombre, descripcion }) => {
       <img src={imagen} alt="Mascota en adopción" />
       <h3 className={styles.text}>{nombre}</h3>
       {/* <p className={styles.text}>{descripcion}</p> */}
-      <div>
+      {/* <div>
         <BtnPrincipal texto="Leer más"/>
-      </div>
+      </div> */}
     </article>
   )
 }
