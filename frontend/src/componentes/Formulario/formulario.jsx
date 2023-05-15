@@ -14,7 +14,7 @@ import bg from '../../iconos/imagenes recursos/bg_form.webp';
  */
 
 const formulario = ({ setModal }) => {
-	const [petType, setPetType] = useState(false);
+	const [petType, setPetType] = useState(true);
 	const [file, setFile] = useState(false);
 	const [uploadImgHover, setUploadImgHover] = useState(false);
 
