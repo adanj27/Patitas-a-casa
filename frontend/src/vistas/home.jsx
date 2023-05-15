@@ -80,9 +80,9 @@ const Home = () => {
 					align="center"
 				/>
 				<AdopcionesTarjetaContainer />
-				<div className={styles.header__buttons}>
+				<Link to="/adoptar" className={styles.header__buttons}>
 					<BtnPrincipal texto="Ver más" />
-				</div>
+				</Link>
 			</div>
 			<LetraTitulo texto="BLOG" clase="letra-titulo--red" align="center" />
 			<BlogContainer />
