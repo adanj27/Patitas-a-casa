@@ -1,6 +1,6 @@
 .carousel {
   position: relative;
-  width: 700px;
+  width: 860px;
   padding: 160px 0;
 }
 
@@ -43,8 +43,8 @@
 }
 
 .carousel-item {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 100px;
 }
 
@@ -84,11 +84,11 @@
 @media (max-width: 1000px){
   .carousel {
     padding: 60px 0px;
-    width: 400px;
+    max-width: 500px;
   }
   .carousel-item {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 40px;
   }
 }
