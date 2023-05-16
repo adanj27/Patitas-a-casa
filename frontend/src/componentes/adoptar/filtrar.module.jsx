@@ -12,14 +12,17 @@ const Filtrar = () => {
 				className={styles.filtrar__input}
 				type="text"
 				onFocus={() => setVerValores(true)}
+				onBlur={() => setVerValores(false)}
 				placeholder="-- Todos --"
 				id="input"
+				readOnly="readonly"
 			/>
 			<img
 				className={styles.filtrar__down}
 				src={downIcon}
 				alt="down"
 				style={verValores ? { transform: 'rotate(180deg)' } : {}}
+				onClick={() => setVerValores(!verValores)}
 			/>
 			<div
 				className={styles.filter__option}

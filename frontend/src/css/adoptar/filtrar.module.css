@@ -5,6 +5,9 @@
 	flex-direction: column;
 	margin: 2%;
 }
+.filtrar img {
+	cursor: pointer;
+}
 
 .filtrar__input {
 	height: 40px;
