@@ -26,7 +26,8 @@ const Filtrar = () => {
 			/>
 			<div
 				className={styles.filter__option}
-				style={verValores ? { height: '140px' } : {}}>
+				style={verValores ? { height: '140px' } : {}}
+			>
 				<Opcion tipo="-- Todos --" view={setVerValores} />
 				<Opcion tipo="Perros" view={setVerValores} />
 				<Opcion tipo="Gatos" view={setVerValores} />
