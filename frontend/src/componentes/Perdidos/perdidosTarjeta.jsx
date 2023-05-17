@@ -29,7 +29,7 @@ export default function PerdidosTarjeta({ url_img, nombre, tam, zona, fecha, con
 				src={url_img}
 				alt={`${nombre}-img`}
 			/>
-			<h3 className={styles.perdidosTarjeta__h3}>{encontrado ? 'Encontrado' : `Se perdió ${nombre}`}</h3>
+			<h3 style={{backgroundColor: encontrado ? "#f57969" : null}} className={styles.perdidosTarjeta__h3}>{encontrado ? 'Encontrado' : `Se perdió ${nombre}`}</h3>
 			<div className={styles.perdidosTarjeta__subdata_container}>
 				<SubData className={styles.perdidosTarjeta__subdata} subtitle="Tamaño" data={tam} />
 				<SubData className={styles.perdidosTarjeta__subdata} subtitle="Zona" data={zona} />
