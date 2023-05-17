@@ -10,7 +10,7 @@ import Contacto from './vistas/contacto';
 import Refugios from "./vistas/refugios"
 import NotFound from "./vistas/notFound.jsx"
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Nav from "./componentes/nav/nav";
 import Footer from "./componentes/Footer/Footer";
 
@@ -18,7 +18,6 @@ import Footer from "./componentes/Footer/Footer";
 function App() {
   return (
 		<div className="App">
-			<BrowserRouter>
 				<div className="frente">
 					<Nav />
 				</div>
@@ -34,7 +33,6 @@ function App() {
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 				<Footer />
-			</BrowserRouter>
 		</div>
 	);
 }
