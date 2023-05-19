@@ -81,7 +81,7 @@ const Home = () => {
 				/>
 				<AdopcionesTarjetaContainer />
 				<Link to="/adoptar" className={styles.header__buttons}>
-					<BtnPrincipal texto="Ver más" />
+					<BtnPrincipal texto="Adoptar" />
 				</Link>
 			</div>
 			<LetraTitulo texto="BLOG" clase="letra-titulo--red" align="center" />
