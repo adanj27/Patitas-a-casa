@@ -58,8 +58,8 @@ const Nav = () => {
 				</div>
 				<div className={styles.nav__separador}></div>
 				<div className={styles['nav__contenedor-elementos']}>
-					<BtnLateral src={imgSearch} alt="Search" />
-					<BtnLateral src={imgLogin} alt="Login" />
+					{/* <BtnLateral src={imgSearch} alt="Search" />
+					<BtnLateral src={imgLogin} alt="Login" /> */}
 					<BtnPrincipal texto="Reportar" setModal={setModal} />
 				</div>
 				<BurgerMenu />
