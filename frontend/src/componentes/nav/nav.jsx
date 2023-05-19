@@ -56,15 +56,17 @@ const Nav = () => {
 						);
 					})}
 				</div>
-				<div className={styles.nav__separador}></div>
-				<div className={styles['nav__contenedor-elementos']}>
-					{/* <BtnLateral src={imgSearch} alt="Search" />
-					<BtnLateral src={imgLogin} alt="Login" /> */}
+				{/* <div className={styles.nav__separador}></div> */}
+			</div>
+			<div className={styles['nav__contenedor-elementos']}>
+				{/* <BtnLateral src={imgSearch} alt="Search" />
+				<BtnLateral src={imgLogin} alt="Login" /> */}
+				<div className={styles["nav__contenedor-boton"]}>
 					<BtnPrincipal texto="Reportar" setModal={setModal} />
 				</div>
 				<BurgerMenu />
 				{modal && <Formulario setModal={setModal} />}
-				</div>
+			</div>
 		</nav>
 	);
 } 
