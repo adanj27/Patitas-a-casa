@@ -11,9 +11,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 300px;
+	width: 70%;
+	max-width: 300px;
+	margin-inline: auto;
 	background-color: white;
 	padding: 30px;
+	margin-inline: auto;
 	border: 1px solid rgb(241, 230, 230);
 	border-radius: 2.5vmax;
 }
