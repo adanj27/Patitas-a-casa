@@ -6,6 +6,8 @@ body {
 
 .App {
 	height: 100vh;
+	/*Header fixed position heigth*/
+	padding-top: 80px;
 }
 
 a {
