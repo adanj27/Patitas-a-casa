@@ -12,8 +12,8 @@ import BtnPrincipal from "../principales/btnPrincipal";
 import Formulario from '../Formulario/formulario';
 
 // Imágenes
-import imgSearch from "../../iconos/search.png";
-import imgLogin from "../../iconos/login 2.png"
+import imgSeach from '../../iconos/search.png'
+import login from '../../iconos/login.png';
 import { Logo } from '../../iconos/svg/icons_svg';
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
@@ -23,13 +23,13 @@ import BurgerMenu from "./BurgerMenu/BurgerMenu";
 	o agregar elementos al array para modificar el nav.
 */
 export const botones = [
-	{texto: "Inicio", path: "/"},
-	{texto: "Perdidos", path: "/perdidos"},
-	{texto: "Encontrados", path: "/encontrados"},
-	{texto: "Adoptar", path: "/adoptar"},
-	{texto: "Blog", path: "/blog"},
-	{texto: "Refugios", path: "/refugios"},
-	{texto: "Contacto", path: "/contacto"}
+	{ texto: "Inicio", path: "/" },
+	{ texto: "Perdidos", path: "/perdidos" },
+	{ texto: "Encontrados", path: "/encontrados" },
+	{ texto: "Adoptar", path: "/adoptar" },
+	{ texto: "Blog", path: "/blog" },
+	{ texto: "Refugios", path: "/refugios" },
+	{ texto: "Contacto", path: "/contacto" }
 ];
 
 const Nav = () => {
@@ -38,37 +38,37 @@ const Nav = () => {
 
 	return (
 		<nav className={styles.nav}>
-			<NavLink to="/" className={styles["nav__logo-contenedor"]}>
-				<Logo className={styles.logo} />
-			</NavLink>
-			<div className={styles.nav__contenedor}>
-				<div className={styles['nav__contenedor-botones']}>
-					{botones.map((btn, indice) => {
-						return (
-							<NavLink to={btn.path} key={indice}>
-								{({ isActive }) => (
-									<BtnNav
-										clase={isActive ? 'btn--principal' : 'btn--secundario'}
-										texto={btn.texto}
-									/>
-								)}
-							</NavLink>
-						);
-					})}
+			<div className={styles['nav-container']}>
+				<NavLink to="/" className={styles["nav__logo-contenedor"]}>
+					<Logo className={styles.logo} />
+				</NavLink>
+				<div className={styles.nav__contenedor}>
+					<div className={styles['nav__contenedor-botones']}>
+						{botones.map((btn, indice) => {
+							return (
+								<NavLink to={btn.path} key={indice}>
+									{({ isActive }) => (
+										<BtnNav
+											clase={isActive ? 'btn--principal' : 'btn--secundario'}
+											texto={btn.texto}
+										/>
+									)}
+								</NavLink>
+							);
+						})}
+					</div>
+					<div className={styles.nav__separador}></div>
+					<div className={styles['nav__contenedor-elementos']}>
+						{/*<BtnLateral src={imgSearch} alt="Search" />
+					<BtnLateral src={imgLogin} alt="Login" />*/}
+						<BtnPrincipal texto="Reportar" setModal={setModal} />
+					</div>
+					<BurgerMenu />
+					{modal && <Formulario setModal={setModal} />}
 				</div>
-				{/* <div className={styles.nav__separador}></div> */}
-			</div>
-			<div className={styles['nav__contenedor-elementos']}>
-				{/* <BtnLateral src={imgSearch} alt="Search" />
-				<BtnLateral src={imgLogin} alt="Login" /> */}
-				<div className={styles["nav__contenedor-boton"]}>
-					<BtnPrincipal texto="Reportar" setModal={setModal} />
-				</div>
-				<BurgerMenu />
-				{modal && <Formulario setModal={setModal} />}
 			</div>
 		</nav>
 	);
-} 
+}
 
 export default Nav;
