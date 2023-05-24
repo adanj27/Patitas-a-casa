@@ -1,5 +1,5 @@
 // React
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from "react-router-dom";
 
 // Estilos
@@ -34,10 +34,34 @@ export const botones = [
 
 const Nav = () => {
 
-	const [modal, setModal] = useState(false)
+	const [modal, setModal] = useState(false);
+	const [isScrolling, setScrolling] = useState(false);
+
+	useEffect(() => {
+		const nav = document.getElementById('nav-var');
+		function handleScroll() {
+			const scroll = window.scrollY;
+			if (nav) {
+				if ( scroll > 80) {
+					nav.style.transform = `translateY(-100%)`;
+					clearTimeout(isScrolling);
+
+					// eslint-disable-next-line react-hooks/exhaustive-deps, no-const-assign
+					isScrolling = setTimeout(() => {
+						setScrolling(false);
+						nav.style.transform = `translateY(0%)`;
+					},800);
+
+				} else {
+					nav.style.transform = `translateY(0%)`;
+				}
+			}
+		}
+		window.addEventListener('scroll', handleScroll);
+	}, []);
 
 	return (
-		<nav className={styles.nav}>
+		<nav className={styles.nav} id='nav-var'>
 			<div className={styles['nav-container']}>
 				<NavLink to="/" className={styles["nav__logo-contenedor"]}>
 					<Logo className={styles.logo} />
