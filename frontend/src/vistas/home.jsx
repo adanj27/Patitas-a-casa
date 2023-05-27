@@ -1,5 +1,9 @@
 // React
 import React, { useState } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../css/home/sliderHeader.css"
 
 // Componentes
 import Nav from '../componentes/nav/nav';
@@ -20,9 +24,18 @@ import TarjetaDestacadaContainer from '../contenedores/home/TarjetaDestacadaCont
 import BlogContainer from '../contenedores/home/BlogContainer';
 
 // Imágenes
-import imgSobreNosotros from '../iconos/imagenes recursos/img-sobreNosotros.png';
+import headerImg1 from '../iconos/imagenes recursos/header-img-1.jpg';
+import headerImg2 from '../iconos/imagenes recursos/header-img-2.jpg';
+import headerImg3 from '../iconos/imagenes recursos/header-img-3.jpg';
+
 import { LogoWhite } from "../iconos/svg/icons_svg";
 import { Link } from "react-router-dom";
+
+// Iconos
+import arrowLeft from "../../src/iconos/arrow-left.svg"
+import arrowRight from "../../src/iconos/arrow-right.svg"
+
+import sliderStyles from "../../src/css/adopciones/adopcionesSlider.module.css";
 
 const listaHistoria = [
 	`Esta idea surgió de un punto de vista de querer ayudar a esas personas que quieren
@@ -40,12 +53,43 @@ const listaMision = [
 	'Cómo se espera que los usuarios utilicen la página y que beneficios pueden obtener de ella.',
 ];
 
+
+const PrevArrow = (props) => (
+  <div className={`${sliderStyles.arrow} ${sliderStyles.prev}`} onClick={props.onClick}>
+    <img className={sliderStyles["arrow-icon"]} src={arrowLeft} alt="icono flecha izquierda" />
+  </div>
+);
+
+const NextArrow = (props) => (
+  <div className={`${sliderStyles.arrow} ${sliderStyles.next}`} onClick={props.onClick}>
+    <img className={sliderStyles["arrow-icon"]} src={arrowRight} alt="icono flecha derecha" />
+  </div>
+);
+
 const Home = () => {
 	const [modal, setModal] = useState(false);
+
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 1000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />,
+		autoplay: true,
+		autoplaySpeed: 6000,
+		dotsClass: "button__bar"
+	};
 
 	return (
 		<>
 			<header className={styles.header}>
+				<Slider {...settings}>
+          <img className={styles["header__slider--img"]} src={headerImg1} alt="" />
+          <img className={styles["header__slider--img"]} src={headerImg2} alt="" />
+          <img className={styles["header__slider--img"]} src={headerImg3} alt="" />
+        </Slider>
 				<section className={styles.header__section}>
 					<LogoWhite className={styles.header__logo} />
 					<p className={styles.header__title}>"Rescatando patitas, salvando corazones"</p>
