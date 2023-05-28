@@ -72,24 +72,33 @@ const NextArrow = (props) => (
 const Home = () => {
 	const [modal, setModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(true)
-
-	useEffect(() => {
-		setTimeout(() => {
-			setIsLoading(false)
-		}, 3000)
-	}, [])
 	
+	useEffect(() => {
+    const isPageLoaded = localStorage.getItem('isPageLoaded');
+
+    // Si el estado de carga de la página está almacenado en el almacenamiento local, lo recuperamos
+    if (isPageLoaded) {
+      setIsLoading(false);
+    } else {
+      // Simulación de una solicitud asincrónica para cargar los datos
+      setTimeout(() => {
+        setIsLoading(false);
+        localStorage.setItem('isPageLoaded', true);
+      }, 3000);
+    }
+  }, []);
 
 	const settings = {
 		dots: true,
 		infinite: true,
-		speed: 1000,
+		speed: 800,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
 		autoplay: true,
-		autoplaySpeed: 6000,
+		autoplaySpeed: 5000,
+		pauseOnHover: false,
 		dotsClass: "button__bar"
 	};
 
