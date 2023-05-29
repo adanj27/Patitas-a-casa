@@ -1,6 +1,6 @@
 .carousel {
   position: relative;
-  width: 860px;
+  width: 1300px;
   padding: 100px 0;
 }
 
@@ -44,10 +44,9 @@
 
 .carousel-item {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 100px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 140px;
 }
-
 .pet {
   padding: 20px;
   border: 1px solid #ccc;
@@ -81,6 +80,16 @@
   background-color: #333;
 }
 
+@media (max-width: 1400px){
+  .carousel {
+    width: 860px;
+  }
+  .carousel-item {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 60px 100px;
+  }
+}
 @media (max-width: 1000px){
   .carousel {
     padding: 60px 0px;

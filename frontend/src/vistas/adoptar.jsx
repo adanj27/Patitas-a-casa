@@ -2,8 +2,6 @@
 import React from "react";
 
 // Components
-import Nav from "../componentes/nav/nav";
-import Footer from "../componentes/Footer/Footer";
 import Paginacion from "../componentes/Perdidos/paginacion";
 import AdoptarTarjeta from "../componentes/adoptar/adoptarTarjeta";
 import Filtrar from "../componentes/adoptar/filtrar.module";

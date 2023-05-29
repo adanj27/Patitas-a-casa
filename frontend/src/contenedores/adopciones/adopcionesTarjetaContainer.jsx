@@ -52,20 +52,30 @@ const CarouselItem = ({ pets }) => {
 const Carousel = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const dataHoPet = useDataHoPet().slice(0, 12)
+  const dataHoPet = useDataHoPet().slice(0, 20)
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const numSlides = isDesktop ? 6 : 2;
+  const numSlides = isDesktop ? 8 : isTablet ? 6 : 2;
   const numTotalSlides = Math.ceil(dataHoPet.length / numSlides);
 
   useEffect(() => {
-    const media = window.matchMedia('(min-width: 1000px)');
+    const media = window.matchMedia('(min-width: 1400px)');
     const listener = () => setIsDesktop(media.matches);
     listener();
     window.addEventListener('resize', listener);
 
     return () => window.removeEventListener('resize', listener);
   }, [isDesktop]);
+
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 1000px)');
+    const listener = () => setIsTablet(media.matches);
+    listener();
+    window.addEventListener('resize', listener);
+
+    return () => window.removeEventListener('resize', listener);
+  }, [isTablet]);
 
   const renderCarouselItems = () => {
     const items = [];
