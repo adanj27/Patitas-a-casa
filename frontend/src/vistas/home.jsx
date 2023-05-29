@@ -74,20 +74,32 @@ const Home = () => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+  }, []);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 2500);
+	}, []);
+	
+	useEffect(() => {
 		const handleScroll = () => {
 			if (isLoading) {
 				// Desactivar scroll hacia abajo mientras se carga
 				if (window.scrollY > 0) {
 					window.scrollTo(0, 0);
 				}
-				document.body.style.overflow = 'hidden';
-				document.documentElement.style.overflow = 'hidden';
-			} else {
-				// Habilitar scroll después de cargar
-				document.body.style.overflow = 'visible';
-				document.documentElement.style.overflow = 'auto';
 			}
 		};
+	
+		if (isLoading) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'auto';
+		}
 	
 		window.addEventListener('scroll', handleScroll);
 	
@@ -95,12 +107,6 @@ const Home = () => {
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, [isLoading]);
-
-	useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }, []);
 
 	const settings = {
 		dots: true,
