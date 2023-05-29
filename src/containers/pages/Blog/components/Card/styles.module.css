@@ -1,0 +1,73 @@
+.cardContainer {
+	width: 350px;
+  height: 400px;
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+	border-radius: 10px;
+	color: #000;
+	text-decoration: none;
+	transition: transform .5s;
+	margin-top: 40px;
+}
+
+.cardContainer:hover {
+	transform: scale(1.05);
+}
+
+.cardContainer > img {
+  height: 150px;
+  object-fit: cover;
+	border-radius: 10px 10px 0 0;
+}
+
+.cardContainer__content {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+	margin: 20px;
+}
+
+.cardContainer__consejo {
+	font-family: 'Arial';
+	font-style: normal;
+	font-weight: 400;
+	color: rgba(52, 58, 64, 0.8);
+}
+
+.cardContainer__titulo {
+	font-family: 'Inter', 'Arial';
+	font-style: normal;
+	font-weight: 600;
+  font-size: 18px;
+}
+
+.cardContainer__titulo:hover {
+	text-decoration: underline;
+}
+
+.cardContainer__descripcion {
+	font-family: 'Inter', 'Arial';
+	font-style: normal;
+	font-weight: 400;
+  font-size: 14px;
+}
+
+.cardContainer__fecha {
+	display: flex;
+	justify-content: center;
+	font-family: 'Inter', 'Arial';
+	font-style: normal;
+	font-weight: 400;
+	color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+}
+
+@media (max-width: 960px){
+	.cardContainer {
+		width: 300px;
+		height: 420px;
+	}
+}

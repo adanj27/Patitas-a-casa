@@ -1,0 +1,110 @@
+.adoptarTarjeta {
+  width: 45%;
+  min-width: 550px;
+  display: flex;
+  border: 1px solid rgb(241, 230, 230);
+  border-radius: 125px 10px 10px 125px;
+  background-color: white;
+}
+
+.adoptarTarjeta__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 21px red;
+  border-radius: 50% 0 0 50%;
+  background-color: transparent/*#f2e2e2*/;
+  margin: 2%;
+}
+
+.adoptarTarjeta__img>img {
+  width: 20vw;
+  height: 20vw;
+  min-width: 200px;
+  max-width: 220px;
+  min-height: 200px;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.adoptarTarjeta__description {
+  padding-left: 20px;
+  padding-right: 10px;
+  padding: 1.5%;
+  margin: 2%;
+}
+
+.adoptarTarjeta___img__info_container{
+  width: 45%;
+	position: relative;
+	display: flex;
+	top: 0%;
+
+}
+
+.adoptarTarjeta__img_info{
+	width: 25px;
+	margin-inline: auto;
+	margin: 0;
+	margin-left: auto;
+	margin-right: auto;
+  cursor: pointer;
+}
+
+@media screen and (max-width:1141px) {
+  .adoptarTarjeta {
+    width: 90%;
+    min-width: 500px;
+    display: flex;
+    border: 1px solid rgb(241, 230, 230);
+    border-radius: 125px 10px 10px 125px;
+    background-color: white;
+  }
+}
+
+@media screen and (max-width:550px) {
+  .adoptarTarjeta {
+    width: 80%;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(241, 230, 230);
+    border-radius: 7%;
+    background-color: white;
+  }
+  .adoptarTarjeta__img>img {
+    width: 45vw;
+    height: 45vw;
+    min-width: 150px;
+    max-width: 220px;
+    min-height: 150px;
+    max-height: 220px;
+  }
+  .adoptarTarjeta__description {
+    padding: 2%;
+    margin: 5%;
+    display: grid;
+    place-items: center;
+  }
+  .adoptarTarjeta__description p:nth-child(2){
+    text-align: center;
+  } 
+  .adoptarTarjeta___img__info_container{
+    width: 45%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    top: 0%;
+  }
+  .adoptarTarjeta__img_info{
+    width: 25px;
+    margin-inline: auto;
+    margin: 0;	/*en caso de que el navegador no soporte la opción*/
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+  }
+}
