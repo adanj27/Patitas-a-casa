@@ -72,7 +72,30 @@ const NextArrow = (props) => (
 const Home = () => {
 	const [modal, setModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(true)
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (isLoading) {
+				// Desactivar scroll hacia abajo mientras se carga
+				if (window.scrollY > 0) {
+					window.scrollTo(0, 0);
+				}
+				document.body.style.overflow = 'hidden';
+				document.documentElement.style.overflow = 'hidden';
+			} else {
+				// Habilitar scroll después de cargar
+				document.body.style.overflow = 'visible';
+				document.documentElement.style.overflow = 'auto';
+			}
+		};
 	
+		window.addEventListener('scroll', handleScroll);
+	
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	}, [isLoading]);
+
 	useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
