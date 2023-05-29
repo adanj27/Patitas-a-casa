@@ -16,6 +16,7 @@
 
 .letra-titulo--red{
 	color: #DE341D;
+	padding: 10px;
 	-webkit-text-stroke: .1px #fff;
 	-moz-text-stroke: .1px #fff;
 	z-index: 1;
