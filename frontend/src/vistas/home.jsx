@@ -74,18 +74,9 @@ const Home = () => {
 	const [isLoading, setIsLoading] = useState(true)
 	
 	useEffect(() => {
-    const isPageLoaded = localStorage.getItem('isPageLoaded');
-
-    // Si el estado de carga de la página está almacenado en el almacenamiento local, lo recuperamos
-    if (isPageLoaded) {
+    setTimeout(() => {
       setIsLoading(false);
-    } else {
-      // Simulación de una solicitud asincrónica para cargar los datos
-      setTimeout(() => {
-        setIsLoading(false);
-        localStorage.setItem('isPageLoaded', true);
-      }, 3000);
-    }
+    }, 3000);
   }, []);
 
 	const settings = {

@@ -62,7 +62,8 @@
     background-position: 50%;
   } */
   .header__section {
-    width: 600px;
+    max-width: 600px;
+    min-width: 300px;
     align-items: center;
     padding: 0;
     left: 50%;
@@ -91,10 +92,18 @@
   }
   .header__title {
     font-size: 28px;
-    width: 60%;
+    /* width: 60%; */
   }
   .header__buttons {
     gap: 40px;
+  }
+}
+@media (max-width: 400px){
+  .header__logo {
+    width: 260px;
+  }
+  .header__title {
+    font-size: 24px;
   }
 }
 
