@@ -82,6 +82,9 @@
     font-size: 34px;
     text-align: center;
   }
+  .header__buttons {
+    gap: 40px;
+  }
 }
 @media (max-width: 600px){
   .header__section {
@@ -95,7 +98,7 @@
     /* width: 60%; */
   }
   .header__buttons {
-    gap: 40px;
+    gap: 30px;
   }
 }
 @media (max-width: 400px){
@@ -104,6 +107,9 @@
   }
   .header__title {
     font-size: 24px;
+  }
+  .header__buttons {
+    gap: 10px;
   }
 }
 
