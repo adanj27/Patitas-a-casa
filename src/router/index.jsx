@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
         element: <Contacto />
       },
       {
-        path: "pedidos",
+        path: "perdidos",
         element: <Perdidos />
       },
       {
