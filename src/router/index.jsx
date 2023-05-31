@@ -1,14 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { ScrollToTop } from "./ScrollToTop";
 import { NotFound } from "../containers/errors";
 import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios } from "../containers/pages";
 import { FullWithLayout } from "../hocs/layouts/FullWithLayout";
 
 export const router = createBrowserRouter([
-  {
-    element: <ScrollToTop />
-  },
   {
     path: "/",
     element: <FullWithLayout />,

@@ -1,3 +1,13 @@
+.adopciones {
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 60px;
+  padding: 80px 0px; */
+  display: flex;
+  justify-content: center;
+}
+
 .adoptarTarjeta {
   width: 45%;
   min-width: 550px;
@@ -106,5 +116,120 @@
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+  }
+}
+
+
+.carousel {
+  position: relative;
+  width: 1300px;
+  padding: 100px 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  /* background-color: #fff; */
+  /* border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+  font-size: 24px;
+  opacity: 0.8;
+}
+
+.prev {
+  left: 0;
+
+}
+
+.next {
+  right: 0;
+}
+
+.arrow-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.carousel-items {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.carousel-item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 140px;
+}
+.pet {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pet img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+@media (max-width: 1400px){
+  .carousel {
+    width: 860px;
+  }
+  .carousel-item {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 60px 100px;
+  }
+}
+@media (max-width: 1000px){
+  .carousel {
+    padding: 60px 0px;
+    max-width: 500px;
+  }
+  .carousel-item {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+@media (max-width: 500px){
+  .carousel {
+    width: 340px;
+  }
+}
+@media (max-width: 400px){
+  .carousel {
+    width: 300px;
   }
 }
