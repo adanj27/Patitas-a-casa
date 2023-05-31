@@ -52,7 +52,7 @@ const CarouselItem = ({ pets }) => {
 const Carousel = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const dataHoPet = useDataHoPet().slice(0, 20)
+  const dataHoPet = useDataHoPet().slice(0, 16)
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
