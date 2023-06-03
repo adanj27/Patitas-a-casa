@@ -63,12 +63,6 @@ export const Home = () => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
-  }, []);
-
-	useEffect(() => {
 		setTimeout(() => {
 			setIsLoading(false);
 		}, 2500);

@@ -65,7 +65,7 @@
 }
 
 .loading__img {
-  position: absolute;
+  /* position: absolute; */
   max-width: 600px;
   min-width: 300px;
   padding: 60px;
