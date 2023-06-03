@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import shareIcon from '/icons/share-iconSubdata.png';
 import whatsApp from '/icons/whatsAppSubdata.png';
-import twitter from '/icons/twitterSubdata.png';
-import facebook from '/icons/facebookSubdata.png';
+import twitter from '/icons/twitter-icon.png';
+import facebook from '/icons/facebook.png';
 
 import styles from './styles.module.css'
 
