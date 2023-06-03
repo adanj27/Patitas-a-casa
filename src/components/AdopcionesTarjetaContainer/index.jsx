@@ -17,8 +17,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Iconos
-import arrowLeft from "../../../public/icons/arrow-left.svg"
-import arrowRight from "../../../public/icons/arrow-right.svg"
+import arrowLeft from "/icons/arrow-left.svg"
+import arrowRight from "/icons/arrow-right.svg"
 
 
 const PrevArrow = (props) => (

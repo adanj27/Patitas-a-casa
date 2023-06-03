@@ -1,5 +1,5 @@
 import React from 'react'
-import LogoWhite from "../../../public/icons/logo-patitas-blanco.png";
+import LogoWhite from "/icons/logo-patitas-blanco.png";
 import styles from "./styles.module.css"
 
 const Loading = () => {

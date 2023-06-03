@@ -18,13 +18,13 @@ import "slick-carousel/slick/slick-theme.css";
 import "./sliderHeader.css"
 
 // Imágenes
-import headerImg1 from '../../../../public/icons/imagenes recursos/header-img-1.jpg';
-import headerImg2 from '../../../../public/icons/imagenes recursos/header-img-2.jpg';
-import headerImg3 from '../../../../public/icons/imagenes recursos/header-img-3.jpg';
+import headerImg1 from '/icons/imagenes recursos/header-img-1.jpg';
+import headerImg2 from '/icons/imagenes recursos/header-img-2.jpg';
+import headerImg3 from '/icons/imagenes recursos/header-img-3.jpg';
 
 // Iconos
-import arrowLeft from "../../../../public/icons/arrow-left.svg"
-import arrowRight from "../../../../public/icons/arrow-right.svg"
+import arrowLeft from "/icons/arrow-left.svg"
+import arrowRight from "/icons/arrow-right.svg"
 
 import sliderStyles from "../../../components/AdopcionesTarjetaContainer/styles.module.css";
 import Loading from "../../../components/Loading/index";
