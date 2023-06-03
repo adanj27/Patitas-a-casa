@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 import shareIcon from '/icons/share-iconSubdata.png';
 import whatsApp from '/icons/whatsAppSubdata.png';
 import twitter from '/icons/twitter-icon.png';
-import facebook from '/icons/.png';
+import facebook from '/icons/facebook-icon.png';
 
 //Animate On Scroll
 import AOS from 'aos';
