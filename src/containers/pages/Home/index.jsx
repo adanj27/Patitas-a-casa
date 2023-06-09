@@ -21,6 +21,7 @@ import "./sliderHeader.css"
 import headerImg1 from '/icons/imagenes recursos/header-img-1.jpg';
 import headerImg2 from '/icons/imagenes recursos/header-img-2.jpg';
 import headerImg3 from '/icons/imagenes recursos/header-img-3.jpg';
+import LogoPatita from "/icons/logo-patita.png"
 
 // Iconos
 import arrowLeft from "/icons/arrow-left.svg"
@@ -99,7 +100,7 @@ export const Home = () => {
 		slidesToScroll: 1,
 		prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
-		autoplay: true,
+		// autoplay: true,
 		autoplaySpeed: 5000,
 		pauseOnHover: false,
 		dotsClass: "button__bar"
@@ -112,20 +113,48 @@ export const Home = () => {
 			}
 			<header className={styles.header}>
 				<Slider {...settings}>
-					<img className={styles["header__slider--img"]} src={headerImg1} alt="" />
-					<img className={styles["header__slider--img"]} src={headerImg2} alt="" />
-					<img className={styles["header__slider--img"]} src={headerImg3} alt="" />
-				</Slider>
-				<section className={styles.header__section}>
-					<LogoWhite className={styles.header__logo} />
-					<p className={styles.header__title}>"Rescatando patitas, salvando corazones"</p>
-					<div className={styles.header__buttons}>
-						<BtnPrincipal texto="Reportar" setModal={setModal} />
-						<Link to="/adoptar">
-							<BtnPrincipal texto="Adoptar" />
-						</Link>
+					<div className={styles.header__slider}>
+						<img className={styles["header__slider--img"]} src={headerImg1} alt="imagen slider header 1" />
+						<section className={styles.header__section}>
+							<LogoWhite className={styles.header__logo} />
+							<p className={styles.header__title}>"Rescatando patitas, salvando corazones"</p>
+							<div className={styles.header__buttons}>
+								<BtnPrincipal texto="Reportar" setModal={setModal} />
+								<Link to="/adoptar">
+									<BtnPrincipal texto="Adoptar" />
+								</Link>
+							</div>
+						</section>
 					</div>
-				</section>
+					<div className={styles.header__slider}>
+						<img className={`${styles["header__slider--img"]} ${styles["slider__img--two"]}`} src={headerImg2} alt="imagen slider header 2" />
+						<div className={styles["header__slider--overlay"]}>
+							<div className={styles["header__info"]}>
+								<div className={styles["header__info-heading"]}>
+									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
+									<h2 className={styles["header__info--title"]}>¿Qué hacemos?</h2>
+								</div>
+								<p className={styles["header__info--text"]}>
+									Nos encargamos de difundir, listar y dar mayor visibilidad a mascotas perdidas y en busca de un nuevo hogar
+								</p>
+							</div>
+						</div>
+					</div>
+					<div className={styles.header__slider}>
+						<img className={`${styles["header__slider--img"]} ${styles["slider__img--three"]}`} src={headerImg3} alt="imagen slider header 3" />
+						<div className={styles["header__slider--overlay"]}>
+							<div className={styles["header__info"]}>
+								<div className={styles["header__info-heading"]}>
+									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
+									<h2 className={styles["header__info--title"]}>¿Quiénes somos?</h2>
+								</div>
+								<p className={styles["header__info--text"]}>
+									Somos un equipo de desarrollo el cual compartimos la necesidad de ayudar a los animales que dia a dia nos brindan su amor incondicional
+								</p>
+							</div>
+						</div>
+					</div>
+				</Slider>
 			</header>
 
 			<section className={styles['publicacion-destacada']}>
