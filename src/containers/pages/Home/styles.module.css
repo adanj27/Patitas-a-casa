@@ -60,7 +60,8 @@
   justify-content: center;
   -webkit-clip-path: polygon(0 0, 52% 0, 44% 100%, 0% 100%);
   clip-path: polygon(0 0, 52% 0, 44% 100%, 0% 100%);
-  background-color: #252422;
+  /* background-color: #0a0a0a; */
+  background-color: #000;
   width: 100%;
   height: calc(100vh - 5rem);
   position: absolute;
