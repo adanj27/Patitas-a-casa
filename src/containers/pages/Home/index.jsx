@@ -168,8 +168,12 @@ export const Home = () => {
 				</h3>
 					<TarjetaDestacadaContainer />
 					<div className={styles['publicacion-destacada__buttons']}>
-						<BtnPrincipal texto="Encontrados" />
-						<BtnPrincipal texto="Perdidos" />
+						<Link to="/encontrados">
+							<BtnPrincipal texto="Encontrados" />
+						</Link>
+						<Link to="/perdidos">
+							<BtnPrincipal texto="Perdidos" />
+						</Link>
 					</div>
 				</section>
 				<div className={styles.adopciones}>
