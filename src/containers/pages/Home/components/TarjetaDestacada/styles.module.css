@@ -5,12 +5,12 @@
   width: 220px;
   min-height: 220px;
   padding: 16px;
-  margin-bottom: 170px;
+  margin-bottom: 190px;
 }
 
 .card {
   width: 220px;
-  height: 220px;
+  height: 210px;
   padding: 16px;
   background-color: rgba(238, 238, 238, 0.73);
   display: flex;
@@ -26,10 +26,9 @@
 }
 
 .card:hover {
-  padding-bottom: 190px;
+  padding-bottom: 220px;
   transition: all .6s;
   background-color: #e3e3e3;
-  color: #111111;
 }
 
 .card img {
@@ -43,11 +42,9 @@
 }
 
 .card:hover p {
-  font-size: 26px;
-  margin: 0;
-  padding: 0;
   transition: all .6s;
-  background-color: transparent;
+  color: #FFF;
+  margin-bottom: 6px;
 }
 
 .card:hover h3{
@@ -56,7 +53,6 @@
 }
 
 .cardNoExtended {
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -66,16 +62,12 @@
 .cardNoExtended>p {
   font-size: 18px;
   font-weight: 700;
-  padding: 5px 15%;
+  padding: 5px 30px;
   text-align: center;
   background-color: #de523f;
   border-radius: 8px;
-  /* color: #FAFAFA; */
   transition: all .6s;
-}
-
-.cardNoExtended:hover>p {
-  background-color: transparent;
+  margin-top: 10px;
 }
 
 .cardNoExtended>img {
@@ -88,25 +80,24 @@
 .cardExtended {
   display: none;
   text-align: left;
+  color: #111111;
 }
 
 .card:hover>.cardExtended {
   display: block;
+  margin-top: 4px;
 }
 
 .cardExtended>h3 {
-  /* padding: 2px 0px; */
   font-size: 16px;
   text-align: center;
-  /* background-color: #de523f; */
   border-radius: 8px;
-  /* color: #FAFAFA; */
+  color: #de523f;
 }
-
 
 .cardExtended>ul {
   list-style: none;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   padding: 0 10px;
 }
 
@@ -117,31 +108,6 @@
   cursor: pointer;
 }
 
-/* .cardButton>img {
-  width: fit-content;
-  height: fit-content;
-  transition: all 200ms ease;
-}
-
-.cardButton>img:hover {
-  transform: scale(1.3);
-} */
-
 .arrow {
   rotate: 90deg;
 }
-
-/* @media (max-width: 500px){
-  .card {
-    padding: 15px 15px 15px 70px;
-  }
-  .card:hover {
-    width: 340px;
-    padding: 30px 10px 30px 15px;
-  }
-  .cardNoExtended img {
-    height: 140px;
-    width: 140px;
-  }
-} */
-
