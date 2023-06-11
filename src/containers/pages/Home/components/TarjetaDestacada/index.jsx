@@ -28,38 +28,40 @@ export const TarjetaDestacada = ({
 	};
 	return (
 		<>
-			<article className={styles.card} onMouseOver={handleStateHover}>
-				<div className={styles.cardNoExtended}>
-					<img src={image} alt="mascota" />
-					<p>{nombre}</p>
+			<div className={styles.card__container}>
+				<div className={styles.card} onMouseOver={handleStateHover}>
+					<div className={styles.cardNoExtended}>
+						<img src={image} alt="mascota" />
+						<p>{nombre}</p>
+					</div>
+					{stateHover && (
+						<section className={styles.cardExtended}>
+							<h3>Perdido</h3>
+							<ul>
+								<li>
+									<b>Tamaño:</b> {length}
+								</li>
+								<li>
+									<b>Zona:</b> {place}
+								</li>
+								<li>
+									<b>Fecha:</b> {date}
+								</li>
+								<li>
+									<b>Contacto:</b> {contact}
+								</li>
+								<li>
+									<b>Descripción:</b> {description}
+								</li>
+							</ul>
+							<address></address>
+						</section>
+					)}
+					{/* <button className={styles.cardButton}>
+						<img src={arrow} alt="arrow" />
+					</button> */}
 				</div>
-				{stateHover && (
-					<section className={styles.cardExtended}>
-						<h3>Se perdió</h3>
-						<ul>
-							<li>
-								<b>Tamaño:</b> {length}
-							</li>
-							<li>
-								<b>Zona:</b> {place}
-							</li>
-							<li>
-								<b>Fecha:</b> {date}
-							</li>
-							<li>
-								<b>Contacto:</b> {contact}
-							</li>
-							<li>
-								<b>Descripción:</b> {description}
-							</li>
-						</ul>
-						<address></address>
-					</section>
-				)}
-				<button className={styles.cardButton}>
-					<img src={arrow} alt="arrow" />
-				</button>
-			</article>
+			</div>
 		</>
 	);
 };
