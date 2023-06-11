@@ -1,15 +1,18 @@
 // React
 import React, { useEffect, useState } from 'react';
 
+// Css
 import styles from './styles.module.css';
 
+// Componentes
+import { AdopcionesTarjetaContainer, BtnPrincipal, Formulario, LetraTitulo, Lista } from '../../../components';
 import TarjetaDestacadaContainer from './components/TarjetaDestacadaContainer';
 import {BlogContainer} from './components/BlogContainer';
-
-import { Link } from "react-router-dom";
-
-import { AdopcionesTarjetaContainer, BtnPrincipal, Formulario, LetraTitulo, Lista } from '../../../components';
 import { LogoWhite } from '../../../components/Icons';
+import { Stats } from "../../../components/Stats/index"
+
+// React Router
+import { Link } from "react-router-dom";
 
 // React Slick
 import Slider from "react-slick";
@@ -176,6 +179,9 @@ export const Home = () => {
 						</Link>
 					</div>
 				</section>
+
+				<Stats />
+
 				<div className={styles.adopciones}>
 					<LetraTitulo
 						texto="ADOPCIONES"
@@ -187,6 +193,7 @@ export const Home = () => {
 						<BtnPrincipal texto="Adoptar" />
 					</Link>
 				</div>
+
 				<LetraTitulo texto="BLOG" clase="letra-titulo--red" align="center" />
 				<BlogContainer />
 				<section className={styles['sobre-nosotros']}>
