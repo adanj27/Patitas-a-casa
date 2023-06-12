@@ -28,6 +28,6 @@
 
 .refugiosCard > button:hover {
   cursor: pointer;
-  transform: translateY(3.5rem) translateX(.5rem) scale(1.2);
+  transform: translateY(3.6rem) translateX(.8rem) scale(1.2);
   transition: all 400ms ease;
 }
