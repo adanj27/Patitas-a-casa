@@ -95,6 +95,8 @@ export const Home = () => {
 		};
 	}, [isLoading]);
 
+	const [currentSlide, setCurrentSlide] = useState(0);
+
 	const settings = {
 		dots: true,
 		infinite: true,
@@ -106,7 +108,10 @@ export const Home = () => {
 		// autoplay: true,
 		autoplaySpeed: 5000,
 		pauseOnHover: false,
-		dotsClass: "button__bar"
+		dotsClass: "button__bar",
+		afterChange: (current) => {
+      setCurrentSlide(current);
+    },
 	};
 
 	return (
@@ -132,7 +137,10 @@ export const Home = () => {
 					<div className={styles.header__slider}>
 						<img className={`${styles["header__slider--img"]} ${styles["slider__img--two"]}`} src={headerImg2} alt="imagen slider header 2" />
 						<div className={styles["header__slider--overlay"]}>
-							<div className={styles["header__info"]}>
+							<div 
+								className={`${styles.header__info} slide ${currentSlide === 0 ? "active" : ""}`}
+								key={0}
+							>
 								<div className={styles["header__info-heading"]}>
 									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
 									<h2 className={styles["header__info--title"]}>¿Qué hacemos?</h2>
@@ -146,7 +154,10 @@ export const Home = () => {
 					<div className={styles.header__slider}>
 						<img className={`${styles["header__slider--img"]} ${styles["slider__img--three"]}`} src={headerImg3} alt="imagen slider header 3" />
 						<div className={styles["header__slider--overlay"]}>
-							<div className={styles["header__info"]}>
+							<div 
+								className={`${styles.header__info} slide ${currentSlide === 1 ? "active" : ""}`}
+								key={1}
+							>
 								<div className={styles["header__info-heading"]}>
 									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
 									<h2 className={styles["header__info--title"]}>¿Quiénes somos?</h2>
