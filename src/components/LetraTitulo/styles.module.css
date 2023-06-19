@@ -19,6 +19,7 @@
 	-webkit-text-stroke: .1px #fff;
 	-moz-text-stroke: .1px #fff;
 	z-index: 1;
+	margin: 10px;
 }
 .letra-titulo--red--mobile {
 	color: #DE341D;
