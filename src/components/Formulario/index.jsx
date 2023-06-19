@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styles from "./styles.module.css"
 
@@ -17,76 +17,111 @@ export const Formulario = ({ setModal }) => {
 	const [file, setFile] = useState(false);
 	const [uploadImgHover, setUploadImgHover] = useState(false);
 
+	const bodyRef = useRef(null);
+	const reportFormRef = useRef();
+
 	const handleSubmit = () => {
 		// Falta implementar el metodo post desde la API
 		// Si petype = true se agrega el formulario a las mascotas perdidas
 		return petType ? 1 : 0;
 	};
 
-	const handleCancel = () => {
-		setModal(false);
+	//ends the animation
+	const handleCancel = (e) => {
+		e.preventDefault();
+		if (reportFormRef.current) {
+			setTimeout(() => {
+				reportFormRef.current.style.transform = 'translateY(5%)';
+				reportFormRef.current.style.opacity = '0';
+			}, 10);
+		}
+		setTimeout(() => {
+			setModal(false);
+		}, 500);
 	};
 
+	//starts the animation
+	useEffect(() => {
+		if (reportFormRef.current) {
+			setTimeout(() => {
+				reportFormRef.current.style.transform = 'translateY(0)';
+				reportFormRef.current.style.opacity = '1';
+			}, 10);
+		}
+	}, []);
+
+	useEffect(() => {
+		bodyRef.current = document.body;
+		if (bodyRef.current) {
+			bodyRef.current.style.overflowY = 'hidden';
+		}
+		return () => {
+			bodyRef.current.style.overflowY = 'visible';
+		};
+	}, []);
+
 	return (
-		<div className={styles.formContainer}>
-			<form
-				action="POST"
-				onSubmit={handleSubmit}
-				className={styles.form}>
-				<div className={styles.headerForm}>
-					<div
-						style={{ borderRadius: '8px 0 0 0' }}
-						className={petType ? styles.petSelected : styles.pet}
-						onClick={() => setPetType(true)}>
-						<img src={dog} alt="dog draw" /> Perdido
-					</div>
-					<div
-						className={!petType ? styles.petSelected : styles.pet}
-						onClick={() => setPetType(false)}>
-						<img src={pet} alt="pet draw" /> Encontrado
-					</div>
-					<button className={styles.cancelButton} onClick={handleCancel}>
-						<img src={close} alt="close-icon" />
-					</button>
-				</div>
-				<div className={styles.mainForm}>
-					<div className={styles.buttonFile}>
-						<label
-							style={
-								uploadImgHover
-									? { backgroundColor: 'rgba(222, 52, 29, 0.5)' }
-									: {}
-							}>
-							{file ? `Foto subida` : `Subir foto`}
-						</label>
-						<input
-							type="file"
-							accept=".jpg, .jpeg, .png"
-							id="petFile"
-							className={styles.buttonFile}
-							onInput={() => setFile(true)}
-							onMouseEnter={() => setUploadImgHover(true)}
-							onMouseLeave={() => setUploadImgHover(false)}
-						/>
-					</div>
-					<section className={styles.form_inputs}>
-						{ petType ? <input type="text" name="name" placeholder="Nombre" /> : '' }
-						<div>
-							<input type="text" name="size" placeholder="Tamaño" />
-							<input type="text" name="zone" placeholder="Zona" />
+		<div className={styles['report-container']}>
+			<div ref={reportFormRef} className={styles.formContainer}>
+				<form
+					action="POST"
+					onSubmit={handleSubmit}
+					className={styles.form}>
+					<div className={styles.headerForm}>
+						<div
+							style={{ borderRadius: '8px 0 0 0' }}
+							className={petType ? styles.petSelected : styles.pet}
+							onClick={() => setPetType(true)}>
+							<img src={dog} alt="dog draw" /> Perdido
 						</div>
-						<div>
-							<input type="tel" name="contact" placeholder="Contacto" />
-							<input type="date" name="date" placeholder="Fecha" />
+						<div
+							className={!petType ? styles.petSelected : styles.pet}
+							onClick={() => setPetType(false)}>
+							<img src={pet} alt="pet draw" /> Encontrado
 						</div>
-					</section>
-					<h3>Descripción</h3>
-					<textarea name="description" cols="30" rows="10"></textarea>
-					<button onClick={handleSubmit} className={styles.submitButon}>
-						Enviar
-					</button>
-				</div>
-			</form>
+						<button className={styles.cancelButton} onClick={handleCancel}>
+							<img src={close} alt="close-icon" />
+						</button>
+					</div>
+					<div className={styles.mainForm}>
+						<div className={styles.buttonFile}>
+							<label
+								style={
+									uploadImgHover
+										? { backgroundColor: 'rgba(222, 52, 29, 0.5)' }
+										: {}
+								}>
+								{file ? `Foto subida` : `Subir foto`}
+							</label>
+							<input
+								type="file"
+								accept=".jpg, .jpeg, .png"
+								id="petFile"
+								className={styles.buttonFile}
+								onInput={() => setFile(true)}
+								onMouseEnter={() => setUploadImgHover(true)}
+								onMouseLeave={() => setUploadImgHover(false)}
+							/>
+						</div>
+						<section className={styles.form_inputs}>
+							{petType ? <input type="text" name="name" placeholder="Nombre" /> : ''}
+							<div>
+								<input type="text" name="size" placeholder="Tamaño" />
+								<input type="text" name="zone" placeholder="Zona" />
+							</div>
+							<div>
+								<input type="tel" name="contact" placeholder="Contacto" />
+								<input type="date" name="date" placeholder="Fecha" />
+							</div>
+						</section>
+						<h3>Descripción</h3>
+						<textarea name="description" cols="30" rows="10"></textarea>
+						<button onClick={handleSubmit} className={styles.submitButon}>
+							Enviar
+						</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 };

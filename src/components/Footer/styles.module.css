@@ -18,6 +18,7 @@
 
 .footer__text {
 	margin: 0;
+	text-align: center;
 }
 
 .footer__contact-container {
@@ -46,6 +47,7 @@
 
 .footer__contact--text {
 	margin: 0;
+
 }
 
 .footer__social {
@@ -83,6 +85,7 @@
 .footer__rights a:hover {
 	text-decoration: underline;
 }
+
 
 
 @media (max-width: 1050px){

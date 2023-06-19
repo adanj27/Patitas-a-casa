@@ -152,7 +152,7 @@ export const Home = () => {
 									<h2 className={styles["header__info--title"]}>¿Quiénes somos?</h2>
 								</div>
 								<p className={styles["header__info--text"]}>
-									Somos un equipo de desarrollo el cual compartimos la necesidad de ayudar a los animales que dia a dia nos brindan su amor incondicional
+									Somos un equipo de desarrollo el cual compartimos la necesidad de ayudar a los animales que día a día nos brindan su amor incondicional
 								</p>
 							</div>
 						</div>
@@ -167,7 +167,7 @@ export const Home = () => {
 				/>
 				<h3 className={styles["publicacion-destaca__sub-titulo"]}>
 					Cuando reporta una mascota perdida/encontrada, su publicación
-					aparecerá aquí como publicación reciente.
+					aparecerá aquí.
 				</h3>
 					<TarjetaDestacadaContainer />
 					<div className={styles['publicacion-destacada__buttons']}>
