@@ -1,34 +1,19 @@
-.report-container {
-  display: grid;
-  place-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  background-color: #00000093;
-  width: 100vw;
-  height: 100vh;
-  padding: 0;
-}
-
 .formContainer {
-  /*position: fixed;
+  position: fixed;
   top: 1%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;*/
-  background-image: url('/icons/imagenes\ recursos/bg_form.webp');
+  z-index: 100;
   padding: 15px;
   border-radius: 8px;
+  background-image: url('/icons/imagenes\ recursos/bg_form.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 450px;
   height: auto;
-  transition: 0.5s;
-  transform: translateY(5%);
-  opacity: 0;
+  transition: height .5s;
 }
 
 .form {
@@ -195,7 +180,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   transition: all 200ms ease;
   background-color: rgba(222, 52, 29, 1);
   border-left: 1px solid #fff;

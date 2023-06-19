@@ -21,7 +21,7 @@ export default function Footer() {
 			<footer className={styles.footer__container}>
 				<Logo className={styles.footer__logo} />
 				<p className={styles.footer__text}>
-					"Esta es una herramienta creada para todas aquellas personas que han perdido a una mascota o que están buscando un nuevo miembro en la familia. No buscamos más que ayudar y poder contribuir con nuestros conocimientos y habilidades para brindar una mejor vida a estos animalitos, quienes entregan todo su amor sin esperar nada a cambio."
+					"Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio dolorum nisi reprehenderit reiciendis hic sint deserunt"
 				</p>
 				<div className={styles["footer__contact-container"]}>
 					<p className={styles["footer__contact-title"]}>Contacto</p>

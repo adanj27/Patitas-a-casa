@@ -35,24 +35,25 @@ export const Navbar = () => {
 	const [isScrolling, setScrolling] = useState(false);
 
 	useEffect(() => {
-		function handleScroll() {
-			const scroll = window.scrollY;
-			const nav = document.getElementById("nav-var");
-			if (nav) {
-				if (scroll > 80) {
-					nav.style.transform = `translateY(-100%)`;
-					clearTimeout(isScrolling);
-					setTimeout(() => {
-						setScrolling(false);
-						nav.style.transform = ``;
-					}, 800);
-				} else {
-					nav.style.transform = `translateY(0%)`;
-				}
-			}
-		}
-		window.addEventListener("scroll", handleScroll);
-	}, []);
+    function handleScroll() {
+      const scroll = window.scrollY;
+      const nav = document.getElementById("nav-var");
+      if (nav) {
+        if (scroll > 80) {
+          nav.style.transform = `translateY(-100%)`;
+          clearTimeout(isScrolling);
+          setTimeout(() => {
+            setScrolling(false);
+            nav.style.transform = ``;
+          }, 800);
+        }
+				// else {
+        //   nav.style.transform = `translateY(0%)`;
+        // }
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
 	return (
 		<nav className={styles.nav} id='nav-var'>
@@ -86,10 +87,7 @@ export const Navbar = () => {
 					</div>
 					<BurgerMenu />
 				</div>
-				{/*modal && <Formulario setModal={setModal} />*/}
-				{modal ? (
-					<Formulario setModal={setModal} />
-				) : null}
+				{modal && <Formulario setModal={setModal} />}
 			</div>
 		</nav>
 	);
