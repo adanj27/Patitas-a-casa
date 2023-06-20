@@ -1,3 +1,9 @@
+
+
+
+
+
+
 // React
 import React, { useEffect, useState } from 'react';
 
@@ -103,9 +109,7 @@ export const Home = () => {
 		speed: 800,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		prevArrow: <PrevArrow />,
-    nextArrow: <NextArrow />,
-		// autoplay: true,
+		autoplay: true,
 		autoplaySpeed: 5000,
 		pauseOnHover: false,
 		dotsClass: "button__bar",
@@ -124,23 +128,25 @@ export const Home = () => {
 					<div className={styles.header__slider}>
 						<img className={styles["header__slider--img"]} src={headerImg1} alt="imagen slider header 1" />
 						<section className={styles.header__section}>
-							<LogoWhite className={styles.header__logo} />
-							<p className={styles.header__title}>"Rescatando patitas, salvando corazones"</p>
-							<div className={styles.header__buttons}>
-								<BtnPrincipal texto="Reportar" setModal={setModal} />
-								<Link to="/adoptar">
-									<BtnPrincipal texto="Adoptar" />
-								</Link>
+							<div 
+								className={`${styles.header__info} slide ${currentSlide === 0 ? "active" : ""}`}
+								key={0}
+							>
+								<LogoWhite className={styles.header__logo} />
+								<p className={styles.header__title}>"Rescatando patitas, salvando corazones"</p>
+								<div className={styles.header__buttons}>
+									<BtnPrincipal texto="Reportar" setModal={setModal} />
+									<Link to="/adoptar">
+										<BtnPrincipal texto="Adoptar" />
+									</Link>
+								</div>
 							</div>
 						</section>
 					</div>
 					<div className={styles.header__slider}>
 						<img className={`${styles["header__slider--img"]} ${styles["slider__img--two"]}`} src={headerImg2} alt="imagen slider header 2" />
 						<div className={styles["header__slider--overlay"]}>
-							<div 
-								className={`${styles.header__info} slide ${currentSlide === 0 ? "active" : ""}`}
-								key={0}
-							>
+							<div className={styles["header__info"]}>
 								<div className={styles["header__info-heading"]}>
 									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
 									<h2 className={styles["header__info--title"]}>¿Qué hacemos?</h2>
@@ -154,10 +160,7 @@ export const Home = () => {
 					<div className={styles.header__slider}>
 						<img className={`${styles["header__slider--img"]} ${styles["slider__img--three"]}`} src={headerImg3} alt="imagen slider header 3" />
 						<div className={styles["header__slider--overlay"]}>
-							<div 
-								className={`${styles.header__info} slide ${currentSlide === 1 ? "active" : ""}`}
-								key={1}
-							>
+							<div className={styles["header__info"]}>
 								<div className={styles["header__info-heading"]}>
 									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
 									<h2 className={styles["header__info--title"]}>¿Quiénes somos?</h2>
