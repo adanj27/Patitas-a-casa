@@ -7,6 +7,13 @@
   background-color: white;
 }
 
+.adoptarTarjeta:hover {
+  border-radius: 10px;
+}
+.adoptarTarjeta:hover .adoptarTarjeta__img>img {
+  border-radius: 10px;
+}
+
 .adoptarTarjeta__img {
   display: flex;
   justify-content: center;
@@ -26,6 +33,37 @@
   max-height: 220px;
   object-fit: cover;
   border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.adoptarTarjeta__imgs {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  border: 21px red;
+  border-radius: 50% 0 0 50%;
+  background-color: transparent/*#f2e2e2*/;
+  margin-left: 2%;
+}
+.adoptarTarjeta:hover .adoptarTarjeta__imgs {
+  display: flex;
+}
+.adoptarTarjeta__imgs>img {
+  width: 4vw;
+  height: 5vw;
+  /* min-width: 200px;
+  max-width: 220px;
+  min-height: 200px;
+  max-height: 220px; */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+
+}
+.adoptarTarjeta__imgs>img:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .adoptarTarjeta__description {
@@ -40,7 +78,6 @@
 	position: relative;
 	display: flex;
 	top: 0%;
-
 }
 
 .adoptarTarjeta__img_info{

@@ -34,6 +34,10 @@ export const AdoptarTarjeta = ({
 
 	return (
 		<div className={styles.adoptarTarjeta} data-aos={animation}>
+			<div className={styles["adoptarTarjeta__imgs"]}>
+				<img src={img} alt={`${img}-img`} />
+				<img src={img} alt={`${img}-img`} />
+			</div>
 			<div className={styles.adoptarTarjeta__img}>
 				<img src={img} alt={`${img}-img`} />
 			</div>
