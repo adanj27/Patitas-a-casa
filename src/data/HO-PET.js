@@ -6,6 +6,8 @@ export const Data = [
 		fecha: '2022-06-15',
 		lugar: 'Parque Central',
 		contacto: '555-1234',
+		edad: '6',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Chihuahua de color marrón claro. Tiene un collar rojo con etiqueta de identificación.',
 		imagen:
@@ -18,6 +20,8 @@ export const Data = [
 		fecha: '2022-02-28',
 		lugar: 'Parque Central',
 		contacto: '555-5678',
+		edad: '8',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato negro con pelaje largo y brillante. Tiene un collar con campana y etiqueta de identificación.',
 		imagen:
@@ -30,6 +34,8 @@ export const Data = [
 		fecha: '2022-07-10',
 		lugar: 'Calle Principal',
 		contacto: '555-7890',
+		edad: '12',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Pastor Alemán de pelaje negro y marrón. Tiene un collar naranja con etiqueta de identificación.',
 		imagen:
@@ -42,6 +48,8 @@ export const Data = [
 		fecha: '2022-09-01',
 		lugar: 'Parque de la Ciudad',
 		contacto: '555-9012',
+		edad: '4',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Labrador Retriever dorado. No lleva collar ni identificación.',
 		imagen:
@@ -54,6 +62,8 @@ export const Data = [
 		fecha: '2022-04-19',
 		lugar: 'Plaza del Pueblo',
 		contacto: '555-3456',
+		edad: '10',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato atigrado de pelaje corto. Tiene un collar rosa con etiqueta de identificación.',
 		imagen: 'https://t1.ea.ltmcdn.com/es/posts/2/0/2/pixie_bob_25202_2_600.jpg',
@@ -65,6 +75,8 @@ export const Data = [
 		fecha: '2022-03-02',
 		lugar: 'Parque de la Ciudad',
 		contacto: '555-2345',
+		edad: '7',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato siamés con pelaje corto. Lleva un collar azul con etiqueta de identificación.',
 		imagen:
@@ -77,6 +89,8 @@ export const Data = [
 		fecha: '2022-08-14',
 		lugar: 'Parque Central',
 		contacto: '555-0123',
+		edad: '9',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato anaranjado de pelaje largo. No lleva collar ni identificación.',
 		imagen:
@@ -89,6 +103,8 @@ export const Data = [
 		fecha: '2022-06-15',
 		lugar: 'Parque Central',
 		contacto: '555-1234',
+		edad: '11',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Caniche blanco de tamaño pequeño. Lleva un collar rojo con etiqueta de identificación.',
 		imagen:
@@ -101,6 +117,8 @@ export const Data = [
 		fecha: '2022-10-05',
 		lugar: 'Zona Residencial',
 		contacto: '555-4567',
+		edad: '6',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Bulldog francés de pelaje negro. Tiene un collar amarillo con etiqueta de identificación.',
 		imagen:
@@ -113,6 +131,8 @@ export const Data = [
 		fecha: '2022-12-01',
 		lugar: 'Plaza del Pueblo',
 		contacto: '555-8901',
+		edad: '11',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato blanco con manchas negras. Lleva un collar morado con etiqueta de identificación.',
 		imagen:
@@ -125,6 +145,8 @@ export const Data = [
 		fecha: '2022-06-15',
 		lugar: 'Parque Central',
 		contacto: '555-1234',
+		edad: '6',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Chihuahua de color marrón claro. Tiene un collar rojo con etiqueta de identificación.',
 		imagen:
@@ -137,6 +159,8 @@ export const Data = [
 		fecha: '2022-02-28',
 		lugar: 'Parque Central',
 		contacto: '555-5678',
+		edad: '8',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato negro con pelaje largo y brillante. Tiene un collar con campana y etiqueta de identificación.',
 		imagen:
@@ -149,6 +173,8 @@ export const Data = [
 		fecha: '2022-07-10',
 		lugar: 'Calle Principal',
 		contacto: '555-7890',
+		edad: '12',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Pastor Alemán de pelaje negro y marrón. Tiene un collar naranja con etiqueta de identificación.',
 		imagen:
@@ -161,6 +187,8 @@ export const Data = [
 		fecha: '2022-09-01',
 		lugar: 'Parque de la Ciudad',
 		contacto: '555-9012',
+		edad: '4',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Labrador Retriever dorado. No lleva collar ni identificación.',
 		imagen:
@@ -173,6 +201,8 @@ export const Data = [
 		fecha: '2022-04-19',
 		lugar: 'Plaza del Pueblo',
 		contacto: '555-3456',
+		edad: '10',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato atigrado de pelaje corto. Tiene un collar rosa con etiqueta de identificación.',
 		imagen: 'https://t1.ea.ltmcdn.com/es/posts/2/0/2/pixie_bob_25202_2_600.jpg',
@@ -184,6 +214,8 @@ export const Data = [
 		fecha: '2022-03-02',
 		lugar: 'Parque de la Ciudad',
 		contacto: '555-2345',
+		edad: '7',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato siamés con pelaje corto. Lleva un collar azul con etiqueta de identificación.',
 		imagen:
@@ -196,6 +228,8 @@ export const Data = [
 		fecha: '2022-08-14',
 		lugar: 'Parque Central',
 		contacto: '555-0123',
+		edad: '9',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato anaranjado de pelaje largo. No lleva collar ni identificación.',
 		imagen:
@@ -208,6 +242,8 @@ export const Data = [
 		fecha: '2022-06-15',
 		lugar: 'Parque Central',
 		contacto: '555-1234',
+		edad: '11',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Caniche blanco de tamaño pequeño. Lleva un collar rojo con etiqueta de identificación.',
 		imagen:
@@ -220,6 +256,8 @@ export const Data = [
 		fecha: '2022-10-05',
 		lugar: 'Zona Residencial',
 		contacto: '555-4567',
+		edad: '6',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Perro Bulldog francés de pelaje negro. Tiene un collar amarillo con etiqueta de identificación.',
 		imagen:
@@ -232,6 +270,8 @@ export const Data = [
 		fecha: '2022-12-01',
 		lugar: 'Plaza del Pueblo',
 		contacto: '555-8901',
+		edad: '11',
+		refugio: 'Patitas a Casa',
 		descripcion:
 			'Gato blanco con manchas negras. Lleva un collar morado con etiqueta de identificación.',
 		imagen:

@@ -28,7 +28,7 @@ export const Adoptar = () => {
             <Filtrar />
           </article>
           <article className={styles.adoptarTarjeta__container}>
-            {Data.map(({ id, nombre, imagen, descripcion, contacto }, index) => {
+            {Data.map(({ id, nombre, imagen, descripcion, contacto, edad, refugio }, index) => {
               return (
                 <AdoptarTarjeta
                   key={id}
@@ -37,6 +37,8 @@ export const Adoptar = () => {
                   img={imagen}
                   descripcion={descripcion}
                   contacto={contacto}
+                  edad={edad}
+                  refugio={refugio}
                 />
               );
             })}
