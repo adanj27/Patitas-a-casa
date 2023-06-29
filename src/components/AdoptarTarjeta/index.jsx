@@ -7,6 +7,7 @@ import facebook from '/icons/facebook-icon.png';
 //Animate On Scroll
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useEffect, useRef, useState } from "react";
 
 export const AdoptarTarjeta = ({
 	idNumber,
@@ -32,14 +33,39 @@ export const AdoptarTarjeta = ({
 		once: true,
 	});
 
+	const [hovered, setHovered] = useState(false);
+	const padreRef = useRef(null);
+
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
+  };
+
+	useEffect(() => {
+    const padreElement = padreRef.current;
+
+    padreElement.addEventListener('mouseenter', handleMouseEnter);
+    padreElement.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      padreElement.removeEventListener('mouseenter', handleMouseEnter);
+      padreElement.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
 	return (
-		<div className={styles.adoptarTarjeta} data-aos={animation}>
-			<div className={styles["adoptarTarjeta__imgs"]}>
-				<img src={img} alt={`${img}-img`} />
-				<img src={img} alt={`${img}-img`} />
-			</div>
-			<div className={styles.adoptarTarjeta__img}>
-				<img src={img} alt={`${img}-img`} />
+		<div className={`${styles.adoptarTarjeta} ${hovered ? styles["adoptarTarjeta--hovered"] : ""}`} data-aos={animation}>
+			<div ref={padreRef} className={styles["adoptarTarjeta__img-container"]}>
+				<div className={styles["adoptarTarjeta__imgs"]}>
+					<img src={img} alt={`${img}-img`} />
+					<img src={img} alt={`${img}-img`} />
+				</div>
+				<div className={styles.adoptarTarjeta__img}>
+					<img src={img} alt={`${img}-img`} />
+				</div>
 			</div>
 			<div className={styles.adoptarTarjeta__description}>
 				<h3>Nombre: {nombre}</h3>
