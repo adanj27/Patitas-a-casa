@@ -8,6 +8,10 @@ import styles from './styles.module.css';
 // import sliderStyles from "../../css/adopciones/adopcionesSlider.module.css";
 import "./adopcionesSlider.css"
 
+
+// Hooks
+import useGet from '../../hooks/services/useGet.js'
+
 // Data mascotas
 import useDataHoPet from '../../hooks/useDataHoPet.js';
 
@@ -52,7 +56,7 @@ const CarouselItem = ({ pets }) => {
 const Carousel = () => {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const dataHoPet = useDataHoPet().slice(0, 16)
+  const dataHoPet = useDataHoPet().slice(0, 16) // | useGet('/dogs')
   const [isDesktop, setIsDesktop] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
