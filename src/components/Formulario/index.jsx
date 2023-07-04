@@ -7,6 +7,9 @@ import dog from '/icons/imagenes recursos/dog-seating.png';
 import pet from '/icons/imagenes recursos/pet.png';
 import close from '/icons/imagenes recursos/close.png';
 
+
+// hooks
+import usePost from '../../hooks/services/usePost';
 /**
  Petype = es un booleano que indica si el formulario es para reportar una mascota
  perdida o si es para reportar una mascota encontrada
@@ -20,9 +23,12 @@ export const Formulario = ({ setModal }) => {
 	const bodyRef = useRef(null);
 	const reportFormRef = useRef();
 
-	const handleSubmit = () => {
-		// Falta implementar el metodo post desde la API
-		// Si petype = true se agrega el formulario a las mascotas perdidas
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		const data = new FormData(reportFormRef.current);
+		// Descomentarlo cuando haya API de formulario
+		// const url = petType ? '/urlParaPerros': '/urlParaMichis';
+		// usePost(url, data) 
 		return petType ? 1 : 0;
 	};
 

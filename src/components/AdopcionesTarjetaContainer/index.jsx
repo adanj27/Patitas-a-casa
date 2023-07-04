@@ -5,12 +5,11 @@ import { AdopcionesTarjeta } from '../AdopcionesTarjeta/index';
 
 // Estilos
 import styles from './styles.module.css';
-// import sliderStyles from "../../css/adopciones/adopcionesSlider.module.css";
 import "./adopcionesSlider.css"
 
 
 // Hooks
-import useGet from '../../hooks/services/useGet.js'
+import useGet from '../../hooks/services/useGet.js' // API GET
 
 // Data mascotas
 import useDataHoPet from '../../hooks/useDataHoPet.js';
