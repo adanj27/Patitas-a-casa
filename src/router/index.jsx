@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { NotFound } from "../containers/errors";
 import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios } from "../containers/pages";
 import { FullWithLayout } from "../hocs/layouts/FullWithLayout";
+import { Terminos } from "../containers/pages/Terminos";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ export const router = createBrowserRouter([
       {
         path: "encontrados",
         element: <Encontrados />
-      } 
+      }, 
+      {
+        path: "terminos-y-condiciones",
+        element: <Terminos />
+      }
     ],
   },
 ]);
