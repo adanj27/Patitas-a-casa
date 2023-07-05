@@ -19,6 +19,7 @@
 .footer__text {
 	margin: 0;
 	text-align: center;
+	width: 58%;
 }
 
 .footer__contact-container {
@@ -88,9 +89,24 @@
 
 
 
-@media (max-width: 1050px){
+@media (max-width: 1700px){
+	.footer__text {
+		width: 70%;
+	}
+}
+@media (max-width: 1450px){
 	.footer__text {
 		width: 80%;
+	}
+}
+@media (max-width: 1250px){
+	.footer__text {
+		width: 90%;
+	}
+}
+@media (max-width: 1050px){
+	.footer__text {
+		/* width: 80%; */
 		text-align: center;
 	}
 }
