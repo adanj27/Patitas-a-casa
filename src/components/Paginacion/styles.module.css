@@ -1,7 +1,3 @@
-/* .paginacion__img:first-child {
-  transform: rotate(180deg);
-} */
-
 .paginacion__img {
   width: 22px;
   cursor: pointer;
@@ -42,9 +38,14 @@
     gap: 2rem;
   }
 }
-
-@media screen and (max-width: 370px) {
+@media (max-width: 500px){
+  .paginacion__img {
+    width: 20px;
+  }
   .paginacion__container {
-    gap: 1rem;
+    gap: 1.4rem;
+  }
+  .paginacion__button {
+    font-size: 18px;
   }
 }
