@@ -25,7 +25,7 @@ export const Adoptar = () => {
             />
           </article>
           <article className={styles.filter__container}>
-            <Filtrar />
+            {/* <Filtrar /> */}
           </article>
           <article className={styles.adoptarTarjeta__container}>
             {Data.map(({ id, nombre, imagen, descripcion, contacto, edad, refugio }, index) => {
