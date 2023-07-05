@@ -2,8 +2,18 @@ import styles from "./styles.module.css";
 
 import { Data } from "../../../data/HO-PET";
 import { AdoptarTarjeta, Filtrar, LetraParrafo, LetraSubtitulo, LetraTitulo, Paginacion } from "../../../components";
+import { useState } from "react";
 
 export const Adoptar = () => {
+  const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(6)
+
+	const lastPostIndex = currentPage * postsPerPage
+	const firstPostIndex = lastPostIndex - postsPerPage
+  const currentPosts = Data.slice(firstPostIndex, lastPostIndex)
+  const totalPosts = Data.length;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
   return (
     <>
       <div className={styles.adoptar__container}>
@@ -25,7 +35,7 @@ export const Adoptar = () => {
             />
           </article>
           <article className={styles.adoptarTarjeta__container}>
-            {Data.map(({ id, nombre, imagen, descripcion, contacto, edad, refugio }, index) => {
+            {currentPosts.map(({ id, nombre, imagen, descripcion, contacto, edad, refugio }, index) => {
               return (
                 <AdoptarTarjeta
                   key={id}
@@ -40,7 +50,13 @@ export const Adoptar = () => {
               );
             })}
           </article>
-          <Paginacion enlaces={["", "", "", "", ""]} />
+          <Paginacion
+            totalPosts={Data.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
         </section>
       </div>
     </>

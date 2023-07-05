@@ -1,9 +1,11 @@
-.paginacion__img:first-child {
+/* .paginacion__img:first-child {
   transform: rotate(180deg);
-}
+} */
 
 .paginacion__img {
-  width: 50px;
+  width: 22px;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .paginacion {
@@ -19,8 +21,20 @@
   font-size: 1.5rem;
 }
 
-.paginacion__a {
+.paginacion__button {
   color: #000;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 2px;
+  text-align: center;
+  transition: all 0.3s ease 0s;
+}
+.paginacion__button--active {
+  color: #DE341D;
+  background-color: #e9ecef;
 }
 
 @media screen and (max-width: 530px) {

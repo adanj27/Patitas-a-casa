@@ -2,8 +2,18 @@ import styles from './styles.module.css'
 import { Data } from '../../../data/HO-PET';
 import { LetraParrafo, LetraSubtitulo, LetraTitulo, Paginacion } from '../../../components';
 import { PerdidosTarjeta } from '../../../components/PerdidosTarjeta';
+import { useState } from "react";
 
 export const Perdidos = () => {
+	const [currentPage, setCurrentPage] = useState(1)
+	const [postsPerPage, setPostsPerPage] = useState(10)
+
+	const lastPostIndex = currentPage * postsPerPage
+	const firstPostIndex = lastPostIndex - postsPerPage
+  const currentPosts = Data.slice(firstPostIndex, lastPostIndex)
+  const totalPosts = Data.length;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
 	return (
 		<>
 			<div className={styles.perdidos}>
@@ -26,7 +36,7 @@ export const Perdidos = () => {
 					</article>
 				</section>
 				<section className={styles.perdidos__tarjeta_container}>
-					{Data.map(
+					{currentPosts.map(
 						({ id, nombre, tamaño, fecha, lugar, contacto, descripcion, imagen }) => {
 							return (
 								<PerdidosTarjeta
@@ -43,7 +53,13 @@ export const Perdidos = () => {
 						}
 					)}
 				</section>
-				<Paginacion enlaces={['', '', '', '', '']} />
+				<Paginacion 
+					totalPosts={Data.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          totalPages={totalPages}
+				/>
 			</div>
 		</>
 	);
