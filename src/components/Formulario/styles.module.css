@@ -6,6 +6,7 @@
   left: 0;
   z-index: 100;
   background-color: #00000093;
+  backdrop-filter: blur(5px);
   width: 100vw;
   height: 100vh;
   padding: 0;
@@ -18,12 +19,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;*/
-  background-image: url('/icons/imagenes\ recursos/bg_form.webp');
+  /* background-image: url('/icons/imagenes\ recursos/bg_form.webp'); */
+  background-color: #FAFAFA;
   padding: 15px;
   border-radius: 8px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
   width: 450px;
   height: auto;
   transition: 0.5s;
