@@ -53,7 +53,6 @@ const CarouselItem = ({ pets }) => {
 };
 
 const Carousel = () => {
-
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const dataHoPet = useDataHoPet().slice(0, 16) // | useGet('/dogs')
   const [isDesktop, setIsDesktop] = useState(false);
