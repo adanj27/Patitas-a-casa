@@ -2,7 +2,7 @@
 import styles from './styles.module.css';
 
 export const Blog = ({ title, content, img }) => {
-  return(
+  return (
     <article className={`${styles.blog} blog`}>
       <img src={"#"} alt="blog image" />
       <h2>{title}</h2>

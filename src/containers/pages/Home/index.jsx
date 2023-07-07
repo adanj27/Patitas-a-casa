@@ -192,24 +192,26 @@ export const Home = () => {
 							<BtnPrincipal texto="Perdidos" />
 						</Link>
 					</div>
-				</section>
+			</section>
 
-				<Stats />
+			<Stats />
 
-				<div className={styles.adopciones}>
-					<LetraTitulo
-						texto="ADOPCIONES"
-						clase="letra-titulo--red"
-						align="center"
-					/>
-					<AdopcionesTarjetaContainer />
-					<Link to="/adoptar" className={styles.header__buttons}>
-						<BtnPrincipal texto="Adoptar" />
-					</Link>
-				</div>
+			<div className={styles.adopciones}>
+				<LetraTitulo
+					texto="ADOPCIONES"
+					clase="letra-titulo--red"
+					align="center"
+				/>
+				<AdopcionesTarjetaContainer />
+				<Link to="/adoptar" className={styles.header__buttons}>
+					<BtnPrincipal texto="Adoptar" />
+				</Link>
+			</div>
 
+			<section>
 				<LetraTitulo texto="BLOG" clase="letra-titulo--red" align="center" />
 				<BlogContainer />
+			</section>
 				<section className={styles['sobre-nosotros']}>
 					<LetraTitulo texto="Sobre Nosotros" clase="letra-titulo--red" />
 					<article className={styles['sobre-nosotros__container']}>
