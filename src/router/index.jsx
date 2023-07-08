@@ -9,7 +9,6 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <FullWithLayout />,
-    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -46,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "terminos-y-condiciones",
         element: <Terminos />
+      },
+      {
+        path: "*",
+        element: <NotFound />
       }
     ],
   },

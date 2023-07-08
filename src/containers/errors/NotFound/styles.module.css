@@ -1,0 +1,140 @@
+.error__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  margin: 60px 0;
+  gap: 10px;
+}
+.error__img-container {
+  position: relative;
+}
+.error__img {
+  z-index: 100;
+}
+.error__headings {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #D11317;
+  font-weight: 700;
+}
+.error__title {
+  font-size: 178px;
+  margin: 0;
+  font-weight: 900;
+  line-height: 140px;
+}
+.error__subtitle {
+  font-size: 100px;
+  margin: 0;
+  line-height: 100px;
+}
+.error__text {
+  font-size: 32px;
+  color: #343A40;
+  margin: 10px 0 0;
+}
+.error__link {
+  color: #343A40;
+  font-size: 20px;
+  background-color: #e9ecef;
+  text-align: center;
+  width: 340px;
+  border-radius: 6px;
+  padding: 4px 0;
+  transition: all 0.3s ease 0s;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: 30px 0 0;
+}
+.error__link:hover {
+  text-decoration: underline;
+  background-color: #dee2e6;
+}
+
+@media (max-width: 1600px){
+  .error__img {
+    width: 360px;
+  }
+  .error__title {
+    font-size: 148px;
+    line-height: 110px;
+  }
+  .error__subtitle {
+    font-size: 82px;
+    line-height: 90px;
+  }
+  .error__text {
+    font-size: 28px;
+  }
+  .error__link {
+    font-size: 18px;
+    width: 320px;
+  }
+}
+@media (max-width: 1300px){
+  .error__img {
+    width: 300px;
+  }
+  .error__title {
+    font-size: 138px;
+    line-height: 110px;
+  }
+  .error__subtitle {
+    font-size: 77px;
+    line-height: 80px;
+  }
+  .error__text {
+    font-size: 24px;
+  }
+  .error__link {
+    font-size: 17px;
+    width: 300px;
+  }
+}
+@media (max-width: 800px){
+  .error__img {
+    width: 240px;
+  }
+  .error__title {
+    font-size: 100px;
+    line-height: 76px;
+  }
+  .error__subtitle {
+    font-size: 56px;
+    line-height: 60px;
+  }
+  .error__text {
+    font-size: 20px;
+  }
+  .error__link {
+    font-size: 14px;
+    width: 240px;
+  }
+}
+@media (max-width: 600px){
+  .error__container {
+    text-align: center;
+  }
+  .error__img {
+    width: 240px;
+    display: none;
+  }
+  .error__title {
+    font-size: 100px;
+    line-height: 76px;
+  }
+  .error__subtitle {
+    font-size: 56px;
+    line-height: 60px;
+  }
+  .error__text {
+    font-size: 20px;
+  }
+  .error__link {
+    font-size: 14px;
+    width: 240px;
+    margin: 30px auto 0;
+  }
+}
+
