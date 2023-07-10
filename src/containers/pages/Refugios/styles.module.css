@@ -62,3 +62,23 @@
   object-fit: contain;
   border-radius: 1rem 5rem;
 }
+
+/*New Refugios section*/
+.section__title-container {
+  display: grid;
+  place-items: center;
+}
+
+.texto-container__subtitulo {
+  width: 80%;
+  margin-inline: auto;
+  margin-bottom: 5%;
+}
+
+
+
+@media screen and (max-width:850px) {
+  .texto-container__subtitulo {
+    margin-bottom: 10%;
+  }
+}

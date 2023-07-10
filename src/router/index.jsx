@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { NotFound } from "../containers/errors";
 import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios } from "../containers/pages";
+import { InformacionRefugio } from "../containers/pages/Refugios/components/InformacionRefugio";
 import { FullWithLayout } from "../hocs/layouts/FullWithLayout";
 
 export const router = createBrowserRouter([
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "refugios",
         element: <Refugios />
+      },
+      {
+        path: "refugios/informacion/:id",
+        element: <InformacionRefugio />
       },
       {
         path: "encontrados",
