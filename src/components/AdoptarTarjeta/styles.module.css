@@ -5,6 +5,23 @@
   border: 1px solid rgb(241, 230, 230);
   border-radius: 125px 10px 10px 125px;
   background-color: white;
+  transform: translate3d(0px,0,0) !important;
+  opacity: 1 !important;
+}
+
+.adoptarTarjeta--hovered {
+  border-radius: 10px;
+}
+.adoptarTarjeta__img-container:hover .adoptarTarjeta__img>img {
+  border-radius: 10px;
+}
+
+.adoptarTarjeta__img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  gap: 6px;
 }
 
 .adoptarTarjeta__img {
@@ -26,6 +43,36 @@
   max-height: 220px;
   object-fit: cover;
   border-radius: 50%;
+  transition: all 0.5s ease;
+}
+
+.adoptarTarjeta__imgs {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  border: 21px red;
+  border-radius: 50% 0 0 50%;
+  background-color: transparent/*#f2e2e2*/;
+  margin-left: 2%;
+}
+.adoptarTarjeta__img-container:hover .adoptarTarjeta__imgs {
+  display: flex;
+}
+.adoptarTarjeta__imgs>img {
+  width: 4vw;
+  height: 5vw;
+  /* min-width: 200px;
+  max-width: 220px;
+  min-height: 200px;
+  max-height: 220px; */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: all 0.3s ease 0s;
+}
+.adoptarTarjeta__imgs>img:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .adoptarTarjeta__description {
@@ -40,7 +87,6 @@
 	position: relative;
 	display: flex;
 	top: 0%;
-
 }
 
 .adoptarTarjeta__img_info{
@@ -54,16 +100,31 @@
 
 @media screen and (max-width:1141px) {
   .adoptarTarjeta {
-    width: 90%;
-    min-width: 500px;
+    width: 100%;
+    min-width: 600px;
     display: flex;
     border: 1px solid rgb(241, 230, 230);
-    border-radius: 125px 10px 10px 125px;
+    /* border-radius: 125px 10px 10px 125px; */
     background-color: white;
   }
+  .adoptarTarjeta__imgs>img {
+    width: 6vw;
+    height: 8vw;
+  }
 }
-
-@media screen and (max-width:550px) {
+@media (max-width: 900px){
+  .adoptarTarjeta__imgs>img {
+    width: 8vw;
+    height: 10vw;
+  }
+}
+@media (max-width: 700px){
+  .adoptarTarjeta__imgs>img {
+    width: 10vw;
+    height: 12vw;
+  }
+}
+@media screen and (max-width:660px) {
   .adoptarTarjeta {
     width: 80%;
     min-width: 200px;
@@ -80,6 +141,10 @@
     max-width: 220px;
     min-height: 150px;
     max-height: 220px;
+  }
+  .adoptarTarjeta__imgs>img {
+    width: 12vw;
+    height: 14vw;
   }
   .adoptarTarjeta__description {
     padding: 2%;
@@ -106,5 +171,17 @@
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
+  }
+}
+@media (max-width: 500px){
+  .adoptarTarjeta__imgs>img {
+    width: 14vw;
+    height: 16vw;
+  }
+}
+@media (max-width: 400px){
+  .adoptarTarjeta__imgs>img {
+    width: 15vw;
+    height: 17vw;
   }
 }

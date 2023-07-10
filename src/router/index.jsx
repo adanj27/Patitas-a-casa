@@ -4,12 +4,12 @@ import { NotFound } from "../containers/errors";
 import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios } from "../containers/pages";
 import { InformacionRefugio } from "../containers/pages/Refugios/components/InformacionRefugio";
 import { FullWithLayout } from "../hocs/layouts/FullWithLayout";
+import { Terminos } from "../containers/pages/Terminos";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <FullWithLayout />,
-    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -46,7 +46,15 @@ export const router = createBrowserRouter([
       {
         path: "encontrados",
         element: <Encontrados />
-      } 
+      }, 
+      {
+        path: "terminos-y-condiciones",
+        element: <Terminos />
+      },
+      {
+        path: "*",
+        element: <NotFound />
+      }
     ],
   },
 ]);

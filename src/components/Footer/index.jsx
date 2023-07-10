@@ -13,6 +13,7 @@ import FacebookIcon from "/icons/facebook-icon.png";
 import TwitterIcon from "/icons/twitter-icon.png";
 import InstagramIcon from "/icons/instagram-icon.png";
 import YoutubeIcon from "/icons/youtube-icon.png";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
 	return (
@@ -28,7 +29,7 @@ export default function Footer() {
 					<div className={styles["footer__contact"]}>
 						<div className={styles["footer__contact--type"]}>
 							<img className={styles["footer__contact--img"]} src={PhoneIcon} alt="icono telefono" />
-							<p className={styles["footer__contact--text"]}>+1 909 764 0024</p>
+							<p className={styles["footer__contact--text"]}>+54 261-257-2860</p>
 						</div>
 						<div className={styles["footer__contact--type"]}>
 							<img className={styles["footer__contact--img"]} src={MailIcon} alt="icono telefono" />
@@ -43,7 +44,7 @@ export default function Footer() {
 					<a href="#">
 						<img className={styles["footer__social--icon"]} src={TwitterIcon} alt="icono twitter" />
 					</a>
-					<a href="#">
+					<a href="https://www.instagram.com/patitasacasa_arg/" target="_blank">
 						<img className={styles["footer__social--icon"]} src={InstagramIcon} alt="icono instagram" />
 					</a>
 					<a href="#">
@@ -52,9 +53,9 @@ export default function Footer() {
 				</div>
 				<div className={styles.footer__line}></div>
 				<div className={styles.footer__rights}>
-					<a href="">
+					<Link to="terminos-y-condiciones">
 						<p>Términos y Condiciones</p>
-					</a>
+					</Link>
 					<p className={styles["footer__rights--bar"]}>|</p>
 					<p>Copyright &copy; 2023 oHm Devs</p>
 				</div>
