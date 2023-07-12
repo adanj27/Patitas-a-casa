@@ -43,7 +43,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: .7rem;
+	gap: .4rem;
 	/* transform: translateX(clamp(-30px, -10%, -80px)); */
 	/* margin-right: clamp(1px, 10%, 1px); */
 }

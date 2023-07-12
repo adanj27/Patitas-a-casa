@@ -1,12 +1,12 @@
 .btn {
 	color: rgba(0, 0, 0, 0.75);
-	font-size: 1rem;
+	font-size: 15px;
 	border: none;
 	font-weight: 700;
 	clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
 	border-radius: 10px 10px 20px 20px;
 	cursor: pointer;
-	padding: .5rem 1rem;
+	padding: 8px 16px;
 
 }
 

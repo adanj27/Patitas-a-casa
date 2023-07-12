@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { NotFound } from "../containers/errors";
-import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios } from "../containers/pages";
+import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios, Nosotros } from "../containers/pages";
 import { InformacionRefugio } from "../containers/pages/Refugios/components/InformacionRefugio";
 import { FullWithLayout } from "../hocs/layouts/FullWithLayout";
 import { Terminos } from "../containers/pages/Terminos";
@@ -26,6 +26,10 @@ export const router = createBrowserRouter([
       {
         path: "blogs/:id",
         element: <Blogs />
+      },
+      {
+        path: "nosotros",
+        element: <Nosotros />
       },
       {
         path: "contacto",

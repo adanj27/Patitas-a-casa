@@ -26,6 +26,7 @@ export const botones = [
 	{ texto: "Adoptar", path: "/adoptar" },
 	{ texto: "Blog", path: "/blog" },
 	{ texto: "Refugios", path: "/refugios" },
+	{ texto: "Nosotros", path: "/nosotros" },
 	{ texto: "Contacto", path: "/contacto" }
 ];
 
