@@ -1,0 +1,50 @@
+.blogsNota__container {
+	height: 180px;
+	position: relative;
+	margin: 40px 60px;
+}
+
+.blogsNota__container > img {
+	width: 80px;
+	position: absolute;
+	bottom: 0;
+}
+
+.blogsNota__container > p {
+	width: 80%;
+	position: absolute;
+  z-index: 5;
+	right: 0;
+  text-align: center;
+	padding: 20px;
+	border: 1px solid #0000004d;
+	border-radius: 40px;
+	background-color: #f1dfd1;
+}
+
+.blogsNota__container > p::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  bottom: -25px;
+  left: -10px;
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: #f1dfd1;
+  border: 1px solid #0000004d;
+  border-radius: 50%;
+}
+
+.blogsNota__container > p::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: -2px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #f1dfd1;
+  border: 1px solid #0000004d;
+  border-radius: 50%;
+}

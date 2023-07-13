@@ -1,0 +1,9 @@
+.blog .slick-dots {
+  bottom: -14px !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+.blog .slick-dots button {
+  z-index: 100;
+  position: relative;
+}

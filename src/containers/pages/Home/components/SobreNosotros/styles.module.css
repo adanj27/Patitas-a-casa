@@ -1,0 +1,22 @@
+.sobre-nosotros{
+  background-color: #D9D9D9;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  border-radius: 0.625rem;
+}
+
+.sobre-nosotros__img{
+  margin: 0 1rem;
+  width: 6.25rem;
+  height: 6.25rem;
+}
+
+.sobre-nosotros__titulo{
+  font-size: 1.25rem;
+}
+
+.sobre-nosotros__parrafo{
+  color: #343A40;
+  font-size: 0.875rem;
+}

@@ -1,0 +1,29 @@
+.servicio{
+  width: 12.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem
+}
+
+.servicio > img{
+  max-width: 8rem;
+}
+
+.servicio > p{
+  font-size: 1.125rem;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+}
+
+@media (max-width: 1000px){
+  .servicio > img {
+    max-width: 6rem;
+  }
+}
+@media (max-width: 600px){
+  .servicio > img {
+    max-width: 5rem;
+  }
+}

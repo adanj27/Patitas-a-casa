@@ -1,0 +1,75 @@
+.adoptar__container {
+	background-image: url('../../iconos/imagen\ de\ fondo\ de\ huellas/bg-3.png');
+	background-position: center;
+}
+
+.adoptarTarjeta__container {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	gap: 30px 80px;
+	margin: 0 20px;
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 15px;
+	letter-spacing: 0.02em;
+	color: #343a40;
+	/*border: 1px solid red;*/
+}
+
+.filter__container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+@media screen and (max-width:1141px) {
+	.adoptarTarjeta__container {
+		display: grid;
+		grid-template-columns: 100%;
+		place-items: center;
+	}
+}
+@media (max-width: 500px){
+	.adoptarTarjeta__container {
+		margin: 0px;
+	}
+}
+
+.perdidos {
+	background-image: url('../../iconos/imagen\ de\ fondo\ de\ huellas/bg-3.png');
+	background-position: center;
+}
+
+.texto-container{
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 5vh 0;
+	gap: 1rem
+}
+
+.texto-container__titulo{
+	text-align: center;
+	max-width: 50%;
+}
+
+.texto-container__subtitulo{
+	max-width: 80%;
+	margin-bottom: 2rem;
+}
+
+.perdidos__tarjeta_container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	margin: 0;
+	gap: 50px 0;
+	padding-bottom: 2rem;
+}

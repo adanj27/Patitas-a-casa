@@ -1,0 +1,113 @@
+.card__container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 220px;
+  min-height: 220px;
+  padding: 16px;
+  margin-bottom: 190px;
+}
+
+.card {
+  width: 220px;
+  height: 210px;
+  padding: 16px;
+  background-color: rgba(238, 238, 238, 0.73);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
+  z-index: 1;
+  transition: all .6s;
+  overflow: hidden;
+  color: #FFF;
+  position: absolute;
+}
+
+.card:hover {
+  padding-bottom: 220px;
+  transition: all .6s;
+  background-color: #e3e3e3;
+}
+
+.card img {
+  transition: all .6s;
+}
+
+.card:hover img {
+  width: 100%;
+  border-radius: 10px;
+  transition: all .6s;
+}
+
+.card:hover p {
+  transition: all .6s;
+  color: #FFF;
+  margin-bottom: 6px;
+}
+
+.card:hover h3{
+  font-size: 20px;
+  margin: 0;
+}
+
+.cardNoExtended {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cardNoExtended>p {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px 30px;
+  text-align: center;
+  background-color: #de523f;
+  border-radius: 8px;
+  transition: all .6s;
+  margin-top: 10px;
+}
+
+.cardNoExtended>img {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cardExtended {
+  display: none;
+  text-align: left;
+  color: #111111;
+}
+
+.card:hover>.cardExtended {
+  display: block;
+  margin-top: 4px;
+}
+
+.cardExtended>h3 {
+  font-size: 16px;
+  text-align: center;
+  border-radius: 8px;
+  color: #de523f;
+}
+
+.cardExtended>ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0 10px;
+}
+
+.cardButton {
+  padding: 0;
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
+.arrow {
+  rotate: 90deg;
+}

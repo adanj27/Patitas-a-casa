@@ -1,0 +1,40 @@
+.btn {
+	color: rgba(0, 0, 0, 0.75);
+	font-size: 15px;
+	border: none;
+	font-weight: 700;
+	clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+	border-radius: 10px 10px 20px 20px;
+	cursor: pointer;
+	padding: 8px 16px;
+
+}
+
+.btn--principal {
+	background-color: #DE341D;
+	color: white;
+}
+
+.btn--secundario {
+	transition: all .3s ease;
+	background-color: transparent;
+}
+
+.btn--secundario:hover {
+	background-color: #DE341D;
+	color: white
+}
+
+@media (max-width: 1400px){
+	.btn {
+		font-size: 15px;
+	}
+}
+@media (max-width: 1024px) {
+
+	.btn {
+		font-size: 0.9rem;
+		font-weight: 600;
+	}
+	
+}
