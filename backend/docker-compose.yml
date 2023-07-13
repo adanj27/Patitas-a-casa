@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+    db:
+        container_name: patitasacasa-db
+        image: postgres:15
+        restart: always
+        ports:
+            - "5432:5432"
+        volumes:
+            - patitasacasa-data:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: myuser
+            POSTGRES_PASSWORD: superpassword
+            POSTGRES_DB: patitasacasa
+    app:
+        container_name: patitasacasa-api
+        image: patitasacasa:dev
+        build: .
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "ConnectionStrings__DefaultConnection=User ID=myuser;Password=superpassword;Host=patitasacasa-db;Port=5432;Database=patitasacasa;"
+volumes:
+    patitasacasa-data:
