@@ -281,6 +281,7 @@
   /* margin: 2rem 0; */
   padding: 2rem 0;
   position: relative;
+  margin-bottom: 50px;
 }
 .adopciones::before {
   content: "";
