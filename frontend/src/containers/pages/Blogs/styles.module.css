@@ -1,0 +1,33 @@
+.blogs__container {
+  margin: 120px;
+}
+
+.blogsData__container {
+  margin: 0 200px;
+  margin-top: 80px;
+}
+
+.blogs__refran {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 30px;
+  text-align: center;
+  margin: 70px 0;
+}
+
+.blogs__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blogs__footer>div {
+  width: 130px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.blogs__footer > div > img {
+  width: 25px;
+}

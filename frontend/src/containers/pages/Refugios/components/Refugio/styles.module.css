@@ -1,0 +1,141 @@
+.refugio-container {
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
+
+    width: 80%;
+
+    border: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: clamp(20px, 3vw, 30px);
+
+    padding: 0.5% 2.5% 0.5% 2.5%;
+    margin-inline: auto;
+    margin-bottom: 3%;
+    margin-top: 4%;
+}
+
+.container__icon {
+    display: grid;
+    place-items: center;
+
+    border: 1px solid transparent;
+}
+
+.container__icon>div {
+    display: grid;
+    place-items: center;
+
+    background-color: #DE341D;
+    border-radius: 50%;
+
+    min-width: 50px;
+    min-height: 50px;
+    width: 12vw;
+    height: 12vw;
+    max-width: 120px;
+    max-height: 120px;
+}
+
+.container__icon>div>img {
+    width: 70%;
+}
+
+.container__info {
+    border: 1px solid transparent;
+}
+
+.container__info>h2,
+.container__info>h4 {
+    color: #DE341D;
+}
+
+.container__info>h2 {
+    font-size: clamp(20px, 2.5vw, 25px);
+}
+
+.container__info>h4 {
+    font-size: clamp(18px, 2vw, 20px);
+}
+
+.container__info>p {
+    font-size: 16px;
+}
+
+.container__info-btn {
+    border: 1px solid transparent;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 3%;
+    place-items: center;
+}
+
+.container__info-btn>button {
+    font-size: 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+
+    width: 150px;
+    padding: 7%;
+
+    border: transparent;
+    border-radius: 8px;
+    color: white;
+    background-color: #DE341D;
+
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.container__info-btn>button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.donate-img>img {
+    width: 1.8vw;
+    max-width: 18px;
+    min-width: 16px;
+}
+
+@media screen and (max-width:850px) {
+
+    .refugio-container {
+        margin-bottom: 8%;
+    }
+
+    .refugio-container {
+        flex-direction: column;
+    }
+
+    .container__info-btn>button {
+        width: 170px;
+        
+        padding: 5%;
+    }
+}
+
+@media screen and (max-width:495px) {
+
+    .refugio-container {
+        padding-inline: 7%;
+    }
+
+    .container__info-btn {
+        grid-template-columns: 100%;
+        gap: 10%;
+
+        margin-bottom: 8%;
+        margin-top: 3%;
+    }
+    .container__info-btn>button {
+        width: 160px;
+
+        padding: 5%;
+    }
+}
