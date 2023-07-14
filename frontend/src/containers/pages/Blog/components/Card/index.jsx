@@ -8,7 +8,7 @@ export const Card = ({ id, img, consejo, titulo, descripcion, fecha }) => {
 				<span className={styles.cardContainer__consejo}>{consejo}</span>
 				<div className={styles.cardContainer__data}>
 					<h2 className={styles.cardContainer__titulo}>{titulo}</h2>
-					<p className={styles.cardContainer__descripcion}>{descripcion}</p>
+					<p className={styles.cardContainer__descripcion}>{descripcion}...</p>
 				</div>
 				<span className={styles.cardContainer__fecha}>{fecha}</span>
 			</div>

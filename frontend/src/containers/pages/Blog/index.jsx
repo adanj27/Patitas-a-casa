@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 import { LetraTitulo, Paginacion } from '../../../components';
 import { Card } from './components/Card';
 import { useState } from "react";
-import { blogData } from "../../../data/blog-data";
+import { blogData } from "../../../data/blogs";
 
 export const Blog = () => {
 	const [currentPage, setCurrentPage] = useState(1)
@@ -27,11 +27,11 @@ export const Blog = () => {
 							<Card 
 								key={index}
 								id={blog.id}
-								img={blog.img}
-								consejo={blog.consejo}
-								titulo={blog.titulo}
-								descripcion={blog.descripcion}
-								fecha={blog.fecha}
+								img={blog.imageBanner}
+								consejo={blog.category}
+								titulo={blog.title}
+								descripcion={blog.description[0].content.split(" ").slice(0, 15).join(" ")}
+								fecha={blog.date}
 							/>
 						)
 					})}

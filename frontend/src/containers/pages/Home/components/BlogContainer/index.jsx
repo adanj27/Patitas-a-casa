@@ -18,7 +18,7 @@ import arrowLeft from "/icons/arrow-left-black.svg"
 import arrowRight from "/icons/arrow-right-black.svg"
 
 // Data
-import { blogData } from "../../../../../data/blog-data"
+import { blogData } from "../../../../../data/blogs"
 import {Blog} from '../Blog'
 import axios from 'axios'
 
@@ -43,11 +43,11 @@ const CarouselItem = ({ pets }) => {
             <Card 
               key={index}
               id={blog.id}
-              img={blog.img}
-              consejo={blog.consejo}
-              titulo={blog.titulo}
-              descripcion={blog.descripcion}
-              fecha={blog.fecha}
+              img={blog.imageBanner}
+              consejo={blog.category}
+              titulo={blog.title}
+              descripcion={blog.description[0].content.split(" ").slice(0, 15).join(" ")}
+              fecha={blog.date}
             />
           )
         })}
