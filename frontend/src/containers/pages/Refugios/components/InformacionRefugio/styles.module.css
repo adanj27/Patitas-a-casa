@@ -1,0 +1,280 @@
+.information-section {
+    overflow-x: hidden;
+}
+
+.information-section__header {
+    position: relative;
+
+    max-width: 1371px;
+    min-width: 290px;
+    width: 90vw;
+
+    height: 381px;
+
+    margin-top: 5%;
+    margin-inline: auto;
+
+    background-image: url('./Imgs/portadaRP.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.information-section__header>div:first-child {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    z-index: 2;
+}
+
+.information-content__contact p {
+    cursor: pointer;
+}
+
+/*.information-section__header>div:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.information-section__header>div:last-child>img {
+    max-width: 1371px;
+    min-width: 290px;
+    width: 90vw;
+    max-height: 381px;
+    min-height: 67px;
+}*/
+
+.information-section__header>div>h2 {
+    font-size: clamp(30px, 4vw, 40px);
+
+    -webkit-text-stroke: 0.5px white;
+}
+
+.information-section__header>div>p {
+    font-size: clamp(25px, 3vw, 30px);
+
+    font-weight: 700;
+
+    -webkit-text-stroke: 0.5px white;
+}
+
+.information-section__content {
+    width: 90%;
+
+    border: 1px solid transparent;
+    margin-inline: auto;
+}
+
+.information-content__btns {
+    display: flex;
+    flex-direction: row;
+    gap: 3%;
+
+    justify-content: center;
+
+    margin-top: 5%;
+}
+
+.information-content__btns>button {
+    font-size: 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+
+    width: 130px;
+    padding: 1%;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: white;
+    background-color: #DE341D;
+
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.information-content__btns>button a {
+    color: white;
+    transition: 0.3s;
+}
+
+.information-content__btns>button:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.information-content__btns>button:hover a {
+    color: black;
+}
+
+.information-content__about,
+.information-content__information,
+.information-content__contact {
+    display: grid;
+    grid-template-columns: repeat(2, 45%);
+    gap: 5%;
+
+    justify-content: center;
+
+    margin-top: 5%;
+}
+
+.information-content__about h3,
+.information-content__information h3 {
+    color: black/*#DE341D*/;
+
+    font-size: 25px;
+
+    text-align: center;
+}
+
+.information-content__about>div {
+    /*border: 1px solid red;*/
+}
+
+.information-content__imgs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5%;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    text-align: center;
+}
+
+.information-content__imgs>img {
+    width: 35vw;
+    max-width: 392px;
+    min-width: 250px;
+    max-height: 269px;
+    min-height: 188px;
+}
+
+.information-content__information>div:first-child,
+.information-content__information>div:nth-child(2) {
+    text-align: center;
+}
+
+.information-content__information>div:first-child>p,
+.information-content__information>div:nth-child(2)>p,
+.information-content__information>div:nth-child(3)>p {
+    text-align: start;
+
+    width: 85%;
+
+    margin-bottom: 5%;
+    margin-inline: auto;
+}
+
+.information-content__information>div:first-child>img {
+    width: 39vw;
+    max-width: 392px;
+    min-width: 200px;
+    max-height: 269px;
+    min-height: 132px;
+}
+
+.information-content__information>div:nth-child(2)>div>img {
+    max-width: 133px;
+    min-width: 80px;
+    width: 15vw;
+    max-height: 269px;
+    min-height: 162px;
+    margin-inline: clamp(5px, 1%, 10px);
+}
+
+.information-content__information>div:nth-child(2)>img .information-content__information>div:last-child>div {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: center;
+}
+
+.information-content__contact li {
+    list-style: none;
+}
+
+.information-content__donate li {
+    list-style: circle;
+}
+
+.information-content__donate>ol {
+    width: 85%;
+
+    margin-inline: auto;
+}
+
+.information-content__information>div {
+    /*border: 1px solid black;*/
+}
+
+
+.information-content__contact {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 0;
+}
+
+.information-content__contact>ol li>p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5%;
+
+    font-size: clamp(18px, 2vw, 20px);
+}
+
+.information-content__contact>ol li>p>span {
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+    place-items: center;
+}
+
+.information-content__contact>ol li>p i{
+    font-size: 30px;
+}
+
+.information-content__final {
+    text-align: center;
+
+    margin-top: clamp(40px, 8%, 100px);
+}
+
+.information-content__final>img {
+    max-width: 1371px;
+    min-width: 250px;
+    width: 87vw;
+    max-height: 381px;
+    min-height: 67px;
+}
+
+@media screen and (max-width:650px) {
+    .information-content__information {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
+
+@media screen and (max-width:550px) {
+    .information-content__about {
+        display: flex;
+        flex-direction: column;
+
+    }
+}
