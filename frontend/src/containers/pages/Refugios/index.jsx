@@ -2,13 +2,13 @@ import { Lista } from '../../../components'
 
 import styles from './styles.module.css'
 
-import headerBar from '/icons/imagenes recursos/refugios_fondo.png'
-import imgFundacion from "/icons/img-refugios/fundacion.jpg"
-import imgServicio1 from "/icons/img-refugios/actividades-divertidas.png"
-import imgServicio2 from "/icons/img-refugios/pet-house.png"
-import imgServicio3 from "/icons/img-refugios/servicio-aseo.png"
-import imgServicio4 from "/icons/img-refugios/veterinario.png"
-import iconRefugio from '../../../../public/icons/icono-casa-mascota.png';
+import headerBar from "/icons/imagenes recursos/refugios_fondo.png";
+import imgFundacion from "/icons/img-refugios/fundacion.jpg";
+import imgServicio1 from "/icons/img-refugios/actividades-divertidas.png";
+import imgServicio2 from "/icons/img-refugios/pet-house.png";
+import imgServicio3 from "/icons/img-refugios/servicio-aseo.png";
+import imgServicio4 from "/icons/img-refugios/veterinario.png";
+import iconRefugio from "/icons/icono-casa-mascota.png";
 
 import { refugios } from '../../../refugios/refugiosData'
 import { LetraTitulo, LetraParrafo } from '../../../components';

@@ -1,15 +1,15 @@
 //casita de lula
 //icono
-import casitaDeLulaIcon from '../../public/icons/casitaDeLulaRefugiocono.png';
+import casitaDeLulaIcon from '/icons/casitaDeLulaRefugiocono.png';
 //principal
-import casitaDeLulaPrincipal1 from '../../public/icons/casitaDeLulaMain1.png';
-import casitaDeLulaPrincipal2 from '../../public/icons/casitaDeLulaMain2.png';
-import casitaDeLulaPrincipal3 from '../../public/icons/casitaDeLulaMain3.png';
+import casitaDeLulaPrincipal1 from '/icons/casitaDeLulaMain1.png';
+import casitaDeLulaPrincipal2 from '/icons/casitaDeLulaMain2.png';
+import casitaDeLulaPrincipal3 from '/icons/casitaDeLulaMain3.png';
 //mascotas
-import casitaDeLulaPet1 from '../../public/icons/casitaDeLulaPet1.jpg';
-import casitaDeLulaPet2 from '../../public/icons/casitaDeLulaPet2.jpg';
-import casitaDeLulaPet3 from '../../public/icons/casitaDeLulaPet3.jpg';
-import casitaDeLulaPet4 from '../../public/icons/casitaDeLulaPet4.jpg';
+import casitaDeLulaPet1 from '/icons/casitaDeLulaPet1.jpg';
+import casitaDeLulaPet2 from '/icons/casitaDeLulaPet2.jpg';
+import casitaDeLulaPet3 from '/icons/casitaDeLulaPet3.jpg';
+import casitaDeLulaPet4 from '/icons/casitaDeLulaPet4.jpg';
 
 export const refugios = [
     {
