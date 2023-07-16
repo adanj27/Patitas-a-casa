@@ -4,14 +4,17 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	margin-top: 40px;
 }
 
 .blogsPortada__data {
+	box-sizing: border-box;
 	position: absolute;
 	bottom: 0;
 	color: #fff;
 	background-color: #00000080;
-	padding: 20px;
+	padding: calc(20px);
+	width: 100%;
 }
 
 .blogsPortada__data > * {

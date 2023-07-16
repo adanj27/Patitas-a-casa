@@ -9,20 +9,20 @@ export const Posts = ({ posts }) => {
 		<div className={styles.postsRelacionados__container}>
 			<h4>Posts Relacionados</h4>
 			<div className={styles.postsRelacionados__card}>
-			{filteredBlogs && filteredBlogs.slice(0, 4).map((pro, index) => <PostsCard key={index} img={pro.imageBanner} titulo={pro.category} descripcion={pro.description[0].content.split(" ").slice(0, 15).join(" ")} />)}
+			{filteredBlogs && filteredBlogs.slice(0, 4).map((pro, index) => <PostsCard key={index} img={pro.imageBanner} titulo={pro.category} title={pro.title} />)}
 				
 			</div>
 		</div>
 	);
 }
 
-const PostsCard = ({ img, titulo, descripcion }) => {
+const PostsCard = ({ img, titulo, title }) => {
 	return (
 		<div className={styles.postsRelacionadosCard__container}>
 			<img src={img} alt={`${img}_img`} />
 			<div className={styles.postsRelacionadosCard__data}>
 				<h5>{titulo}</h5>
-				<p>{descripcion}...</p>
+				<p>{title}</p>
 			</div>
 		</div>
 	);
