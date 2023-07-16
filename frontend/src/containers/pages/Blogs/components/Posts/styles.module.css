@@ -65,3 +65,34 @@
 /* .postsRelacionadosCard__container>div {
   padding: 20px;
 } */
+
+
+@media (max-width: 1800px){
+  .postsRelacionados__card {
+    gap: 60px;
+  }
+}
+@media (max-width: 1650px){
+  .postsRelacionados__card {
+    gap: 20px;
+  }
+}
+@media (max-width: 1500px){
+  .postsRelacionadosCard__container {
+    width: 260px;
+  }
+  
+  .postsRelacionadosCard__container>img {
+    width: 260px;
+    min-height: 180px;
+    max-height: 180px;
+  }
+  
+  .postsRelacionadosCard__container>div>h5 {
+    font-size: 16px;
+  }
+  
+  .postsRelacionadosCard__container>div>p {
+    font-size: 16px;
+  }
+}
