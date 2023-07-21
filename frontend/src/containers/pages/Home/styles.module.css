@@ -102,6 +102,13 @@
   text-align: center;
 }
 
+.blog__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
 @media (max-width: 1500px){
   .header__slider--overlay {
     -webkit-clip-path: polygon(0 0, 56% 0, 48% 100%, 0% 100%);

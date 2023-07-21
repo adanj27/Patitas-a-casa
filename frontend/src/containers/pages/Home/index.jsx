@@ -211,6 +211,9 @@ export const Home = () => {
 			<section>
 				<LetraTitulo texto="BLOG" clase="letra-titulo--red" align="center" />
 				<BlogContainer />
+				<Link className={styles.blog__button} to="/blog">
+					<BtnPrincipal texto="Ver más" />
+				</Link>
 			</section>
 
 			{modal && <Formulario setModal={setModal} />}
