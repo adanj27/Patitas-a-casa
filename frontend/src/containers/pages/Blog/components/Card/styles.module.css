@@ -1,7 +1,7 @@
 .cardContainer {
 	display: flex;
 	width: 350px;
-  min-height: 380px;
+  max-height: 420px;
 	flex-direction: column;
 	background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -17,6 +17,7 @@
 }
 
 .cardContainer > img {
+	/* min-width: 350px; */
   min-height: 250px;
 	max-height: 250px;
   object-fit: cover;
@@ -24,7 +25,7 @@
 }
 
 .cardContainer__content {
-  height: 240px;
+  max-height: 240px;
   display: flex;
   flex-direction: column;
 	padding: 30px 20px 0;
@@ -32,6 +33,7 @@
 	background: rgb(255,255,255);
 	background: linear-gradient(0deg, rgba(255,255,255, 1) 84%, rgba(255, 255, 255, 0.8) 94%, rgba(255,255,255, 0.6) 100%);
 	position: relative;
+	border-radius: 0 0 10px 10px;
 }
 
 .cardContainer__consejo {
@@ -57,7 +59,7 @@
 	font-style: normal;
 	font-weight: 400;
   font-size: 14px;
-	margin-bottom: 40px;
+	height: 100px;
 }
 
 .cardContainer__fecha {
@@ -72,12 +74,11 @@
 	bottom: 20px;
 	left: 0;
 	right: 0;
-
 }
 
 @media (max-width: 960px){
 	.cardContainer {
 		width: 300px;
-		height: 420px;
+		/* height: 420px; */
 	}
 }

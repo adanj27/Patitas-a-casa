@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-export const Card = ({ id, img, consejo, titulo, descripcion, fecha }) => {
+export const Card = ({ id, img, consejo, titulo, descripcion, fecha, related }) => {
 	return (
 		<a href={`/blogs/${id}`} className={styles.cardContainer}>
 			<img src={img} alt={`${img}_img`} />
@@ -8,9 +8,9 @@ export const Card = ({ id, img, consejo, titulo, descripcion, fecha }) => {
 				<span className={styles.cardContainer__consejo}>{consejo}</span>
 				<div className={styles.cardContainer__data}>
 					<h2 className={styles.cardContainer__titulo}>{titulo}</h2>
-					<p className={styles.cardContainer__descripcion}>{descripcion}...</p>
+					{ !related ? <p className={styles.cardContainer__descripcion}>{descripcion}...</p> : null }
 				</div>
-				<span className={styles.cardContainer__fecha}>{fecha}</span>
+				{ !related ? <span className={styles.cardContainer__fecha}>{fecha}</span> : null}
 			</div>
 		</a>
 	);
