@@ -1,3 +1,9 @@
+.refugios-section {
+  background-image: url(/icons/imagen\ de\ fondo\ de\ huellas/bg-3.png);
+  background-size: cover;
+  padding: 60px 0;
+}
+
 .headerImg {
   width: 100%;
 }
