@@ -1,5 +1,6 @@
 .blog__container {
-  background-image: url('../../iconos/imagen\ de\ fondo\ de\ huellas/bg-3.png');
+  background-image: url(/icons/imagen\ de\ fondo\ de\ huellas/bg-3.png);
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
