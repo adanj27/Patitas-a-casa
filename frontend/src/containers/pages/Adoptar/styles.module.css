@@ -1,6 +1,6 @@
 .adoptar__container {
-	background-image: url('../../iconos/imagen\ de\ fondo\ de\ huellas/bg-3.png');
-	background-position: center;
+	background-image: url(/icons/imagen\ de\ fondo\ de\ huellas/bg-3.png);
+	background-size: cover;
 }
 
 .adoptarTarjeta__container {
