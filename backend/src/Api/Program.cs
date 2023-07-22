@@ -35,9 +35,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-// temporal solution
-System.Threading.Thread.Sleep(TimeSpan.FromSeconds(10));
-
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
