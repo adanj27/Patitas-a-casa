@@ -72,22 +72,28 @@ export const Nosotros = () => {
         <h3 className={styles.nosotros__title}>¿Cómo surgió la idea?</h3>
 
         <div className={styles.nosotros__items}>
-          <div className={styles.nosotros__item}>
+          <div className={`${styles.nosotros__item} ${styles["nosotros__item--card"]}`}>
             <h3 className={styles["nosotros__item-title"]}>Inicio</h3>
             <p className={styles["nosotros__item-text"]}>
-             Todo inicio con una idea, esta idea se fue comentando a distintas personas para ir mejorándola y buscando si era algo que tenia utilidad, y una vez que nos dimos cuenta que era una buena idea y tenia un futuro, empezamos con la planeación.
+             Todo inicio con una idea, se le fue comentando a distintas personas para ir mejorándola, y una vez que nos dimos cuenta que era una buena idea y tenia un futuro, empezamos con la planeación.
             </p>
           </div>
-          <div className={styles.nosotros__item}>
+          <div className={`${styles.nosotros__item} ${styles["nosotros__item--card"]}`}>
             <h3 className={styles["nosotros__item-title"]}>Planear</h3>
             <p className={styles["nosotros__item-text"]}>
-              Se inicio por darle una forma a la idea y ir compartiéndola por diferentes canales de comunicación para poder buscar gente que quiera ir colaborando con el proyecto, una vez que se empezó a diseñar la paginas y las funcionalidades bien definidas se empezó la fase de desarrollo y mejora continua. 
+              Se le dio forma a la idea para ir compartiéndola por diferentes canales de comunicación para poder buscar gente que quiera colaborar con el proyecto, una vez que se empezó a diseñar la paginas y las funcionalidades, se empezó la fase de desarrollo. 
             </p>
           </div>
-          <div className={styles.nosotros__item}>
-            <h3 className={styles["nosotros__item-title"]}>El proyecto hoy en día</h3>
+          <div className={`${styles.nosotros__item} ${styles["nosotros__item--card"]}`}>
+            <h3 className={styles["nosotros__item-title"]}>Desarrollo</h3>
             <p className={styles["nosotros__item-text"]}>
-              En enero del 2022 se empezó el desarrollo y constante mejora de “Patitas a Casa” en cada paso de la construcción de los módulos del sitio web y cada una de sus funcionalidades para que sea lo mejor y mas útil posible para cada unas de las personas que la utilicen.
+              En enero del 2022 se empezó el desarrollo y constante mejora de “Patitas a Casa” en cada paso de la construcción de los módulos del sitio web y cada una de sus funcionalidades para que sea lo mejor y mas útil para los usuarios.
+            </p>
+          </div>
+          <div className={`${styles.nosotros__item} ${styles["nosotros__item--card"]}`}>
+            <h3 className={styles["nosotros__item-title"]}>Hoy</h3>
+            <p className={styles["nosotros__item-text"]}>
+              Al día de hoy esta herramienta sigue en desarrollo y con un equipo que aprende todo los días de este proyectos para ponerle solución a todos los inconvenientes que se nos pongan en el camino para que esta herramienta siga con su propósito y ayude a toda la gente posible.
             </p>
           </div>
         </div>
