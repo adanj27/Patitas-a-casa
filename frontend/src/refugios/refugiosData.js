@@ -20,10 +20,12 @@ export const refugios = [
         ubicacion: "Mendoza, Argentina",
         socialMedia: [
             //red social userName, url social, fontAwesome class icon
-            ['@casitadelularefugio','https://www.instagram.com/casitadelularefugio/', 'fa-brands fa-instagram'],
-            ['@lacasitadelularefugio','https://www.facebook.com/lacasitadelularefugio/','fa-brands fa-facebook'],
-            ['leticiacristal821','https://www.youtube.com/@leticiacristal821/videos','fa-brands fa-youtube'],
-            ['lacasitadelularefugio@gmail.com','mailto:lacasitadelularefugio@gmail.com', 'fa-regular fa-envelope'],
+            // ['@casitadelularefugio','https://www.instagram.com/casitadelularefugio/', 'fa-brands fa-instagram'],
+            // ['@lacasitadelularefugio','https://www.facebook.com/lacasitadelularefugio/','fa-brands fa-facebook'],
+            // ['leticiacristal821','https://www.youtube.com/@leticiacristal821/videos','fa-brands fa-youtube'],
+            // ['lacasitadelularefugio@gmail.com','mailto:lacasitadelularefugio@gmail.com', 'fa-regular fa-envelope'],
+            ['+54 261-535-0925','https://wa.link/pd8j00', 'fa-solid fa-phone'],
+            ['+54 261-535-0925','https://wa.link/8ki2yh', 'fa-solid fa-phone'],
         ],
         donar: {
             elementos: [],
@@ -52,5 +54,11 @@ export const refugios = [
                 casitaDeLulaPet4
             ],
         },
+        section1: true,
+        section2: true,
+        section3: false,
+        section4: true,
+        section5: true,
+        section6: true,
     },
 ];

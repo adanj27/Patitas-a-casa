@@ -73,17 +73,22 @@ export const InformacionRefugio = () => {
                     })}
                 </div>
                 <div className={styles['information-content__information']}>
-
-                    <div>
-                        <h3>
-                            Las personas que trabajan aqui
-                        </h3>
-                        <p>
-                            ros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in feugiat ex eu
-
-                        </p>
-                        <img src={workerR} alt="trabajadores" />
-                    </div>
+                    {/* Cada refugio tiene 6 secciones con información, si algun refugio no quiere que se muestre
+                    esa sección entonces poner el numero de la sección en false y se ocultara */}
+                   {
+                        refugios[id].section3 ? 
+                        <div>
+                            <h3>
+                                Las personas que trabajan aqui
+                            </h3>
+                            <p>
+                                ros tempus lacinia. Nam bibendum pellentesque quam a convallis. Sed ut vulputate nisi. Integer in feugiat ex eu
+                            </p>
+                            <img src={workerR} alt="trabajadores" />
+                        </div>
+                        :
+                        <div></div>
+                   }
 
                     <div>
                         <h3>

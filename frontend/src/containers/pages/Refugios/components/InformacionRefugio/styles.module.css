@@ -14,9 +14,10 @@
     margin-top: 5%;
     margin-inline: auto;
 
-    background-image: url('./Imgs/portadaRP.png');
+    background-image: url('/icons/header-refugios.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: 50% 40%;
 }
 
 .information-section__header>div:first-child {
