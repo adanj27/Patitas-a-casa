@@ -107,6 +107,12 @@ export const InformacionRefugio = () => {
                     <div className={styles['information-content__donate']}>
                         <h3>
                             Con lo que puedas aporta
+                            <ol>Mantas</ol>
+                            <ol>Colchones </ol>
+                            <ol>Alimentos </ol>
+                            <ol>Medicamentos </ol>
+                            <ol>Dinero </ol>
+                            
                         </h3>
                         <p>
                             Podes colaborar no solamente con dinero también muchas veces cosas que te sobran en tu casa como colchones viejos, mantas o medicamentos como desparasitantes, aportas muchísimo.
