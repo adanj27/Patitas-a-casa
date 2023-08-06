@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
 	return (
 		<>
-			<div className={`${styles["footer__line"]} ${styles["footer__line--top"]}`}></div>
+			<div className={styles["footer__line--top"]}></div>
 			<footer className={styles.footer__container}>
 				<Logo className={styles.footer__logo} />
 				<p className={styles.footer__text}>
