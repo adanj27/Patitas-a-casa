@@ -93,3 +93,20 @@
     display: flex;
   }
 }
+
+@media (max-height: 830px){
+  .burger_menu__items a {
+    padding: 20px 0;
+  }
+  .burger_menu__items li:last-of-type {
+    padding: 20px 0;
+  }
+}
+@media (max-height: 700px){
+  .burger_menu__items a {
+    padding: 16px 0;
+  }
+  .burger_menu__items li:last-of-type {
+    padding: 16px 0;
+  }
+}
