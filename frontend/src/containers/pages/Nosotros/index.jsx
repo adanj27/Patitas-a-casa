@@ -6,7 +6,7 @@ import { devsData } from "../../../data/dev-data";
 // Imagenes
 import PerroJugando from "/icons/perro-jugando.png"
 
-export const Nosotros = () => {
+const Nosotros = () => {
   return (
     <div className={styles.nosotros__container}>
       <div className={styles.nosotros__headings}>
@@ -115,3 +115,5 @@ export const Nosotros = () => {
     </div>
   )
 }
+
+export default Nosotros

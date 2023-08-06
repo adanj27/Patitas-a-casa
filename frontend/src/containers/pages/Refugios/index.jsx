@@ -28,7 +28,7 @@ const servicios = [
   { img: imgServicio4, texto: "Veterinario 24/7" }
 ]
 
-export const Refugios = () => {
+const Refugios = () => {
 
   return (
     <>
@@ -67,3 +67,4 @@ export const Refugios = () => {
   )
 }
 
+export default Refugios

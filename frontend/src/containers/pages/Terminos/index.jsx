@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-export const Terminos = () => {
+const Terminos = () => {
 	return (
 		<>
       
@@ -8,3 +8,4 @@ export const Terminos = () => {
 	);
 };
 
+export default Terminos

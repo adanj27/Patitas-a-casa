@@ -3,7 +3,7 @@ import { LetraParrafo, LetraSubtitulo, LetraTitulo, Paginacion, PerdidosTarjeta 
  import styles from './styles.module.css'
 import { useState } from "react";
 
-export const Encontrados = () => {
+const Encontrados = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage, setPostsPerPage] = useState(10)
 
@@ -75,3 +75,4 @@ export const Encontrados = () => {
 	);
 };
 
+export default Encontrados

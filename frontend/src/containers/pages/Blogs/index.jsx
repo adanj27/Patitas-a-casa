@@ -11,7 +11,7 @@ import twitter_icon from '/icons/twitter-sign.png';
 import ig_icon from '/icons/instagram.png';
 import yt_icon from '/icons/youtube.png';
 
-export const Blogs = ({ imgP, tituloP }) => {
+const Blogs = ({ imgP, tituloP }) => {
 	const { id } = useParams();
 	const blogId = parseInt(id, 10);
 	console.log(blogId)
@@ -62,3 +62,5 @@ export const Blogs = ({ imgP, tituloP }) => {
 		</>
 	);
 }
+
+export default Blogs

@@ -4,7 +4,7 @@ import { Data } from "../../../data/HO-PET";
 import { AdoptarTarjeta, Filtrar, LetraParrafo, LetraSubtitulo, LetraTitulo, Paginacion } from "../../../components";
 import { useState } from "react";
 
-export const Adoptar = () => {
+const Adoptar = () => {
   const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage, setPostsPerPage] = useState(6)
 
@@ -62,4 +62,6 @@ export const Adoptar = () => {
     </>
   );
 };
+
+export default Adoptar
 

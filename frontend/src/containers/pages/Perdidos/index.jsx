@@ -4,7 +4,7 @@ import { LetraParrafo, LetraSubtitulo, LetraTitulo, Paginacion } from '../../../
 import { PerdidosTarjeta } from '../../../components/PerdidosTarjeta';
 import { useState } from "react";
 
-export const Perdidos = () => {
+const Perdidos = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage, setPostsPerPage] = useState(10)
 
@@ -64,4 +64,6 @@ export const Perdidos = () => {
 		</>
 	);
 };
+
+export default Perdidos
 

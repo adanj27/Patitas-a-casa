@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 import ImgPerroRojo from "/icons/imagenes recursos/perro-rojo.png"
 import LogoPatitas from "/icons/logo-patitas-blanco.png"
 
-export const NotFound = () => {
+const NotFound = () => {
   return (
     <div className={styles.error__container}>
       <div className={styles["error__img-container"]}>
@@ -24,4 +24,6 @@ export const NotFound = () => {
     </div>
   )
 }
+
+export default NotFound
 

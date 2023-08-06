@@ -1,7 +1,7 @@
 import { BtnPrincipal, LetraParrafo, LetraTitulo } from '../../../components';
 import styles from './styles.module.css';
 
-export const Contacto = () => {
+const Contacto = () => {
 	return (
 		<div className={styles['contenedor-principal']}>
 			{/* <Nav /> */}
@@ -64,3 +64,4 @@ export const Contacto = () => {
 	);
 };
 
+export default Contacto

@@ -4,7 +4,7 @@ import { Card } from './components/Card';
 import { useState } from "react";
 import { blogData } from "../../../data/blogs";
 
-export const Blog = () => {
+const Blog = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [postsPerPage, setPostsPerPage] = useState(8)
 
@@ -48,3 +48,4 @@ export const Blog = () => {
 	);
 };
 
+export default Blog

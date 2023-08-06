@@ -20,7 +20,7 @@ import { refugios } from '../../../../../refugios/refugiosData';
 
 import styles from './styles.module.css';
 
-export const InformacionRefugio = () => {
+const InformacionRefugio = () => {
 
     const { id } = useParams();
 
@@ -152,3 +152,5 @@ export const InformacionRefugio = () => {
         </section>
     );
 };
+
+export default InformacionRefugio
