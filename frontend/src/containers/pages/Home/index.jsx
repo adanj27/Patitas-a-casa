@@ -21,9 +21,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "./sliderHeader.css"
 
 // Imágenes
-import headerImg1 from '/icons/imagenes recursos/header-img-1.jpg';
-import headerImg2 from '/icons/imagenes recursos/header-img-2.jpg';
-import headerImg3 from '/icons/imagenes recursos/header-img-3.jpg';
+import headerImg1 from '/icons/imagenes recursos/header-img-1.webp';
+import headerImg2 from '/icons/imagenes recursos/header-img-2.webp';
+import headerImg3 from '/icons/imagenes recursos/header-img-3.webp';
 import LogoPatita from "/icons/logo-patita.png"
 
 // Iconos
@@ -33,36 +33,7 @@ import arrowRight from "/icons/arrow-right.svg"
 import sliderStyles from "../../../components/AdopcionesTarjetaContainer/styles.module.css";
 import Loading from "../../../components/Loading/index";
 
-const listaHistoria = [
-	`Esta idea surgió de un punto de vista de querer ayudar a esas personas que quieren
-  encontrar a sus amigos peludos extraviados, dando una mano desde la virtualidad
-  para que puedan reencontrarse.`,
-	`El equipo de trabajo se formo desde 0 buscando a gente interesada en trabajar
-  en un proyecto relacionado con el rastro de mascotas con gente de diferentes
-  provincias y paises.`,
-	`Desafíos que se han presentado durante el desarrollo de la página y como se han solucionado.`,
-];
-
-const listaMision = [
-	'Cuál es el propósito de la página y que impacto se espera tener en la comunidad.',
-	'Cuáles son los valores y principios que guían el trabajo del equipo.',
-	'Cómo se espera que los usuarios utilicen la página y que beneficios pueden obtener de ella.',
-];
-
-
-const PrevArrow = (props) => (
-  <div className={`${sliderStyles.arrow} ${sliderStyles.prev}`} onClick={props.onClick}>
-    <img className={sliderStyles["arrow-icon"]} src={arrowLeft} alt="icono flecha izquierda" />
-  </div>
-);
-
-const NextArrow = (props) => (
-  <div className={`${sliderStyles.arrow} ${sliderStyles.next}`} onClick={props.onClick}>
-    <img className={sliderStyles["arrow-icon"]} src={arrowRight} alt="icono flecha derecha" />
-  </div>
-);
-
-export const Home = () => {
+const Home = () => {
 	const [modal, setModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(true)
 
@@ -120,7 +91,7 @@ export const Home = () => {
 			<header className={styles.header}>
 				<Slider {...settings}>
 					<div className={styles.header__slider}>
-						<img className={styles["header__slider--img"]} src={headerImg1} alt="imagen slider header 1" />
+						<img className={styles["header__slider--img"]} src={headerImg1} alt="imagen slider header 1" loading="lazy"  />
 						<section className={styles.header__section}>
 							<div 
 								className={`${styles.header__info} slide ${currentSlide === 0 ? "active" : ""}`}
@@ -138,14 +109,14 @@ export const Home = () => {
 						</section>
 					</div>
 					<div className={styles.header__slider}>
-						<img className={`${styles["header__slider--img"]} ${styles["slider__img--two"]}`} src={headerImg2} alt="imagen slider header 2" />
+						<img className={`${styles["header__slider--img"]} ${styles["slider__img--two"]}`} src={headerImg2} alt="imagen slider header 2" loading="lazy" />
 						<div className={styles["header__slider--overlay"]}>
 							<div 
 								className={`${styles.header__info} slide ${currentSlide === 1 ? "active" : ""}`}
 								key={1}
 							>
 								<div className={styles["header__info-heading"]}>
-									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
+									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" loading="lazy" />
 									<h2 className={styles["header__info--title"]}>¿Qué hacemos?</h2>
 								</div>
 								<p className={styles["header__info--text"]}>
@@ -162,7 +133,7 @@ export const Home = () => {
 								key={2}
 							>
 								<div className={styles["header__info-heading"]}>
-									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" />
+									<img className={styles["header__info--img"]} src={LogoPatita} alt="logo patita" loading="lazy" />
 									<h2 className={styles["header__info--title"]}>¿Quiénes somos?</h2>
 								</div>
 								<p className={styles["header__info--text"]}>
@@ -220,3 +191,5 @@ export const Home = () => {
 		</>
 	);
 };
+
+export default Home

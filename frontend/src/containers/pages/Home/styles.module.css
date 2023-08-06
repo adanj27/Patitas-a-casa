@@ -293,7 +293,7 @@
 .adopciones::before {
   content: "";
   position: absolute;
-  background-image: url(/icons/imagenes\ recursos/adopciones-bg.jpg);
+  background-image: url(/icons/imagenes\ recursos/adopciones-bg.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
