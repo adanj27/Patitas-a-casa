@@ -18,12 +18,6 @@ body {
 	padding: 0;
 }
 
-.App {
-	height: 100vh;
-	/*Header fixed position heigth*/
-	padding-top: 80px;
-}
-
 a {
 	text-decoration: none;
 }
@@ -31,4 +25,10 @@ a {
 .frente {
 	position: relative;
 	z-index: 100;
+}
+
+.App {
+	height: 100vh;
+  width: 100%;
+  position: relative;
 }

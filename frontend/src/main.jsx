@@ -4,8 +4,12 @@ import { router } from './router'
 import { RouterProvider } from 'react-router-dom'
 import { Suspense } from "react"
 
+import Spinner from "./components/Spinner/index"
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Suspense fallback={<></>}>
-    <RouterProvider router={router} />
-  </Suspense>
+  <div className="App">
+    <Suspense fallback={<Spinner />}>
+      <RouterProvider router={router} />
+    </Suspense>
+  </div>
 )
