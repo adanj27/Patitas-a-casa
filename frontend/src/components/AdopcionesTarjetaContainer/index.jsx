@@ -26,13 +26,13 @@ import arrowRight from "/icons/arrow-right.svg"
 
 const PrevArrow = (props) => (
   <div className={`${styles.arrow} ${styles.prev}`} onClick={props.onClick}>
-    <img className={styles["arrow-icon"]} src={arrowLeft} alt="icono flecha izquierda" />
+    <img className={styles["arrow-icon"]} src={arrowLeft} alt="icono flecha izquierda" loading="lazy" />
   </div>
 );
 
 const NextArrow = (props) => (
   <div className={`${styles.arrow} ${styles.next}`} onClick={props.onClick}>
-    <img className={styles["arrow-icon"]} src={arrowRight} alt="icono flecha derecha" />
+    <img className={styles["arrow-icon"]} src={arrowRight} alt="icono flecha derecha" loading="lazy" />
   </div>
 );
 

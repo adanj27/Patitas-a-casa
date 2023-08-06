@@ -13,21 +13,21 @@ export const Stats = () => {
     <>
       <div className={styles.stats__container}>
         <div className={styles.stats__stat}>
-          <img className={styles.stats__icon} src={RescuedIcon} alt="icono rescatados" />
+          <img className={styles.stats__icon} src={RescuedIcon} alt="icono rescatados" loading="lazy" />
           <span>
             <p>Animales reencontrados</p>
           </span>
           <p className={styles.stats__number}>+0</p>
         </div>
         <div className={styles.stats__stat}>
-          <img className={styles.stats__icon} src={LogoPatita} alt="icono adoptados" />
+          <img className={styles.stats__icon} src={LogoPatita} alt="icono adoptados" loading="lazy" />
           <span>
             <p>Adoptados</p>
           </span>
           <p className={styles.stats__number}>+0</p>
         </div>
         <div className={styles.stats__stat}>
-          <img className={styles.stats__icon} src={HousePetIcon} alt="icono casa mascota" />
+          <img className={styles.stats__icon} src={HousePetIcon} alt="icono casa mascota" loading="lazy" />
           <span>
             <p>Refugios con los que trabajamos</p>
           </span>

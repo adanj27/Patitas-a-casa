@@ -31,7 +31,7 @@ export const TarjetaDestacada = ({
 			<div className={styles.card__container}>
 				<div className={styles.card} onMouseOver={handleStateHover}>
 					<div className={styles.cardNoExtended}>
-						<img src={image} alt="mascota" />
+						<img src={image} alt="mascota" loading="lazy" />
 						<p>{nombre}</p>
 					</div>
 					{stateHover && (
