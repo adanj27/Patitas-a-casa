@@ -1,11 +1,11 @@
 export const devsData = [
   {
-    title: "zeroz",
-    img: "/icons/devs/zeroz.png"
-  },
-  {
     title: "engrohm",
     img: "/icons/devs/engrohm.jpg"
+  },
+  {
+    title: "zeroz",
+    img: "/icons/devs/zeroz.png"
   },
   {
     title: "heis",
