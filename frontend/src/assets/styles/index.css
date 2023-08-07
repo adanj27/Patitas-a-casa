@@ -28,7 +28,7 @@ a {
 }
 
 .App {
-	height: 100vh;
-  width: 100%;
-  position: relative;
+  height: 100vh;
+	/*Header fixed position heigth*/
+	padding-top: 5rem;
 }
