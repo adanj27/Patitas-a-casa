@@ -204,7 +204,10 @@
   .nosotros__item-text {
     font-size: 18px;
   }
- 
+  .nosotros__devs {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
   .nosotros__why {
     margin: 0;
   }
