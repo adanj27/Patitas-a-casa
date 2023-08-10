@@ -33,7 +33,7 @@ export const devsData = [
   },
   {
     title: "letal",
-    name: "Letal",
+    name: "Carlos Morán",
     img: "/icons/devs/letal.png",
     position: "desarrollador",
     linkedin: "https://www.linkedin.com/in/letalandroid/",
