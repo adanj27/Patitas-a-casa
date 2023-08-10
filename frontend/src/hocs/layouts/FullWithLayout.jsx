@@ -1,12 +1,11 @@
-import { Outlet, useLocation } from "react-router-dom"
+import { Navbar } from "../../components/Nav"
 import Footer from "../../components/Footer"
-import  { Navbar } from "../../components/Nav"
-import ScrollToTop from "../../helpers/scrollToTop/scrollToTop";
+
+import { Outlet } from "react-router-dom"
 
 export const FullWithLayout = () => {
   return (
     <div className="App">
-      <ScrollToTop />
       <div className="frente">
         <Navbar />
       </div>
