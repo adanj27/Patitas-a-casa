@@ -1,11 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 
-// import { NotFound } from "../containers/errors";
-// import { Adoptar, Blog, Blogs, Contacto, Encontrados, Home, Perdidos, Refugios, Nosotros } from "../containers/pages";
-// import { InformacionRefugio } from "../containers/pages/Refugios/components/InformacionRefugio";
 import { FullWithLayout } from "../hocs/layouts/FullWithLayout";
-// import { Terminos } from "../containers/pages/Terminos";
 
 const Home = lazy(() => import("../containers/pages/Home"))
 const Perdidos = lazy(() => import("../containers/pages/Perdidos"))
