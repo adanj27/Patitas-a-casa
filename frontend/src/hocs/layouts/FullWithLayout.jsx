@@ -1,22 +1,15 @@
-import { Outlet, useLocation } from "react-router-dom"
+import { Navbar } from "../../components/Nav"
 import Footer from "../../components/Footer"
-import  { Navbar } from "../../components/Nav"
-import { useEffect } from "react";
+
+import { Outlet } from "react-router-dom"
 
 export const FullWithLayout = () => {
-  const location = useLocation();
-
-  // Alternativa más corta a <ScrollToTop />
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
-
   return (
     <div className="App">
       <div className="frente">
         <Navbar />
       </div>
-        <Outlet />
+      <Outlet />
       <Footer />
     </div>
   )

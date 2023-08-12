@@ -133,18 +133,19 @@
     border: 1px solid rgb(241, 230, 230);
     border-radius: 7%;
     background-color: white;
+    padding: 16px 0 0;
   }
   .adoptarTarjeta__img>img {
     width: 45vw;
     height: 45vw;
-    min-width: 150px;
-    max-width: 220px;
-    min-height: 150px;
-    max-height: 220px;
+    min-width: 130px;
+    max-width: 200px;
+    min-height: 130px;
+    max-height: 200px;
   }
   .adoptarTarjeta__imgs>img {
-    width: 12vw;
-    height: 14vw;
+    width: 11vw;
+    height: 13vw;
   }
   .adoptarTarjeta__description {
     padding: 2%;

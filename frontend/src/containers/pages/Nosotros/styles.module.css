@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 .nosotros__headings {
   display: flex;
@@ -75,7 +76,9 @@
 
 .nosotros__dev {
   width: 70px;
+  height: 70px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .nosotros__item-text {
@@ -202,17 +205,10 @@
   .nosotros__item-text {
     font-size: 18px;
   }
-
   .nosotros__devs {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
-  
-  .nosotros__dev {
-    width: 70px;
-    border-radius: 50%;
-  }
-
   .nosotros__why {
     margin: 0;
   }

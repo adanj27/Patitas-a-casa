@@ -5,14 +5,27 @@ import { devsData } from "../../../data/dev-data";
 
 // Imagenes
 import PerroJugando from "/icons/perro-jugando.png"
+import Popup from "./components/Popup";
+import { useState } from "react";
+import ImageWithPopup from "./components/ImageWithPopup";
 
 const Nosotros = () => {
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+
   return (
     <div className={styles.nosotros__container}>
       <div className={styles.nosotros__headings}>
         <h2 className={styles.nosotros__title}>Sobre Nosotros</h2>
         <p className={styles.nosotros__subtitle}>
-         Somos un equipo que nos une el amor por los animales y que sufrimos situaciones por las que vos quizás estas pasando ahora mismo.
+          Somos un equipo que nos une el amor por los animales y que sufrimos situaciones por las que vos quizás estas pasando ahora mismo.
         </p>
       </div>
       <div className={styles["nosotros-info__container"]}>
@@ -22,12 +35,7 @@ const Nosotros = () => {
           <div className={styles.nosotros__devs}>
             {devsData.map((dev, index) => {
               return (
-                <img
-                  className={styles.nosotros__dev}
-                  src={dev.img}
-                  alt={`foto ${dev.title} desarrollador`}
-                  key={index} 
-                />
+                <ImageWithPopup key={index} dev={dev} />
               )
             })}
           </div>
