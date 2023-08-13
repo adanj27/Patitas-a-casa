@@ -68,7 +68,7 @@
 
 .nosotros__devs {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   margin: 20px 0 10px;
@@ -205,10 +205,6 @@
   .nosotros__item-text {
     font-size: 18px;
   }
-  .nosotros__devs {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
   .nosotros__why {
     margin: 0;
   }
@@ -245,6 +241,12 @@
 @media (max-width: 500px){
   .nosotros__item-text {
     font-size: 16px;
+  }
+}
+@media (max-width: 450px){
+  .nosotros__devs {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 }
 @media (max-width: 400px){
