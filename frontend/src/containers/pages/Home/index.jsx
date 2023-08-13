@@ -11,6 +11,9 @@ import {BlogContainer} from './components/BlogContainer';
 import { LogoWhite } from '../../../components/Icons';
 import { Stats } from "../../../components/Stats/index"
 
+//LocalStorage 
+import { updateLoadingStatus, getLoading } from '../../../localStorage/localStorage';
+
 // React Router
 import { Link } from "react-router-dom";
 
@@ -35,10 +38,11 @@ import Loading from "../../../components/Loading/index";
 
 const Home = () => {
 	const [modal, setModal] = useState(false);
-	const [isLoading, setIsLoading] = useState(true)
+	const [isLoading, setIsLoading] = useState(getLoading());
 
 	useEffect(() => {
 		setTimeout(() => {
+			updateLoadingStatus(false);
 			setIsLoading(false);
 		}, 2500);
 	}, []);
