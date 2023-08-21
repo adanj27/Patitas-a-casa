@@ -44,7 +44,7 @@ export const devsData = [
     name: "Leire",
     img: "/icons/devs/leire.jpg",
     position: "diseñadora",
-    // linkedin: "",
+    linkedin: "https://www.linkedin.com/in/leire-garcía-arranz-51a44310b/",
     // portfolio: ""
   },
   {
