@@ -37,7 +37,7 @@ export const devsData = [
     img: "/icons/devs/letal.png",
     position: "desarrollador",
     linkedin: "https://www.linkedin.com/in/letalandroid/",
-    portfolio: "https://letalandroid.online/#redes  "
+    portfolio: "https://letalandroid.online/#redes"
   },
   {
     title: "leire",
