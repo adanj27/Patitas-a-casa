@@ -330,8 +330,26 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 6rem;
+  gap: 4rem;
   padding: 2.2rem 0 0;
+}
+
+@media (max-width: 800px){
+  .publicacion-destacada__buttons {
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 500px){
+  .publicacion-destacada__buttons {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 400px){
+  .publicacion-destacada__buttons {
+    gap: 0.8rem;
+  }
 }
 
 .publicacion-destacada__buttons>button {
