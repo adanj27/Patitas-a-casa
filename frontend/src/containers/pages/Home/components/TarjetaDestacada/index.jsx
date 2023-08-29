@@ -9,8 +9,7 @@ import instagram from "/icons/instagram.png"
 import twitter from "/icons/twitter-sign.png"
 import facebook from "/icons/facebook.png"
 
-// asset import
-import arrow from '/icons/arrow-down-sign-to-navigate.png'
+import ArrowDown from '/icons/arrow-down.png'
 
 //tarjeta destacada recibe como prop la imagen de la mascota. Se require algún contenedor de tarjetas para eso
 export const TarjetaDestacada = ({
@@ -33,6 +32,7 @@ export const TarjetaDestacada = ({
 					<div className={styles.cardNoExtended}>
 						<img src={image} alt="mascota" loading="lazy" />
 						<p>{nombre}</p>
+						<img className={styles["card__more-icon"]} src={ArrowDown} alt="icono flecha abajo" />
 					</div>
 					{stateHover && (
 						<section className={styles.cardExtended}>
