@@ -7,6 +7,43 @@
   padding: 80px;
 }
 
+.blog__header {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #FFF;
+  background-color: #53000A;
+  position: relative;
+}
+
+.blog__header::before {
+  background-image: url("/icons/blog-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-y: top;
+  background-position-x: center;
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.4;
+}
+
+.blog__header h1 {
+  position: relative;
+  font-size: 36px;
+}
+.blog__header p {
+  position: relative;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
 .blog__title {
   min-width: 0;
 }
