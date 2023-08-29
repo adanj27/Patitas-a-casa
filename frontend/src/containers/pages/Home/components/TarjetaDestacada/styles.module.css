@@ -10,7 +10,7 @@
 
 .card {
   width: 220px;
-  height: 210px;
+  height: 244px;
   padding: 16px;
   background-color: rgba(238, 238, 238, 0.73);
   display: flex;
@@ -39,6 +39,10 @@
   width: 100%;
   border-radius: 10px;
   transition: all .6s;
+}
+
+.card:hover .card__more-icon {
+  display: none;
 }
 
 .card:hover p {
@@ -75,6 +79,12 @@
   width: 160px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.card__more-icon {
+  width: 30px !important;
+  height: 30px !important;
+  opacity: 0.4;
 }
 
 .cardExtended {

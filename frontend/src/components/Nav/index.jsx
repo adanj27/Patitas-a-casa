@@ -35,28 +35,28 @@ export const Navbar = () => {
 	const [modal, setModal] = useState(false);
 	const [isScrolling, setScrolling] = useState(false);
 
-	useEffect(() => {
-		function handleScroll() {
-			const scroll = window.scrollY;
-			const nav = document.getElementById("nav-var");
-			if (nav) {
-				if (scroll > 80) {
-					nav.style.transform = `translateY(-100%)`;
-					clearTimeout(isScrolling);
-					setTimeout(() => {
-						setScrolling(false);
-						nav.style.transform = ``;
-					}, 800);
-				} else {
-					nav.style.transform = `translateY(0%)`;
-				}
-			}
-		}
-		window.addEventListener("scroll", handleScroll);
-	}, []);
+  useEffect(() => {
+    let timeoutId;
+
+    function handleScroll() {
+      clearTimeout(timeoutId);
+      setScrolling(true);
+
+      timeoutId = setTimeout(() => {
+        setScrolling(false);
+      }, 800);
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
 	return (
-		<nav className={styles.nav} id='nav-var'>
+		<nav className={`${styles.nav} ${isScrolling ? styles.hidden : ''}`} id='nav-var'>
 			<div className={styles['nav-container']}>
 				<NavLink to="/" className={styles["nav__logo-contenedor"]}>
 					<Logo className={styles.logo} />

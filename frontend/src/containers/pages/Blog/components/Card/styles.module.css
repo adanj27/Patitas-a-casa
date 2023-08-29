@@ -82,3 +82,15 @@
 		/* height: 420px; */
 	}
 }
+
+@media (max-width: 500px){
+	.cardContainer {
+		width: 260px;
+	}
+}
+
+@media (max-width: 430px){
+	.cardContainer {
+		width: 240px;
+	}
+}
