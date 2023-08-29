@@ -17,6 +17,7 @@
   color: #FFF;
   background-color: #53000A;
   position: relative;
+  text-align: center;
 }
 
 .blog__header::before {
@@ -37,11 +38,49 @@
 .blog__header h1 {
   position: relative;
   font-size: 36px;
+  margin-bottom: 30px;
 }
 .blog__header p {
   position: relative;
   margin: 10px 0;
   font-size: 20px;
+}
+
+@media (max-width: 1100px){
+  .blog__header h1 {
+    font-size: 34px;
+  }
+  .blog__header p {
+    font-size: 20px;
+    width: 80%;
+  }
+}
+@media (max-width: 600px){
+  .blog__header h1 {
+    font-size: 30px;
+  }
+  .blog__header p {
+    font-size: 18px;
+    width: 90%;
+  }
+}
+@media (max-width: 500px){
+  .blog__header h1 {
+    font-size: 28px;
+  }
+  .blog__header p {
+    font-size: 18px;
+    width: 90%;
+  }
+}
+@media (max-width: 400px){
+  .blog__header h1 {
+    font-size: 26px;
+  }
+  .blog__header p {
+    font-size: 18px;
+    width: 90%;
+  }
 }
 
 .blog__title {
