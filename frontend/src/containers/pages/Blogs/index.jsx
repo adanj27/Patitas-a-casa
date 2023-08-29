@@ -44,16 +44,13 @@ const Blogs = ({ imgP, tituloP }) => {
 					<span>{blog.date}</span>
 					<div>
 						<a href="#">
-							<img src={fb_icon} alt='fb_icon' />
-						</a>
-						<a href="#">
-							<img src={yt_icon} alt='yt_icon' />
-						</a>
-						<a href="#">
 							<img src={ig_icon} alt='ig_icon' />
 						</a>
 						<a href="#">
 							<img src={twitter_icon} alt='twitter_icon' />
+						</a>
+						<a href="#">
+							<img src={fb_icon} alt='fb_icon' />
 						</a>
 					</div>
 				</div>
