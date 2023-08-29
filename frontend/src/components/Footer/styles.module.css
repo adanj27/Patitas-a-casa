@@ -111,6 +111,9 @@
 	}
 }
 @media (max-width: 800px){
+	.footer__logo {
+		height: 70px;
+	}
 	.footer__text {
 		width: 100%;
 		text-align: center;
@@ -121,7 +124,10 @@
 }
 @media (max-width: 600px){
 	.footer__logo {
-		height: 70px;
+		min-height: 60px;
+	}
+	.footer__text {
+		width: 90%;
 	}
 	.footer__contact {
 		gap: 40px;
@@ -139,6 +145,9 @@
 	}
 }
 @media (max-width: 500px){
+	.footer__logo {
+		min-height: 50px;
+	}
 	.footer__container {
 		padding: 20px 10px;
 	}
@@ -157,5 +166,10 @@
 	}
 	.footer__rights--bar {
 		display: none;
+	}
+}
+@media (max-width: 400px){
+	.footer__logo {
+		min-height: 46px;
 	}
 }
