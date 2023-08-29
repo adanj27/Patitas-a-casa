@@ -7,6 +7,14 @@
   background-color: white;
   transform: translate3d(0px,0,0) !important;
   opacity: 1 !important;
+  font-family: 'Roboto',sans-serif;
+}
+.adoptarTarjeta h3{
+  color: red;
+  font-size: 25px;
+  border-radius: 10px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  
 }
 
 .adoptarTarjeta--hovered {

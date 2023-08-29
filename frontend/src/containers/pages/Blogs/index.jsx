@@ -39,7 +39,7 @@ const Blogs = ({ imgP, tituloP }) => {
 						return null;
 					})}
 				</div>
-				<p className={styles.blogs__refran}>LOS QUEREMOS, LOS PROTEGEMOS</p>
+				<p className={styles.blogs__refran}>🐕‍🦺LOS QUEREMOS, LOS PROTEGEMOS🐕‍🦺</p>
 				<div className={styles.blogs__footer}>
 					<span>{blog.date}</span>
 					<div>
