@@ -21,4 +21,9 @@ COPY --from=build /app .
 # Skiasharp
 RUN apt-get update -y && apt-get install libfontconfig1 -y
 
+EXPOSE 8000
+
+ENV ASPNETCORE_ENVIRONMENT Development
+ENV ASPNETCORE_URLS http://+:80
+ENV ConnectionStrings__DefaultConnection: "Host=${DB_HOST};Port=${DB_PORT};Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}"
 ENTRYPOINT ["dotnet", "Api.dll", "--environment=Development"]
