@@ -47,9 +47,6 @@ export default function Footer() {
 					<a href="https://www.instagram.com/patitasacasa_arg/" target="_blank">
 						<img className={styles["footer__social--icon"]} src={InstagramIcon} alt="icono instagram" loading="lazy" />
 					</a>
-					<a href="#">
-						<img className={styles["footer__social--icon"]} src={YoutubeIcon} alt="icono youtube" loading="lazy" />
-					</a>
 				</div>
 				<div className={styles.footer__line}></div>
 				<div className={styles.footer__rights}>
