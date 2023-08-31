@@ -107,10 +107,20 @@
 
     .refugio-container {
         margin-bottom: 8%;
+        padding-block: 20px;
     }
 
     .refugio-container {
         flex-direction: column;
+    }
+
+    .container__icon>div {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .container__icon>div>img {
+        width: 94px;
     }
 
     .container__info-btn>button {
@@ -124,6 +134,15 @@
 
     .refugio-container {
         padding-inline: 7%;
+    }
+
+    .container__icon>div {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .container__icon>div>img {
+        width: 84px;
     }
 
     .container__info-btn {
