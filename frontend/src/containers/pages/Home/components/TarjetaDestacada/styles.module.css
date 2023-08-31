@@ -10,7 +10,7 @@
 
 .card {
   width: 220px;
-  height: 244px;
+  height: 220px;
   padding: 16px;
   background-color: rgba(238, 238, 238, 0.73);
   display: flex;
@@ -82,9 +82,10 @@
 }
 
 .card__more-icon {
-  width: 30px !important;
-  height: 30px !important;
-  opacity: 0.4;
+  width: 26px !important;
+  height: 26px !important;
+  opacity: 0.3;
+  margin-top: -14px;
 }
 
 .cardExtended {
@@ -120,4 +121,14 @@
 
 .arrow {
   rotate: 90deg;
+}
+
+@media (max-width: 1000px){
+  .card__container {
+    margin: 0px;
+    padding-block: 6px;
+  }
+  .card {
+    position: static;
+  }
 }
