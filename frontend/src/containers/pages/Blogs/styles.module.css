@@ -10,12 +10,12 @@
 .blogs__refran {
   font-family: 'Arial';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 750;
   font-size: 34px;
   line-height: 30px;
   text-align: center;
-  margin: 120px 0 60px;
-  color: #343A40;
+  margin: 120px 0 120px; 
+  color: #de341d;
 }
 
 .blogs__footer {
@@ -87,7 +87,7 @@
   .blogs__refran {
     font-size: 24px;
     width: 60%;
-    margin: 100px auto 40px;
+    margin: 40px auto 40px;
   }
 }
 @media (max-width: 500px){

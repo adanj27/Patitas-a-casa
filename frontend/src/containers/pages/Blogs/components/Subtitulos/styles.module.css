@@ -1,12 +1,15 @@
 .blogsSubtitulos {
-	font-family: 'Arial';
+	/* font-family: 'Robot'; */
+	font-family:Arial, Helvetica, sans-serif ;
 	font-style: normal;
 	font-weight: 700;
-	font-size: 26px;
+	font-size: 30px;
 	line-height: 30px;
 	letter-spacing: 0.05em;
-	color: #21273a;
-  text-align: center;
-  margin: 50px 0 -20px;
+	color: #000000;
+	text-align: center;
+	margin: 50px 0 -25px ;
 	text-align: start;
+	max-height: 500px;
+	max-width: 500px;
 }

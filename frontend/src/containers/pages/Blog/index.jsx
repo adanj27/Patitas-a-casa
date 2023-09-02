@@ -16,6 +16,11 @@ const Blog = () => {
 
 	return (
 		<>
+			<div className={styles.blog__header}>
+				<h1>BLOG DE PATITAS A CASA</h1>
+				<p>Este blog esta hecho para informar y ayudar a nuestros visitantes sobre el cuidado y curiosidades</p>
+				<p>Si quieres sumar un blog propio solo ponte en contacto con nosotros</p>
+			</div>
 			<div className={styles.blog__container}>
 				<LetraTitulo
 					texto="Blog"

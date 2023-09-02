@@ -10,7 +10,7 @@
 
 .card {
   width: 220px;
-  height: 210px;
+  height: 220px;
   padding: 16px;
   background-color: rgba(238, 238, 238, 0.73);
   display: flex;
@@ -39,6 +39,10 @@
   width: 100%;
   border-radius: 10px;
   transition: all .6s;
+}
+
+.card:hover .card__more-icon {
+  display: none;
 }
 
 .card:hover p {
@@ -77,6 +81,13 @@
   object-fit: cover;
 }
 
+.card__more-icon {
+  width: 26px !important;
+  height: 26px !important;
+  opacity: 0.3;
+  margin-top: -14px;
+}
+
 .cardExtended {
   display: none;
   text-align: left;
@@ -110,4 +121,14 @@
 
 .arrow {
   rotate: 90deg;
+}
+
+@media (max-width: 1000px){
+  .card__container {
+    margin: 0px;
+    padding-block: 6px;
+  }
+  .card {
+    position: static;
+  }
 }

@@ -2,7 +2,12 @@
 	position: fixed;
 	top: 0;
 	width: 100%;
-	transition: 0.4s;
+	/* transition: 0.4s; */
+	transition: transform 0.8s;
+}
+
+.hidden {
+  transform: translateY(-100%);
 }
 
 .nav-container {

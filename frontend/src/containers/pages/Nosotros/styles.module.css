@@ -244,10 +244,10 @@
   }
 }
 @media (max-width: 450px){
-  .nosotros__devs {
+  /* .nosotros__devs {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-  }
+  } */
 }
 @media (max-width: 400px){
   .nosotros__item--card {
