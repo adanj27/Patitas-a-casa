@@ -58,8 +58,7 @@
 
 .contacto__container {
   height: 100%;
-
-  flex: 3;
+  flex: 2.5;
 
   background-color: #f7f0f0;
 }
