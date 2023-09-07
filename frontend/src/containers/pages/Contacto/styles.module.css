@@ -1,5 +1,5 @@
 .contenedor-principal {
-  min-height: 100vh;
+  min-height: 90vh;
   display: grid;
   place-items: center;
 }
@@ -17,7 +17,7 @@
   width: 85vw;
   min-width: 250px;
   max-width: 1200px;
-  max-height: 1200px;
+  max-height: 700px;
   min-height: 250px;
   height: 85vh;
 
@@ -138,7 +138,38 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+@media (max-width: 1100px){
+  .contenedor-principal {
+    min-height: 80vh;
+  }
+  .contenedor-principal form {
+    height: 56vh;
+  }
+  .contacto__information h2 {
+    font-size: 26px;
+    margin-top: 60px;
+  }
+  .contacto__information p {
+    font-size: 18px;
+  }
+  .contacto__container {
+    flex: 1.6;
+  }
+  .contacto__inputs {
+    margin-top: 70px;
+  }
+}
+@media (max-width: 1000px){
+  .contacto__information h2 {
+    font-size: 24px;
+  }
+}
+
 @media screen and (max-width:800px) {
+  .contenedor-principal {
+    min-height: 100vh;
+    margin-top: 20px;
+  }
 
   .contenedor-principal form {
     margin-top: 165px;
