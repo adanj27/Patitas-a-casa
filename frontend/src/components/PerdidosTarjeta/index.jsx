@@ -45,11 +45,6 @@ export const PerdidosTarjeta = ({ url_img, nombre, tam, zona, fecha, contacto, d
 				/>
 				<img
 					className={styles.perdidosTarjeta__img_info}
-					src={twitter}
-					alt="share-icon"
-				/>
-				<img
-					className={styles.perdidosTarjeta__img_info}
 					src={facebook}
 					alt="share-icon"
 				/>
