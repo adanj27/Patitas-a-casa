@@ -1,11 +1,13 @@
 .contenedor-principal {
+  background-image: url(/icons/imagen\ de\ fondo\ de\ huellas/bg-3.png);
+  background-size: cover;
   min-height: 86vh;
   display: grid;
   place-items: center;
 }
 
 .contacto {
-  background-image: url('../../iconos/imagen\ de\ fondo\ de\ huellas/bg-3.png');
+  background-image: url(/icons/imagen\ de\ fondo\ de\ huellas/bg-3.png);
   background-position: center;
   display: flex;
   justify-content: center;
@@ -111,6 +113,10 @@
 
   transition: all 0.2s;
 }
+
+/* .contacto__textarea {
+  height: 3.5rem;
+} */
 
 .contacto__input {
   width: 60%;

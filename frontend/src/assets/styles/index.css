@@ -32,3 +32,7 @@ a {
 	/*Header fixed position heigth*/
 	padding-top: 5rem;
 }
+
+.disable-scroll {
+  overflow: hidden;
+}

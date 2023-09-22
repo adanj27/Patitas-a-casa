@@ -67,9 +67,13 @@ const Contacto = () => {
     }
   };
 
+  const textareaStyle = {
+    height: message === "" ? "auto" : "3.5rem", // Cambia la altura según el contenido
+  };
+
   return (
     <>
-    {showNotification && <Notification setShowModal={setShowNotification} message={notification} />}
+      {showNotification && <Notification setShowModal={setShowNotification} message={notification} />}
       <div className={styles["contenedor-principal"]}>
         <form onSubmit={handleSubmit} action="/" className={styles.contacto}>
           <div className={styles["contacto__information"]}>
@@ -211,6 +215,7 @@ const Contacto = () => {
                   }}
                   id="mensaje"
                   maxLength="300"
+                  style={textareaStyle}
                 />
               </div>
             </div>

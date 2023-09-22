@@ -15,17 +15,24 @@ export const Paginacion = ({ totalPosts, postsPerPage, setCurrentPage, currentPa
 	const arrowPrev = () => {
 		if (currentPage > 1) {
 			setCurrentPage(currentPage - 1)
+			window.scrollTo(0, 0);
 		}
 
 	}
 	const arrowNext = () => {
 		if (currentPage < totalPages) {
 			setCurrentPage(currentPage + 1)
+			window.scrollTo(0, 0);
 		}
 		else {
 			setCurrentPage(totalPages)
 		}
 	}
+
+	const handlePageClick = (page) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0);
+  }
 
   return (
 		<div className={styles.paginacion}>
@@ -42,7 +49,7 @@ export const Paginacion = ({ totalPosts, postsPerPage, setCurrentPage, currentPa
 							<button
 								className={`${styles.paginacion__button} ${currentPage === index + 1 ? styles["paginacion__button--active"] : ""}`}
 								key={index}
-								onClick={() => setCurrentPage(page)}
+								onClick={() => handlePageClick(page)}
 							>
 								{page}
 							</button>

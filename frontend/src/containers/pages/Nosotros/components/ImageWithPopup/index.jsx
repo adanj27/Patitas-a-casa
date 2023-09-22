@@ -8,10 +8,12 @@ const ImageWithPopup = ({ dev }) => {
 
   const openPopup = () => {
     setPopupOpen(true);
+    document.body.classList.add('disable-scroll');
   };
 
   const closePopup = () => {
     setPopupOpen(false);
+    document.body.classList.remove('disable-scroll');
   };
 
   return (
