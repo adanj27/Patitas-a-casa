@@ -30,7 +30,7 @@ export const refugios = [
         donar: {
             elementos: [],
             links: [
-                "https://www.paypal.com/donate/?hosted_button_id=T32XYHV66QS8A",
+                "https://linktr.ee/lacasitadelula",
             ],
         },
         historia: `Nuestro refugio comenzó con una modesta casita destinada exclusivamente a perros rescatados en tránsito. Nos enfocamos en proporcionarles un entorno seguro y 

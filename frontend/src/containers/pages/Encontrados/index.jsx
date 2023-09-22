@@ -24,7 +24,7 @@ const Encontrados = () => {
 							clase="letra-titulo--red"
 						/>
 						<LetraSubtitulo
-							texto="devuelve a tu amigo peludo a casa"
+							texto="Devuelve a tu amigo peludo a casa"
 							clase="letra-titulo--red"
 						/>
 					</article>
