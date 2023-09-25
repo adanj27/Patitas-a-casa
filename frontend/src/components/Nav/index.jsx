@@ -44,7 +44,7 @@ export const Navbar = () => {
 
       timeoutId = setTimeout(() => {
         setScrolling(false);
-      }, 800);
+      }, 500);
     }
 
     window.addEventListener("scroll", handleScroll);
