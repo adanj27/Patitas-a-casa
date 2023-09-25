@@ -58,6 +58,20 @@
 .footer__social--icon {
 	height: 40px;
 }
+.footer__social_twitter-x-container {
+  background: red;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+.footer__social_twitter-x-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	height: 40px;
+  fill: white;
+  width: 40px;
+}
 
 .footer__line {
 	width: 70%;

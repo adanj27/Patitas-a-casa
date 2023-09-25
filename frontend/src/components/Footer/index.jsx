@@ -4,13 +4,12 @@ import React from 'react';
 import styles from './styles.module.css';
 
 // Components
-import { Logo } from '../Icons';
+import { Logo, TwitterIconX } from '../Icons';
 
 // Images
 import PhoneIcon from "/icons/phone-call.png"
 import MailIcon from "/icons/mail.png"
 import FacebookIcon from "/icons/facebook-icon.png";
-import TwitterIcon from "/icons/twitter-icon.png";
 import InstagramIcon from "/icons/instagram-icon.png";
 import YoutubeIcon from "/icons/youtube-icon.png";
 import { Link } from "react-router-dom";
@@ -41,9 +40,11 @@ export default function Footer() {
 					<a href="#">
 						<img className={styles["footer__social--icon"]} src={FacebookIcon} alt="icono facebook" loading="lazy" />
 					</a>
-					<a href="#">
-						<img className={styles["footer__social--icon"]} src={TwitterIcon} alt="icono twitter" loading="lazy" />
-					</a>
+          <a href="#" className={styles["footer__social_twitter-x-container"]}>
+            <div className={styles["footer__social_twitter-x-icon"]}>
+              <TwitterIconX />
+            </div>
+          </a>
 					<a href="https://www.instagram.com/patitasacasa_arg/" target="_blank">
 						<img className={styles["footer__social--icon"]} src={InstagramIcon} alt="icono instagram" loading="lazy" />
 					</a>
