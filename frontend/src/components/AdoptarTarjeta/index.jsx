@@ -1,7 +1,6 @@
 import styles from './styles.module.css';
 import shareIcon from '/icons/share-iconSubdata.png';
 import whatsApp from '/icons/whatsAppSubdata.png';
-import twitter from '/icons/twitter-icon.png';
 import facebook from '/icons/facebook-icon.png';
 
 //Animate On Scroll
@@ -83,11 +82,6 @@ export const AdoptarTarjeta = ({
 					<img
 						className={styles.adoptarTarjeta__img_info}
 						src={whatsApp}
-						alt="share-icon"
-					/>
-					<img
-						className={styles.adoptarTarjeta__img_info}
-						src={twitter}
 						alt="share-icon"
 					/>
 					<img
