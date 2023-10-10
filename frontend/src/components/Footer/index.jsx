@@ -4,14 +4,13 @@ import React from 'react';
 import styles from './styles.module.css';
 
 // Components
-import { Logo, TwitterIconX } from '../Icons';
+import { Logo, TwitterIconX, ThreadsIcon } from '../Icons';
 
 // Images
-import PhoneIcon from "/icons/phone-call.png"
+// import ThreadsIcon from "/icons/threads.svg"
 import MailIcon from "/icons/mail.png"
 import FacebookIcon from "/icons/facebook-icon.png";
 import InstagramIcon from "/icons/instagram-icon.png";
-import YoutubeIcon from "/icons/youtube-icon.png";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -26,21 +25,21 @@ export default function Footer() {
 				<div className={styles["footer__contact-container"]}>
 					<p className={styles["footer__contact-title"]}>Contacto</p>
 					<div className={styles["footer__contact"]}>
-						<div className={styles["footer__contact--type"]}>
+						{/* <div className={styles["footer__contact--type"]}>
 							<img className={styles["footer__contact--img"]} src={PhoneIcon} alt="icono telefono" loading="lazy" />
 							<p className={styles["footer__contact--text"]}>+54 261-257-2860</p>
-						</div>
+						</div> */}
 						<div className={styles["footer__contact--type"]}>
 							<img className={styles["footer__contact--img"]} src={MailIcon} alt="icono telefono" loading="lazy" />
-							<p className={styles["footer__contact--text"]}>ejemplo@correo.com</p>
+							<p className={styles["footer__contact--text"]}>patitasacasaorg@gmail.com</p>
 						</div>
 					</div>
 				</div>
 				<div className={styles.footer__social}>
-					<a href="#">
+					<a href="https://www.facebook.com/profile.php?id=61552147730427&mibextid=ZbWKwL" target="_blank">
 						<img className={styles["footer__social--icon"]} src={FacebookIcon} alt="icono facebook" loading="lazy" />
 					</a>
-          <a href="#" className={styles["footer__social_twitter-x-container"]}>
+          <a href="https://twitter.com/PatitasaCasaORG" target="_blank" className={styles["footer__social_twitter-x-container"]}>
             <div className={styles["footer__social_twitter-x-icon"]}>
               <TwitterIconX />
             </div>
@@ -48,6 +47,11 @@ export default function Footer() {
 					<a href="https://www.instagram.com/patitasacasa_arg/" target="_blank">
 						<img className={styles["footer__social--icon"]} src={InstagramIcon} alt="icono instagram" loading="lazy" />
 					</a>
+					<a href="https://www.threads.net/@patitasacasa_org" target="_blank" className={styles["footer__social_twitter-x-container"]}>
+            <div className={styles["footer__social_threads-icon"]}>
+							<ThreadsIcon />
+            </div>
+          </a>
 				</div>
 				<div className={styles.footer__line}></div>
 				<div className={styles.footer__rights}>

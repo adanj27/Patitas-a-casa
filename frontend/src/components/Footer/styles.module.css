@@ -73,6 +73,16 @@
   width: 40px;
 }
 
+.footer__social_threads-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	height: 40px;
+  fill: white;
+  width: 40px;
+	padding: 5px;
+}
+
 .footer__line {
 	width: 70%;
 	height: 2px !important;
