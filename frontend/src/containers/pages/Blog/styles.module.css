@@ -21,7 +21,7 @@
 }
 
 .blog__header::before {
-  background-image: url("/icons/blog-bg.png");
+  background-image: url("/icons/imagenes recursos/fondoBLog.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position-y: top;
