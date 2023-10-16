@@ -59,7 +59,7 @@ export default function Footer() {
 						<p>Términos y Condiciones</p>
 					</Link>
 					<p className={styles["footer__rights--bar"]}>|</p>
-					<p>Copyright &copy; 2023 oHm Devs</p>
+					<p>Copyright &copy; 2023 <a href="https://www.linkedin.com/company/ohm-devs/" target="_blank">oHm Devs</a></p>
 				</div>
 			</footer>
 		</>
