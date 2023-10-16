@@ -4,6 +4,12 @@ import { BtnPrincipal } from "../../../components";
 import { Notification } from "../../../components/Notification/Index";
 import styles from "./styles.module.css";
 
+import emailjs from '@emailjs/browser';
+
+const EMAILJS_USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+
 const Contacto = () => {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const phonePattern = /^\d{10}$/;
@@ -61,8 +67,42 @@ const Contacto = () => {
     }
     setShowNotification(true);
     if (check) {
-      setNotification('Enviado!');
+
+      const emailParams = {
+        to_name: "Patitas A Casa", // Puedes personalizar el destinatario
+        from_name: `${firstName} ${lastName}`,
+        from_email: email,
+        phone_number: phone,
+        message: message,
+      };
+      
+      emailjs
+      .send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        emailParams,
+        EMAILJS_USER_ID
+      )
+      .then(
+        (response) => {
+          console.log("Correo enviado con éxito", response);
+          setShowNotification(true);
+          setNotification("Correo enviado con éxito");
+
+          setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPhone("");
+        setMessage("");
+        },
+        (error) => {
+          console.error("Error al enviar el correo", error);
+          setShowNotification(true);
+          setNotification("Error al enviar el correo");
+        }
+      );
     } else {
+      setShowNotification(true);
       setNotification(`El campo ${failedProp} ${inputError}`);
     }
   };
