@@ -44,7 +44,7 @@ export default function Footer() {
               <TwitterIconX />
             </div>
           </a>
-					<a href="https://www.instagram.com/patitasacasa_arg/" target="_blank">
+					<a href="https://www.instagram.com/patitasacasa_org/" target="_blank">
 						<img className={styles["footer__social--icon"]} src={InstagramIcon} alt="icono instagram" loading="lazy" />
 					</a>
 					<a href="https://www.threads.net/@patitasacasa_org" target="_blank" className={styles["footer__social_twitter-x-container"]}>
