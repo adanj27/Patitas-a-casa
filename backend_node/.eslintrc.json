@@ -1,0 +1,28 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "no-console": "off",
+    "quotes": [2, "double", { "allowTemplateLiterals": true }],
+    "comma-dangle": ["error", "never"],
+    "max-len": ["error", 140],
+    "import/estensions": "off",
+    "prettier/prettier": "error",
+    "import/no-unresolved": ["error", { "ignore": ["@"] }],
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error",
+    "camelcase": "off"
+  }
+}
