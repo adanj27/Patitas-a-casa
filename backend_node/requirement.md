@@ -1,3 +1,7 @@
+GET /api/formularo: Esta ruta debe permitir a los usuarios recuperar información existente del formulario. Puede devolver una lista de registros del formulario o un registro específico según sea necesario.
+
+POST /api/formulario: Esta ruta debe permitir a los usuarios enviar datos del formulario al servidor para su procesamiento. Debe validar los datos del formulario, almacenarlos en la base de datos y proporcionar una respuesta adecuada.
+
 ## Forms
 
 ```GET /api/forms
@@ -8,11 +12,10 @@
 
 ```
 
-GET /api/formularo: Esta ruta debe permitir a los usuarios recuperar información existente del formulario. Puede devolver una lista de registros del formulario o un registro específico según sea necesario.
-
-POST /api/formulario: Esta ruta debe permitir a los usuarios enviar datos del formulario al servidor para su procesamiento. Debe validar los datos del formulario, almacenarlos en la base de datos y proporcionar una respuesta adecuada.
-
 Rutas para Blogs:
+GET /api/blogs: Esta ruta debe permitir a los usuarios recuperar una lista de publicaciones de blog. Puede admitir consultas para filtrar publicaciones según categorías, etiquetas, fechas, etc.
+
+GET /api/blogs/🆔 Esta ruta debe permitir a los usuarios recuperar una publicación de blog específica mediante su identificador (ID).
 
 ## Blogs
 
@@ -31,10 +34,6 @@ Rutas para Blogs:
 ## Category
 
 ## Tags
-
-GET /api/blogs: Esta ruta debe permitir a los usuarios recuperar una lista de publicaciones de blog. Puede admitir consultas para filtrar publicaciones según categorías, etiquetas, fechas, etc.
-
-GET /api/blogs/🆔 Esta ruta debe permitir a los usuarios recuperar una publicación de blog específica mediante su identificador (ID).
 
 Base de Datos:
 

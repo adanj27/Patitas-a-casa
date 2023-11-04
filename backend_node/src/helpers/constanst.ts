@@ -8,3 +8,8 @@ export const APP_CONFIG = {
   ENV: process.env.APP_ENV,
   NAME: process.env.APP_NAME,
 };
+
+export const DB_CONN = {
+  TEST: process.env.DB_STRING_CONNECTION_TEST,
+  DEV: process.env.DB_STRING_CONNECTION,
+};
