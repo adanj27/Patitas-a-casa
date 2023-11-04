@@ -1,36 +1,36 @@
 # Patitas a Casa API Documentation
 
--   [Authentication](#authentication)
+- [Authentication](#authentication)
 
-    -   [Login](#login)
-        -   [Login Request](#login-request)
-        -   [Login Response](#login-response)
-    -   [Register](#register)
-        -   [Register Request](#register-request)
-        -   [Register Response](#register-response)
+  - [Login](#login)
+    - [Login Request](#login-request)
+    - [Login Response](#login-response)
+  - [Register](#register)
+    - [Register Request](#register-request)
+    - [Register Response](#register-response)
 
--   [Pets](#pets)
+- [Pets](#pets)
 
-    -   [GetPetById](#getpetbyid)
-        -   [GetPetById Request](#getpetbyid-request)
-        -   [GetPetById Response](#getpetbyid-response)
-    -   [GetPets](#getpets)
-        -   [GetPets Request](#getpets-request)
-        -   [GetPets Response](#getpets-response)
-    -   [CreatePet](#createpet)
-        -   [CreatePet Request](#createpet-request)
-        -   [CreatePet Response](#createpet-response)
-    -   [UpdatePet](#updatepet)
-        -   [UpdatePet Request](#updatepet-request)
-        -   [UpdatePet Response](#updatepet-response)
-    -   [DeletePet](#deletepet)
-        -   [DeletePet Request](#deletepet-request)
-        -   [DeletePet Response](#deletepet-response)
+  - [GetPetById](#getpetbyid)
+    - [GetPetById Request](#getpetbyid-request)
+    - [GetPetById Response](#getpetbyid-response)
+  - [GetPets](#getpets)
+    - [GetPets Request](#getpets-request)
+    - [GetPets Response](#getpets-response)
+  - [CreatePet](#createpet)
+    - [CreatePet Request](#createpet-request)
+    - [CreatePet Response](#createpet-response)
+  - [UpdatePet](#updatepet)
+    - [UpdatePet Request](#updatepet-request)
+    - [UpdatePet Response](#updatepet-response)
+  - [DeletePet](#deletepet)
+    - [DeletePet Request](#deletepet-request)
+    - [DeletePet Response](#deletepet-response)
 
--   [Card](#card)
-    -   [Generate](#generatecard)
-        -   [GenerateCard Request](#generatecard-request)
-        -   [GenerateCard Response](#generatecard-response)
+- [Card](#card)
+  - [Generate](#generatecard)
+    - [GenerateCard Request](#generatecard-request)
+    - [GenerateCard Response](#generatecard-response)
 
 ## Authentication
 
@@ -50,8 +50,8 @@ POST /api/auth/login
 
 ```json
 {
-    "email": "mail@mail.com",
-    "password": "yourpassword"
+  "email": "mail@mail.com",
+  "password": "yourpassword"
 }
 ```
 
@@ -63,10 +63,10 @@ POST /api/auth/login
 
 ```json
 {
-    "id": "00000000-0000-0000-0000-000000000000",
-    "username": "username",
-    "email": "mail@mail.com",
-    "token": "supertoken"
+  "id": "00000000-0000-0000-0000-000000000000",
+  "username": "username",
+  "email": "mail@mail.com",
+  "token": "supertoken"
 }
 ```
 
@@ -82,9 +82,9 @@ POST /api/auth/register;
 
 ```json
 {
-    "username": "yourusername",
-    "password": "yourpassword",
-    "email": "youremail"
+  "username": "yourusername",
+  "password": "yourpassword",
+  "email": "youremail"
 }
 ```
 
@@ -96,10 +96,10 @@ POST /api/auth/register;
 
 ```json
 {
-    "id": "00000000-0000-0000-0000-000000000000",
-    "username": "username",
-    "email": "mail@mail.com",
-    "token": "supertoken"
+  "id": "00000000-0000-0000-0000-000000000000",
+  "username": "username",
+  "email": "mail@mail.com",
+  "token": "supertoken"
 }
 ```
 
@@ -123,18 +123,18 @@ GET /api/pets/{{id}}
 
 ```json
 {
+  "id": "00000000-0000-0000-0000-000000000000",
+  "name": "name",
+  "imageUrl": "https://domain.com/api/image.png",
+  "date": "01/01/01",
+  "contact": "999999999",
+  "zone": "zone",
+  "shelter": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "name": "name",
-    "imageUrl": "https://domain.com/api/image.png",
-    "date": "01/01/01",
-    "contact": "999999999",
-    "zone": "zone",
-    "shelter": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "name"
-    }, // NULL
-    "type": "type", // dog / cat / others
-    "description": "description"
+    "name": "name"
+  }, // NULL
+  "type": "type", // dog / cat / others
+  "description": "description"
 }
 ```
 
@@ -185,17 +185,17 @@ POST /api/pets
 
 ```json
 {
-    "name": "name",
-    "imageUrl": "https://domain.com/api/image.png",
-    "date": "01/01/01",
-    "contact": "999999999",
-    "zone": "zone",
-    "shelter": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "name"
-    }, // NULL
-    "type": "type", // dog / cat / others
-    "description": "description"
+  "name": "name",
+  "imageUrl": "https://domain.com/api/image.png",
+  "date": "01/01/01",
+  "contact": "999999999",
+  "zone": "zone",
+  "shelter": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "name"
+  }, // NULL
+  "type": "type", // dog / cat / others
+  "description": "description"
 }
 ```
 
@@ -217,17 +217,17 @@ PUT /api/pets/{{id}}
 
 ```json
 {
-    "name": "name",
-    "imageUrl": "https://domain.com/api/image.png",
-    "date": "01/01/01",
-    "contact": "999999999",
-    "zone": "zone",
-    "shelter": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "name"
-    }, // NULL
-    "type": "type", // dog / cat / others
-    "description": "description"
+  "name": "name",
+  "imageUrl": "https://domain.com/api/image.png",
+  "date": "01/01/01",
+  "contact": "999999999",
+  "zone": "zone",
+  "shelter": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "name": "name"
+  }, // NULL
+  "type": "type", // dog / cat / others
+  "description": "description"
 }
 ```
 
