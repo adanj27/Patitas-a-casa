@@ -1,4 +1,9 @@
 {
+  "env": {
+    "node": true,
+    "es2021": true,
+    "jest": true
+  },
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -10,19 +15,69 @@
   "plugins": ["@typescript-eslint", "import", "prettier"],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-base",
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "rules": {
     "no-console": "off",
     "quotes": [2, "double", { "allowTemplateLiterals": true }],
-    "comma-dangle": ["error", "never"],
+    /* "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ], */
     "max-len": ["error", 140],
     "import/estensions": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
     "import/no-unresolved": ["error", { "ignore": ["@"] }],
     "import/prefer-default-export": "off",
     "import/no-default-export": "error",
-    "camelcase": "off"
+    "camelcase": "off",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true,
+        "variables": true,
+        "typedefs": true
+      }
+    ],
+    "import/no-extraneous-dependencies": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts"],
+      "node": ["src"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
   }
 }

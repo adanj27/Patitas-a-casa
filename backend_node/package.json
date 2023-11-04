@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "clear": "rm -rf dist",
     "installese": "npm i && tsc",
-    "start": "node build/index",
+    "start": "node dist/index",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "dev": "ts-node-dev src/index.ts",
@@ -15,21 +16,23 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/express": "^4.17.20",
-    "@types/node": "^20.8.10",
-    "@typescript-eslint/eslint-plugin": "^6.9.1",
-    "@typescript-eslint/parser": "^6.9.1",
-    "eslint": "^8.52.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.2.2"
+    "@types/express": "4.17.20",
+    "@types/node": "20.8.10",
+    "@typescript-eslint/eslint-plugin": "6.9.1",
+    "@typescript-eslint/parser": "6.9.1",
+    "eslint": "8.52.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "ts-node-dev": "2.0.0",
+    "typescript": "5.2.2"
   },
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "dotenv": "16.3.1",
+    "express": "4.18.2",
+    "mongoose": "^8.0.0",
+    "mongoose-slug-generator": "^1.0.4"
   }
 }
