@@ -9,7 +9,7 @@ const FormSchema = new Schema(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 export const FormModel = model("Form", FormSchema);

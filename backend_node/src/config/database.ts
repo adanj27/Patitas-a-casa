@@ -13,6 +13,7 @@ export const connectionDB = async () => {
   await mongoose.connect(connection, {} as ConnectOptions);
 
   database = mongoose.connection;
+  console.log(`connected to the database  successfully is time Work! `);
 };
 
 export const disconnect = () => {

@@ -6,6 +6,9 @@ connectionDB();
 
 const app = express();
 
+app.disable("x-powered-by");
+app.use(express.json());
+
 app.get("/", (req, res) => {
   return res.json({ message: "welcome api" });
 });
