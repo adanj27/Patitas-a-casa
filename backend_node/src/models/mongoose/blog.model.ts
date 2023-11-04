@@ -17,7 +17,21 @@ const BlogSchema = new Schema(
   {
     timestamps: true,
     versionKey: false,
-  }
+    toObject: {
+      transform(doc, ret) {
+        return {
+          id: ret._id,
+          title: ret.title,
+          sub_title: ret.sub_title,
+          description: ret.description,
+          short_description: ret.short_description,
+          image_url: ret.image_url,
+          status: ret.status,
+          count_view: ret.count_view,
+        };
+      },
+    },
+  },
 );
 
 export const BlogModel = model("Blog", BlogSchema);

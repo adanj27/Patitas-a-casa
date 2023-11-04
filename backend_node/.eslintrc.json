@@ -24,6 +24,8 @@
   ],
   "rules": {
     "no-console": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+
     "quotes": [2, "double", { "allowTemplateLiterals": true }],
     /* "comma-dangle": [
       "error",
