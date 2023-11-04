@@ -1,109 +1,64 @@
 import { Request, Response } from "express";
 import { FormModel as Form } from "../models/mongoose/form.model";
 
-export const getForms = async (req: Request, res: Response) => {
-  const forms = await Form.findAll();
+export const formsGet = async (req: Request, res: Response) => {
+  const { limit = 5, from = 0 } = req.query;
+  const query = { estado: true };
 
-  res.json({ forms });
+  const [total, forms] = await Promise.all([
+    Form.countDocuments(query),
+    Form.find(query).skip(Number(from)).limit(Number(limit)),
+  ]);
+
+  res.json({ total, forms });
 };
 
-export const getForm = async (req: Request, res: Response) => {
+// eslint-disable-next-line consistent-return
+export const formGet = async (req: Request, res: Response) => {
   const { id } = req.params;
+  try {
+    const form = await Form.findById(id);
 
-  const form = await Form.findByPk(id);
-
-  if (!form) {
-    res.status(404).json({
-      msg: `No exist form ${id}`,
+    if (!form) {
+      return res.status(404).json({
+        msg: `No exist form ${id}`,
+      });
+    }
+    res.json({
+      form,
     });
-  } else {
-    res.json({ form });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      msg: "Ha ocurrido un error inesperado. Por favor, contacta al administrador.",
+    });
   }
 };
 
-export const postForm = async (req: Request, res: Response) => {
-  const { body } = req;
-
+// eslint-disable-next-line consistent-return
+export const formPost = async (req: Request, res: Response) => {
   try {
+    const { name, contact_number, slug } = req.body;
     const existname = await Form.findOne({
       where: {
-        name: body.name,
+        name,
       },
     });
 
     if (existname) {
       return res.status(400).json({
-        msg: `Exist form ${body.email}`,
+        msg: `Exist form - ${name}`,
       });
     }
-
-    const newform = Form.build(body);
-
-    await newform.save();
-
-    res.status(201).json(newform);
+    const form = new Form({ name, contact_number, slug });
+    await form.save();
+    res.json({
+      form,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       msg: "Hable con el admin",
     });
   }
-
-  return res.status(500).json({
-    msg: "Ha ocurrido un error inesperado. Por favor, contacta al administrador.",
-  });
 };
-
-// export const putForm = async (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   const { body } = req;
-
-//   try {
-//     const form = await Form.findByPk(id);
-//     if (!form) {
-//       return res.status(404).json({
-//         msg: `No exist form id ${id}`,
-//       });
-//     }
-
-//     await form.update(body);
-
-//     res.json(form);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       msg: "Hable con el admin",
-//     });
-//   }
-
-//   return res.status(500).json({
-//     msg: "Ha ocurrido un error inesperado. Por favor, contacta al administrador.",
-//   });
-// };
-
-// export const deleteForm = async (req: Request, res: Response) => {
-//   const { id } = req.params;
-
-//   try {
-//     const form = await Form.findByPk(id);
-//     if (!form) {
-//       return res.status(404).json({
-//         msg: `No exist form id ${id}`,
-//       });
-//     }
-
-//     await form.update({ estado: false });
-
-//     res.json(form);
-//     // await user.destroy();
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({
-//       msg: "Hable con el admin",
-//     });
-//   }
-
-//   return res.status(500).json({
-//     msg: "Ha ocurrido un error inesperado. Por favor, contacta al administrador.",
-//   });
-// };
