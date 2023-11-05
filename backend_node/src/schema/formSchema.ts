@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { isValidImageURL } from "../helpers/regexFunctions";
 
 // create
-export const formSchema = z.object({
+export const FormSchema = z.object({
   body: z.object({
     name: z
       .string({
