@@ -9,4 +9,5 @@ export interface IForm extends Document {
   size: string;
   type: string;
   description: string;
+  status: boolean;
 }

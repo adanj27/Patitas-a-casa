@@ -11,6 +11,7 @@ const FormSchema = new Schema<IForm>(
     size: { type: String, require: true },
     type: { type: String, enum: ["dog", "cat", "others"], require: true },
     description: { type: String, require: true },
+    status: { type: Boolean, default: false },
   },
   {
     timestamps: true,
