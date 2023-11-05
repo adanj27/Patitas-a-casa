@@ -111,7 +111,7 @@ export class BlogController {
         { ...input, slug: generateSlug(input.title) },
         {
           new: true,
-        }
+        },
       );
 
       const response = {

@@ -9,7 +9,7 @@ const ImageSchema = new Schema(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 export const ImageModel = model("Image", ImageSchema);

@@ -1,4 +1,4 @@
-### Root api
+||### Root api
 GET http://localhost:4000/
 
 
@@ -6,14 +6,14 @@ GET http://localhost:4000/
 ### blogs
 GET http://localhost:4000/api/blog
 ### blog byId
-GET http://localhost:4000/api/blog/65470dab594fe75e9a416e20   
+GET http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28   
 
 ### create blog
 POST http://localhost:4000/api/blog
 Content-Type: application/json
 
 {
-      "title": "Excepturi quia harum nostrum numquam debitis ea.",
+      "title": "Excepturi nostrum numquam debitis ea.",
     "sub_title": "Velit id ut minima.",
    
     "description": "Ut beatae qui. Explicabo explicabo et possimus illum officia reiciendis non ipsa laborum. Vel molestiae natus. Tempora placeat unde. Velit provident et incidunt sunt debitis. Qui ut similique.\n \rIpsum ullam omnis sit qui. Optio nam possimus excepturi cupiditate ipsum excepturi ut deserunt fugiat. Eos debitis qui quia voluptatem deserunt blanditiis adipisci id. Dolores qui perspiciatis rerum aut temporibus perferendis cumque et.\n \rVero qui omnis. Magnam non reprehenderit sequi praesentium. Asperiores nobis et blanditiis eum eveniet quis nihil distinctio.",
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 ### update
-PATCH http://localhost:4000/api/blog/65470dab594fe75e9a416e20
+PATCH http://localhost:4000/api/blog/6547e862c24af4e4dd23f8aa
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ### delete
-DELETE  http://localhost:4000/api/blog/65470dab594fe75e9a416e20
+DELETE  http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28
 
 
 
