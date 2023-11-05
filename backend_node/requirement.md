@@ -19,13 +19,41 @@ GET /api/blogs/🆔 Esta ruta debe permitir a los usuarios recuperar una publica
 
 ## Blogs
 
-```GET /api/blogs
+```
+GET /api/blogs
 
+```
+
+#### Blogs Response
+
+````json
+[
+    {
+        "id" : "00000000-0000-0000-0000-000000000000",
+        "title" : "name",
+        "description" : "https://domain.com/api/image.png",
+        "create_at": "01/01/01",
+        "update_at" : "999999999",
+        "zone" : "zone",
+        "shelter" : {
+            "id" : "00000000-0000-0000-0000-000000000000",
+            "name" : "name",
+        }, // NULL
+        "type" : "type", // dog / cat / others
+        "description" : "description",
+    },
+    {
+        ...
+    },
+    {
+        ...
+    },
+]
 ```
 
 ```GET /api/blogs/:id
 
-```
+````
 
 ```POST /api/blogs
 

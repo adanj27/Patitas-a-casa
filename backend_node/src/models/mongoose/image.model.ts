@@ -9,17 +9,7 @@ const ImageSchema = new Schema(
   {
     timestamps: true,
     versionKey: false,
-    toObject: {
-      transform(doc, ret) {
-        return {
-          id: ret._id,
-          model_id: ret.model_id,
-          model_type: ret.model_type,
-          url: ret.url,
-        };
-      },
-    },
-  },
+  }
 );
 
 export const ImageModel = model("Image", ImageSchema);

@@ -3,28 +3,41 @@ GET http://localhost:4000/
 
 
 ### Endpoint blog
-
-    ### ==== Call all blogs ===== ####
+### blogs
 GET http://localhost:4000/api/blog
+### blog byId
+GET http://localhost:4000/api/blog/65470dab594fe75e9a416e20   
 
-
-### ==== Call all blogs ===== ####
-GET http://localhost:4000/api/blog/img
-
-### ==== Blog by id ===== ####
-GET http://localhost:4000/api/blog/65466fc28d72e320b376fa7b
-
-### ==== Create blog ===== ####
+### create blog
 POST http://localhost:4000/api/blog
 Content-Type: application/json
 
 {
-    "title": "blog sin problemas",    
-    "sub_title": "mi primer juego",
-    "description": "If you encounter game crashes, please try updating your graphics card driver. We are sorry to inform you that AMD graphics cards and some earlier released NVIDIA graphics cards may experience crashes when starting the game. You can try updating your graphics card driver to resolve this issue.",
-    "short_description": "prueba short",
-    "image_url": "https://media.rawg.io/media/screenshots/d75/d75bf15ab007368615b155ab1f93b002.jpg"   
+      "title": "Excepturi quia harum nostrum numquam debitis ea.",
+    "sub_title": "Velit id ut minima.",
+   
+    "description": "Ut beatae qui. Explicabo explicabo et possimus illum officia reiciendis non ipsa laborum. Vel molestiae natus. Tempora placeat unde. Velit provident et incidunt sunt debitis. Qui ut similique.\n \rIpsum ullam omnis sit qui. Optio nam possimus excepturi cupiditate ipsum excepturi ut deserunt fugiat. Eos debitis qui quia voluptatem deserunt blanditiis adipisci id. Dolores qui perspiciatis rerum aut temporibus perferendis cumque et.\n \rVero qui omnis. Magnam non reprehenderit sequi praesentium. Asperiores nobis et blanditiis eum eveniet quis nihil distinctio.",
+    "short_description": "Rerum repellat nemo quod fugiat reiciendis vel. Facere architecto omnis reprehenderit laudantium optio dolorem unde. Tempore earum et sed et nemo consectetur voluptatem. Repellat aperiam est amet aspernatur nesciunt sit impedit hic. Aliquid aut rerum aut laborum harum itaque nulla. Voluptas quaerat iste eos saepe reprehenderit.",
+    "image_url": "https://media.rawg.io/media/screenshots/d75/d75bf15ab007368615b155ab1f93b002.jpg"
+    
 }
+
+### update
+PATCH http://localhost:4000/api/blog/65470dab594fe75e9a416e20
+Content-Type: application/json
+
+{
+    "title": "validando cambio con imagen.",    
+    "sub_title": "cambiando imagen",
+    "description": "pequeño",
+    "short_description": "ingresando un nuevo description",
+     "image_url": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+    "status": false
+    
+}
+
+### delete
+DELETE  http://localhost:4000/api/blog/65470dab594fe75e9a416e20
 
 
 

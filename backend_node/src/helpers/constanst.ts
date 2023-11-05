@@ -13,3 +13,9 @@ export const DB_CONN = {
   TEST: process.env.DB_STRING_CONNECTION_TEST,
   DEV: process.env.DB_STRING_CONNECTION,
 };
+
+export const CLOUDINARY = {
+  NAME: process.env.CLOUDINARY_NAME,
+  KEY: process.env.CLOUDINARY_KEY,
+  API: process.env.CLOUDINARY_API,
+};

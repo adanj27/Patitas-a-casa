@@ -1,9 +1,10 @@
 import slug from "mongoose-slug-generator";
 import mongoose, { Schema, model } from "mongoose";
+import { IBlog } from "../../interface/BlogInterface";
 
 mongoose.plugin(slug);
 
-const BlogSchema = new Schema(
+const BlogSchema = new Schema<IBlog>(
   {
     title: { type: String, require: true, unique: true },
     sub_title: { type: String, require: true },
@@ -12,26 +13,12 @@ const BlogSchema = new Schema(
     short_description: { type: String },
     image_url: { type: Schema.Types.ObjectId, ref: "Image" },
     status: { type: Boolean },
-    count_view: { type: Number },
+    count_view: { type: Number, default: 0 },
   },
   {
     timestamps: true,
     versionKey: false,
-    toObject: {
-      transform(doc, ret) {
-        return {
-          id: ret._id,
-          title: ret.title,
-          sub_title: ret.sub_title,
-          description: ret.description,
-          short_description: ret.short_description,
-          image_url: ret.image_url,
-          status: ret.status,
-          count_view: ret.count_view,
-        };
-      },
-    },
-  },
+  }
 );
 
-export const BlogModel = model("Blog", BlogSchema);
+export const BlogModel = model<IBlog>("Blog", BlogSchema);
