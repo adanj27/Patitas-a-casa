@@ -1,64 +1,78 @@
 import { Request, Response } from "express";
-import { FormModel as Form } from "../models/mongoose/form.model";
+import { FormModel as Form, FormModel } from "../models/mongoose/form.model";
+import { Errors } from "../interface";
+import { uploadImage } from "../helpers";
+import { ImageModel } from "../models/mongoose/image.model";
 
-export const formsGet = async (req: Request, res: Response) => {
-  const { limit = 5, from = 0 } = req.query;
-  const query = { estado: true };
+export class FormController {
+  static async getAll(req: Request, res: Response) {
+    try {
+      const { limit = 5, from = 0 } = req.query;
+      const query = { status: true };
 
-  const [total, forms] = await Promise.all([
-    Form.countDocuments(query),
-    Form.find(query).skip(Number(from)).limit(Number(limit)),
-  ]);
+      const [total, forms] = await Promise.all([
+        Form.countDocuments(query),
+        Form.find(query).skip(Number(from)).limit(Number(limit)),
+      ]);
 
-  res.json({ total, forms });
-};
+      const response = {
+        status: true,
+        total,
+        forms,
+      };
 
-// eslint-disable-next-line consistent-return
-export const formGet = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const form = await Form.findById(id);
-
-    if (!form) {
-      return res.status(404).json({
-        msg: `No exist form ${id}`,
-      });
+      return res.json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
-    res.json({
-      form,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      msg: "Ha ocurrido un error inesperado. Por favor, contacta al administrador.",
-    });
   }
-};
 
-// eslint-disable-next-line consistent-return
-export const formPost = async (req: Request, res: Response) => {
-  try {
-    const { name, contact_number, slug } = req.body;
-    const existname = await Form.findOne({
-      where: {
-        name,
-      },
-    });
+  static async getById(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const form = await Form.findById(id);
 
-    if (existname) {
-      return res.status(400).json({
-        msg: `Exist form - ${name}`,
-      });
+      if (!form) {
+        return res.status(404).json(Errors.NOT_FOUND);
+      }
+
+      const response = {
+        status: true,
+        data: form,
+      };
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
-    const form = new Form({ name, contact_number, slug });
-    await form.save();
-    res.json({
-      form,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      msg: "Hable con el admin",
-    });
   }
-};
+
+  static async create(req: Request, res: Response) {
+    try {
+      const { image_url, ...all } = req.body;
+      // genera url cloudinary
+      const linkImg = await uploadImage(image_url);
+
+      // id-image
+      const newImg = await ImageModel.create({
+        url: linkImg,
+        model_type: "FORM",
+      });
+
+      const newForm = await FormModel.create({
+        ...all,
+        image_url: newImg.id, // asigna id-image
+      });
+      newImg.model_id = newForm._id;
+
+      await newForm.save();
+
+      const response = {
+        status: true,
+        data: newForm,
+      };
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
+    }
+  }
+}

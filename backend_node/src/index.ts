@@ -1,20 +1,25 @@
-import express from "express";
-import { connectionDB } from "./config/database";
-import { apiRoute } from "./routes";
+// import express from "express";
+// import { connectionDB } from "./config/database";
+// import { apiRoute } from "./routes";
+import { Server } from "./config/server";
 
-connectionDB();
+const server = new Server();
 
-const app = express();
+server.listen();
 
-app.disable("x-powered-by");
-app.use(express.json());
+// connectionDB();
 
-app.get("/", (req, res) => {
-  return res.json({ message: "welcome api" });
-});
+// const app = express();
 
-app.use("/api", apiRoute);
+// app.disable("x-powered-by");
+// app.use(express.json());
 
-app.listen(4000, () => {
-  console.log("✓ Server running on localhost:4000");
-});
+// app.get("/", (req, res) => {
+//   return res.json({ message: "welcome api" });
+// });
+
+// app.use("/api", apiRoute);
+
+// app.listen(4000, () => {
+//   console.log("✓ Server running on localhost:4000");
+// });
