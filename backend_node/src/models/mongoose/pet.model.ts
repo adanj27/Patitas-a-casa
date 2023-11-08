@@ -26,5 +26,5 @@ const PetSchema = new Schema<IPet>(
   },
 );
 
-const PetModel = model<IPet>("Form", PetSchema);
+const PetModel = model<IPet>("Pet", PetSchema);
 export { PetModel };
