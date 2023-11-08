@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { isValidImageURL } from "../helpers/regexFunctions";
 
 // create
-export const FormSchema = z.object({
+export const PetSchema = z.object({
   body: z.object({
     name: z
       .string({
@@ -13,47 +13,47 @@ export const FormSchema = z.object({
       })
       .min(10)
       .max(100),
+    color: z.string({
+      required_error: "Color is required!",
+    }),
+    size: z.enum(["SMALL", "MEDIUM", "LARGE"]),
+    city: z.string({ required_error: "City is required!" }),
+    address: z.string({ required_error: "Address is required!" }),
+    reward: z.number().optional(),
+    contact: z.string({ required_error: "Contact is required" }),
+    loss_date: z.date({
+      required_error: "Date is required!",
+      invalid_type_error: "That's not a date!",
+    }),
     image_url: z
       .string({
         required_error: "Image is required",
       })
       .refine((url) => isValidImageURL(url), "this image dont valid!"),
-    date: z.date({
-      required_error: "Date is required!",
-      invalid_type_error: "That's not a date!",
-    }),
-    contact: z.string({ required_error: "Contact is required" }),
-    zone: z.string({ required_error: "Zone is required" }),
-    size: z.string({ required_error: "Size is required" }),
-    type: z.enum(["dog", "cat", "others"]),
     description: z.string({ required_error: "Description is required" }),
+    status: z.boolean({ required_error: "Status is required" }),
+    type: z.enum(["DOG", "CAT", "OTHERS"]),
   }),
 });
 
 // update
-export const UFormSchema = z.object({
+export const UPetSchema = z.object({
   body: z.object({
     name: z.string().min(10).max(100).optional(),
+    color: z.string().optional(),
+    size: z.enum(["SMALL", "MEDIUM", "LARGE"]).optional(),
+    city: z.string().optional(),
+    address: z.string().optional(),
+    reward: z.number().optional(),
+    contact: z.string().optional(),
+    loss_date: z.date().optional(),
     image_url: z
       .string()
       .refine((url) => isValidImageURL(url), "this image dont valid!")
       .optional(),
-    date: z.date().optional(),
-    contact: z.string().optional(),
-    zone: z.string().optional(),
-    shelter: z
-      .object({
-        id: z
-          .string()
-          .refine((value) => mongoose.Types.ObjectId.isValid(value), {
-            message: "Id invalid!",
-          })
-          .optional(),
-        name: z.string().optional(),
-      })
-      .optional(),
-    type: z.enum(["dog", "cat", "others"]).optional(),
     description: z.string().optional(),
+    status: z.boolean().optional(),
+    type: z.enum(["DOG", "CAT", "OTHERS"]).optional(),
   }),
 
   params: z.object({
@@ -64,7 +64,7 @@ export const UFormSchema = z.object({
 });
 
 // for getById - Delete
-export const DFormSchema = z.object({
+export const DPetSchema = z.object({
   params: z.object({
     id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
       message: "Id invalid!",

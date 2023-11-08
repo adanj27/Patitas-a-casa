@@ -1,24 +1,24 @@
 import { Request, Response } from "express";
-import { FormModel as Form, FormModel } from "../models/mongoose/form.model";
+import { PetModel as Pet } from "../models/mongoose/pet.model";
 import { Errors } from "../interface";
 import { uploadImage } from "../helpers";
 import { ImageModel } from "../models/mongoose/image.model";
 
-export class FormController {
+export class PetController {
   static async getAll(req: Request, res: Response) {
     try {
       const { limit = 5, from = 0 } = req.query;
       const query = { status: true };
 
-      const [total, forms] = await Promise.all([
-        Form.countDocuments(query),
-        Form.find(query).skip(Number(from)).limit(Number(limit)),
+      const [total, pets] = await Promise.all([
+        Pet.countDocuments(query),
+        Pet.find(query).skip(Number(from)).limit(Number(limit)),
       ]);
 
       const response = {
         status: true,
         total,
-        forms,
+        pets,
       };
 
       return res.json(response);
@@ -30,15 +30,15 @@ export class FormController {
   static async getById(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const form = await Form.findById(id);
+      const pet = await Pet.findById(id);
 
-      if (!form) {
+      if (!pet) {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
       const response = {
         status: true,
-        data: form,
+        data: pet,
       };
       return res.status(200).json(response);
     } catch (error) {
@@ -55,20 +55,20 @@ export class FormController {
       // id-image
       const newImg = await ImageModel.create({
         url: linkImg,
-        model_type: "FORM",
+        model_type: "Pet",
       });
 
-      const newForm = await FormModel.create({
+      const newPet = await Pet.create({
         ...all,
         image_url: newImg.id, // asigna id-image
       });
-      newImg.model_id = newForm._id;
+      newImg.model_id = newPet._id;
 
-      await newForm.save();
+      await newPet.save();
 
       const response = {
         status: true,
-        data: newForm,
+        data: newPet,
       };
       return res.status(201).json(response);
     } catch (error) {
