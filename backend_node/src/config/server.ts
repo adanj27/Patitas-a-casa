@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
-import { router as formRoutes } from "../routes/forms.routes";
+import { router as petRoutes } from "../routes/pet.routes";
 
 import { connectionDB } from "./database";
 
@@ -10,7 +10,7 @@ class Server {
   private port: string;
 
   private apiPaths = {
-    formularios: "/api/formulario",
+    pets: "/api/pet",
   };
 
   constructor() {
@@ -45,7 +45,7 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.apiPaths.formularios, formRoutes);
+    this.app.use(this.apiPaths.pets, petRoutes);
   }
 
   listen() {
