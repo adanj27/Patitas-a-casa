@@ -3,7 +3,7 @@ import { config as initialDotenv } from "dotenv";
 initialDotenv();
 
 export const APP_CONFIG = {
-  PORT: process.env.APP_PORT ? parseInt(process.env.APP_PORT, 10) : undefined,
+  PORT: process.env.APP_PORT ? parseInt(process.env.APP_PORT, 10) : 8000,
   HOST: process.env.APP_HOST,
   ENV: process.env.APP_ENV,
   NAME: process.env.APP_NAME,
@@ -18,4 +18,10 @@ export const CLOUDINARY = {
   NAME: process.env.CLOUDINARY_NAME,
   KEY: process.env.CLOUDINARY_KEY,
   API: process.env.CLOUDINARY_API,
+};
+
+export const IMAGE_TYPE = {
+  IMAGE: "IMAGE",
+  FORM: "FORM",
+  BLOG: "BLOG",
 };

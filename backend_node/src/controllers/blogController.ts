@@ -2,19 +2,23 @@ import { Request, Response } from "express";
 import { BlogModel } from "../models/mongoose/blog.model";
 import { uploadImage } from "../helpers/linkedCloudinary";
 import { ImageModel } from "../models/mongoose/image.model";
-import { Errors } from "../interface";
-import { generateSlug } from "../helpers";
+import { ApiResponse, Errors, IBlog } from "../interface";
+import { IMAGE_TYPE, generateSlug } from "../helpers";
 
 export class BlogController {
-  static async getAll(req: Request, res: Response) {
+  static async getAll(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IBlog[]>>> {
     try {
       const data = await BlogModel.find({}).populate({
         path: "image_url",
         select: "-_id, url",
       });
 
-      const response = {
+      const response: ApiResponse<IBlog[]> = {
         status: true,
+        total: data.length,
         data,
       };
 
@@ -24,7 +28,10 @@ export class BlogController {
     }
   }
 
-  static async create(req: Request, res: Response) {
+  static async create(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IBlog>>> {
     const validInput = req.body;
     const { image_url, ...allimput } = validInput;
 
@@ -35,7 +42,7 @@ export class BlogController {
       // id-image
       const newImg = await ImageModel.create({
         url: linkImg,
-        model_type: "BLOG",
+        model_type: IMAGE_TYPE.BLOG,
       });
 
       // id-blog
@@ -47,8 +54,8 @@ export class BlogController {
       newImg.model_id = newBlog._id; // asigna id-blog
 
       newImg.save();
-      console.log(newImg);
-      const response = {
+
+      const response: ApiResponse<IBlog> = {
         status: true,
         data: newBlog,
       };
@@ -59,7 +66,10 @@ export class BlogController {
     }
   }
 
-  static async getById(req: Request, res: Response) {
+  static async getById(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IBlog>>> {
     const { id } = req.params;
     try {
       const exist = await BlogModel.findById(id).populate({
@@ -73,7 +83,7 @@ export class BlogController {
 
       await BlogModel.updateOne({ _id: id }, { $inc: { count_view: 1 } });
 
-      const response = {
+      const response: ApiResponse<IBlog> = {
         status: true,
         data: exist,
       };
@@ -84,7 +94,10 @@ export class BlogController {
     }
   }
 
-  static async update(req: Request, res: Response) {
+  static async update(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IBlog>>> {
     const { id } = req.params;
     const { image_url, ...input } = req.body;
 
@@ -114,7 +127,7 @@ export class BlogController {
         },
       );
 
-      const response = {
+      const response: ApiResponse<IBlog> = {
         status: true,
         data: result,
       };
@@ -125,7 +138,10 @@ export class BlogController {
     }
   }
 
-  static async delete(req: Request, res: Response) {
+  static async delete(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<string>>> {
     const { id } = req.params;
     try {
       const exist = await BlogModel.findById(id);
@@ -137,7 +153,7 @@ export class BlogController {
       await BlogModel.findByIdAndDelete(id);
       await ImageModel.findByIdAndDelete(exist.image_url);
 
-      const response = {
+      const response: ApiResponse<string> = {
         status: true,
         data: `${exist.title} deleted!`,
       };

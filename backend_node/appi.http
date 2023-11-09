@@ -1,4 +1,4 @@
-||### Root api
+### Root api
 GET http://localhost:4000/
 
 
@@ -42,7 +42,7 @@ DELETE  http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28
 
 
 ### Endpoint forms
-GET http://localhost:4000/api/forms
+GET http://localhost:4000/api/pet
 
 ### Endpoint forms
 GET http://localhost:4000/api/tag
