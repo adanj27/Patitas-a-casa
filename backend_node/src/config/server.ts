@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import cors from "cors";
 import { router as petRoutes } from "../routes/pet.routes";
+import { router as userRoutes } from "../routes/user.routes";
 
 import { connectionDB } from "./database";
 
@@ -11,6 +12,7 @@ class Server {
 
   private apiPaths = {
     pets: "/api/pet",
+    users: "/api/user",
   };
 
   constructor() {
@@ -45,6 +47,7 @@ class Server {
   }
 
   routes() {
+    this.app.use(this.apiPaths.users, userRoutes);
     this.app.use(this.apiPaths.pets, petRoutes);
   }
 

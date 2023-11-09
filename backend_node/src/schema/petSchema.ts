@@ -5,14 +5,7 @@ import { isValidImageURL } from "../helpers/regexFunctions";
 // create
 export const PetSchema = z.object({
   body: z.object({
-    name: z
-      .string({
-        required_error: "Name is required!",
-        invalid_type_error:
-          "You need a valid title, a minimum of 10 and a maximum of 150 characters.",
-      })
-      .min(10)
-      .max(100),
+    name: z.string({ required_error: "Name is required!" }),
     color: z.string({
       required_error: "Color is required!",
     }),
@@ -31,7 +24,7 @@ export const PetSchema = z.object({
       })
       .refine((url) => isValidImageURL(url), "this image dont valid!"),
     description: z.string({ required_error: "Description is required" }),
-    status: z.boolean({ required_error: "Status is required" }),
+    status: z.boolean().optional(),
     type: z.enum(["DOG", "CAT", "OTHERS"]),
   }),
 });

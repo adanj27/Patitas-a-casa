@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import bcryptjs from "bcryptjs";
 import { UserModel as User } from "../models/mongoose/user.model";
 import { Errors } from "../interface";
-import { existEmail } from "../helpers";
 
 export class UserController {
   static async getAll(req: Request, res: Response) {
@@ -48,10 +47,8 @@ export class UserController {
 
   static async create(req: Request, res: Response) {
     try {
-      const { name, email, password, rol } = req.body;
-      const user = new User({ name, email, password, rol });
-
-      existEmail(email);
+      const { user_name, email, token, password, roles } = req.body;
+      const user = new User({ user_name, email, token, password, roles });
 
       // encriptar la contraseña
       const salt = bcryptjs.genSaltSync();
