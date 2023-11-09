@@ -7,10 +7,10 @@ export const UserSchema = z.object({
     user_name: z.string({ required_error: "Name is required!" }),
     email: z.string().email({ message: "Ivalid email address" }),
     token: z.string({ required_error: "Token is required!" }),
-    status: z.boolean({ required_error: "Status is required!" }),
+    status: z.boolean().optional(),
     password: z.string({ required_error: "Password is required!" }),
     roles: z.array(z.enum(["ADMIN_ROL", "USER_ROL"])),
-    pets: z.array(z.string()),
+    pets: z.array(z.string()).optional(),
   }),
 });
 

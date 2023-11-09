@@ -4,12 +4,8 @@ import { IUser } from "../../interface/props/UserInterface";
 const UserSchema = new Schema<IUser>(
   {
     user_name: { type: String, require: true, unique: true },
-    email: { type: String, required: true },
-    password: {
-      type: String,
-      enum: ["grande", "pequeño", "mediano"],
-      required: true,
-    },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
     roles: {
       type: [String],
       enum: ["ADMIN_ROL", "USER_ROL"],
@@ -17,13 +13,21 @@ const UserSchema = new Schema<IUser>(
       required: true,
     },
     pets: [{ type: Schema.Types.ObjectId, ref: "Pet" }],
-    status: { type: Boolean, required: true, default: true },
+    status: { type: Boolean, default: true },
   },
   {
     timestamps: true,
     versionKey: false,
   },
 );
+
+// eslint-disable-next-line func-names
+UserSchema.methods.toJSON = function () {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { __v, password, _id, ...user } = this.toObject();
+  user.uid = _id;
+  return user;
+};
 
 const UserModel = model<IUser>("User", UserSchema);
 export { UserModel };

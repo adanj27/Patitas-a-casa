@@ -7,7 +7,7 @@ const PetSchema = new Schema<IPet>(
     color: { type: String, required: true },
     size: {
       type: String,
-      enum: ["grande", "pequeño", "mediano"],
+      enum: ["SMALL", "MEDIUM", "LARGE"],
       required: true,
     },
     city: { type: String, required: true },
@@ -18,7 +18,7 @@ const PetSchema = new Schema<IPet>(
     image_url: { type: Schema.Types.ObjectId, required: true },
     description: { type: String, required: true },
     status: { type: Boolean, default: false },
-    type: { type: String, enum: ["dog", "cat", "others"], required: true },
+    type: { type: String, enum: ["DOG", "CAT", "OTHERS"], required: true },
   },
   {
     timestamps: true,
@@ -26,5 +26,5 @@ const PetSchema = new Schema<IPet>(
   },
 );
 
-const PetModel = model<IPet>("Form", PetSchema);
+const PetModel = model<IPet>("Pet", PetSchema);
 export { PetModel };
