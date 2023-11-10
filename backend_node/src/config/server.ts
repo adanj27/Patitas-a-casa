@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 import { router as petRoutes } from "../routes/pet.routes";
 import { router as userRoutes } from "../routes/user.routes";
+import { router as blogRoutes } from "../routes/blog.routes";
 
 import { connectionDB } from "./database";
 
@@ -11,8 +12,9 @@ class Server {
   private port: string;
 
   private apiPaths = {
-    pets: "/api/pet",
     users: "/api/user",
+    pets: "/api/pet",
+    blogs: "/api/blog",
   };
 
   constructor() {
@@ -49,6 +51,7 @@ class Server {
   routes() {
     this.app.use(this.apiPaths.users, userRoutes);
     this.app.use(this.apiPaths.pets, petRoutes);
+    this.app.use(this.apiPaths.blogs, blogRoutes);
   }
 
   listen() {

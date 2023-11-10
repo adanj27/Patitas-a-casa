@@ -10,7 +10,7 @@ export class PetController {
       const { limit = 5, from = 0 } = req.query;
       const query = { status: true };
 
-      const [total, pets] = await Promise.all([
+      const [total, pet] = await Promise.all([
         Pet.countDocuments(query),
         Pet.find(query).skip(Number(from)).limit(Number(limit)),
       ]);
@@ -18,7 +18,7 @@ export class PetController {
       const response = {
         status: true,
         total,
-        pets,
+        pet,
       };
 
       return res.json(response);
@@ -62,9 +62,14 @@ export class PetController {
         ...all,
         image_url: newImg.id, // asigna id-image
       });
-      newImg.model_id = newPet._id;
+      newImg.model_id = newPet._id; // asigna id-pet
 
       await newPet.save();
+
+      // asigna pet al user
+      // const user = await User.findById(userId);
+      // user.pets.push(newPet._id);
+      // await user.save();
 
       const response = {
         status: true,
