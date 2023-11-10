@@ -9,15 +9,14 @@ export class UserController {
       const { limit = 5, from = 0 } = req.query;
       const query = { status: true };
 
-      const [total, user] = await Promise.all([
-        User.countDocuments(query),
-        User.find(query).skip(Number(from)).limit(Number(limit)),
-      ]);
+      const users = await User.find(query)
+        .skip(Number(from))
+        .limit(Number(limit));
 
       const response = {
         status: true,
-        total,
-        user,
+        total: users.length,
+        data: users,
       };
 
       return res.json(response);

@@ -1,62 +1,55 @@
-import express, { Application } from "express";
-import cors from "cors";
-import { router as petRoutes } from "../routes/pet.routes";
-import { router as userRoutes } from "../routes/user.routes";
-import { router as blogRoutes } from "../routes/blog.routes";
+/* eslint-disable no-underscore-dangle */
+import express, { Router, Express } from "express";
+import http from "node:http";
 
-import { connectionDB } from "./database";
+import { serverConfig } from "../interface/config";
 
 class Server {
-  private app: Application;
+  private _config: serverConfig;
 
-  private port: string;
+  private _express: Express;
 
-  private apiPaths = {
-    users: "/api/user",
-    pets: "/api/pet",
-    blogs: "/api/blog",
-  };
+  private _server: http.Server;
 
-  constructor() {
-    this.app = express();
-    this.port = process.env.PORT || "8000";
+  private _router: Router;
 
-    // Metodos iniciales
-    this.dbConnection();
-    this.middlewares();
-    this.routes();
+  constructor({ config }: { config: serverConfig }, router: Router) {
+    this._config = config;
+    this._express = express();
+    this._server = http.createServer(this._express);
+    this._router = router;
+    this._express.use(router);
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  async dbConnection() {
-    try {
-      await connectionDB();
-      console.log("Database online");
-    } catch (error) {
-      throw new Error(error);
-    }
+  start() {
+    return new Promise<void>((resolve, reject): void => {
+      this._server.on("error", (error) => {
+        reject(error);
+      });
+
+      this._server.listen(this._config.PORT || process.env.PORT, () => {
+        console.log(`✓ Project ${this._config.NAME}`);
+        console.log(`✓ Service: ${this._config.ENV}`);
+        if (this._config.ENV !== "production") {
+          console.log(
+            `✓ Server running on ${this._config.HOST}:${this._config.PORT}`,
+          );
+        }
+        resolve();
+      });
+    });
   }
 
-  middlewares() {
-    // CORS
-    this.app.use(cors());
-
-    // Lectura del body
-    this.app.use(express.json());
-
-    // Carpeta publica
-    // this.app.use(express.static("public"));
-  }
-
-  routes() {
-    this.app.use(this.apiPaths.users, userRoutes);
-    this.app.use(this.apiPaths.pets, petRoutes);
-    this.app.use(this.apiPaths.blogs, blogRoutes);
-  }
-
-  listen() {
-    this.app.listen(this.port, () => {
-      console.log(`Server corriendo en puerto!! ${this.port}`);
+  stop() {
+    return new Promise<void>((resolve, reject) => {
+      this._server.close((error) => {
+        if (error) {
+          reject(error);
+        } else {
+          console.log("✓ Server stopped");
+          resolve();
+        }
+      });
     });
   }
 }

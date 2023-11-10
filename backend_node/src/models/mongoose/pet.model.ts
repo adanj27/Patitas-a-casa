@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IPet } from "../../interface/PetInterface";
+import { IPet } from "../../interface/props/PetInterface";
 
 const PetSchema = new Schema<IPet>(
   {
