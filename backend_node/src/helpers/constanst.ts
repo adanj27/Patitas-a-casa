@@ -14,6 +14,14 @@ export const DB_CONN = {
   DEV: process.env.DB_STRING_CONNECTION,
 };
 
+export const BREVO_CONFIG = {
+  APIKEY: process.env.SENDINBLUE_KEY,
+};
+
+export const SMS = {
+  EMAIL: process.env.SMTP_EMAIL,
+};
+
 export const CLOUDINARY = {
   NAME: process.env.CLOUDINARY_NAME,
   KEY: process.env.CLOUDINARY_KEY,

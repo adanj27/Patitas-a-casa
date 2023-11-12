@@ -3,4 +3,3 @@ build/
 dist/
 .env
 package-lock.json
-helpers/constanst.ts

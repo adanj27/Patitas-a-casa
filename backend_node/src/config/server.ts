@@ -21,7 +21,7 @@ class Server {
     this._express.use(router);
   }
 
-  start() {
+  public start() {
     return new Promise<void>((resolve, reject): void => {
       this._server.on("error", (error) => {
         reject(error);
@@ -40,7 +40,7 @@ class Server {
     });
   }
 
-  stop() {
+  public stop() {
     return new Promise<void>((resolve, reject) => {
       this._server.close((error) => {
         if (error) {
