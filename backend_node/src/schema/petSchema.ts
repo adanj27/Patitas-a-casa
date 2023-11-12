@@ -14,10 +14,7 @@ export const PetSchema = z.object({
     address: z.string({ required_error: "Address is required!" }),
     reward: z.number().optional(),
     contact: z.string({ required_error: "Contact is required" }),
-    loss_date: z.date({
-      required_error: "Date is required!",
-      invalid_type_error: "That's not a date!",
-    }),
+    loss_date: z.string().datetime(),
     image_url: z
       .string({
         required_error: "Image is required",

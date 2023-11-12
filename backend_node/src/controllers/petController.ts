@@ -73,6 +73,11 @@ export class PetController {
 
       await newPet.save();
 
+      // asigna pet al user
+      // const user = await User.findById(userId);
+      // user.pets.push(newPet._id);
+      // await user.save()
+
       const response: ApiResponse<IPet> = {
         status: true,
         data: newPet,

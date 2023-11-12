@@ -82,7 +82,7 @@ export class UserController {
   static async delete(req: Request, res: Response) {
     const { id } = req.params;
 
-    const user = await User.findByIdAndUpdate(id, { estado: false });
+    const user = await User.findByIdAndUpdate(id, { status: false });
 
     res.json(user);
   }
