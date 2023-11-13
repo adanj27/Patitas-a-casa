@@ -9,7 +9,7 @@ export const AuthFormContainer = ({ setLogin }) => {
     setIsRegisterForm((prevIsRegisterForm) => !prevIsRegisterForm);
   };
 
-  const FormComponent = isRegisterForm ? RegisterForm : LoginForm;
+  const FormComponent = isRegisterForm ? LoginForm : RegisterForm ;
 
   return (
     <FormComponent

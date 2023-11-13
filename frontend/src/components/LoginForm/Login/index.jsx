@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
 import loginForm from '/icons/imagenes recursos/loginForm.png';
+import { useAuth } from '../../../context/AuthContext';
 
 
 export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
   const navigate = useNavigate();
+  const { login, isAuthenticated } = useAuth(); // Usa el hook de autenticación
 
   const [formData, setFormData] = useState({
     email: '',
@@ -14,6 +16,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
   });
 
   const [errors, setErrors] = useState({});
+
 
   const handleCancel = () => {
     setLogin(false);
@@ -27,7 +30,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Validaciones
     const newErrors = {};
@@ -41,11 +44,30 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Si no hay errores, puedes manejar los datos (por ahora solo log)
     if (Object.keys(newErrors).length === 0) {
-      console.log('Datos del formulario:', formData);
-      // Puedes redirigir al usuario a la página principal o realizar la lógica de inicio de sesión
-      navigate('/');
+      try {
+        // Usa la función de login del hook de autenticación
+        const success = await login(formData);
+
+        if (success) {
+          // Redirige al usuario a la página principal después del inicio de sesión exitoso
+          navigate('/');
+        } else {
+          // Maneja el caso en que la respuesta del servidor no sea exitosa
+          console.error('Error en el inicio de sesión');
+        }
+      } catch (error) {
+        // Maneja errores de red o problemas con la solicitud
+        console.error('Error de red:', error);
+      }
     }
   };
+
+  useEffect(() => {
+    // Si el usuario ya está autenticado, redirige a la página principal
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className={styles.loginContainer}>
@@ -65,7 +87,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
             <input
               type="email"
               id="email"
-              name="password"
+              name="email"
               value={formData.email}
               onChange={handleChange}
               className={styles.input}
@@ -89,14 +111,14 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
             )}
           </div>
           <p className={styles.link}>
-            {isRegisterForm ? '¿Ya tienes una cuenta? ' : '¿No tienes una cuenta? '}
+            {isRegisterForm ? '¿No tienes una cuenta? ': '¿Ya tienes una cuenta? '}
             <span onClick={switchForm}>
-              {isRegisterForm ? 'Iniciar sesión' : 'Registrarte'}
+              {isRegisterForm ? 'Registrarte' : 'Iniciar sesión'}
             </span>
           </p>
           <div className={styles.submitButton}>
             <button type="submit" className={styles.button}>
-              {isRegisterForm ? 'Registrarse' : 'Iniciar sesión'}
+              {isRegisterForm ? 'Iniciar sesión' : 'Registrarse'}
             </button>
           </div>
         </form>

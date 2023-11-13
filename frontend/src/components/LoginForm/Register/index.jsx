@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
 import loginForm from '/icons/imagenes recursos/loginForm.png';
+import axios from 'axios'; 
 
 export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Validaciones
     const newErrors = {};
@@ -44,9 +45,20 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Si no hay errores, puedes manejar los datos (por ahora solo log)
     if (Object.keys(newErrors).length === 0) {
-      console.log('Datos del formulario:', formData);
-      // Puedes redirigir al usuario a la página de inicio de sesión
-      navigate('/login');
+      try {
+        const response = await axios.post('http://localhost:3000/users', formData);
+
+        if (response.status === 201) {
+          // Registro exitoso, redirige al usuario a la página de inicio de sesión
+          navigate('/');
+        } else {
+          // Maneja el caso en que la respuesta del servidor no sea exitosa
+          console.error('Error al registrar usuario');
+        }
+      } catch (error) {
+        // Maneja errores de red o problemas con la solicitud
+        console.error('Error de red:', error);
+      }
     }
   };
 

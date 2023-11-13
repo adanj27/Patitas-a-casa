@@ -14,7 +14,9 @@ import { BurgerMenu } from '../BurgerMenu';
 
 // Imágenes
 import { Logo, LogoutIcon } from '../Icons';
-import {AuthFormContainer} from '../LoginForm';
+import { AuthFormContainer } from '../LoginForm';
+
+import { useAuth } from '../../context/AuthContext';
 
 /*
 	Array formado de objetos que permite la creación
@@ -33,7 +35,7 @@ export const botones = [
 ];
 
 export const Navbar = () => {
-  const [user, setUser] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   const [modal, setModal] = useState(false);
 	const [isScrolling, setScrolling] = useState(false);
 	const [login, setLogin] = useState(false)
@@ -57,6 +59,12 @@ export const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const handleLogout = () => {
+    console.log('Haciendo logout...');
+    logout();
+    console.log(localStorage.getItem('token'));
+  };
 
   return (
     <nav
@@ -88,10 +96,12 @@ export const Navbar = () => {
 					{/*<BtnLateral src={imgSearch} alt="Search" />*/}
           {/* <BtnPrincipal className={styles["nav__boton-reportar"]} texto="Reportar" setModal={setModal} /> */}
           <div className={styles['nav__contenedor-boton']}>
-						{user ? (
+						{isAuthenticated ? (
 							
 							<div className={styles['nav__contenedor-boton-user']}>
-								<LogoutIcon />
+                <div onClick={handleLogout}>
+                <LogoutIcon />
+                </div>
 								<BtnPrincipal texto="Reportar" setModal={setModal} />
 							</div>
 							) : (
