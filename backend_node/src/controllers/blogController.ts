@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { BlogModel } from "../models/mongoose/blog.model";
-import { uploadImage } from "../helpers/linkedCloudinary";
+import { detroyImage, uploadImage } from "../helpers/linkedCloudinary";
 import { ImageModel } from "../models/mongoose/image.model";
 import { ApiResponse, Errors, IBlog } from "../interface";
 import { IMAGE_TYPE, generateSlug } from "../helpers";
@@ -35,9 +35,11 @@ export class BlogController {
     const validInput = req.body;
     const { image_url, ...allimput } = validInput;
 
+    let url_img: string;
     try {
       // genera url cloudinary
-      const linkImg = await uploadImage(image_url);
+      const linkImg = await uploadImage(image_url, "blogs");
+      url_img = linkImg;
 
       // id-image
       const newImg = await ImageModel.create({
@@ -62,6 +64,7 @@ export class BlogController {
 
       return res.status(201).json(response);
     } catch (error) {
+      await detroyImage(url_img); // se eliminara img de cloudnary
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
@@ -112,7 +115,7 @@ export class BlogController {
         const img = await ImageModel.findOne({ model_id: id });
 
         if (img) {
-          const newurl = await uploadImage(image_url);
+          const newurl = await uploadImage(image_url, "blogs");
           console.log(newurl);
           img.url = newurl;
           await img.save();
@@ -151,7 +154,8 @@ export class BlogController {
       }
 
       await BlogModel.findByIdAndDelete(id);
-      await ImageModel.findByIdAndDelete(exist.image_url);
+      const { url } = await ImageModel.findByIdAndDelete(exist.image_url);
+      await detroyImage(url);
 
       const response: ApiResponse<string> = {
         status: true,

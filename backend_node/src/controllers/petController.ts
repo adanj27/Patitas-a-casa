@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { PetModel as Pet } from "../models/mongoose/pet.model";
 import { ApiResponse, Errors, IPet } from "../interface";
-import { IMAGE_TYPE, uploadImage } from "../helpers";
+import { IMAGE_TYPE, detroyImage, uploadImage } from "../helpers";
 import { ImageModel } from "../models/mongoose/image.model";
 
 export class PetController {
@@ -52,11 +52,12 @@ export class PetController {
     req: Request,
     res: Response,
   ): Promise<Response<ApiResponse<IPet>>> {
+    const { image_url, ...all } = req.body;
+    let url_img: string;
     try {
-      const { image_url, ...all } = req.body;
       // genera url cloudinary
-      const linkImg = await uploadImage(image_url);
-
+      const linkImg = await uploadImage(image_url, "forms");
+      url_img = linkImg;
       // id-image
       const newImg = await ImageModel.create({
         url: linkImg,
@@ -67,7 +68,6 @@ export class PetController {
         ...all,
         image_url: newImg.id,
       });
-
       // asigna id-image
       newImg.model_id = newPet._id;
 
@@ -84,6 +84,7 @@ export class PetController {
       };
       return res.status(201).json(response);
     } catch (error) {
+      await detroyImage(url_img); // se eliminara img de cloudnary
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
