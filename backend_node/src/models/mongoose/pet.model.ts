@@ -3,7 +3,7 @@ import { IPet } from "../../interface/props/PetInterface";
 
 const PetSchema = new Schema<IPet>(
   {
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     color: { type: String, required: true },
     size: {
       type: String,
