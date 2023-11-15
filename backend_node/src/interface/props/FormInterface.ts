@@ -1,6 +1,6 @@
 import mongoose, { Date, Document } from "mongoose";
 
-export interface IPet extends Document {
+export interface IForm extends Document {
   name: string;
   color: string;
   size: string;

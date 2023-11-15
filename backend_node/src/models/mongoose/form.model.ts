@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { IPet } from "../../interface/props/PetInterface";
+import { IForm } from "../../interface/props/FormInterface";
 
-const PetSchema = new Schema<IPet>(
+const FormSchema = new Schema<IForm>(
   {
     name: { type: String, required: true },
     color: { type: String, required: true },
@@ -26,5 +26,5 @@ const PetSchema = new Schema<IPet>(
   },
 );
 
-const PetModel = model<IPet>("Pet", PetSchema);
-export { PetModel };
+const FormModel = model<IForm>("Form", FormSchema);
+export { FormModel };

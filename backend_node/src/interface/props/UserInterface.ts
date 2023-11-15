@@ -6,6 +6,6 @@ export interface IUser extends Document {
   token: string;
   password: string;
   roles: string[];
-  pets: mongoose.Types.ObjectId[];
+  forms: mongoose.Types.ObjectId[];
   status: boolean;
 }

@@ -1,23 +1,23 @@
 import { Request, Response } from "express";
-import { PetModel as Pet } from "../models/mongoose/pet.model";
-import { ApiResponse, Errors, IPet } from "../interface";
+import { FormModel as Form } from "../models/mongoose/form.model";
+import { ApiResponse, Errors, IForm } from "../interface";
 import { IMAGE_TYPE, detroyImage, uploadImage } from "../helpers";
 import { ImageModel } from "../models/mongoose/image.model";
 
-export class PetController {
+export class FormController {
   static async getAll(
     req: Request,
     res: Response,
-  ): Promise<Response<ApiResponse<IPet[]>>> {
+  ): Promise<Response<ApiResponse<IForm[]>>> {
     try {
       const { limit = 5, from = 0 } = req.query;
 
-      const pets = await Pet.find({}).skip(Number(from)).limit(Number(limit));
+      const forms = await Form.find({}).skip(Number(from)).limit(Number(limit));
 
-      const response: ApiResponse<IPet[]> = {
+      const response: ApiResponse<IForm[]> = {
         status: true,
-        total: pets.length,
-        data: pets,
+        total: forms.length,
+        data: forms,
       };
 
       return res.status(200).json(response);
@@ -29,18 +29,18 @@ export class PetController {
   static async getById(
     req: Request,
     res: Response,
-  ): Promise<Response<ApiResponse<IPet>>> {
+  ): Promise<Response<ApiResponse<IForm>>> {
     const { id } = req.params;
     try {
-      const pet = await Pet.findById(id);
+      const form = await Form.findById(id);
 
-      if (!pet) {
+      if (!form) {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
-      const response: ApiResponse<IPet> = {
+      const response: ApiResponse<IForm> = {
         status: true,
-        data: pet,
+        data: form,
       };
       return res.status(200).json(response);
     } catch (error) {
@@ -51,7 +51,7 @@ export class PetController {
   static async create(
     req: Request,
     res: Response,
-  ): Promise<Response<ApiResponse<IPet>>> {
+  ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...all } = req.body;
     let url_img: string;
     try {
@@ -64,23 +64,23 @@ export class PetController {
         model_type: IMAGE_TYPE.FORM,
       });
 
-      const newPet = await Pet.create({
+      const newForm = await Form.create({
         ...all,
         image_url: newImg.id,
       });
       // asigna id-image
-      newImg.model_id = newPet._id;
+      newImg.model_id = newForm._id;
 
-      await newPet.save();
+      await newForm.save();
 
-      // asigna pet al user
+      // asigna form al user
       // const user = await User.findById(userId);
-      // user.pets.push(newPet._id);
+      // user.forms.push(newForm._id);
       // await user.save()
 
-      const response: ApiResponse<IPet> = {
+      const response: ApiResponse<IForm> = {
         status: true,
-        data: newPet,
+        data: newForm,
       };
       return res.status(201).json(response);
     } catch (error) {

@@ -23,7 +23,7 @@ export const UserSchema = z.object({
       })
       .min(6),
     roles: z.array(z.enum(["ADMIN_ROL", "USER_ROL"])),
-    pets: z.array(z.string()).optional(),
+    forms: z.array(z.string()).optional(),
   }),
 });
 
@@ -36,7 +36,7 @@ export const UUserSchema = z.object({
     status: z.boolean().optional(),
     password: z.string().min(6).optional(),
     roles: z.array(z.enum(["ADMIN_ROL", "USER_ROL"])).optional(),
-    pets: z.array(z.string()).optional(),
+    forms: z.array(z.string()).optional(),
   }),
 
   params: z.object({

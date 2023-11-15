@@ -12,7 +12,7 @@ const UserSchema = new Schema<IUser>(
       default: ["USER_ROL"],
       required: true,
     },
-    pets: [{ type: Schema.Types.ObjectId, ref: "Pet" }],
+    forms: [{ type: Schema.Types.ObjectId, ref: "Form" }],
     status: { type: Boolean, default: true },
   },
   {
