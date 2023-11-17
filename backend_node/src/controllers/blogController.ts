@@ -35,15 +35,16 @@ export class BlogController {
     const validInput = req.body;
     const { image_url, ...allimput } = validInput;
 
-    let url_img: string;
+    let id_cloudinary: string;
     try {
       // genera url cloudinary
-      const linkImg = await uploadImage(image_url, "blogs");
-      url_img = linkImg;
+      const { secure_url, public_id } = await uploadImage(image_url, "blogs");
+      id_cloudinary = public_id;
 
       // id-image
       const newImg = await ImageModel.create({
-        url: linkImg,
+        url: secure_url,
+        public_id,
         model_type: IMAGE_TYPE.BLOG,
       });
 
@@ -64,7 +65,7 @@ export class BlogController {
 
       return res.status(201).json(response);
     } catch (error) {
-      await detroyImage(url_img); // se eliminara img de cloudnary
+      await detroyImage(id_cloudinary); // se eliminara img de cloudnary
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
@@ -117,7 +118,7 @@ export class BlogController {
         if (img) {
           const newurl = await uploadImage(image_url, "blogs");
           console.log(newurl);
-          img.url = newurl;
+          img.url = newurl.secure_url;
           await img.save();
         }
       }
@@ -154,8 +155,8 @@ export class BlogController {
       }
 
       await BlogModel.findByIdAndDelete(id);
-      const { url } = await ImageModel.findByIdAndDelete(exist.image_url);
-      await detroyImage(url);
+      const { public_id } = await ImageModel.findByIdAndDelete(exist.image_url);
+      await detroyImage(public_id);
 
       const response: ApiResponse<string> = {
         status: true,

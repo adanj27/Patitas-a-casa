@@ -53,14 +53,15 @@ export class FormController {
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...all } = req.body;
-    let url_img: string;
+    let id_cloudinary: string;
     try {
       // genera url cloudinary
-      const linkImg = await uploadImage(image_url, "forms");
-      url_img = linkImg;
+      const { secure_url, public_id } = await uploadImage(image_url, "forms");
+      id_cloudinary = public_id;
       // id-image
       const newImg = await ImageModel.create({
-        url: linkImg,
+        url: secure_url,
+        public_id,
         model_type: IMAGE_TYPE.FORM,
       });
 
@@ -84,7 +85,7 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
-      await detroyImage(url_img); // se eliminara img de cloudnary
+      await detroyImage(id_cloudinary); // se eliminara img de cloudnary
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
