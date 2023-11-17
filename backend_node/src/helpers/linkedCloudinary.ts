@@ -23,11 +23,6 @@ export const uploadImage = async (
 
 export const detroyImage = async (public_id: string) => {
   try {
-    // const partes = url.split("/");
-    // const [ultimoSegmento] = partes.slice(-1);
-    // const [nombreSinExtension] = ultimoSegmento.split(".");
-    // const public_id = `${partes.slice(-3, -1).join("/")}/${nombreSinExtension}`;
-    // console.log(public_id);
     await cloudinary.uploader.destroy(public_id);
   } catch (error) {
     throw Error("Error cloudinary dont delete image.!");
