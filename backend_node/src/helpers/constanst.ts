@@ -19,7 +19,7 @@ export const BREVO_CONFIG = {
 };
 
 export const SMS = {
-  EMAIL: process.env.SMTP_EMAIL,
+  EMAIL: process.env.EMAIL_CORPORATIVO,
 };
 
 export const CLOUDINARY = {

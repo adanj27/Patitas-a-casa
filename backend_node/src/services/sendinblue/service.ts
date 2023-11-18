@@ -10,9 +10,21 @@ const list = 2;
   | Here you can specify the methods used to automate emails using Brevo.
   | To use the current configuration or add new functionality here the reference 
   | https://github.com/getbrevo/brevo-node/blob/main/README.md  
-  |
- 
+  | 
  */
+
+interface IBrevoConsult {
+  email: string;
+  name: string;
+  type: string;
+}
+
+// List name Brevo
+const NameTypes = {
+  PETS: "pets",
+} as const;
+
+type TypesNAme = keyof typeof NameTypes;
 
 export class ServiceSMTP {
   private apikey: string;
@@ -33,11 +45,12 @@ export class ServiceSMTP {
    * @param type :name template
    * @returns  Id template found
    */
-  private async getTemplate({ type }) {
+  public async getTemplate({ type }: { type: TypesNAme }) {
     this.configApiClient();
 
     const apiInstance = new Brevo.TransactionalEmailsApi();
     const templates = await apiInstance.getSmtpTemplates();
+    console.log(templates);
     const template = templates.templates.find((t) =>
       t.name.toLowerCase().includes(type.toLowerCase()),
     );
@@ -74,12 +87,37 @@ export class ServiceSMTP {
   }
 
   /**
+   * *This method helps to find the contact list with the specific name
+   * @param name
+   * @returns The list with the assigned name
+   */
+  public async getList({ name }: Pick<IBrevoConsult, "name">) {
+    this.configApiClient();
+    let result: [];
+    const api = new Brevo.ContactsApi();
+    /*  const opts = {
+      limit: 10, // Number | Number of documents per page
+      offset: 0, // Number | Index of the first document of the page
+    }; */
+
+    const { lists } = await api.getLists();
+
+    if (lists.length) {
+      result = lists.findIndex((item) =>
+        item.name.toLowerCase().includes(name.toLowerCase()),
+      );
+    }
+
+    return lists[result];
+  }
+
+  /**
    * * Add the contact to the list created in your Brevo administrative panel
    * !TODO: look for the option to accept dynamic list
    * @param email
    * @return response : { status: boolean, message: string}
    */
-  public async AddContact({ email }) {
+  public async AddContact({ email }: Pick<IBrevoConsult, "email">) {
     this.configApiClient();
 
     try {
@@ -112,7 +150,7 @@ export class ServiceSMTP {
    * @param email
    * @return response : { status: boolean, message: string}
    */
-  public async DeleteContact({ email }) {
+  public async DeleteContact({ email }: Pick<IBrevoConsult, "email">) {
     this.configApiClient();
     try {
       const apiContact = new Brevo.ContactsApi();
@@ -135,21 +173,27 @@ export class ServiceSMTP {
     }
   }
 
-  public async SendEmail() {
+  /**
+   * !sendEmail.to recibe el array de los correos, toca ver
+   * @param param0
+   * @returns
+   */
+  public async SendEmail({ type, items }) {
     this.configApiClient();
     const { data } = await this.getInfo();
-    const templateId = await this.getTemplate({ type: "pets" });
+    const templateId = await this.getTemplate({ type });
 
     try {
       const api = new Brevo.TransactionalEmailsApi();
       const sendEmail = new Brevo.SendSmtpEmail();
       sendEmail.sender = { name: data.name, email: data.email };
+      sendEmail.subject = "dinamic data!";
       sendEmail.to = [{ email: "phew_misame@hotmail.com" }];
-      sendEmail.subject = "prueba!";
       sendEmail.templateId = templateId;
       sendEmail.params = {
-        parameter: "My param value",
-        subject: "common subject",
+        name: items.name,
+        message: items.message,
+        items: items.items,
       };
       const result = await api.sendTransacEmail(sendEmail);
 
@@ -167,19 +211,6 @@ export class ServiceSMTP {
       }
       throw error;
     }
-  }
-
-  public async getList() {
-    this.configApiClient();
-
-    const api = new Brevo.ContactsApi();
-    const opts = {
-      limit: 10, // Number | Number of documents per page
-      offset: 0, // Number | Index of the first document of the page
-    };
-    const result = await api.getLists(opts);
-
-    return result.lists;
   }
 
   /**
