@@ -2,7 +2,7 @@ import { cloudinary } from "../config/cloudinary";
 
 export const uploadImage = async (
   path: string,
-  folder: string = "test"
+  folder: string = "test",
 ): Promise<{ secure_url: string; public_id: string }> => {
   try {
     // Check if folder exists, if not, create it

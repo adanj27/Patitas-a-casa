@@ -11,7 +11,7 @@ const ImageSchema = new Schema<IImage>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 export const ImageModel = model<IImage>("Image", ImageSchema);

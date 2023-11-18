@@ -28,7 +28,7 @@ export class ImageRepository extends BaseRepository<IImage, string> {
   }
 
   async getByOne(
-    conditions: FilterQuery<IImage>
+    conditions: FilterQuery<IImage>,
   ): Promise<QueryWithHelpers<IImage | null, IImage>> {
     return ImageModel.findOne(conditions);
   }
@@ -49,14 +49,23 @@ export class ImageRepository extends BaseRepository<IImage, string> {
     }
   }
 
-  async updateWithCloudinary({ public_id, input }) {
+  async updateWithCloudinary(
+    image_url: string,
+    public_id: string,
+    folder: string,
+  ) {
     try {
-      const update = await cloudinary.uploader.explicit(input, {
-        public_id,
-        type: "upload",
-        overwrite: true,
-        tags: "actualizacion_imagen",
-      });
+      await cloudinary.uploader.destroy(public_id); // elimina la img
+
+      const update = await uploadImage(image_url, folder); // crea la nueva img
+
+      // explicit aunq actuliza los tags, este no actualiza la imagen
+      // const update = await cloudinary.uploader.explicit(image_url //newUrl, {
+      //   type: "upload",
+      //   public_id //UrlCloudinary,
+      // });
+
+      // console.log(update);
 
       return update;
     } catch (error) {
