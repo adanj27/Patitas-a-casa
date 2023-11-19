@@ -14,6 +14,13 @@ export const DB_CONN = {
   DEV: process.env.DB_STRING_CONNECTION,
 };
 
+export const TOKEN = {
+  NAME: "access-token",
+  SECRET: process.env.ACCESS_TOKEN_SECRET,
+  REFRESH: process.env.REFRESH_TOKEN_SECRET,
+  TIME: process.env.TOKEN_EXPIRES,
+};
+
 export const BREVO_CONFIG = {
   APIKEY: process.env.SENDINBLUE_KEY,
 };
@@ -26,10 +33,4 @@ export const CLOUDINARY = {
   NAME: process.env.CLOUDINARY_NAME,
   KEY: process.env.CLOUDINARY_KEY,
   API: process.env.CLOUDINARY_API,
-};
-
-export const IMAGE_TYPE = {
-  IMAGE: "IMAGE",
-  FORM: "FORM",
-  BLOG: "BLOG",
 };

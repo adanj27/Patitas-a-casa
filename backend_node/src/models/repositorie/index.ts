@@ -1,2 +1,3 @@
 export * from "./BlogRepository";
-export * from "./imageRepository";
+export * from "./ImageRepository";
+export * from "./FromRepository";

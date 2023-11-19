@@ -1,5 +1,9 @@
 import { Schema, model } from "mongoose";
-import { IForm } from "../../interface/props/FormInterface";
+import {
+  IForm,
+  PETSIZE_TYPE,
+  PET_TYPE,
+} from "../../interface/props/FormInterface";
 
 const FormSchema = new Schema<IForm>(
   {
@@ -7,7 +11,7 @@ const FormSchema = new Schema<IForm>(
     color: { type: String, required: true },
     size: {
       type: String,
-      enum: ["SMALL", "MEDIUM", "LARGE"],
+      enum: [PETSIZE_TYPE.SMALL, PETSIZE_TYPE.MEDIUM, PETSIZE_TYPE.LARGE],
       required: true,
     },
     city: { type: String, required: true },
@@ -18,7 +22,7 @@ const FormSchema = new Schema<IForm>(
     image_url: { type: Schema.Types.ObjectId, required: true },
     description: { type: String, required: true },
     status: { type: Boolean, default: false },
-    type: { type: String, enum: ["DOG", "CAT", "OTHERS"], required: true },
+    type: { type: String, enum: [PET_TYPE.CAT, PET_TYPE.DOG], required: true },
   },
   {
     timestamps: true,
@@ -26,5 +30,4 @@ const FormSchema = new Schema<IForm>(
   },
 );
 
-const FormModel = model<IForm>("Form", FormSchema);
-export { FormModel };
+export const FormModel = model<IForm>("Form", FormSchema);

@@ -1,18 +1,16 @@
 import { Request, Response } from "express";
-import { FormModel as Form } from "../models/mongoose/form.model";
-import { ApiResponse, Errors, IForm } from "../interface";
-import { IMAGE_TYPE, detroyImage, uploadImage } from "../helpers";
-import { ImageModel } from "../models/mongoose/image.model";
+import { FormRepository, ImageRepository } from "../models/repositorie";
+import { ApiResponse, Errors, IForm, IImage } from "../interface";
 
+const Form = new FormRepository();
+const Image = new ImageRepository();
 export class FormController {
   static async getAll(
     req: Request,
     res: Response,
   ): Promise<Response<ApiResponse<IForm[]>>> {
     try {
-      const { limit = 5, from = 0 } = req.query;
-
-      const forms = await Form.find({}).skip(Number(from)).limit(Number(limit));
+      const forms = await Form.getAll();
 
       const response: ApiResponse<IForm[]> = {
         status: true,
@@ -32,7 +30,7 @@ export class FormController {
   ): Promise<Response<ApiResponse<IForm>>> {
     const { id } = req.params;
     try {
-      const form = await Form.findById(id);
+      const form = await Form.getById(id);
 
       if (!form) {
         return res.status(404).json(Errors.NOT_FOUND);
@@ -52,32 +50,24 @@ export class FormController {
     req: Request,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
-    const { image_url, ...all } = req.body;
-    let id_cloudinary: string;
+    const { image_url, ...input } = req.body;
+    let newImage: IImage;
+
     try {
+      const newForm = await Form.create({ ...input });
+
       // genera url cloudinary
-      const { secure_url, public_id } = await uploadImage(image_url, "forms");
-      id_cloudinary = public_id;
-      // id-image
-      const newImg = await ImageModel.create({
-        url: secure_url,
-        public_id,
-        model_type: IMAGE_TYPE.FORM,
-      });
+      if (newForm) {
+        newImage = await Image.createWithCloudinary({
+          url: image_url,
+        });
 
-      const newForm = await Form.create({
-        ...all,
-        image_url: newImg.id,
-      });
-      // asigna id-image
-      newImg.model_id = newForm._id;
+        newImage.model_id = newForm._id;
+        await newImage.save();
+      }
 
+      newForm.image_url = newImage._id;
       await newForm.save();
-
-      // asigna form al user
-      // const user = await User.findById(userId);
-      // user.forms.push(newForm._id);
-      // await user.save()
 
       const response: ApiResponse<IForm> = {
         status: true,
@@ -85,7 +75,6 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
-      await detroyImage(id_cloudinary); // se eliminara img de cloudnary
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }

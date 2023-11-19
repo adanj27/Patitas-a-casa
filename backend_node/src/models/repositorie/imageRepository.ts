@@ -1,9 +1,10 @@
 /* eslint-disable class-methods-use-this */
 import { FilterQuery, QueryWithHelpers } from "mongoose";
-import { BaseRepository } from "../../repositories/Baserepository";
-import { IMAGE_TYPE, ServiceImage } from "../../helpers";
+import { BaseRepository } from "../../repositories/BaseRepository";
+
 import { ImageModel } from "../mongoose/image.model";
-import { IImage } from "../../interface";
+import { IImage, IMAGE_TYPE } from "../../interface";
+import { ServiceImage } from "../../services/Image/cloudinary";
 
 export class ImageRepository extends BaseRepository<IImage, string> {
   constructor() {

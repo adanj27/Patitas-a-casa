@@ -1,42 +1,72 @@
 import { z } from "zod";
 import mongoose from "mongoose";
+import { isValidPassword, isValidPhone } from "../helpers";
 
 // create
-export const UserSchema = z.object({
+export const createUserSchema = z.object({
   body: z.object({
-    user_name: z
+    first_name: z
       .string({
         required_error: "Name is required!",
         invalid_type_error:
-          "You need a valid user_name, a minimum of 10 and a maximum of 20 characters.",
+          "You need a valid name, a minimum of 5 and a maximum of 20 characters.",
       })
       .min(5)
       .max(20),
-    email: z.string().email({ message: "Ivalid email address" }),
-    token: z.string({ required_error: "Token is required!" }),
+    last_name: z
+      .string({
+        required_error: "Second Name is required!",
+        invalid_type_error:
+          "You need a valid second name, a minimum of 5 and a maximum of 20 characters.",
+      })
+      .min(5)
+      .max(20),
+    alias: z
+      .string({
+        required_error: "Alias Name is required!",
+        invalid_type_error:
+          "You need a valid second name, a minimum of 5 and a maximum of 20 characters.",
+      })
+      .min(5)
+      .max(20),
+    email: z.string().email({ message: "Insert valid Email" }),
+    phone: z
+      .string()
+      .refine((phone) => isValidPhone(phone), "Insert phone valid!"),
     status: z.boolean().optional(),
     password: z
       .string({
         required_error: "Password is required!",
-        invalid_type_error:
-          "You need a valid user_name, a minimum of 6 20 characters.",
       })
-      .min(6),
-    roles: z.array(z.enum(["ADMIN_ROL", "USER_ROL"])),
-    forms: z.array(z.string()).optional(),
+      .refine(
+        (pass) => isValidPassword(pass),
+        "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+      ),
   }),
 });
 
 // update
 export const UUserSchema = z.object({
   body: z.object({
-    user_name: z.string().min(5).max(20).optional(),
+    first_name: z.string().min(5).max(20).optional(),
+    last_name: z.string().min(5).max(20).optional(),
+    alias: z.string().min(5).max(20).optional(),
     email: z.string().email().optional(),
-    token: z.string().optional(),
+    phone: z
+      .string()
+      .refine((phone) => isValidPhone(phone), "Insert phone valid!")
+      .optional(),
     status: z.boolean().optional(),
-    password: z.string().min(6).optional(),
-    roles: z.array(z.enum(["ADMIN_ROL", "USER_ROL"])).optional(),
-    forms: z.array(z.string()).optional(),
+    roles: z.string().optional(),
+    password: z
+      .string({
+        required_error: "Password is required!",
+      })
+      .refine(
+        (pass) => isValidPassword(pass),
+        "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+      )
+      .optional(),
   }),
 
   params: z.object({
@@ -54,3 +84,5 @@ export const DUserSchema = z.object({
     }),
   }),
 });
+
+export type CreateUserType = z.infer<typeof createUserSchema>["body"];
