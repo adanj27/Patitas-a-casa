@@ -7,7 +7,7 @@ const Image = new ImageRepository();
 export class FormController {
   static async getAll(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response<ApiResponse<IForm[]>>> {
     try {
       const forms = await Form.getAll();
@@ -26,7 +26,7 @@ export class FormController {
 
   static async getById(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { id } = req.params;
     try {
@@ -48,7 +48,7 @@ export class FormController {
 
   static async create(
     req: Request,
-    res: Response
+    res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...input } = req.body;
     let newImage: IImage;
