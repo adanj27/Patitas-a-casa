@@ -39,7 +39,23 @@ DELETE  http://localhost:4000/api/blog/65584935fcd07652c3e02fae
 
 
 
-### Endpoint forms
+### Endpoint AUTH CONNECTION
+
+## Login AUTH
+POST http://localhost:4000/api/auth/login
+
+### Logout AUTH
+POST http://localhost:4000/api/auth/logout
+
+### register AUTH
+POST http://localhost:4000/api/auth/register
+
+### register AUTH
+POST http://localhost:4000/api/auth/51/reset-password
+
+
+
+### Endpoint FORM
 GET http://localhost:4000/api/form
 
 ### Endpoint forms

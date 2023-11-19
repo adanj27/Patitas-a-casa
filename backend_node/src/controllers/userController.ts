@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import bcryptjs from "bcryptjs";
+import bcryptjs from "bcrypt";
 import { UserModel as User } from "../models/mongoose/user.model";
 import { Errors } from "../interface";
 
