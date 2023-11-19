@@ -1,10 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import { FilterQuery, QueryWithHelpers } from "mongoose";
+import { BaseRepository } from "../../repositories/Baserepository";
+import { IMAGE_TYPE, ServiceImage } from "../../helpers";
 import { ImageModel } from "../mongoose/image.model";
 import { IImage } from "../../interface";
-import { BaseRepository } from "../../repositories/Baserepository";
-import { IMAGE_TYPE, uploadImage } from "../../helpers";
-import { cloudinary } from "../../config/cloudinary";
 
 export class ImageRepository extends BaseRepository<IImage, string> {
   constructor() {
@@ -29,13 +28,20 @@ export class ImageRepository extends BaseRepository<IImage, string> {
 
   async getByOne(
     conditions: FilterQuery<IImage>,
-  ): Promise<QueryWithHelpers<IImage | null, IImage>> {
+  ): Promise<QueryWithHelpers<IImage, IImage>> {
     return ImageModel.findOne(conditions);
+  }
+
+  async deleteByOne(conditions: FilterQuery<IImage>) {
+    return ImageModel.deleteOne(conditions);
   }
 
   async createWithCloudinary({ url }): Promise<IImage> {
     try {
-      const { secure_url, public_id } = await uploadImage(url, IMAGE_TYPE.BLOG);
+      const { secure_url, public_id } = await ServiceImage.create({
+        path: url,
+        folder: IMAGE_TYPE.BLOG,
+      });
 
       const newImg = await this.create({
         url: secure_url,
@@ -49,25 +55,31 @@ export class ImageRepository extends BaseRepository<IImage, string> {
     }
   }
 
-  async updateWithCloudinary(
-    image_url: string,
-    public_id: string,
-    folder: string,
-  ) {
+  async updateWithCloudinary({ image_url, public_id, folder }) {
+    let result;
     try {
-      await cloudinary.uploader.destroy(public_id); // elimina la img
+      const deletedImage = await ServiceImage.delete({ publicId: public_id });
 
-      const update = await uploadImage(image_url, folder); // crea la nueva img
+      if (deletedImage) {
+        result = await ServiceImage.create({
+          path: image_url,
+          folder,
+        });
+      }
+      return result;
+    } catch (error) {
+      throw Error(error);
+    }
+  }
 
-      // explicit aunq actuliza los tags, este no actualiza la imagen
-      // const update = await cloudinary.uploader.explicit(image_url //newUrl, {
-      //   type: "upload",
-      //   public_id //UrlCloudinary,
-      // });
+  async deleteWithCloudinary(id: string) {
+    try {
+      const image = await this.getByOne({ model_id: id });
 
-      // console.log(update);
-
-      return update;
+      if (image) {
+        await ServiceImage.delete({ publicId: image.public_id });
+        await this.delete(image._id);
+      }
     } catch (error) {
       throw Error(error);
     }

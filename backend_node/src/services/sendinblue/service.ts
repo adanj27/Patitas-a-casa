@@ -50,7 +50,7 @@ export class ServiceSMTP {
 
     const apiInstance = new Brevo.TransactionalEmailsApi();
     const templates = await apiInstance.getSmtpTemplates();
-    console.log(templates);
+
     const template = templates.templates.find((t) =>
       t.name.toLowerCase().includes(type.toLowerCase()),
     );

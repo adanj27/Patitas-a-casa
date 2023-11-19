@@ -6,7 +6,7 @@ GET http://localhost:4000/
 ### blogs
 GET http://localhost:4000/api/blog
 ### blog byId
-GET http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28   
+GET http://localhost:4000/api/blog/65584935fcd07652c3e02fae   
 
 ### create blog
 POST http://localhost:4000/api/blog
@@ -26,7 +26,7 @@ PATCH http://localhost:4000/api/blog/65584935fcd07652c3e02fae
 Content-Type: application/json
 
 {
-    "title": " cambio con imagen.",    
+    "title": "cambio con imagen.",    
     "sub_title": "cambiando imagen",
     "description": "pequeño",
     "short_description": "ingresando un nuevo description",
@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ### delete
-DELETE  http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28
+DELETE  http://localhost:4000/api/blog/65584935fcd07652c3e02fae 
 
 
 

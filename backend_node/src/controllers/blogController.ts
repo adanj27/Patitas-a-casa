@@ -1,6 +1,4 @@
 import { Request, Response } from "express";
-import { detroyImage } from "../helpers/linkedCloudinary";
-import { ImageModel } from "../models/mongoose/image.model";
 import { ApiResponse, Errors, IBlog, IImage } from "../interface";
 import { generateSlug } from "../helpers";
 import { BlogRepository, ImageRepository } from "../models/repositorie";
@@ -24,7 +22,6 @@ export class BlogController {
 
       return res.status(200).json(response);
     } catch (error) {
-      console.log(error);
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
@@ -47,10 +44,10 @@ export class BlogController {
         });
 
         newImg.model_id = newBlog._id;
-        // asigna id-blog
+
         await newImg.save();
       }
-      // asign image
+
       newBlog.image_url = newImg._id;
 
       await newBlog.save();
@@ -105,10 +102,6 @@ export class BlogController {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
-      // const result = await Blog.update(id, {
-      //   ...input,
-      //   slug: generateSlug(input.title), // TODO:validar title
-      // });
       let result: IBlog;
       if (input.title) {
         const updatedFields = {
@@ -117,7 +110,6 @@ export class BlogController {
         };
         result = await Blog.update(id, updatedFields);
       } else {
-        // No hay title, no se hace ninguna actualización relacionada con el slug
         result = await Blog.update(id, input);
       }
 
@@ -126,11 +118,12 @@ export class BlogController {
 
         // modificar con las clases de cloudinary o de image
         if (img) {
-          const newurl = await Image.updateWithCloudinary(
+          const newurl = await Image.updateWithCloudinary({
             image_url,
-            img.public_id,
-            "BLOG",
-          );
+            public_id: img.public_id,
+            folder: "BLOG",
+          });
+
           img.url = newurl.secure_url;
           img.public_id = newurl.public_id;
           await img.save();
@@ -161,10 +154,7 @@ export class BlogController {
       }
 
       await Blog.delete(id);
-
-      const { public_id } = await ImageModel.findByIdAndDelete(exist.image_url);
-
-      await detroyImage(public_id);
+      await Image.deleteWithCloudinary(exist._id);
 
       const response: ApiResponse<string> = {
         status: true,
