@@ -2,8 +2,7 @@
 import { FilterQuery, QueryWithHelpers } from "mongoose";
 import { FormModel } from "../mongoose/form.model";
 import { BaseRepository } from "../../repositories/BaseRepository";
-import { IForm, IMAGE_TYPE } from "../../interface";
-import { ServiceImage } from "../../helpers";
+import { IForm } from "../../interface";
 
 export class FormRepository extends BaseRepository<IForm, string> {
   constructor() {
@@ -27,7 +26,7 @@ export class FormRepository extends BaseRepository<IForm, string> {
   }
 
   async getByOne(
-    conditions: FilterQuery<IForm>
+    conditions: FilterQuery<IForm>,
   ): Promise<QueryWithHelpers<IForm, IForm>> {
     return FormModel.findOne(conditions);
   }

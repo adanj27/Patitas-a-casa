@@ -27,7 +27,7 @@ export class ImageRepository extends BaseRepository<IImage, string> {
   }
 
   async getByOne(
-    conditions: FilterQuery<IImage>
+    conditions: FilterQuery<IImage>,
   ): Promise<QueryWithHelpers<IImage, IImage>> {
     return ImageModel.findOne(conditions);
   }

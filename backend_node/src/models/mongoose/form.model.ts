@@ -27,7 +27,7 @@ const FormSchema = new Schema<IForm>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 export const FormModel = model<IForm>("Form", FormSchema);

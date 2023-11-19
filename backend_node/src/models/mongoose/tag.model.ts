@@ -9,8 +9,6 @@ const TagSchema = new Schema(
     slug: { type: String, slug: "name" },
   },
   {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
     timestamps: true,
     versionKey: false,
   },
