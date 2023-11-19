@@ -27,9 +27,3 @@ export const CLOUDINARY = {
   KEY: process.env.CLOUDINARY_KEY,
   API: process.env.CLOUDINARY_API,
 };
-
-export const IMAGE_TYPE = {
-  IMAGE: "IMAGE",
-  FORM: "FORM",
-  BLOG: "BLOG",
-};

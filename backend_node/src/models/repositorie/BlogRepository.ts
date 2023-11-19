@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import { BlogModel } from "../mongoose/blog.model";
 import { IBlog } from "../../interface";
-import { BaseRepository } from "../../repositories/Baserepository";
+import { BaseRepository } from "../../repositories/BaseRepository";
 
 export class BlogRepository extends BaseRepository<IBlog, string> {
   constructor() {

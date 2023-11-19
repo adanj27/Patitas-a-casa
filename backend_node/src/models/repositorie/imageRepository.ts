@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import { FilterQuery, QueryWithHelpers } from "mongoose";
-import { BaseRepository } from "../../repositories/Baserepository";
-import { IMAGE_TYPE, ServiceImage } from "../../helpers";
+import { BaseRepository } from "../../repositories/BaseRepository";
+import { ServiceImage } from "../../helpers";
 import { ImageModel } from "../mongoose/image.model";
-import { IImage } from "../../interface";
+import { IImage, IMAGE_TYPE } from "../../interface";
 
 export class ImageRepository extends BaseRepository<IImage, string> {
   constructor() {
@@ -27,7 +27,7 @@ export class ImageRepository extends BaseRepository<IImage, string> {
   }
 
   async getByOne(
-    conditions: FilterQuery<IImage>,
+    conditions: FilterQuery<IImage>
   ): Promise<QueryWithHelpers<IImage, IImage>> {
     return ImageModel.findOne(conditions);
   }
