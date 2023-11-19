@@ -15,6 +15,7 @@ export const DB_CONN = {
 };
 
 export const TOKEN = {
+  NAME: "access-token",
   SECRET: process.env.ACCESS_TOKEN_SECRET,
   REFRESH: process.env.REFRESH_TOKEN_SECRET,
   TIME: process.env.TOKEN_EXPIRES,

@@ -7,7 +7,7 @@ export class JWT {
       const token = jwt.sign(
         {
           id: user.id,
-          rol: user.rol,
+          alias: user.alias,
         },
         TOKEN.SECRET,
         {

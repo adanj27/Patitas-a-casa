@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt";
-import { Schema, model } from "mongoose";
+import { Model, Schema, model } from "mongoose";
 import { IUser, IUserDocument } from "../../interface/props/UserInterface";
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<IUserDocument, IUser>(
   {
     first_name: { type: String, requiere: true },
     last_name: { type: String, requiere: true },
@@ -50,4 +50,4 @@ UserSchema.statics.comparePassword = async (
   return comparePassword;
 };
 
-export const UserModel = model<IUser>("User", UserSchema);
+export const UserModel = model<IUserDocument, Model<IUser>>("User", UserSchema);
