@@ -22,7 +22,7 @@ export class BlogController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -84,7 +84,7 @@ export class BlogController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -137,7 +137,7 @@ export class BlogController {
 
       return res.status(202).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -163,7 +163,7 @@ export class BlogController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 }

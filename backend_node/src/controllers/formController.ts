@@ -20,7 +20,7 @@ export class FormController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -42,7 +42,7 @@ export class FormController {
       };
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -52,7 +52,6 @@ export class FormController {
   ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...input } = req.body;
     let newImage: IImage;
-
     try {
       const newForm = await Form.create({ ...input });
 
@@ -75,7 +74,7 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 }
