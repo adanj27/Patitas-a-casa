@@ -16,7 +16,7 @@ Content-Type: application/json
     "sub_title": "Velit id ut minima.",   
     "description": "Ut beatae qui. Explicabo explicabo et possimus illum officia reiciendis non ipsa laborum. Vel molestiae natus. Tempora placeat unde. Velit provident et incidunt sunt debitis. Qui ut similique.\n \rIpsum ullam omnis sit qui. Optio nam possimus excepturi cupiditate ipsum excepturi ut deserunt fugiat. Eos debitis qui quia voluptatem deserunt blanditiis adipisci id. Dolores qui perspiciatis rerum aut temporibus perferendis cumque et.\n \rVero qui omnis. Magnam non reprehenderit sequi praesentium. Asperiores nobis et blanditiis eum eveniet quis nihil distinctio.",
     "short_description": "Rerum repellat nemo quod fugiat reiciendis vel. Facere architecto omnis reprehenderit laudantium optio dolorem unde. Tempore earum et sed et nemo consectetur voluptatem. Repellat aperiam est amet aspernatur nesciunt sit impedit hic. Aliquid aut rerum aut laborum harum itaque nulla. Voluptas quaerat iste eos saepe reprehenderit.",
-    "image_url": "https://media.rawg.io/media/screenshots/d75/d75bf15ab007368615b155ab1f93b002.jpg",
+    "image_url": "https://media.rawg.io/media/screenshots/d75/d75bf15ab007368615b155ab1f93b002.jpg"
     
 }
 
@@ -46,8 +46,8 @@ POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {    
-    "email": "phew_misame1@hotmail.com",    
-    "password": "password1A@"    
+    "email": "phew_misame@hotmail.com",    
+    "password": "passwordkj1A@"    
 }
 
 ### Logout AUTH
@@ -60,19 +60,25 @@ Content-Type: application/json
 {
     "first_name": "Katell Pitts",
     "last_name": "Paul Pruit",   
-    "alias": "@admin",
+    "alias": "testing",
     "email": "phew_misame1@hotmail.com",
     "phone": "(504) 641-2564",
     "password": "password1A@"    
 }
 
-### register AUTH
-POST http://localhost:4000/api/auth/51/reset-password
+### reset-password AUTH
+POST http://localhost:4000/api/auth/655a71d250ecab5da0e22b76/reset-password
+Content-Type: application/json
 
+{
+    
+    "oldpassword": "password1A@",
+    "newpassword": "passwordkj1A@"
+}
 
 
 ### Endpoint FORM
-GET http://localhost:4000/api/form
+GET http://localhost:4000/api/user
 
 ### Endpoint forms
 GET http://localhost:4000/api/tag

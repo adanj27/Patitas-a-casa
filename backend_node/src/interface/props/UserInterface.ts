@@ -3,6 +3,13 @@ import mongoose, { Document, Model } from "mongoose";
 import { IForm } from "./FormInterface";
 import { IBlog } from "./BlogInterface";
 
+export interface listNameArray {
+  blogs: string;
+  forms: string;
+}
+
+export type listOption = keyof listNameArray;
+
 export interface IUser extends Document {
   first_name: string;
   last_name: string;
