@@ -66,3 +66,8 @@ export const DBlogSchema = z.object({
     })
     .strict(),
 });
+
+export type BlogCreateType = z.infer<typeof BlogSchemaz>["body"];
+export type BlogUpdateTypeB = z.infer<typeof UBlogSchema>["body"];
+export type BlogUpdateTypeP = z.infer<typeof UBlogSchema>["params"];
+export type BlogDeleteType = z.infer<typeof DBlogSchema>["params"];

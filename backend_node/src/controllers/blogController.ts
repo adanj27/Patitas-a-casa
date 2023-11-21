@@ -1,8 +1,15 @@
 import { Request, Response } from "express";
 import { ApiResponse, Errors, IBlog, IImage } from "../interface";
-import { generateSlug } from "../helpers";
-import { BlogRepository, ImageRepository } from "../models/repositorie";
+import { IAuth, generateSlug } from "../helpers";
+import {
+  BlogRepository,
+  ImageRepository,
+  UserRepository,
+} from "../models/repositorie";
+import { BlogCreateType } from "../schema";
+import { AuthRequest } from "../middlware/authorization";
 
+const User = new UserRepository();
 const Blog = new BlogRepository();
 const Image = new ImageRepository();
 
@@ -27,11 +34,10 @@ export class BlogController {
   }
 
   static async create(
-    req: Request,
+    req: Request<unknown, unknown, BlogCreateType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IBlog>>> {
-    const validInput = req.body;
-    const { image_url, ...allimput } = validInput;
+    const { image_url, ...allimput } = req.body;
     let newImg: IImage;
     try {
       const newBlog = await Blog.create({
@@ -50,11 +56,24 @@ export class BlogController {
 
       newBlog.image_url = newImg._id;
 
-      await newBlog.save();
+      const result = await newBlog.save();
+
+      // agregar al usuario
+      if (result) {
+        const user = await User.addToListUser({
+          auth: req.user,
+          documentId: newBlog._id,
+          modelName: "blogs",
+        });
+
+        if (!user) {
+          throw Error("no se agrego la lista");
+        }
+      }
 
       const response: ApiResponse<IBlog> = {
         status: true,
-        data: newBlog,
+        data: result,
       };
 
       return res.status(201).json(response);
