@@ -29,6 +29,7 @@ router.patch(
 router.delete(
   "/:id",
   isAuth,
+  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(DBlogSchema),
   BlogController.delete,
 );

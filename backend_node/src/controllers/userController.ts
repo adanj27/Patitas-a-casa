@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserRepository } from "../models/repositorie/UserRepository";
-import { Errors } from "../interface";
+import { ApiResponse, Errors, IUser } from "../interface";
 
 const User = new UserRepository();
 export class UserController {
@@ -36,6 +36,39 @@ export class UserController {
       return res.status(200).json(response);
     } catch (error) {
       return res.status(500).json(Errors.ERROR_DATABASE(error));
+    }
+  }
+
+  static async update(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IUser>>> {
+    const { id } = req.params;
+    const { first_name, last_name, alias, email, phone } = req.body;
+
+    try {
+      const exist = await User.getById(id);
+
+      if (!exist) {
+        return res.status(404).json(Errors.NOT_FOUND);
+      }
+
+      const result: IUser = await User.update(id, {
+        first_name,
+        last_name,
+        alias,
+        email,
+        phone,
+      });
+
+      const response: ApiResponse<IUser> = {
+        status: true,
+        data: result,
+      };
+
+      return res.status(202).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 

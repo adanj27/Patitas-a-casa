@@ -1,6 +1,7 @@
 import { z } from "zod";
 import mongoose from "mongoose";
 import { isValidImageURL } from "../helpers/regexFunctions";
+import { PETSIZE_TYPE } from "../interface";
 
 // create
 export const FormSchema = z.object({
@@ -10,7 +11,11 @@ export const FormSchema = z.object({
       color: z.string({
         required_error: "Color is required!",
       }),
-      size: z.enum(["SMALL", "MEDIUM", "LARGE"]),
+      size: z.enum([
+        PETSIZE_TYPE.SMALL,
+        PETSIZE_TYPE.MEDIUM,
+        PETSIZE_TYPE.LARGE,
+      ]),
       city: z.string({ required_error: "City is required!" }),
       address: z.string({ required_error: "Address is required!" }),
       reward: z.number().optional(),
@@ -69,3 +74,8 @@ export const DFormSchema = z.object({
     })
     .strict(),
 });
+
+export type FormCreateType = z.infer<typeof FormSchema>["body"];
+export type FormUpdateTypeB = z.infer<typeof UFormSchema>["body"];
+export type FormUpdateTypeP = z.infer<typeof UFormSchema>["params"];
+export type FormDeleteType = z.infer<typeof DFormSchema>["params"];

@@ -48,43 +48,39 @@ export const createUserSchema = z.object({
 });
 
 // update
-export const UUserSchema = z
-  .object({
-    body: z
-      .object({
-        first_name: z.string().min(5).max(20).optional(),
-        last_name: z.string().min(5).max(20).optional(),
-        alias: z.string().min(5).max(20).optional(),
-        email: z.string().email().optional(),
-        phone: z
-          .string()
-          .refine((phone) => isValidPhone(phone), "Insert phone valid!")
-          .optional(),
-        status: z.boolean().optional(),
-        roles: z.string().optional(),
-        password: z
-          .string({
-            required_error: "Password is required!",
-          })
-          .refine(
-            (pass) => isValidPassword(pass),
-            "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-          )
-          .optional(),
-      })
-      .strict(),
+export const UUserSchema = z.object({
+  body: z
+    .object({
+      first_name: z.string().min(5).max(20).optional(),
+      last_name: z.string().min(5).max(20).optional(),
+      alias: z.string().min(5).max(20).optional(),
+      email: z.string().email().optional(),
+      phone: z
+        .string()
+        .refine((phone) => isValidPhone(phone), "Insert phone valid!")
+        .optional(),
+      status: z.boolean().optional(),
+      // roles: z.string().optional(),
+      // password: z
+      //   .string({
+      //     required_error: "Password is required!",
+      //   })
+      //   .refine(
+      //     (pass) => isValidPassword(pass),
+      //     "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+      //   )
+      //   .optional(),
+    })
+    .strict(),
 
-    params: z
-      .object({
-        id: z
-          .string()
-          .refine((value) => mongoose.Types.ObjectId.isValid(value), {
-            message: "Id invalid!",
-          }),
-      })
-      .strict(),
-  })
-  .strict();
+  params: z
+    .object({
+      id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
+        message: "Id invalid!",
+      }),
+    })
+    .strict(),
+});
 
 // for getById - Delete
 export const DUserSchema = z.object({

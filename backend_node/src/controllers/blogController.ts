@@ -47,6 +47,7 @@ export class BlogController {
       if (newBlog) {
         newImg = await Image.createWithCloudinary({
           url: image_url,
+          folder: "BLOG",
         });
 
         newImg.model_id = newBlog._id;
