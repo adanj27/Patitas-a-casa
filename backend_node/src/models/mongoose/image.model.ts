@@ -1,8 +1,10 @@
 import { Schema, model } from "mongoose";
+import { IImage } from "../../interface";
 
-const ImageSchema = new Schema(
+const ImageSchema = new Schema<IImage>(
   {
     url: { type: String, require: true },
+    public_id: { type: String, require: true }, // id_Cloudinary
     model_id: { type: Schema.Types.ObjectId, require: true },
     model_type: { type: String, require: true },
   },
@@ -12,4 +14,4 @@ const ImageSchema = new Schema(
   },
 );
 
-export const ImageModel = model("Image", ImageSchema);
+export const ImageModel = model<IImage>("Image", ImageSchema);

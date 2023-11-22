@@ -1,11 +1,38 @@
-import mongoose, { Document } from "mongoose";
+/* eslint-disable no-unused-vars */
+import mongoose, { Document, Model } from "mongoose";
+import { IForm } from "./FormInterface";
+import { IBlog } from "./BlogInterface";
+
+export interface listNameArray {
+  blogs: string;
+  forms: string;
+}
+
+export type listOption = keyof listNameArray;
 
 export interface IUser extends Document {
-  user_name: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  token: string;
+  phone: string;
+  alias: string;
   password: string;
-  roles: string[];
-  pets: mongoose.Types.ObjectId[];
   status: boolean;
+  rol: mongoose.Types.ObjectId; // ref rol
+  forms: Array<mongoose.Types.ObjectId | IForm>; // ref form
+  blogs: Array<mongoose.Types.ObjectId | IBlog>; // ref blogs
+}
+
+/**
+ * methods functions
+ */
+export interface IUserDocument extends IUser, Document {
+  encryptPassword(password: string): Promise<string>;
+}
+
+/**
+ * static functions
+ */
+export interface IUserModel extends Model<IUserDocument> {
+  comparePassword(password: string, recivePassword: string): Promise<boolean>;
 }

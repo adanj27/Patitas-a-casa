@@ -2,47 +2,83 @@
 GET http://localhost:4000/
 
 
-### Endpoint blog
-### blogs
+### GetAll BLOG
 GET http://localhost:4000/api/blog
-### blog byId
-GET http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28   
+### ById BLOG
+GET http://localhost:4000/api/blog/65584935fcd07652c3e02fae   
 
-### create blog
+### create BLOG
 POST http://localhost:4000/api/blog
 Content-Type: application/json
 
 {
-      "title": "Excepturi nostrum numquam debitis ea.",
-    "sub_title": "Velit id ut minima.",
-   
+    "title": "Nostrum numquam debitis ea.",
+    "sub_title": "Velit id ut minima.",   
     "description": "Ut beatae qui. Explicabo explicabo et possimus illum officia reiciendis non ipsa laborum. Vel molestiae natus. Tempora placeat unde. Velit provident et incidunt sunt debitis. Qui ut similique.\n \rIpsum ullam omnis sit qui. Optio nam possimus excepturi cupiditate ipsum excepturi ut deserunt fugiat. Eos debitis qui quia voluptatem deserunt blanditiis adipisci id. Dolores qui perspiciatis rerum aut temporibus perferendis cumque et.\n \rVero qui omnis. Magnam non reprehenderit sequi praesentium. Asperiores nobis et blanditiis eum eveniet quis nihil distinctio.",
     "short_description": "Rerum repellat nemo quod fugiat reiciendis vel. Facere architecto omnis reprehenderit laudantium optio dolorem unde. Tempore earum et sed et nemo consectetur voluptatem. Repellat aperiam est amet aspernatur nesciunt sit impedit hic. Aliquid aut rerum aut laborum harum itaque nulla. Voluptas quaerat iste eos saepe reprehenderit.",
     "image_url": "https://media.rawg.io/media/screenshots/d75/d75bf15ab007368615b155ab1f93b002.jpg"
     
 }
 
-### update
-PATCH http://localhost:4000/api/blog/6547e862c24af4e4dd23f8aa
+### update  BLOG
+PATCH http://localhost:4000/api/blog/65584935fcd07652c3e02fae
 Content-Type: application/json
 
 {
-    "title": "validando cambio con imagen.",    
+    "title": "cambio con imagen.",    
     "sub_title": "cambiando imagen",
     "description": "pequeño",
     "short_description": "ingresando un nuevo description",
-     "image_url": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+     "image_url": "https://media.rawg.io/media/screenshots/c10/c100f84cb626cbc20752dc7a01c5934b.jpg",
     "status": false
     
 }
 
-### delete
-DELETE  http://localhost:4000/api/blog/6546e7e0d44462c8d0846d28
+### delete BLOG
+DELETE  http://localhost:4000/api/blog/65584935fcd07652c3e02fae 
 
 
 
-### Endpoint forms
-GET http://localhost:4000/api/pet
+### Endpoint AUTH CONNECTION
+
+## Login AUTH
+POST http://localhost:4000/api/auth/login
+Content-Type: application/json
+
+{    
+    "email": "phew_misame@hotmail.com",    
+    "password": "passwordkj1A@"    
+}
+
+### Logout AUTH
+POST http://localhost:4000/api/auth/logout
+
+### register AUTH
+POST http://localhost:4000/api/auth/register
+Content-Type: application/json
+
+{
+    "first_name": "Katell Pitts",
+    "last_name": "Paul Pruit",   
+    "alias": "testing",
+    "email": "phew_misame1@hotmail.com",
+    "phone": "(504) 641-2564",
+    "password": "password1A@"    
+}
+
+### reset-password AUTH
+POST http://localhost:4000/api/auth/655a71d250ecab5da0e22b76/reset-password
+Content-Type: application/json
+
+{
+    
+    "oldpassword": "password1A@",
+    "newpassword": "passwordkj1A@"
+}
+
+
+### Endpoint FORM
+GET http://localhost:4000/api/user
 
 ### Endpoint forms
 GET http://localhost:4000/api/tag

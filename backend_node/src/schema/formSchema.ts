@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { isValidImageURL } from "../helpers/regexFunctions";
 
 // create
-export const PetSchema = z.object({
+export const FormSchema = z.object({
   body: z.object({
     name: z.string({ required_error: "Name is required!" }),
     color: z.string({
@@ -27,7 +27,7 @@ export const PetSchema = z.object({
 });
 
 // update
-export const UPetSchema = z.object({
+export const UFormSchema = z.object({
   body: z.object({
     name: z.string().min(10).max(100).optional(),
     color: z.string().optional(),
@@ -54,7 +54,7 @@ export const UPetSchema = z.object({
 });
 
 // for getById - Delete
-export const DPetSchema = z.object({
+export const DFormSchema = z.object({
   params: z.object({
     id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
       message: "Id invalid!",

@@ -1,3 +1,5 @@
 export * from "./BlogInterface";
-export * from "./PetInterface";
+export * from "./FormInterface";
+export * from "./ImageInterface";
+export * from "./RolInterface";
 export * from "./UserInterface";

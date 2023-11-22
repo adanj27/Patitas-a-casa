@@ -1,19 +1,19 @@
-import { Schema, model } from "mongoose";
-import { IUser } from "../../interface/props/UserInterface";
+import bcrypt from "bcrypt";
+import { Model, Schema, model } from "mongoose";
+import { IUser, IUserDocument } from "../../interface/props/UserInterface";
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<IUserDocument, IUser>(
   {
-    user_name: { type: String, require: true, unique: true },
-    email: { type: String, required: true, unique: true },
+    first_name: { type: String, requiere: true },
+    last_name: { type: String, requiere: true },
+    email: { type: String, require: true, unique: true },
+    phone: { type: String, requiere: true },
+    alias: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    roles: {
-      type: [String],
-      enum: ["ADMIN_ROL", "USER_ROL"],
-      default: ["USER_ROL"],
-      required: true,
-    },
-    pets: [{ type: Schema.Types.ObjectId, ref: "Pet" }],
     status: { type: Boolean, default: true },
+    rol: { type: Schema.Types.ObjectId, ref: "Role" },
+    forms: [{ type: Schema.Types.ObjectId, ref: "Form" }],
+    blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
   },
   {
     timestamps: true,
@@ -22,11 +22,32 @@ const UserSchema = new Schema<IUser>(
 );
 
 // eslint-disable-next-line func-names
-UserSchema.methods.toJSON = function () {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { __v, password, _id, ...user } = this.toObject();
-  user.uid = _id;
-  return user;
+UserSchema.pre<IUserDocument>("save", async function onSave(next) {
+  if (!this.isNew) {
+    return next();
+  }
+  try {
+    const hashPassword = await this.encryptPassword(this.password);
+
+    this.password = hashPassword;
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
+
+UserSchema.methods.encryptPassword = async (password: string) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(password, salt);
+  return hashPassword;
 };
 
-export const UserModel = model<IUser>("User", UserSchema);
+UserSchema.statics.comparePassword = async (
+  password: string,
+  recivePassword: string,
+) => {
+  const comparePassword = await bcrypt.compare(password, recivePassword);
+  return comparePassword;
+};
+
+export const UserModel = model<IUserDocument, Model<IUser>>("User", UserSchema);

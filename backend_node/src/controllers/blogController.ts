@@ -1,9 +1,17 @@
 import { Request, Response } from "express";
-import { BlogModel } from "../models/mongoose/blog.model";
-import { uploadImage } from "../helpers/linkedCloudinary";
-import { ImageModel } from "../models/mongoose/image.model";
-import { ApiResponse, Errors, IBlog } from "../interface";
-import { IMAGE_TYPE, generateSlug } from "../helpers";
+import { ApiResponse, Errors, IBlog, IImage } from "../interface";
+import { IAuth, generateSlug } from "../helpers";
+import {
+  BlogRepository,
+  ImageRepository,
+  UserRepository,
+} from "../models/repositorie";
+import { BlogCreateType } from "../schema";
+import { AuthRequest } from "../middlware/authorization";
+
+const User = new UserRepository();
+const Blog = new BlogRepository();
+const Image = new ImageRepository();
 
 export class BlogController {
   static async getAll(
@@ -11,10 +19,7 @@ export class BlogController {
     res: Response,
   ): Promise<Response<ApiResponse<IBlog[]>>> {
     try {
-      const data = await BlogModel.find({}).populate({
-        path: "image_url",
-        select: "-_id, url",
-      });
+      const data = await Blog.getAll();
 
       const response: ApiResponse<IBlog[]> = {
         status: true,
@@ -29,35 +34,46 @@ export class BlogController {
   }
 
   static async create(
-    req: Request,
+    req: Request<unknown, unknown, BlogCreateType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IBlog>>> {
-    const validInput = req.body;
-    const { image_url, ...allimput } = validInput;
-
+    const { image_url, ...allimput } = req.body;
+    let newImg: IImage;
     try {
-      // genera url cloudinary
-      const linkImg = await uploadImage(image_url);
-
-      // id-image
-      const newImg = await ImageModel.create({
-        url: linkImg,
-        model_type: IMAGE_TYPE.BLOG,
-      });
-
-      // id-blog
-      const newBlog = await BlogModel.create({
+      const newBlog = await Blog.create({
         ...allimput,
-        image_url: newImg.id, // asigna id-image
       });
 
-      newImg.model_id = newBlog._id; // asigna id-blog
+      if (newBlog) {
+        newImg = await Image.createWithCloudinary({
+          url: image_url,
+        });
 
-      newImg.save();
+        newImg.model_id = newBlog._id;
+
+        await newImg.save();
+      }
+
+      newBlog.image_url = newImg._id;
+
+      const result = await newBlog.save();
+
+      // agregar al usuario
+      if (result) {
+        const user = await User.addToListUser({
+          auth: req.user,
+          documentId: newBlog._id,
+          modelName: "blogs",
+        });
+
+        if (!user) {
+          throw Error("no se agrego la lista");
+        }
+      }
 
       const response: ApiResponse<IBlog> = {
         status: true,
-        data: newBlog,
+        data: result,
       };
 
       return res.status(201).json(response);
@@ -72,16 +88,13 @@ export class BlogController {
   ): Promise<Response<ApiResponse<IBlog>>> {
     const { id } = req.params;
     try {
-      const exist = await BlogModel.findById(id).populate({
-        path: "image_url",
-        select: "-_id, url",
-      });
+      const exist = await Blog.getById(id);
 
       if (!exist) {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
-      await BlogModel.updateOne({ _id: id }, { $inc: { count_view: 1 } });
+      await Blog.incrementViewCount(id);
 
       const response: ApiResponse<IBlog> = {
         status: true,
@@ -102,30 +115,39 @@ export class BlogController {
     const { image_url, ...input } = req.body;
 
     try {
-      const exist = await BlogModel.findById(id);
+      const exist = await Blog.getById(id);
 
       if (!exist) {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
-      if (image_url) {
-        const img = await ImageModel.findOne({ model_id: id });
+      let result: IBlog;
+      if (input.title) {
+        const updatedFields = {
+          ...input,
+          slug: generateSlug(input.title),
+        };
+        result = await Blog.update(id, updatedFields);
+      } else {
+        result = await Blog.update(id, input);
+      }
 
+      if (image_url) {
+        const img = await Image.getByOne({ model_id: id });
+
+        // modificar con las clases de cloudinary o de image
         if (img) {
-          const newurl = await uploadImage(image_url);
-          console.log(newurl);
-          img.url = newurl;
+          const newurl = await Image.updateWithCloudinary({
+            image_url,
+            public_id: img.public_id,
+            folder: "BLOG",
+          });
+
+          img.url = newurl.secure_url;
+          img.public_id = newurl.public_id;
           await img.save();
         }
       }
-
-      const result = await BlogModel.findByIdAndUpdate(
-        id,
-        { ...input, slug: generateSlug(input.title) },
-        {
-          new: true,
-        },
-      );
 
       const response: ApiResponse<IBlog> = {
         status: true,
@@ -144,14 +166,14 @@ export class BlogController {
   ): Promise<Response<ApiResponse<string>>> {
     const { id } = req.params;
     try {
-      const exist = await BlogModel.findById(id);
+      const exist = await Blog.getById(id);
 
       if (!exist) {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
-      await BlogModel.findByIdAndDelete(id);
-      await ImageModel.findByIdAndDelete(exist.image_url);
+      await Blog.delete(id);
+      await Image.deleteWithCloudinary(exist._id);
 
       const response: ApiResponse<string> = {
         status: true,
