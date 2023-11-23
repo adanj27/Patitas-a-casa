@@ -54,7 +54,53 @@ export class FormController {
     }
   }
 
-  static async create(
+  static async createLost(
+    req: Request<unknown, unknown, FormCreateType> & AuthRequest<IAuth>,
+    res: Response,
+  ): Promise<Response<ApiResponse<IForm>>> {
+    const { image_url, ...input } = req.body;
+    let newImage: IImage;
+    try {
+      const newForm = await Form.create({ ...input });
+
+      // genera url cloudinary
+      if (newForm) {
+        newImage = await Image.createWithCloudinary({
+          url: image_url,
+          folder: "FORM",
+        });
+
+        newImage.model_id = newForm._id;
+        await newImage.save();
+      }
+
+      newForm.image_url = newImage._id;
+      const result = await newForm.save();
+
+      // agregar al usuario
+      if (result) {
+        const user = await User.addToListUser({
+          auth: req.user,
+          documentId: newForm._id,
+          modelName: "forms",
+        });
+
+        if (!user) {
+          throw Error("no se agrego la lista");
+        }
+      }
+
+      const response: ApiResponse<IForm> = {
+        status: true,
+        data: result,
+      };
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
+    }
+  }
+
+  static async createFound(
     req: Request<unknown, unknown, FormCreateType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {

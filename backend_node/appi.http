@@ -44,7 +44,7 @@ GET http://localhost:4000/api/form
 GET http://localhost:4000/api/form/65584935fcd07652c3e02fae   
 
 ### create FORM
-POST http://localhost:4000/api/form
+POST http://localhost:4000/api/form/lost
 Content-Type: application/json
 {
 	"name": "pet2",
@@ -57,8 +57,26 @@ Content-Type: application/json
 	"image_url": "https://cdn.discordapp.com/attachments/952030310713946172/1112498601881518100/image.png",
 	"description": "pet",
 	"type": "CAT",
-    "status": true
+	"type_search": "LOST"
 }
+
+### PET FOUND
+POST http://localhost:4000/api/form/found
+Content-Type: application/json
+{	
+	"color": "black",
+	"size": "SMALL",
+	"city": "smallville",
+	"address": "san andres",
+	"contact": "(504) 641-2564",
+	"loss_date": "2023-11-09T12:34:56.789Z",
+	"image_url": "https://cdn.discordapp.com/attachments/952030310713946172/1112498601881518100/image.png",
+	"description": "mascota encontrada",
+	"type": "CAT",
+    "type_search": "FOUND"
+    
+}
+
 
 ### update  FORM
 PATCH http://localhost:4000/api/form/65584935fcd07652c3e02fae

@@ -9,13 +9,24 @@ import { DUserSchema, UUserSchema } from "../schema";
 
 const router = Router();
 
-router.get("/", isAuth, UserController.getAll);
+router.get(
+  "/",
+  isAuth,
+  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
+  UserController.getAll,
+);
 
-router.get("/:id", isAuth, UserController.getById);
+router.get(
+  "/:id",
+  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
+  isAuth,
+  UserController.getById,
+);
 
 router.patch(
   "/:id",
   isAuth,
+  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
   SchemaValidate(UUserSchema),
   UserController.update,
 );

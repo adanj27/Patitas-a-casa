@@ -1,13 +1,14 @@
 import { Schema, model } from "mongoose";
 import {
   IForm,
+  PETSEARCH_TYPE,
   PETSIZE_TYPE,
   PET_TYPE,
 } from "../../interface/props/FormInterface";
 
 const FormSchema = new Schema<IForm>(
   {
-    name: { type: String, required: true },
+    name: { type: String },
     color: { type: String, required: true },
     size: {
       type: String,
@@ -23,6 +24,11 @@ const FormSchema = new Schema<IForm>(
     description: { type: String, required: true },
     status: { type: Boolean, default: false },
     type: { type: String, enum: [PET_TYPE.CAT, PET_TYPE.DOG], required: true },
+    type_search: {
+      type: String,
+      enum: [PETSEARCH_TYPE.FOUND, PETSEARCH_TYPE.LOST],
+      require: true,
+    },
   },
   {
     timestamps: true,

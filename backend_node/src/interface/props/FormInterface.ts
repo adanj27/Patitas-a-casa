@@ -11,8 +11,14 @@ export const PET_TYPE = {
   CAT: "CAT",
 };
 
-export type PetSizeOption = keyof typeof PETSIZE_TYPE;
-export type PetType = keyof typeof PET_TYPE;
+export const PETSEARCH_TYPE = {
+  LOST: "LOST",
+  FOUND: "FOUND",
+};
+
+type PetSizeOption = keyof typeof PETSIZE_TYPE;
+type PetType = keyof typeof PET_TYPE;
+type PetSearchType = keyof typeof PETSEARCH_TYPE;
 
 export interface IForm extends Document {
   name: string;
@@ -27,4 +33,5 @@ export interface IForm extends Document {
   description: string;
   status: boolean;
   type: PetType;
+  type_search: PetSearchType;
 }

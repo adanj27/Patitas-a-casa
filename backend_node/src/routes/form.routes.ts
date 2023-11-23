@@ -5,7 +5,12 @@ import { FormController } from "../controllers";
 import { isAuth } from "../middlware/authorization";
 import { ROL_TYPE } from "../interface";
 import { checkrol } from "../middlware/checkroles";
-import { DFormSchema, FormSchema, UFormSchema } from "../schema";
+import {
+  DFormSchema,
+  FormFoundSchema,
+  FormLostSchema,
+  UFormSchema,
+} from "../schema";
 
 const router = Router();
 
@@ -13,13 +18,28 @@ router.get("/", FormController.getAll);
 
 router.get("/:id", FormController.getById);
 
-router.post("/", isAuth, SchemaValidate(FormSchema), FormController.create);
+router.post(
+  "/found",
+  isAuth,
+  checkrol([ROL_TYPE.user]),
+  SchemaValidate(FormFoundSchema),
+  FormController.createFound
+);
+
+router.post(
+  "/lost",
+  isAuth,
+  checkrol([ROL_TYPE.user]),
+  SchemaValidate(FormLostSchema),
+  FormController.createLost
+);
 
 router.patch(
   "/:id",
   isAuth,
+  checkrol([ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
   SchemaValidate(UFormSchema),
-  FormController.update,
+  FormController.update
 );
 
 router.delete(
@@ -27,7 +47,7 @@ router.delete(
   isAuth,
   checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(DFormSchema),
-  FormController.delete,
+  FormController.delete
 );
 
 export { router };
