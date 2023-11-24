@@ -1,10 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { FilterQuery, QueryWithHelpers } from "mongoose";
-// eslint-disable-next-line import/no-unresolved
 import { BaseRepository } from "../../repositories/BaseRepository";
-
 import { ImageModel } from "../mongoose/image.model";
-import { IImage, IMAGE_TYPE } from "../../interface";
+import { IImage } from "../../interface";
 import { ServiceImage } from "../../services/Image/cloudinary";
 
 export class ImageRepository extends BaseRepository<IImage, string> {

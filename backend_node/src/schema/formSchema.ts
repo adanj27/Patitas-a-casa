@@ -1,10 +1,10 @@
 import { z } from "zod";
 import mongoose from "mongoose";
 import { isValidImageURL } from "../helpers/regexFunctions";
-import { PETSIZE_TYPE } from "../interface";
+import { PETSEARCH_TYPE, PETSIZE_TYPE, PET_TYPE } from "../interface";
 
-// create
-export const FormSchema = z.object({
+// create lost
+export const FormLostSchema = z.object({
   body: z
     .object({
       name: z.string({ required_error: "Name is required!" }),
@@ -28,7 +28,39 @@ export const FormSchema = z.object({
         .refine((url) => isValidImageURL(url), "this image dont valid!"),
       description: z.string({ required_error: "Description is required" }),
       status: z.boolean().optional(),
-      type: z.enum(["DOG", "CAT", "OTHERS"]),
+      type: z.enum([PET_TYPE.CAT, PET_TYPE.DOG]),
+      type_search: z.enum([PETSEARCH_TYPE.LOST]),
+    })
+    .strict(),
+});
+
+// create found
+export const FormFoundSchema = z.object({
+  body: z
+    .object({
+      name: z.string().optional(),
+      color: z.string({
+        required_error: "Color is required!",
+      }),
+      size: z.enum([
+        PETSIZE_TYPE.SMALL,
+        PETSIZE_TYPE.MEDIUM,
+        PETSIZE_TYPE.LARGE,
+      ]),
+      city: z.string({ required_error: "City is required!" }),
+      address: z.string({ required_error: "Address is required!" }),
+      reward: z.number().optional(),
+      contact: z.string({ required_error: "Contact is required" }),
+      loss_date: z.string().datetime(),
+      image_url: z
+        .string({
+          required_error: "Image is required",
+        })
+        .refine((url) => isValidImageURL(url), "this image dont valid!"),
+      description: z.string({ required_error: "Description is required" }),
+      status: z.boolean().optional(),
+      type: z.enum([PET_TYPE.CAT, PET_TYPE.DOG]),
+      type_search: z.enum([PETSEARCH_TYPE.FOUND]),
     })
     .strict(),
 });
@@ -75,7 +107,8 @@ export const DFormSchema = z.object({
     .strict(),
 });
 
-export type FormCreateType = z.infer<typeof FormSchema>["body"];
+export type FormCreateType = z.infer<typeof FormLostSchema>["body"];
+export type FormFountCreateType = z.infer<typeof FormFoundSchema>["body"];
 export type FormUpdateTypeB = z.infer<typeof UFormSchema>["body"];
 export type FormUpdateTypeP = z.infer<typeof UFormSchema>["params"];
 export type FormDeleteType = z.infer<typeof DFormSchema>["params"];

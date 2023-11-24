@@ -1,0 +1,102 @@
+/* RegisterForm.module.css */
+
+.loginContainer {
+  top: 0;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.formContainer {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  width: 490px;
+  border-radius: 2.5rem;
+}
+
+.names {
+  display: flex;
+  justify-content: space-between;
+}
+
+.imgContainer {
+  display: flex;
+  position: relative;
+}
+
+.imgContainerBg {
+  width: 100%;
+}
+
+.registerForm {
+  padding: 2rem;
+}
+
+.cancelButton {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.cancelButtonImg {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.error {
+  color: red;
+  margin-top: 4px;
+}
+
+.submitButton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  background-color: #DE341D;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.link {
+  display: block;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.link span {
+  color: #DE341D;
+  cursor: pointer;
+}
