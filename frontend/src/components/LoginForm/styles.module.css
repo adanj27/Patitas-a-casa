@@ -18,6 +18,11 @@
   border-radius: 2.5rem;
 }
 
+.names {
+  display: flex;
+  justify-content: space-between;
+}
+
 .imgContainer {
   display: flex;
   position: relative;

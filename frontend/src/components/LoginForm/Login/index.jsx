@@ -50,7 +50,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
         if (success) {
           // Redirige al usuario a la página principal después del inicio de sesión exitoso
-          navigate('/');
+          window.location.reload();
         } else {
           // Maneja el caso en que la respuesta del servidor no sea exitosa
           console.error('Error en el inicio de sesión');

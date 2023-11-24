@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
 import loginForm from '/icons/imagenes recursos/loginForm.png';
-import axios from 'axios'; 
+import axios from 'axios';
 
 export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    first_name: '',
+    last_name: '',
+    alias: '',
     password: '',
+    email: '',
+    phone: '',
   });
 
+  console.log(formData)
+  
   const [errors, setErrors] = useState({});
 
   const handleCancel = () => {
@@ -32,8 +37,17 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     e.preventDefault();
     // Validaciones
     const newErrors = {};
-    if (!formData.name.trim()) {
-      newErrors.name = 'Nombre es requerido';
+    if (!formData.first_name.trim()) {
+      newErrors.first_name = 'Nombre es requerido';
+    }
+    if (!formData.last_name.trim()) {
+      newErrors.last_name = 'Apellido es requerido';
+    }
+    if (!formData.alias.trim()) {
+      newErrors.alias = 'Nombre de usuario es requerido';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Teléfono es requerido';
     }
     if (!formData.email.trim()) {
       newErrors.email = 'Correo es requerido';
@@ -44,21 +58,18 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     setErrors(newErrors);
 
     // Si no hay errores, puedes manejar los datos (por ahora solo log)
-    if (Object.keys(newErrors).length === 0) {
-      try {
-        const response = await axios.post('http://localhost:3000/users', formData);
+    try {
+      const response = await axios.post('http://localhost:4000/api/auth/register', formData);
 
-        if (response.status === 201) {
-          // Registro exitoso, redirige al usuario a la página de inicio de sesión
-          navigate('/');
-        } else {
-          // Maneja el caso en que la respuesta del servidor no sea exitosa
-          console.error('Error al registrar usuario');
-        }
-      } catch (error) {
-        // Maneja errores de red o problemas con la solicitud
-        console.error('Error de red:', error);
+      if (response.status === 200) {
+        // El registro fue exitoso, puedes redirigir al usuario o manejarlo de alguna otra manera.
+        console.log('Registro exitoso');
+      } else {
+        // Manejar errores en el registro
+        console.error('Error en el registro');
       }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
     }
   };
 
@@ -66,26 +77,84 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     <div className={styles.loginContainer}>
       <div className={styles.formContainer}>
         <div className={styles.imgContainer}>
-          <img src={loginForm} alt="login-form" className={styles.imgContainerBg} />
+          <img
+            src={loginForm}
+            alt="login-form"
+            className={styles.imgContainerBg}
+          />
           <button className={styles.cancelButton} onClick={handleCancel}>
-            <img src={close} alt="close-icon" className={styles.cancelButtonImg} />
+            <img
+              src={close}
+              alt="close-icon"
+              className={styles.cancelButtonImg}
+            />
           </button>
         </div>
         <span className={styles.formTitle}>Registrarte</span>
         <form className={styles.registerForm} onSubmit={handleSubmit}>
-          <div className={styles.field}>
-            <label htmlFor="name" className={styles.label}>
-              Nombre:
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className={styles.input}
-            />
-            {errors.name && <p className={styles.error}>{errors.name}</p>}
+          <div className={styles.names}>
+            <div className={styles.field}>
+              <label htmlFor="first_name" className={styles.label}>
+                Nombre:
+              </label>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                className={styles.input}
+              />
+              {errors.first_name && (
+                <p className={styles.error}>{errors.first_name}</p>
+              )}
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="last_name" className={styles.label}>
+                Apellido:
+              </label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                className={styles.input}
+              />
+              {errors.last_name && (
+                <p className={styles.error}>{errors.last_name}</p>
+              )}
+            </div>
+          </div>
+          <div className={styles.names}>
+            <div className={styles.field}>
+              <label htmlFor="alias" className={styles.label}>
+                Nombre de usuario:
+              </label>
+              <input
+                type="text"
+                id="alias"
+                name="alias"
+                value={formData.alias}
+                onChange={handleChange}
+                className={styles.input}
+              />
+              {errors.alias && <p className={styles.error}>{errors.alias}</p>}
+            </div>
+            <div className={styles.field}>
+              <label htmlFor="phone" className={styles.label}>
+                Teléfono:
+              </label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className={styles.input}
+              />
+              {errors.phone && <p className={styles.error}>{errors.phone}</p>}
+            </div>
           </div>
           <div className={styles.field}>
             <label htmlFor="email" className={styles.label}>
@@ -118,14 +187,20 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
             )}
           </div>
           <p className={styles.link}>
-            {isRegisterForm ? '¿Ya tienes una cuenta? ' : '¿No tienes una cuenta? '}
+            {isRegisterForm
+              ? '¿No tienes una cuenta?'
+              : '¿Ya tienes una cuenta?'}
             <span onClick={switchForm}>
-              {isRegisterForm ? 'Iniciar sesión' : 'Registrarte'}
+              {isRegisterForm ? 'Registrarte' : 'Iniciar sesión'}
             </span>
           </p>
           <div className={styles.submitButton}>
-            <button type="submit" className={styles.button}>
-              {isRegisterForm ? 'Registrarse' : 'Iniciar sesión'}
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={Object.keys(errors).length > 0}
+            >
+              {isRegisterForm ? 'Iniciar sesión' : 'Registrarse'}
             </button>
           </div>
         </form>
