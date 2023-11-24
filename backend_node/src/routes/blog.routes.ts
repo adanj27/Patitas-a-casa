@@ -22,6 +22,7 @@ router.get("/:id", SchemaValidate(DBlogSchema), BlogController.getById);
 router.patch(
   "/:id",
   isAuth,
+  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(UBlogSchema),
   BlogController.update,
 );
@@ -29,6 +30,7 @@ router.patch(
 router.delete(
   "/:id",
   isAuth,
+  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(DBlogSchema),
   BlogController.delete,
 );

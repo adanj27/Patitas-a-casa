@@ -39,7 +39,7 @@ export const isAuth = async (
 
     next();
   } catch (error) {
-    return res.status(500).json({ message: "error en authorization" });
+    return res.status(401).json({ message: "error en authorization" });
   }
 
   return undefined;

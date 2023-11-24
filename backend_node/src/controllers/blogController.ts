@@ -29,7 +29,7 @@ export class BlogController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -47,6 +47,7 @@ export class BlogController {
       if (newBlog) {
         newImg = await Image.createWithCloudinary({
           url: image_url,
+          folder: "BLOG",
         });
 
         newImg.model_id = newBlog._id;
@@ -78,7 +79,7 @@ export class BlogController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -103,7 +104,7 @@ export class BlogController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -156,7 +157,7 @@ export class BlogController {
 
       return res.status(202).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -182,7 +183,7 @@ export class BlogController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 }

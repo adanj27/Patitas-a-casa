@@ -38,6 +38,64 @@ Content-Type: application/json
 DELETE  http://localhost:4000/api/blog/65584935fcd07652c3e02fae 
 
 
+### GetAll FORM
+GET http://localhost:4000/api/form
+### ById FORM
+GET http://localhost:4000/api/form/65584935fcd07652c3e02fae   
+
+### create FORM
+POST http://localhost:4000/api/form/lost
+Content-Type: application/json
+{
+	"name": "pet2",
+	"color": "yellow",
+	"size": "SMALL",
+	"city": "city",
+	"address": "adreess",
+	"contact": "123456789",
+	"loss_date": "2023-11-09T12:34:56.789Z",
+	"image_url": "https://cdn.discordapp.com/attachments/952030310713946172/1112498601881518100/image.png",
+	"description": "pet",
+	"type": "CAT",
+	"type_search": "LOST"
+}
+
+### PET FOUND
+POST http://localhost:4000/api/form/found
+Content-Type: application/json
+{	
+	"color": "black",
+	"size": "SMALL",
+	"city": "smallville",
+	"address": "san andres",
+	"contact": "(504) 641-2564",
+	"loss_date": "2023-11-09T12:34:56.789Z",
+	"image_url": "https://cdn.discordapp.com/attachments/952030310713946172/1112498601881518100/image.png",
+	"description": "mascota encontrada",
+	"type": "CAT",
+    "type_search": "FOUND"
+    
+}
+
+
+### update  FORM
+PATCH http://localhost:4000/api/form/65584935fcd07652c3e02fae
+Content-Type: application/json
+
+{
+    "name": "pet2",
+	"color": "yellow",
+	"size": "SMALL",
+	"city": "city",
+	"address": "adreess",
+	"contact": "123456789",
+	"loss_date": "2023-11-09T12:34:56.789Z",
+	"image_url": "https://cdn.discordapp.com/attachments/952030310713946172/1112498601881518100/image.png",
+	"description": "pet",
+	"type": "CAT",
+    "status": false
+}
+
 
 ### Endpoint AUTH CONNECTION
 

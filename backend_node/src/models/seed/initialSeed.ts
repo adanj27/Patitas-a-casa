@@ -44,7 +44,6 @@ export async function createSuperAdmin() {
         throw Error("user dont create!");
       }
     }, 5000);
-
     return "created!";
   } catch (error) {
     throw Error(error);

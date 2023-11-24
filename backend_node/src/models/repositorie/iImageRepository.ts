@@ -1,9 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import { FilterQuery, QueryWithHelpers } from "mongoose";
 import { BaseRepository } from "../../repositories/BaseRepository";
-
 import { ImageModel } from "../mongoose/image.model";
-import { IImage, IMAGE_TYPE } from "../../interface";
+import { IImage } from "../../interface";
 import { ServiceImage } from "../../services/Image/cloudinary";
 
 export class ImageRepository extends BaseRepository<IImage, string> {
@@ -37,17 +36,17 @@ export class ImageRepository extends BaseRepository<IImage, string> {
     return ImageModel.deleteOne(conditions);
   }
 
-  async createWithCloudinary({ url }): Promise<IImage> {
+  async createWithCloudinary({ url, folder }): Promise<IImage> {
     try {
       const { secure_url, public_id } = await ServiceImage.create({
         path: url,
-        folder: IMAGE_TYPE.BLOG,
+        folder,
       });
 
       const newImg = await this.create({
         url: secure_url,
         public_id,
-        model_type: "BLOG",
+        model_type: folder,
       });
 
       return newImg;

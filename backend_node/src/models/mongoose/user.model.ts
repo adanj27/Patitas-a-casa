@@ -50,4 +50,12 @@ UserSchema.statics.comparePassword = async (
   return comparePassword;
 };
 
+// eslint-disable-next-line func-names
+UserSchema.methods.toJSON = function () {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { __v, password, _id, ...user } = this.toObject(); // Quita password del Json que se le devuelve al usuario
+  user.uid = _id;
+  return user;
+};
+
 export const UserModel = model<IUserDocument, Model<IUser>>("User", UserSchema);

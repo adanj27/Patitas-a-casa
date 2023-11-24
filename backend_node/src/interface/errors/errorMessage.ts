@@ -1,3 +1,5 @@
+// import { Request, Response, NextFunction } from "express";
+
 export interface MyError {
   status: boolean;
   message: string;
@@ -15,7 +17,7 @@ export const Errors = {
     message: "This title already exists :)",
   },
 
-  VALUES_ERROR: (error) => ({
+  VALUES_ERROR: (error: string) => ({
     status: false,
     message: `Error inputs ${error}`,
   }),
@@ -25,3 +27,13 @@ export const Errors = {
     message: `Something unexpected has happened with the database ${error}`,
   }),
 };
+
+// export const errorHandler = (
+//   err: Error,
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   console.error(err.stack);
+//   res.status(500).send("Something broke!");
+// };

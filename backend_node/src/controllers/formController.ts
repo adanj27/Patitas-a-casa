@@ -1,7 +1,15 @@
 import { Request, Response } from "express";
-import { FormRepository, ImageRepository } from "../models/repositorie";
+import {
+  FormRepository,
+  ImageRepository,
+  UserRepository,
+} from "../models/repositorie";
 import { ApiResponse, Errors, IForm, IImage } from "../interface";
+import { FormCreateType } from "../schema";
+import { AuthRequest } from "../middlware/authorization";
+import { IAuth } from "../helpers";
 
+const User = new UserRepository();
 const Form = new FormRepository();
 const Image = new ImageRepository();
 export class FormController {
@@ -20,7 +28,7 @@ export class FormController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
@@ -42,17 +50,16 @@ export class FormController {
       };
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 
-  static async create(
-    req: Request,
+  static async createLost(
+    req: Request<unknown, unknown, FormCreateType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...input } = req.body;
     let newImage: IImage;
-
     try {
       const newForm = await Form.create({ ...input });
 
@@ -60,6 +67,7 @@ export class FormController {
       if (newForm) {
         newImage = await Image.createWithCloudinary({
           url: image_url,
+          folder: "FORM",
         });
 
         newImage.model_id = newForm._id;
@@ -67,15 +75,144 @@ export class FormController {
       }
 
       newForm.image_url = newImage._id;
-      await newForm.save();
+      const result = await newForm.save();
+
+      // agregar al usuario
+      if (result) {
+        const user = await User.addToListUser({
+          auth: req.user,
+          documentId: newForm._id,
+          modelName: "forms",
+        });
+
+        if (!user) {
+          throw Error("no se agrego la lista");
+        }
+      }
 
       const response: ApiResponse<IForm> = {
         status: true,
-        data: newForm,
+        data: result,
       };
       return res.status(201).json(response);
     } catch (error) {
       return res.status(500).json(Errors.ERROR_DATABASE(error));
+    }
+  }
+
+  static async createFound(
+    req: Request<unknown, unknown, FormCreateType> & AuthRequest<IAuth>,
+    res: Response,
+  ): Promise<Response<ApiResponse<IForm>>> {
+    const { image_url, ...input } = req.body;
+    let newImage: IImage;
+    try {
+      const newForm = await Form.create({ ...input });
+
+      // genera url cloudinary
+      if (newForm) {
+        newImage = await Image.createWithCloudinary({
+          url: image_url,
+          folder: "FORM",
+        });
+
+        newImage.model_id = newForm._id;
+        await newImage.save();
+      }
+
+      newForm.image_url = newImage._id;
+      const result = await newForm.save();
+
+      // agregar al usuario
+      if (result) {
+        const user = await User.addToListUser({
+          auth: req.user,
+          documentId: newForm._id,
+          modelName: "forms",
+        });
+
+        if (!user) {
+          throw Error("no se agrego la lista");
+        }
+      }
+
+      const response: ApiResponse<IForm> = {
+        status: true,
+        data: result,
+      };
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
+    }
+  }
+
+  static async update(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IForm>>> {
+    const { id } = req.params;
+    const { image_url, ...input } = req.body;
+
+    try {
+      const exist = await Form.getById(id);
+
+      if (!exist) {
+        return res.status(404).json(Errors.NOT_FOUND);
+      }
+
+      const result: IForm = await Form.update(id, input);
+
+      if (image_url) {
+        const img = await Image.getByOne({ model_id: id });
+
+        // modificar con las clases de cloudinary o de image
+        if (img) {
+          const newurl = await Image.updateWithCloudinary({
+            image_url,
+            public_id: img.public_id,
+            folder: "FORM",
+          });
+
+          img.url = newurl.secure_url;
+          img.public_id = newurl.public_id;
+          await img.save();
+        }
+      }
+
+      const response: ApiResponse<IForm> = {
+        status: true,
+        data: result,
+      };
+
+      return res.status(202).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+    }
+  }
+
+  static async delete(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<string>>> {
+    const { id } = req.params;
+    try {
+      const exist = await Form.getById(id);
+
+      if (!exist) {
+        return res.status(404).json(Errors.NOT_FOUND);
+      }
+
+      await Form.delete(id);
+      await Image.deleteWithCloudinary(exist._id);
+
+      const response: ApiResponse<string> = {
+        status: true,
+        data: `${exist.name} deleted!`,
+      };
+
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
     }
   }
 }
