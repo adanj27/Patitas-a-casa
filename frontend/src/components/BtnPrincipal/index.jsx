@@ -3,7 +3,7 @@ import imgPaw from '/icons/paw.png';
 
 export const BtnPrincipal = ({ texto, setModal, action }) => {
 	const handleSetModal = () => {
-		if (texto === 'Reportar') {
+		if (texto === texto) {
 			setModal(true);
 		}
 	};
