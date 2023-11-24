@@ -17,7 +17,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     phone: '',
   });
 
-  console.log(formData)
+  // console.log(formData)
   
   const [errors, setErrors] = useState({});
 
@@ -57,15 +57,13 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     }
     setErrors(newErrors);
 
-    // Si no hay errores, puedes manejar los datos (por ahora solo log)
+    // Si no hay errores, puedes manejar los datos
     try {
       const response = await axios.post('http://localhost:4000/api/auth/register', formData);
 
       if (response.status === 200) {
-        // El registro fue exitoso, puedes redirigir al usuario o manejarlo de alguna otra manera.
         console.log('Registro exitoso');
       } else {
-        // Manejar errores en el registro
         console.error('Error en el registro');
       }
     } catch (error) {
