@@ -4,7 +4,7 @@ import { BtnPrincipal } from "../../../components";
 import { Notification } from "../../../components/Notification/Index";
 import styles from "./styles.module.css";
 
-import emailjs from '@emailjs/browser';
+// import emailjs from '@emailjs/browser';
 
 const EMAILJS_USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
