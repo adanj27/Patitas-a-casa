@@ -121,13 +121,13 @@ export class ServiceSMTP {
     this.configApiClient();
 
     try {
-      const apiContact = new Brevo.ContasctsApi();
+      const apiInstance = new Brevo.ContactsApi();
       const newContact = new Brevo.CreateContact();
 
       newContact.email = email;
       newContact.listId = [list];
 
-      await apiContact.createContact(newContact);
+      await apiInstance.createContact(newContact);
 
       return {
         status: true,
@@ -178,7 +178,7 @@ export class ServiceSMTP {
    * @param param0
    * @returns
    */
-  public async SendEmail({ type, items }) {
+  public async SendEmail({ type, items, email }) {
     this.configApiClient();
     const { data } = await this.getInfo();
     const templateId = await this.getTemplate({ type });
@@ -188,8 +188,9 @@ export class ServiceSMTP {
       const sendEmail = new Brevo.SendSmtpEmail();
       sendEmail.sender = { name: data.name, email: data.email };
       sendEmail.subject = "dinamic data!";
-      sendEmail.to = [{ email: "phew_misame@hotmail.com" }];
+      sendEmail.to = [{ email }];
       sendEmail.templateId = templateId;
+      console.log(items.name, items.message, items.items);
       sendEmail.params = {
         name: items.name,
         message: items.message,

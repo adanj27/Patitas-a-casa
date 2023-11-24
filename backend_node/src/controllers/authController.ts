@@ -46,7 +46,6 @@ export class AuthController {
       if (!newUser) {
         throw Error("fail create user");
       }
-
       await ServiceEmail.AddContact({ email: newUser.email });
 
       const response: ApiResponse<IUser> = {

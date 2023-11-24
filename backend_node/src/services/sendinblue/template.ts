@@ -25,7 +25,7 @@ export const htmlContent = ` <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transi
                   <table align="center" border="0" cellPadding="0" cellSpacing="0" role="presentation" width="100%">
                     <tbody>
                       <tr>
-                        <td><img alt="Image pet loss" src="../../../utils/photo-1526336024174-e58f5cdd8e13.jpg" width="96" height="96" style="display:block;outline:none;border:none;text-decoration:none;margin:0 auto;margin-bottom:16px;border-radius:50%" /></td>
+                        <td><img alt="Image pet loss" src="https://cdn.discordapp.com/attachments/952030310713946172/1112498601881518100/image.png" width="96" height="96" style="display:block;outline:none;border:none;text-decoration:none;margin:0 auto;margin-bottom:16px;border-radius:50%" /></td>
                       </tr>
                     </tbody>
                   </table>

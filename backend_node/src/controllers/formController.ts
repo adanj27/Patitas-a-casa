@@ -7,11 +7,14 @@ import {
 import { ApiResponse, Errors, IForm, IImage } from "../interface";
 import { FormCreateType } from "../schema";
 import { AuthRequest } from "../middlware/authorization";
-import { IAuth } from "../helpers";
+import { BREVO_CONFIG, IAuth } from "../helpers";
+import { ServiceSMTP } from "../services/sendinblue/service";
 
 const User = new UserRepository();
 const Form = new FormRepository();
 const Image = new ImageRepository();
+const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
+
 export class FormController {
   static async getAll(
     req: Request,
@@ -84,10 +87,21 @@ export class FormController {
           documentId: newForm._id,
           modelName: "forms",
         });
-
         if (!user) {
           throw Error("no se agrego la lista");
         }
+        await ServiceEmail.SendEmail({
+          type: "pets",
+          items: {
+            name: "test",
+            message: "testing",
+            items: {
+              alias: "aliastest",
+              description: "description",
+            },
+          },
+          email: user.email,
+        });
       }
 
       const response: ApiResponse<IForm> = {
