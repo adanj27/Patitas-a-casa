@@ -9,7 +9,7 @@ export interface MyError {
 export const Errors = {
   NOT_FOUND: {
     status: false,
-    message: "blog not found.",
+    message: "Register not found.",
   },
 
   ALREADY_EXIST: {
@@ -37,3 +37,13 @@ export const Errors = {
 //   console.error(err.stack);
 //   res.status(500).send("Something broke!");
 // };
+
+export class RepositoryError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = this.constructor.name;
+    this.status = status;
+  }
+}

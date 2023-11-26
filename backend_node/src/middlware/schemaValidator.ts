@@ -1,10 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { AnyZodObject, ZodError } from "zod";
-import { Errors } from "../interface";
+import { handlerHttpError } from "./handlerHttpError";
 
 export const SchemaValidate =
   (schema: AnyZodObject) =>
-  // eslint-disable-next-line consistent-return
   (req: Request, res: Response, next: NextFunction) => {
     try {
       schema.parse({
@@ -16,9 +15,10 @@ export const SchemaValidate =
       next();
     } catch (error) {
       if (error instanceof ZodError) {
-        return res.status(404).json({ message: error.issues });
+        return handlerHttpError(res, `${error.issues}`, 404);
       }
 
-      return res.status(400).json(Errors.ERROR_DATABASE(error));
+      return handlerHttpError(res);
     }
+    return undefined;
   };

@@ -27,9 +27,10 @@ export class AuthController {
     req: Request<unknown, unknown, CreateUserType>,
     res: Response,
   ) {
+    let result;
     const { first_name, last_name, alias, email, password, phone } = req.body;
     try {
-      const assignRol = await Rol.getByOne({ name: "user" });
+      const assingRole = await Rol.getByOne({ name: "user" });
 
       const newUser = await User.create({
         first_name,
@@ -38,16 +39,29 @@ export class AuthController {
         password,
         email,
         phone,
+        rol: assingRole._id,
       });
 
-      newUser.rol = assignRol._id;
-      newUser.save();
+      if (newUser) {
+        const data = await ServiceEmail.AddContact({
+          email: newUser.email,
+        });
 
-      if (!newUser) {
-        throw Error("fail create user");
+        if (!data.status) {
+          return res
+            .status(404)
+            .json({ status: data.status, message: `Brevo: ${data.message}` });
+        }
+
+        result = await newUser.save();
+
+        if (!result) {
+          return res.status(404).json({
+            status: false,
+            message: "Error user dont create",
+          });
+        }
       }
-
-      await ServiceEmail.AddContact({ email: newUser.email });
 
       const response: ApiResponse<IUser> = {
         status: true,
@@ -56,6 +70,11 @@ export class AuthController {
 
       return res.status(201).json(response);
     } catch (error) {
+      if (error.code === 11000)
+        return res
+          .status(404)
+          .json({ status: false, message: "This email or alias alredy exist" });
+
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
@@ -65,7 +84,9 @@ export class AuthController {
       const validUser = await User.getByOne({ email: req.body.email });
 
       if (!validUser) {
-        return res.status(404).json({ message: "Error data no valid!" });
+        return res
+          .status(404)
+          .json({ status: false, message: "Error data no valid!" });
       }
 
       const validPass = await User.ValidatePassword(
@@ -74,7 +95,9 @@ export class AuthController {
       );
 
       if (!validPass) {
-        return res.status(404).json({ message: "Error data no valid!" });
+        return res
+          .status(404)
+          .json({ status: false, message: "Error data no valid!" });
       }
 
       const user: IAuth = {
@@ -100,7 +123,7 @@ export class AuthController {
       }
       return null;
     } catch (error) {
-      throw Error(error);
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
 
@@ -120,13 +143,17 @@ export class AuthController {
     const { oldpassword, newpassword } = req.body;
     try {
       if (oldpassword === newpassword) {
-        return res.status(404).json({ message: "Try a different password" });
+        return res
+          .status(404)
+          .json({ status: false, message: "Try a different password" });
       }
 
       const exist = await User.getById(req.user.id);
 
       if (!exist || !exist.status) {
-        return res.status(404).json({ message: "User dont found" });
+        return res
+          .status(404)
+          .json({ status: false, message: "User dont found" });
       }
 
       const validPass = await User.ValidatePassword(
@@ -148,7 +175,7 @@ export class AuthController {
         .status(200)
         .json({ status: true, message: "Password Update!" });
     } catch (error) {
-      throw Error(error);
+      return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
 }

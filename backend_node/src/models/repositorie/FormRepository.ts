@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { FilterQuery, QueryWithHelpers } from "mongoose";
+import mongoose, { FilterQuery, QueryWithHelpers } from "mongoose";
 import { FormModel } from "../mongoose/form.model";
 import { BaseRepository } from "../../repositories/BaseRepository";
 import { IForm } from "../../interface";
@@ -25,8 +25,13 @@ export class FormRepository extends BaseRepository<IForm, string> {
     });
   }
 
+  async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
+    return new mongoose.Types.ObjectId(id);
+  }
+
   async getByOne(
-    conditions: FilterQuery<IForm>,
+    // eslint-disable-next-line prettier/prettier
+    conditions: FilterQuery<IForm>
   ): Promise<QueryWithHelpers<IForm, IForm>> {
     return FormModel.findOne(conditions);
   }

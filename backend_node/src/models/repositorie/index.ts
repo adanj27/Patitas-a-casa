@@ -4,4 +4,3 @@ export * from "./RolRespository";
 export * from "./ShelterRepository";
 export * from "./UserRepository";
 export * from "./iImageRepository";
-export * from "./index";

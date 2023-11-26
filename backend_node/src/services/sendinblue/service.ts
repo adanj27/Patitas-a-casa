@@ -121,13 +121,14 @@ export class ServiceSMTP {
     this.configApiClient();
 
     try {
-      const apiContact = new Brevo.ContasctsApi();
+      const api = new Brevo.ContactsApi();
       const newContact = new Brevo.CreateContact();
+      const listcontact = await this.getList({ name: "web" });
 
       newContact.email = email;
-      newContact.listId = [list];
+      newContact.listId = listcontact.id;
 
-      await apiContact.createContact(newContact);
+      await api.createContact(newContact);
 
       return {
         status: true,

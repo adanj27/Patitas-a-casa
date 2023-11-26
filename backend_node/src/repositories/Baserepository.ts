@@ -7,7 +7,11 @@ interface DatabaseAdapter<T, K> {
   delete(id: K): Promise<T>;
 }
 
-export class BaseRepository<T, K> {
+interface ConvertObjectId {
+  setConvertId(id: string): Promise<unknown>;
+}
+
+export abstract class BaseRepository<T, K> implements ConvertObjectId {
   private databaseAdapter: DatabaseAdapter<T, K>;
 
   constructor(databaseAdapter: DatabaseAdapter<T, K>) {
@@ -33,4 +37,6 @@ export class BaseRepository<T, K> {
   async delete(id: K): Promise<T> {
     return this.databaseAdapter.delete(id);
   }
+
+  abstract setConvertId(id: string): Promise<unknown>;
 }

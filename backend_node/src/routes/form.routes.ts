@@ -4,7 +4,7 @@ import { SchemaValidate } from "../middlware/schemaValidator";
 import { FormController } from "../controllers";
 import { isAuth } from "../middlware/authorization";
 import { ROL_TYPE } from "../interface";
-import { checkrol } from "../middlware/checkroles";
+import { hasRole } from "../middlware/checkroles";
 import {
   DFormSchema,
   FormFoundSchema,
@@ -21,33 +21,33 @@ router.get("/:id", FormController.getById);
 router.post(
   "/found",
   isAuth,
-  checkrol([ROL_TYPE.user]),
+  hasRole([ROL_TYPE.user]),
   SchemaValidate(FormFoundSchema),
-  FormController.createFound
+  FormController.createFound,
 );
 
 router.post(
   "/lost",
   isAuth,
-  checkrol([ROL_TYPE.user]),
+  hasRole([ROL_TYPE.user]),
   SchemaValidate(FormLostSchema),
-  FormController.createLost
+  FormController.createLost,
 );
 
 router.patch(
   "/:id",
   isAuth,
-  checkrol([ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
+  hasRole([ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
   SchemaValidate(UFormSchema),
-  FormController.update
+  FormController.update,
 );
 
 router.delete(
   "/:id",
   isAuth,
-  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
+  hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(DFormSchema),
-  FormController.delete
+  FormController.delete,
 );
 
 export { router };

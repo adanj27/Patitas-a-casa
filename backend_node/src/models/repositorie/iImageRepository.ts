@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable class-methods-use-this */
-import { FilterQuery, QueryWithHelpers } from "mongoose";
+import mongoose, { FilterQuery, QueryWithHelpers } from "mongoose";
 import { BaseRepository } from "../../repositories/BaseRepository";
 import { ImageModel } from "../mongoose/image.model";
 import { IImage } from "../../interface";
@@ -26,8 +27,12 @@ export class ImageRepository extends BaseRepository<IImage, string> {
     });
   }
 
+  async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
+    return new mongoose.Types.ObjectId(id);
+  }
+
   async getByOne(
-    conditions: FilterQuery<IImage>,
+    conditions: FilterQuery<IImage>
   ): Promise<QueryWithHelpers<IImage, IImage>> {
     return ImageModel.findOne(conditions);
   }

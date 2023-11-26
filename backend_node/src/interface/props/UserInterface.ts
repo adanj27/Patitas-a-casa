@@ -2,6 +2,7 @@
 import mongoose, { Document, Model } from "mongoose";
 import { IForm } from "./FormInterface";
 import { IBlog } from "./BlogInterface";
+import { IShelter } from "./ShelterInterface";
 
 export interface listNameArray {
   blogs: string;
@@ -21,6 +22,7 @@ export interface IUser extends Document {
   rol: mongoose.Types.ObjectId; // ref rol
   forms: Array<mongoose.Types.ObjectId | IForm>; // ref form
   blogs: Array<mongoose.Types.ObjectId | IBlog>; // ref blogs
+  shelters: Array<mongoose.Types.ObjectId | IShelter>;
 }
 
 /**
