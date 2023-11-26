@@ -1,18 +1,22 @@
 // React
 import React, { useEffect, useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 // Estilos
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 // Componentes
-import BtnNav from "../BtnNav";
-import { BtnPrincipal } from "../BtnPrincipal";
+import BtnNav from '../BtnNav';
+import { BtnPrincipal } from '../BtnPrincipal';
 import { Formulario } from '../Formulario';
-import { BurgerMenu } from "../BurgerMenu";
+import { BurgerMenu } from '../BurgerMenu';
+// import BtnLateral from '../BtnLateral';
 
 // Imágenes
-import { Logo } from '../Icons';
+import { Logo, LogoutIcon } from '../Icons';
+import { AuthFormContainer } from '../LoginForm';
+
+import { useAuth } from '../../context/AuthContext';
 
 /*
 	Array formado de objetos que permite la creación
@@ -20,20 +24,21 @@ import { Logo } from '../Icons';
 	o agregar elementos al array para modificar el nav.
 */
 export const botones = [
-	{ texto: "Inicio", path: "/" },
-	{ texto: "Perdidos", path: "/perdidos" },
-	{ texto: "Encontrados", path: "/encontrados" },
-	{ texto: "Adoptar", path: "/adoptar" },
-	{ texto: "Blog", path: "/blog" },
-	{ texto: "Refugios", path: "/refugios" },
-	{ texto: "Nosotros", path: "/nosotros" },
-	{ texto: "Contacto", path: "/contacto" }
+  { texto: 'Inicio', path: '/' },
+  { texto: 'Perdidos', path: '/perdidos' },
+  { texto: 'Encontrados', path: '/encontrados' },
+  { texto: 'Adoptar', path: '/adoptar' },
+  { texto: 'Blog', path: '/blog' },
+  { texto: 'Refugios', path: '/refugios' },
+  { texto: 'Nosotros', path: '/nosotros' },
+  { texto: 'Contacto', path: '/contacto' },
 ];
 
 export const Navbar = () => {
-
-	const [modal, setModal] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
+  const [modal, setModal] = useState(false);
 	const [isScrolling, setScrolling] = useState(false);
+	const [login, setLogin] = useState(false)
 
   useEffect(() => {
     let timeoutId;
@@ -47,51 +52,68 @@ export const Navbar = () => {
       }, 500);
     }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       clearTimeout(timeoutId);
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-	return (
-		<nav className={`${styles.nav} ${isScrolling ? styles.hidden : ''}`} id='nav-var'>
-			<div className={styles['nav-container']}>
-				<NavLink to="/" className={styles["nav__logo-contenedor"]}>
-					<Logo className={styles.logo} />
-				</NavLink>
-				<div className={styles.nav__contenedor}>
-					<div className={styles['nav__contenedor-botones']}>
-						{botones.map((btn, indice) => {
-							return (
-								<NavLink to={btn.path} key={indice}>
-									{({ isActive }) => (
-										<BtnNav
-											clase={isActive ? 'btn--principal' : 'btn--secundario'}
-											texto={btn.texto}
-										/>
-									)}
-								</NavLink>
-							);
-						})}
-					</div>
-					{/* <div className={styles.nav__separador}></div> */}
+  const handleLogout = () => {
+    console.log('Haciendo logout...');
+    logout();
+    console.log(localStorage.getItem('token'));
+  };
+
+  return (
+    <nav
+      className={`${styles.nav} ${isScrolling ? styles.hidden : ''}`}
+      id="nav-var"
+    >
+      <div className={styles['nav-container']}>
+        <NavLink to="/" className={styles['nav__logo-contenedor']}>
+          <Logo className={styles.logo} />
+        </NavLink>
+        <div className={styles.nav__contenedor}>
+          <div className={styles['nav__contenedor-botones']}>
+            {botones.map((btn, indice) => {
+              return (
+                <NavLink to={btn.path} key={indice}>
+                  {({ isActive }) => (
+                    <BtnNav
+                      clase={isActive ? 'btn--principal' : 'btn--secundario'}
+                      texto={btn.texto}
+                    />
+                  )}
+                </NavLink>
+              );
+            })}
+          </div>
+          {/* <div className={styles.nav__separador}></div> */}
+        </div>
+        <div className={styles['nav__contenedor-elementos']}>
+					{/*<BtnLateral src={imgSearch} alt="Search" />*/}
+          {/* <BtnPrincipal className={styles["nav__boton-reportar"]} texto="Reportar" setModal={setModal} /> */}
+          <div className={styles['nav__contenedor-boton']}>
+						{isAuthenticated ? (
+							
+							<div className={styles['nav__contenedor-boton-user']}>
+                <div onClick={handleLogout}>
+                <LogoutIcon />
+                </div>
+								<BtnPrincipal texto="Reportar" setModal={setModal} />
+							</div>
+							) : (
+              <BtnPrincipal texto="Iniciar Sesión" setModal={setLogin} />
+            )}
+          </div>
+          <BurgerMenu />
 				</div>
-				<div className={styles['nav__contenedor-elementos']}>
-					{/*<BtnLateral src={imgSearch} alt="Search" />
-					<BtnLateral src={imgLogin} alt="Login" />*/}
-					{/* <BtnPrincipal className={styles["nav__boton-reportar"]} texto="Reportar" setModal={setModal} /> */}
-					<div className={styles["nav__contenedor-boton"]}>
-						<BtnPrincipal texto="Reportar" setModal={setModal} />
-					</div>
-					<BurgerMenu />
-				</div>
-				{/*modal && <Formulario setModal={setModal} />*/}
-				{modal ? (
-					<Formulario setModal={setModal} />
-				) : null}
-			</div>
-		</nav>
-	);
-}
+				{login ? <AuthFormContainer setLogin={setLogin} /> : null}
+        {/*modal && <Formulario setModal={setModal} />*/}
+        {modal ? <Formulario setModal={setModal} /> : null}
+      </div>
+    </nav>
+  );
+};
