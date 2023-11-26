@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
 import { UserRepository } from "../models/repositorie/UserRepository";
 import { ApiResponse, Errors, IUser } from "../interface";
+import { ServiceSMTP } from "../services/sendinblue/service";
+import { BREVO_CONFIG } from "../helpers";
 
 const User = new UserRepository();
+const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
+
 export class UserController {
   static async getAll(req: Request, res: Response) {
     try {
@@ -75,6 +79,7 @@ export class UserController {
   static async delete(req: Request, res: Response) {
     const { id } = req.params;
     const user = await User.update(id, { status: false });
+    await ServiceEmail.DeleteContact({ email: user.email });
     return res.status(200).json(user);
   }
 }

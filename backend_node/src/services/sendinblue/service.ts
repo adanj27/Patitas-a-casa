@@ -187,13 +187,14 @@ export class ServiceSMTP {
       const api = new Brevo.TransactionalEmailsApi();
       const sendEmail = new Brevo.SendSmtpEmail();
       sendEmail.sender = { name: data.name, email: data.email };
-      sendEmail.subject = "dinamic data!";
+      sendEmail.subject = `Ayudanos a encontrar a ${items.items[0].alias}!`;
       sendEmail.to = [{ email }];
       sendEmail.templateId = templateId;
-      console.log(items.name, items.message, items.items);
       sendEmail.params = {
-        name: items.name,
-        message: items.message,
+        name: "Papitas A Casa",
+        url: "https://papitas-a-casa.com",
+        email: "patitasacasaorg@gmail.com",
+        message: "Somos una organización ........ ...... .. .",
         items: items.items,
       };
       const result = await api.sendTransacEmail(sendEmail);

@@ -91,6 +91,19 @@ export class FormController {
         if (!user) {
           throw Error("no se agrego la lista");
         }
+        await ServiceEmail.SendEmail({
+          type: "pets",
+          items: {
+            items: [
+              {
+                alias: newForm.name,
+                description: newForm.description,
+                image: newImage.url,
+              },
+            ],
+          },
+          email: user.email,
+        });
       }
 
       const response: ApiResponse<IForm> = {
@@ -139,12 +152,13 @@ export class FormController {
         await ServiceEmail.SendEmail({
           type: "pets",
           items: {
-            name: "test",
-            message: "testing",
-            items: {
-              alias: "aliastest",
-              description: "description",
-            },
+            items: [
+              {
+                alias: newForm.name,
+                description: newForm.description,
+                image: newImage.url,
+              },
+            ],
           },
           email: user.email,
         });

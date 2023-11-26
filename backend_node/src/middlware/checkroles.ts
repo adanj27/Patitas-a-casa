@@ -6,7 +6,7 @@ import { IAuth } from "../helpers";
 const User = new UserRepository();
 const Rol = new RolRepository();
 export const checkrol =
-  (roles) =>
+  (roles: string[]) =>
   async (req: AuthRequest<IAuth>, res: Response, next: NextFunction) => {
     let byRol;
     try {
@@ -18,7 +18,6 @@ export const checkrol =
         const rolId = String(validUser.rol);
         byRol = await Rol.getById(rolId);
       }
-
       const checkValueRol = roles.some((rol) =>
         rol.toLowerCase().includes(byRol.name.toLowerCase()),
       );
