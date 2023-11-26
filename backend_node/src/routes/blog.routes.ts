@@ -3,7 +3,7 @@ import { BlogController } from "../controllers/blogController";
 import { SchemaValidate } from "../middlware/schemaValidator";
 import { BlogSchemaz, DBlogSchema, UBlogSchema } from "../schema";
 import { isAuth } from "../middlware/authorization";
-import { checkrol } from "../middlware/checkroles";
+import { hasRole } from "../middlware/checkroles";
 import { ROL_TYPE } from "../interface/props/RolInterface";
 
 const router = Router();
@@ -12,7 +12,7 @@ router.get("/", BlogController.getAll);
 router.post(
   "/",
   isAuth,
-  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
+  hasRole([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(BlogSchemaz),
   BlogController.create,
 );
@@ -22,7 +22,7 @@ router.get("/:id", SchemaValidate(DBlogSchema), BlogController.getById);
 router.patch(
   "/:id",
   isAuth,
-  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
+  hasRole([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(UBlogSchema),
   BlogController.update,
 );
@@ -30,7 +30,7 @@ router.patch(
 router.delete(
   "/:id",
   isAuth,
-  checkrol([ROL_TYPE.ghost, ROL_TYPE.admin]),
+  hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(DBlogSchema),
   BlogController.delete,
 );

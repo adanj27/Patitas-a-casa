@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable class-methods-use-this */
-import { FilterQuery, QueryWithHelpers } from "mongoose";
+import mongoose, { FilterQuery, QueryWithHelpers } from "mongoose";
 import { IRol } from "../../interface/props/RolInterface";
 import { BaseRepository } from "../../repositories/BaseRepository";
 import { RolModel } from "../mongoose/rol.model";
@@ -20,9 +21,14 @@ export class RolRepository extends BaseRepository<IRol, string> {
         return RolModel.findByIdAndDelete(id);
       },
       getById: async (id: string) => {
+        // const validID = await this.setConvertId(id);
         return RolModel.findById(id);
       },
     });
+  }
+
+  async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
+    return new mongoose.Types.ObjectId(id);
   }
 
   async count() {
@@ -30,7 +36,7 @@ export class RolRepository extends BaseRepository<IRol, string> {
   }
 
   async getByOne(
-    conditions: FilterQuery<IRol>,
+    conditions: FilterQuery<IRol>
   ): Promise<QueryWithHelpers<IRol, IRol>> {
     return RolModel.findOne(conditions);
   }

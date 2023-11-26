@@ -3,12 +3,17 @@ import { UserRepository } from "../models/repositorie/UserRepository";
 import { ApiResponse, Errors, IUser } from "../interface";
 import { ServiceSMTP } from "../services/sendinblue/service";
 import { BREVO_CONFIG } from "../helpers";
+import { handlerHttpError } from "../middlware/handlerHttpError";
+import { DUserType } from "../schema";
 
 const User = new UserRepository();
 const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
 
 export class UserController {
-  static async getAll(req: Request, res: Response) {
+  static async getAll(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IUser[]>>> {
     try {
       const users = await User.getAll();
 
@@ -20,17 +25,21 @@ export class UserController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return handlerHttpError(res, Errors.ERROR_DATABASE(error).message);
     }
   }
 
-  static async getById(req: Request, res: Response) {
+  static async getById(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IUser>>> {
     const { id } = req.params;
+    console.log(id);
     try {
       const user = await User.getById(id);
 
       if (!user) {
-        return res.status(404).json(Errors.NOT_FOUND);
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       const response = {
@@ -39,7 +48,7 @@ export class UserController {
       };
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return handlerHttpError(res, Errors.ERROR_DATABASE(error).message);
     }
   }
 
@@ -54,7 +63,7 @@ export class UserController {
       const exist = await User.getById(id);
 
       if (!exist) {
-        return res.status(404).json(Errors.NOT_FOUND);
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       const result: IUser = await User.update(id, {
@@ -72,14 +81,39 @@ export class UserController {
 
       return res.status(202).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return handlerHttpError(res, Errors.ERROR_DATABASE(error).message);
     }
   }
 
-  static async delete(req: Request, res: Response) {
+  static async delete(
+    req: Request,
+    res: Response,
+  ): Promise<Response<ApiResponse<IUser>>> {
+    try {
+      const { id } = req.params;
+      const user = await User.update(id, { status: false });
+      return res.status(200).json(user);
+    } catch (error) {
+      return handlerHttpError(res, Errors.ERROR_DATABASE(error).message);
+    }
+  }
+
+  static async erased(
+    req: Request<DUserType, unknown, unknown>,
+    res: Response,
+  ): Promise<Response<ApiResponse<IUser>>> {
     const { id } = req.params;
-    const user = await User.update(id, { status: false });
-    await ServiceEmail.DeleteContact({ email: user.email });
-    return res.status(200).json(user);
+
+    try {
+      const result = await User.delete(id);
+
+      if (result) {
+        await ServiceEmail.DeleteContact({ email: result.email });
+        return res.status(200).json({ status: true, message: "deleted!" });
+      }
+      return null;
+    } catch (error) {
+      return handlerHttpError(res);
+    }
   }
 }

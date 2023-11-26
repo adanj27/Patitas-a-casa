@@ -105,7 +105,7 @@ Content-Type: application/json
 
 {    
     "email": "phew_misame@hotmail.com",    
-    "password": "passwordkj1A@"    
+    "password": "password1A@"    
 }
 
 ### Logout AUTH
@@ -118,15 +118,16 @@ Content-Type: application/json
 {
     "first_name": "Katell Pitts",
     "last_name": "Paul Pruit",   
-    "alias": "testing",
-    "email": "phew_misame1@hotmail.com",
+    "alias": "random1",
+    "email": "correo_aleatorio1@hotmail.com",
     "phone": "(504) 641-2564",
     "password": "password1A@"    
 }
 
 ### reset-password AUTH
-POST http://localhost:4000/api/auth/655a71d250ecab5da0e22b76/reset-password
+POST http://localhost:4000/api/auth/656296e9cfb5ee8c58647bd9/reset-password
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NjM0NTIsImV4cCI6MTcwMTA0OTg1Mn0.4fhf-ujumz9RDpKrmnQNoZCxhyCvmE3meGAZA5Lqc00
 
 {
     
@@ -135,15 +136,21 @@ Content-Type: application/json
 }
 
 
-### Endpoint FORM
+### Endpoint USERS
 GET http://localhost:4000/api/user
-
-### Endpoint forms
-GET http://localhost:4000/api/tag
-
-### Endpoint forms
-GET http://localhost:4000/api/category
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NzYxODAsImV4cCI6MTcwMTA2MjU4MH0.TRYhDKbB8f3Vme3ooK72CZzKi1f8Qs8KVlffV22RzTQ
 
 
-### Endpoint forms
-GET http://localhost:4000/api/forms
+
+
+### getById  USER
+GET http://localhost:4000/api/user/6562d742a54aca1ae1408f5f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NzYxODAsImV4cCI6MTcwMTA2MjU4MH0.TRYhDKbB8f3Vme3ooK72CZzKi1f8Qs8KVlffV22RzTQ
+
+### delete logic USER
+DELETE http://localhost:4000/api/user/6562bff7e1ec086ac3f8e537/logic
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NzYxODAsImV4cCI6MTcwMTA2MjU4MH0.TRYhDKbB8f3Vme3ooK72CZzKi1f8Qs8KVlffV22RzTQ
+
+### delete erased USER
+DELETE http://localhost:4000/api/user/6562bff7e1ec086ac3f8e537/logic
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NjM0NTIsImV4cCI6MTcwMTA0OTg1Mn0.4fhf-ujumz9RDpKrmnQNoZCxhyCvmE3meGAZA5Lqc00

@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+import mongoose from "mongoose";
 import { BlogModel } from "../mongoose/blog.model";
 import { IBlog } from "../../interface";
 import { BaseRepository } from "../../repositories/BaseRepository";
@@ -28,6 +29,10 @@ export class BlogRepository extends BaseRepository<IBlog, string> {
         });
       },
     });
+  }
+
+  async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
+    return new mongoose.Types.ObjectId(id);
   }
 
   async incrementViewCount(id: string): Promise<IBlog> {

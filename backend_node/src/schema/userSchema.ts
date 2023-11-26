@@ -94,3 +94,4 @@ export const DUserSchema = z.object({
 });
 
 export type CreateUserType = z.infer<typeof createUserSchema>["body"];
+export type DUserType = z.infer<typeof DUserSchema>["params"];

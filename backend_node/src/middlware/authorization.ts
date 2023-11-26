@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { IAuth, JWT } from "../helpers";
 import { UserRepository } from "../models/repositorie";
+import { handlerHttpError } from "./handlerHttpError";
 
 export interface AuthRequest<T = unknown> extends Request {
   user?: T;
@@ -15,23 +16,23 @@ export const isAuth = async (
 ) => {
   try {
     if (!req.headers.authorization) {
-      return res.status(404).json({ message: "Dont have credentials" });
+      return handlerHttpError(res, "Dont have credentials valid!", 404);
     }
 
     const token = req.headers.authorization.split(" ").pop();
 
     if (!token) {
-      return res.status(404).json({ message: "Dont have credentials" });
+      return handlerHttpError(res, "Dont have credentials valid!", 404);
     }
 
     const verified = await JWT.verify(token);
 
-    const foundUser = await User.getByOne({ _id: verified.id });
-    const { _id } = foundUser.rol;
+    const validUser = await User.getById(verified.id);
+    const { _id } = validUser.rol;
 
     const AuthUser = {
-      id: foundUser._id,
-      alias: foundUser.alias,
+      id: validUser._id,
+      alias: validUser.alias,
       rol: _id,
     };
 
@@ -39,7 +40,7 @@ export const isAuth = async (
 
     next();
   } catch (error) {
-    return res.status(401).json({ message: "error en authorization" });
+    return handlerHttpError(res);
   }
 
   return undefined;

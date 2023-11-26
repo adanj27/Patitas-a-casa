@@ -14,6 +14,7 @@ const UserSchema = new Schema<IUserDocument, IUser>(
     rol: { type: Schema.Types.ObjectId, ref: "Role" },
     forms: [{ type: Schema.Types.ObjectId, ref: "Form" }],
     blogs: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
+    shelters: [{ type: Schema.Types.ObjectId, ref: "Blog" }],
   },
   {
     timestamps: true,

@@ -2,13 +2,14 @@ import { NextFunction, Response } from "express";
 import { RolRepository, UserRepository } from "../models/repositorie";
 import { AuthRequest } from "./authorization";
 import { IAuth } from "../helpers";
+import { handlerHttpError } from "./handlerHttpError";
 
 const User = new UserRepository();
 const Rol = new RolRepository();
-export const checkrol =
-  (roles: string[]) =>
+export const hasRole =
+  (roles) =>
   async (req: AuthRequest<IAuth>, res: Response, next: NextFunction) => {
-    let byRol;
+    let hasRol;
     try {
       const { user } = req;
 
@@ -16,19 +17,23 @@ export const checkrol =
 
       if (validUser && validUser.rol) {
         const rolId = String(validUser.rol);
-        byRol = await Rol.getById(rolId);
+        hasRol = await Rol.getById(rolId);
       }
       const checkValueRol = roles.some((rol) =>
-        rol.toLowerCase().includes(byRol.name.toLowerCase()),
+        rol.toLowerCase().includes(hasRol.name.toLowerCase()),
       );
 
       if (!checkValueRol) {
-        return res.status(403).json({ message: "Dont have credentials" });
+        return handlerHttpError(
+          res,
+          "Dont have authorization for this action!",
+          403,
+        );
       }
 
       next();
     } catch (error) {
-      return res.status(403).json({ message: "no valid" });
+      return handlerHttpError(res, `${error}`);
     }
     return undefined;
   };

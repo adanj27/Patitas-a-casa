@@ -26,24 +26,23 @@ export async function createRoles() {
 export async function createSuperAdmin() {
   try {
     const count = await User.count();
-    const findRol = await Rol.getByOne({ name: USERADMIN.ROL });
 
     if (count > 0) return "Already Exist";
 
-    setTimeout(async () => {
-      const admin = await User.create({
-        first_name: USERADMIN.NAME,
-        last_name: USERADMIN.LAST,
-        alias: USERADMIN.ALIAS,
-        email: USERADMIN.EMAIL,
-        password: USERADMIN.PASS,
-        rol: findRol._id,
-      });
+    const findRol = await Rol.getByOne({ name: USERADMIN.ROL });
 
-      if (!admin) {
-        throw Error("user dont create!");
-      }
-    }, 5000);
+    const admin = await User.create({
+      first_name: USERADMIN.NAME,
+      last_name: USERADMIN.LAST,
+      alias: USERADMIN.ALIAS,
+      email: USERADMIN.EMAIL,
+      password: USERADMIN.PASS,
+      rol: findRol._id,
+    });
+
+    await admin.save();
+
+    console.log("user ready!");
     return "created!";
   } catch (error) {
     throw Error(error);
