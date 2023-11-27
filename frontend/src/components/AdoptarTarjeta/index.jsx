@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import shareIcon from '/icons/share-iconSubdata.png';
+import shareIcon from '/icons/share-icon.png';
 import whatsApp from '/icons/whatsAppSubdata.png';
 import facebook from '/icons/facebook-icon.png';
 
@@ -67,16 +67,16 @@ export const AdoptarTarjeta = ({
 				</div>
 			</div>
 			<div className={styles.adoptarTarjeta__description}>
-				<h3>Nombre: {nombre}</h3>
+				<h3>{nombre}</h3>
 				<p>{descripcion}</p>
 				<p>
-					<b>Edad: {edad}</b>
+					<p>Edad: <span>{edad}</span></p>
 				</p>
 				<p>
-					<b>Refugio: {refugio}</b>
+					<p>Refugio: <span>{refugio}</span></p>
 				</p>
 				<p>
-					<b>Contacto: +{contacto}</b>
+					<p>Contacto: <span>+{contacto}</span></p>
 				</p>
 				<div className={styles.adoptarTarjeta___img__info_container}>
 					<img

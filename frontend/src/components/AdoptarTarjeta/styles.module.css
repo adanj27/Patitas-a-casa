@@ -11,10 +11,10 @@
 }
 .adoptarTarjeta h3{
   color: red;
-  font-size: 25px;
+  font-size: 26px;
   border-radius: 10px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  
+  margin-top: 10px;
 }
 
 .adoptarTarjeta--hovered {
@@ -80,21 +80,27 @@
   transition: all 0.3s ease 0s;
 }
 .adoptarTarjeta__imgs>img:hover {
-  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(1.5);
 }
 
 .adoptarTarjeta__description {
   padding-left: 20px;
   padding-right: 10px;
-  padding: 1.5%;
+  padding-block: 8px;
   margin: 2%;
 }
 
+.adoptarTarjeta__description span {
+  font-weight: bold;
+  opacity: 0.9;
+}
+
 .adoptarTarjeta___img__info_container{
-  width: 45%;
+  width: 40%;
 	position: relative;
 	display: flex;
 	top: 0%;
+  margin-top: 20px
 }
 
 .adoptarTarjeta__img_info{
