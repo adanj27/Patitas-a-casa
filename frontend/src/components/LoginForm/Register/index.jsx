@@ -4,8 +4,10 @@ import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
 import loginForm from '/icons/imagenes recursos/loginForm.png';
 import axios from 'axios';
+import { useAuth } from '../../../context/AuthContext';
 
 export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
+  const { setIsAuthenticated } = useAuth();
   // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -18,7 +20,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
   });
 
   // console.log(formData)
-  
+
   const [errors, setErrors] = useState({});
 
   const handleCancel = () => {
@@ -59,15 +61,19 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Si no hay errores, puedes manejar los datos
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/register', formData);
+      const response = await axios.post(
+        'http://localhost:4000/api/auth/register',
+        formData
+      );
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log('Registro exitoso');
+        setIsAuthenticated(true);
       } else {
         console.error('Error en el registro');
       }
     } catch (error) {
-      console.error('Error en la solicitud:', error);
+      console.error('Error en el registro:', error);
     }
   };
 

@@ -27,8 +27,8 @@ export const Formulario = ({ setModal }) => {
 		event.preventDefault();
 		const data = new FormData(reportFormRef.current);
 		// Descomentarlo cuando haya API de formulario
-		// const url = petType ? '/urlParaPerros': '/urlParaMichis';
-		// usePost(url, data) 
+		const url = petType ? 'http://localhost:4000/api/form/lost': 'http://localhost:4000/api/form/found';
+		usePost(url, data);
 		return petType ? 1 : 0;
 	};
 
@@ -111,10 +111,12 @@ export const Formulario = ({ setModal }) => {
 						</div>
 						<section className={styles.form_inputs}>
 							{petType ? <input type="text" name="name" placeholder="Nombre" /> : ''}
+							<input type="text" name="color" placeholder="Color" />
 							<div>
 								<input type="text" name="size" placeholder="Tamaño" />
-								<input type="text" name="zone" placeholder="Zona" />
+								<input type="text" name="city" placeholder="Ciudad" />
 							</div>
+							<input type="text" name="address" placeholder="Dirección" />
 							<div>
 								<input type="tel" name="contact" placeholder="Contacto" />
 								<input type="date" name="date" placeholder="Fecha" />
