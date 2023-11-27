@@ -284,7 +284,6 @@
 }
 
 .adopciones {
-  background-color: #000;
   /* margin: 2rem 0; */
   padding: 2rem 0;
   position: relative;
@@ -293,7 +292,6 @@
 .adopciones::before {
   content: "";
   position: absolute;
-  background-image: url(/icons/imagenes\ recursos/adopciones-bg.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
