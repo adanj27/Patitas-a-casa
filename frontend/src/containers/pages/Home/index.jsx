@@ -75,11 +75,11 @@ const Home = () => {
 	const settings = {
 		dots: true,
 		infinite: true,
-		speed: 800,
+		speed: 1500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		autoplay: true,
-		autoplaySpeed: 5000,
+		autoplaySpeed: 8000,
 		pauseOnHover: false,
 		dotsClass: "button__bar",
 		afterChange: (current) => {
