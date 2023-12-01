@@ -14,6 +14,10 @@ import dog2 from './Imgs/dog2.png';
 import dog3 from './Imgs/dog3.png';
 import dog4 from './Imgs/dog4.png';
 
+import pawIcon from "/icons/paw.png"
+
+import backIcon from "/icons/atras.png"
+
 import refugioR from './Imgs/refugioR.png';
 
 import { refugios } from '../../../../../refugios/refugiosData';
@@ -26,6 +30,9 @@ const InformacionRefugio = () => {
 
     return (
         <section className={styles['information-section']}>
+            <a className={styles["back-button"]} href="/refugios">
+                <img src={backIcon} alt="icono atras" />
+            </a>
             <header className={styles['information-section__header']}>
                 <div>
                     <h2>{refugios[id].nombre}</h2>
@@ -42,14 +49,17 @@ const InformacionRefugio = () => {
             <article className={styles['information-section__content']}>
                 <div className={styles['information-content__btns']}>
                     <button onClick={() => { window.open(refugios[id].donar.links[0], '_blank'); }}>
+                        <img src={pawIcon} alt="icono patita" />
                         Donar
                     </button>
-                    <button onClick={() => { window.open(refugios[id].socialMedia[0][1], '_blank'); }}>
-                        Instagram
-                    </button>
-                    <button onClick={() => { window.open(refugios[id].socialMedia[3][1], '_blank'); }}>
-                        Contacto
-                    </button>
+                    <div>
+                        <button onClick={() => { window.open(refugios[id].socialMedia[0][1], '_blank'); }}>
+                            Instagram
+                        </button>
+                        <button onClick={() => { window.open(refugios[id].socialMedia[3][1], '_blank'); }}>
+                            Contacto
+                        </button>
+                    </div>
                 </div>
                 <div className={styles['information-content__about']}>
                     <div>

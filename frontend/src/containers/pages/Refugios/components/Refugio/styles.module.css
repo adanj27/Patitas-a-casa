@@ -64,10 +64,10 @@
 
 .container__info-btn {
     border: 1px solid transparent;
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
-    gap: 3%;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4%;
 }
 
 .container__info-btn>button {
@@ -79,8 +79,8 @@
     align-items: center;
     gap: 5%;
 
-    width: 150px;
-    padding: 7%;
+    width: 180px;
+    padding: 8%;
 
     border: transparent;
     border-radius: 8px;
