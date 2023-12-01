@@ -2,6 +2,20 @@
     overflow-x: hidden;
 }
 
+.back-button {
+    position: relative;
+    cursor: pointer;
+}
+.back-button:hover {
+    opacity: 0.8;
+}
+.back-button img {
+    width: 38px;
+    position: absolute;
+    top: 20px;
+    left: 64px;
+}
+
 .information-section__header {
     position: relative;
 
@@ -71,8 +85,10 @@
 
 .information-content__btns {
     display: flex;
-    flex-direction: row;
-    gap: 3%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 
     justify-content: center;
 
@@ -90,6 +106,33 @@
 
     width: 130px;
     padding: 1%;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: white;
+    background-color: #DE341D;
+
+    transition: 0.3s;
+    cursor: pointer;
+}
+.information-content__btns div {
+    display: flex;
+    gap: 20px;
+}
+.information-content__btns img {
+    width: 20px;
+}
+.information-content__btns div button {
+    font-size: 16px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+
+    width: 130px;
+    padding: 12px;
 
     border: 1px solid transparent;
     border-radius: 8px;

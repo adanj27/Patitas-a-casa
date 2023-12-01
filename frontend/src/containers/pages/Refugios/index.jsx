@@ -51,14 +51,14 @@ const Refugios = () => {
           {refugios.map((data, id) => {
             return (
               <Refugio
-              key={data.id}
-              id={data.id}
-              icon={data.icono}
-              name={data.nombre}
-              description={data.descripcion}
-              location={data.ubicacion}
-              donate={data.donar.links[id]}
-            />
+                key={data.id}
+                id={data.id}
+                icon={data.icono}
+                name={data.nombre}
+                description={data.descripcion}
+                location={data.ubicacion}
+                donate={data.donar.links[id]}
+              />
             );
           })}
         </article>
