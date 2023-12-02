@@ -5,15 +5,16 @@
 .back-button {
     position: relative;
     cursor: pointer;
+    display: block;
+    height: 38px;
 }
-.back-button:hover {
+.back-button img:hover {
     opacity: 0.8;
 }
 .back-button img {
     width: 38px;
     position: absolute;
-    top: 20px;
-    left: 64px;
+    top: -50px;
 }
 
 .information-section__header {
@@ -25,13 +26,13 @@
 
     height: 381px;
 
-    margin-top: 5%;
     margin-inline: auto;
 
     background-image: url('/icons/header-refugios.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 40%;
+    margin-top: 80px;
 }
 
 .information-section__header>div:first-child {

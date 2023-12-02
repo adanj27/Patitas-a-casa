@@ -30,10 +30,10 @@ const InformacionRefugio = () => {
 
     return (
         <section className={styles['information-section']}>
-            <a className={styles["back-button"]} href="/refugios">
-                <img src={backIcon} alt="icono atras" />
-            </a>
             <header className={styles['information-section__header']}>
+                <a className={styles["back-button"]} href="/refugios">
+                    <img src={backIcon} alt="icono atras" />
+                </a>
                 <div>
                     <h2>{refugios[id].nombre}</h2>
                     <p>
