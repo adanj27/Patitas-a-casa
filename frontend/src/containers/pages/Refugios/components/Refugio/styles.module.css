@@ -123,10 +123,15 @@
         width: 94px;
     }
 
+    .container__info-btn {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+    }
     .container__info-btn>button {
-        width: 170px;
+        /* width: 170px; */
         
-        padding: 5%;
+        padding: 16px;
     }
 }
 
