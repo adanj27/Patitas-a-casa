@@ -7,6 +7,7 @@ import { IShelter } from "./ShelterInterface";
 export interface listNameArray {
   blogs: string;
   forms: string;
+  shelters: string;
 }
 
 export type listOption = keyof listNameArray;

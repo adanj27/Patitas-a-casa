@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { IUser, listNameArray } from "../../interface";
 import { BaseRepository } from "../../repositories/BaseRepository";
 import { UserModel } from "../mongoose/user.model";
-import { IAuth, USERADMIN } from "../../helpers";
+import { IAuth } from "../../helpers";
 import { RolRepository } from "./RolRespository";
 
 interface listUser {
@@ -19,10 +19,12 @@ export class UserRepository extends BaseRepository<IUser, string> {
   constructor() {
     super({
       getAll: async (): Promise<IUser[]> => {
-        const hasRol = await Rol.getByOne({ name: USERADMIN.ROL });
+        const isSuperAdmin = await Rol.getSuperAdmin();
         const users = await UserModel.find({ status: true });
 
-        const filterUser = users.find((user) => user.rol.equals(hasRol._id));
+        const filterUser = users.find((user) =>
+          user.rol.equals(isSuperAdmin._id),
+        );
 
         const result = users.filter((index) => index !== filterUser);
 
@@ -35,12 +37,12 @@ export class UserRepository extends BaseRepository<IUser, string> {
         return UserModel.findByIdAndUpdate(id, input, { new: true });
       },
       delete: async (id: string) => {
-        const hasRol = await Rol.getByOne({ name: USERADMIN.ROL });
-
         const validID = await this.setConvertId(id);
+        const isSuperAdmin = await Rol.getSuperAdmin();
 
         const findUser = await UserModel.findById(validID);
-        if (findUser.rol.equals(hasRol._id)) {
+
+        if (findUser.rol.equals(isSuperAdmin._id)) {
           return Promise.resolve(null);
         }
 
@@ -58,7 +60,7 @@ export class UserRepository extends BaseRepository<IUser, string> {
   }
 
   async getByOne(
-    conditions: FilterQuery<IUser>
+    conditions: FilterQuery<IUser>,
   ): Promise<QueryWithHelpers<IUser, IUser>> {
     return UserModel.findOne(conditions).populate({
       path: "rol",

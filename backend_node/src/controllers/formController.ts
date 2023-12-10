@@ -96,6 +96,7 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
+      console.error(error);
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }

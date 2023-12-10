@@ -25,12 +25,16 @@ export class UserController {
     }
   }
 
+  /*   static async addUserByAuth(req: request, res: Response) {
+    const {} = req.body;
+  }
+ */
   static async getById(
     req: Request,
     res: Response,
   ): Promise<Response<ApiResponse<IUser>>> {
     const { id } = req.params;
-    console.log(id);
+
     try {
       const user = await User.getById(id);
 

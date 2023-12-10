@@ -43,9 +43,11 @@ GET http://localhost:4000/api/form
 ### ById FORM
 GET http://localhost:4000/api/form/65584935fcd07652c3e02fae   
 
-### create FORM
+### PET LOST FORM
 POST http://localhost:4000/api/form/lost
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzMzYzQ3NGNiMWExZDQ2YWQxNjc1OCIsImFsaWFzIjoidGVzdGluZyIsInJvbCI6IjY1NjJhMzk0NDI0ZGE5OTVhNTBiNWE1MSIsImlhdCI6MTcwMjA1MDk1MywiZXhwIjoxNzAyMTM3MzUzfQ.nmISeeqGXy7N936ckCFHAIlW-Umc3j3RqfA8JXkgAMY
+
 {
 	"name": "pet2",
 	"color": "yellow",
@@ -60,7 +62,7 @@ Content-Type: application/json
 	"type_search": "LOST"
 }
 
-### PET FOUND
+### PET FOUND FORM
 POST http://localhost:4000/api/form/found
 Content-Type: application/json
 {	
@@ -104,7 +106,7 @@ POST http://localhost:4000/api/auth/login
 Content-Type: application/json
 
 {    
-    "email": "phew_misame@hotmail.com",    
+    "email": "test1@gmail.com",    
     "password": "password1A@"    
 }
 
@@ -116,12 +118,12 @@ POST http://localhost:4000/api/auth/register
 Content-Type: application/json
 
 {
-    "first_name": "Katell Pitts",
-    "last_name": "Paul Pruit",   
-    "alias": "random1",
-    "email": "correo_aleatorio1@hotmail.com",
-    "phone": "(504) 641-2564",
-    "password": "password1A@"    
+  "first_name": "usertest",
+  "last_name": "apellidotest",
+  "phone": "123456789",
+  "email": "test1@gmail.com",
+  "password": "password1A@",
+  "alias": "testing"
 }
 
 ### reset-password AUTH
@@ -139,8 +141,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2N
 ### Endpoint USERS
 GET http://localhost:4000/api/user
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NzYxODAsImV4cCI6MTcwMTA2MjU4MH0.TRYhDKbB8f3Vme3ooK72CZzKi1f8Qs8KVlffV22RzTQ
-
-
 
 
 ### getById  USER

@@ -13,7 +13,7 @@ export const AuthSchema = z.object({
         })
         .refine(
           (pass) => isValidPassword(pass),
-          "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+          "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
         ),
     })
     .strict(),
@@ -27,7 +27,7 @@ export const AuthResetPassSchema = z.object({
       })
       .refine(
         (pass) => isValidPassword(pass),
-        "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+        "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
       ),
     newpassword: z
       .string({
@@ -35,7 +35,7 @@ export const AuthResetPassSchema = z.object({
       })
       .refine(
         (pass) => isValidPassword(pass),
-        "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+        "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
       ),
   }),
   params: z.object({
@@ -83,7 +83,7 @@ export const AuthCreateUserSchema = z.object({
         })
         .refine(
           (pass) => isValidPassword(pass),
-          "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+          "Min 8 and max 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
         ),
     })
     .strict(),
