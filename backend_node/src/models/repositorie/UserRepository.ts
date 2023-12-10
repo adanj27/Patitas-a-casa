@@ -76,6 +76,7 @@ export class UserRepository extends BaseRepository<IUser, string> {
     const fieldOpts = {
       blogs: () => findUser.blogs.push(documentId),
       forms: () => findUser.forms.push(documentId),
+      shelters: () => findUser.shelters.push(documentId),
     };
 
     if (fieldOpts[modelName]) {

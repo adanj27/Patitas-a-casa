@@ -8,7 +8,10 @@ export class FormRepository extends BaseRepository<IForm, string> {
   constructor() {
     super({
       getAll: async (): Promise<IForm[]> => {
-        return FormModel.find({});
+        return FormModel.find({}).populate({
+          path: "image_url",
+          select: "-_id, url",
+        });
       },
       create: async (input: Partial<IForm>) => {
         return FormModel.create(input);
@@ -20,9 +23,24 @@ export class FormRepository extends BaseRepository<IForm, string> {
         return FormModel.findByIdAndDelete(id);
       },
       getById: async (id: string) => {
-        return FormModel.findById(id);
+        return FormModel.findById(id).populate({
+          path: "image_url",
+          select: "-_id, url",
+        });
       },
     });
+  }
+
+  async getAllPagination({ skip = 0, limit = 0 }) {
+    return FormModel.find({})
+      .populate({
+        path: "image_url",
+        select: "-_id, url",
+      })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
   }
 
   async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
@@ -38,5 +56,9 @@ export class FormRepository extends BaseRepository<IForm, string> {
 
   async deleteByOne(conditions: FilterQuery<IForm>) {
     return FormModel.deleteOne(conditions);
+  }
+
+  async count() {
+    return FormModel.countDocuments();
   }
 }

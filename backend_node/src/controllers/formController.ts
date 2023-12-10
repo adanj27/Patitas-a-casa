@@ -5,7 +5,7 @@ import {
   UserRepository,
 } from "../models/repositorie";
 import { ApiResponse, Errors, IForm, IImage } from "../interface";
-import { FormCreateType } from "../schema";
+import { FormCreateType, PaginationType } from "../schema";
 import { AuthRequest } from "../middlware/authorization";
 import { BREVO_CONFIG, IAuth } from "../helpers";
 import { ServiceSMTP } from "../services/sendinblue/service";
@@ -17,15 +17,21 @@ const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
 
 export class FormController {
   static async getAll(
-    req: Request,
+    req: Request<unknown, unknown, PaginationType>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm[]>>> {
     try {
-      const forms = await Form.getAll();
+      const skip = parseInt(req.query.skip as string, 10);
+      const limit = parseInt(req.query.limit as string, 10);
+
+      const forms = await Form.getAllPagination({ skip, limit });
+      const totalDoc = await Form.count();
+      const hasNexPage = skip + limit < totalDoc;
 
       const response: ApiResponse<IForm[]> = {
         status: true,
         total: forms.length,
+        nextPage: hasNexPage,
         data: forms,
       };
 
@@ -91,19 +97,23 @@ export class FormController {
         if (!user) {
           throw Error("no se agrego la lista");
         }
-        await ServiceEmail.SendEmail({
-          type: "pets",
-          items: {
-            items: [
-              {
-                alias: newForm.name,
-                description: newForm.description,
-                image: newImage.url,
-              },
-            ],
-          },
-          email: user.email,
-        });
+        try {
+          await ServiceEmail.SendEmail({
+            type: "pets",
+            items: {
+              items: [
+                {
+                  alias: newForm.name,
+                  description: newForm.description,
+                  image: newImage.url,
+                },
+              ],
+            },
+            email: user.email,
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
 
       const response: ApiResponse<IForm> = {
@@ -112,7 +122,6 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
-      console.error(error);
       return res.status(500).json(Errors.ERROR_DATABASE(error));
     }
   }
@@ -147,22 +156,27 @@ export class FormController {
           documentId: newForm._id,
           modelName: "forms",
         });
+
         if (!user) {
           throw Error("no se agrego la lista");
         }
-        await ServiceEmail.SendEmail({
-          type: "pets",
-          items: {
-            items: [
-              {
-                alias: newForm.name,
-                description: newForm.description,
-                image: newImage.url,
-              },
-            ],
-          },
-          email: user.email,
-        });
+        try {
+          await ServiceEmail.SendEmail({
+            type: "pets",
+            items: {
+              items: [
+                {
+                  alias: newForm.name,
+                  description: newForm.description,
+                  image: newImage.url,
+                },
+              ],
+            },
+            email: user.email,
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
 
       const response: ApiResponse<IForm> = {

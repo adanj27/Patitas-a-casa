@@ -1,6 +1,6 @@
 import { z } from "zod";
 import mongoose from "mongoose";
-import { isValidImageURL } from "../helpers/regexFunctions";
+import { validateImage } from "../helpers/regexFunctions";
 import { PETSEARCH_TYPE, PETSIZE_TYPE, PET_TYPE } from "../interface";
 
 // create lost
@@ -25,7 +25,7 @@ export const FormLostSchema = z.object({
         .string({
           required_error: "Image is required",
         })
-        .refine((url) => isValidImageURL(url), "this image dont valid!"),
+        .refine((url) => validateImage(url), "this image dont valid!"),
       description: z.string({ required_error: "Description is required" }),
       status: z.boolean().optional(),
       type: z.enum([PET_TYPE.CAT, PET_TYPE.DOG]),
@@ -56,7 +56,7 @@ export const FormFoundSchema = z.object({
         .string({
           required_error: "Image is required",
         })
-        .refine((url) => isValidImageURL(url), "this image dont valid!"),
+        .refine((url) => validateImage(url), "this image dont valid!"),
       description: z.string({ required_error: "Description is required" }),
       status: z.boolean().optional(),
       type: z.enum([PET_TYPE.CAT, PET_TYPE.DOG]),
@@ -79,7 +79,7 @@ export const UFormSchema = z.object({
       loss_date: z.date().optional(),
       image_url: z
         .string()
-        .refine((url) => isValidImageURL(url), "this image dont valid!")
+        .refine((url) => validateImage(url), "this image dont valid!")
         .optional(),
       description: z.string().optional(),
       status: z.boolean().optional(),

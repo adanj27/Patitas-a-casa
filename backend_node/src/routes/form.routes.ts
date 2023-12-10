@@ -21,7 +21,7 @@ router.get("/:id", FormController.getById);
 router.post(
   "/found",
   isAuth,
-  hasRole([ROL_TYPE.user]),
+  hasRole([ROL_TYPE.user, ROL_TYPE.ghost]),
   SchemaValidate(FormFoundSchema),
   FormController.createFound,
 );
@@ -29,7 +29,7 @@ router.post(
 router.post(
   "/lost",
   isAuth,
-  hasRole([ROL_TYPE.user]),
+  hasRole([ROL_TYPE.user, ROL_TYPE.ghost]),
   SchemaValidate(FormLostSchema),
   FormController.createLost,
 );

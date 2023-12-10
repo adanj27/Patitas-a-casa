@@ -62,7 +62,12 @@ export class AuthController {
           });
         }
       }
-      await ServiceEmail.AddContact({ email: newUser.email });
+
+      try {
+        await ServiceEmail.AddContact({ email: newUser.email });
+      } catch (error) {
+        console.error(error);
+      }
 
       const response: ApiResponse<IUser> = {
         status: true,

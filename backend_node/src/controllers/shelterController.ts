@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
 import { ApiResponse, Errors, IImage, IShelter } from "../interface";
 import { IAuth } from "../helpers";
-import { ImageRepository, ShelterRepository } from "../models/repositorie";
+import {
+  ImageRepository,
+  ShelterRepository,
+  UserRepository,
+} from "../models/repositorie";
 import { ShelterCreateType } from "../schema";
 import { AuthRequest } from "../middlware/authorization";
 
+const User = new UserRepository();
 const Shelter = new ShelterRepository();
 const Image = new ImageRepository();
 
@@ -53,6 +58,18 @@ export class ShelterController {
       newShelter.image_url = newImg._id;
 
       const result = await newShelter.save();
+
+      if (result) {
+        const user = await User.addToListUser({
+          auth: req.user,
+          documentId: newShelter._id,
+          modelName: "shelters",
+        });
+
+        if (!user) {
+          throw Error("no se agrego la lista");
+        }
+      }
 
       const response: ApiResponse<IShelter> = {
         status: true,
