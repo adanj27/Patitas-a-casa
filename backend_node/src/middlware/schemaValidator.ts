@@ -15,7 +15,7 @@ export const SchemaValidate =
       next();
     } catch (error) {
       if (error instanceof ZodError) {
-        return handlerHttpError(res, `${error.issues}`, 404);
+        return res.status(404).json({ message: error.issues });
       }
 
       return handlerHttpError(res);

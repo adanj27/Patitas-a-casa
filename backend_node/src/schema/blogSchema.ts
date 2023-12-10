@@ -1,6 +1,6 @@
 import { z } from "zod";
 import mongoose from "mongoose";
-import { isValidImageURL } from "../helpers/regexFunctions";
+import { isValidImageURL, validateImage } from "../helpers/regexFunctions";
 
 // create
 export const BlogSchemaz = z.object({
@@ -23,7 +23,7 @@ export const BlogSchemaz = z.object({
         .string({
           required_error: "Image is required",
         })
-        .refine((url) => isValidImageURL(url), "this image dont valid!"),
+        .refine((url) => validateImage(url), "this image dont valid!"),
       status: z.boolean().optional().default(true),
       count_view: z.number().optional(),
     })

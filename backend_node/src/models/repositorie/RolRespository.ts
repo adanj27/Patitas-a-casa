@@ -4,6 +4,7 @@ import mongoose, { FilterQuery, QueryWithHelpers } from "mongoose";
 import { IRol } from "../../interface/props/RolInterface";
 import { BaseRepository } from "../../repositories/BaseRepository";
 import { RolModel } from "../mongoose/rol.model";
+import { USERADMIN } from "../../helpers";
 
 export class RolRepository extends BaseRepository<IRol, string> {
   constructor() {
@@ -29,6 +30,10 @@ export class RolRepository extends BaseRepository<IRol, string> {
 
   async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
     return new mongoose.Types.ObjectId(id);
+  }
+
+  async getSuperAdmin(): Promise<IRol> {
+    return this.getByOne({ name: USERADMIN.ROL });
   }
 
   async count() {

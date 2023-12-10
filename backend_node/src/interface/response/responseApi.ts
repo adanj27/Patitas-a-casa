@@ -3,4 +3,5 @@ export type ApiResponse<T> = {
   total?: number;
   data?: T | null;
   message?: string;
+  nextPage?: boolean;
 };
