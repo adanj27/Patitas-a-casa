@@ -8,10 +8,13 @@ export class BlogRepository extends BaseRepository<IBlog, string> {
   constructor() {
     super({
       getAll: async (): Promise<IBlog[]> => {
-        return BlogModel.find({}).populate({
-          path: "image_url",
-          select: "-_id, url",
-        });
+        return BlogModel.find({})
+          .populate({
+            path: "image_url",
+            select: "-_id, url",
+          })
+          .sort({ createdAt: -1 })
+          .exec();
       },
       create: async (input: Partial<IBlog>) => {
         return BlogModel.create(input);
@@ -31,6 +34,18 @@ export class BlogRepository extends BaseRepository<IBlog, string> {
     });
   }
 
+  async getAllPagination({ skip = 0, limit = 0 }) {
+    return BlogModel.find({})
+      .populate({
+        path: "image_url",
+        select: "-_id, url",
+      })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
+  }
+
   async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {
     return new mongoose.Types.ObjectId(id);
   }
@@ -40,5 +55,9 @@ export class BlogRepository extends BaseRepository<IBlog, string> {
       $inc: { count_view: 1 },
     });
     return blog;
+  }
+
+  async count() {
+    return BlogModel.countDocuments({});
   }
 }

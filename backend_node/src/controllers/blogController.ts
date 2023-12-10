@@ -8,6 +8,7 @@ import {
 } from "../models/repositorie";
 import { BlogCreateType } from "../schema";
 import { AuthRequest } from "../middlware/authorization";
+import { PaginationType } from "../schema/paginationSchema";
 
 const User = new UserRepository();
 const Blog = new BlogRepository();
@@ -15,15 +16,21 @@ const Image = new ImageRepository();
 
 export class BlogController {
   static async getAll(
-    req: Request,
+    req: Request<unknown, unknown, PaginationType>,
     res: Response,
   ): Promise<Response<ApiResponse<IBlog[]>>> {
     try {
-      const data = await Blog.getAll();
+      const skip = parseInt(req.query.skip as string, 10);
+      const limit = parseInt(req.query.limit as string, 10);
+
+      const data = await Blog.getAllPagination({ skip, limit });
+      const totalDoc = await Blog.count();
+      const hasNexPage = skip + limit < totalDoc;
 
       const response: ApiResponse<IBlog[]> = {
         status: true,
-        total: data.length,
+        total: totalDoc,
+        nextPage: hasNexPage,
         data,
       };
 
