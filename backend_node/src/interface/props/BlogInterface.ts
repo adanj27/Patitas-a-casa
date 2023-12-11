@@ -7,6 +7,7 @@ export interface IBlog extends Document {
   short_description: string;
   image_url: mongoose.Types.ObjectId; // ref 'image'
   description: string;
+  isdeleted: boolean;
   status: boolean;
   count_view: number;
 }

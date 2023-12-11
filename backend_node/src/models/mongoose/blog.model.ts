@@ -13,6 +13,7 @@ const BlogSchema = new Schema<IBlog>(
     short_description: { type: String },
     image_url: { type: Schema.Types.ObjectId, ref: "Image" },
     status: { type: Boolean },
+    isdeleted: { type: Boolean, default: false },
     count_view: { type: Number, default: 0 },
   },
   {

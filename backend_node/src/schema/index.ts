@@ -4,3 +4,4 @@ export * from "./formSchema";
 export * from "./paginationSchema";
 export * from "./shelterSchema";
 export * from "./userSchema";
+export * from "./validateIdSchema";

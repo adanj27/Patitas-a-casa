@@ -1,5 +1,3 @@
-// import { Request, Response, NextFunction } from "express";
-
 export interface MyError {
   status: boolean;
   message: string;
@@ -9,41 +7,27 @@ export interface MyError {
 export const Errors = {
   NOT_FOUND: {
     status: false,
-    message: "Register not found.",
+    message: "This record was not found.",
   },
-
+  DATA_ERROR: {
+    status: false,
+    message: "invalid credentials.",
+  },
   ALREADY_EXIST: {
     status: false,
-    message: "This title already exists :)",
+    message: "This record already exists.",
   },
-
-  VALUES_ERROR: (error: string) => ({
+  UNAUTHENTIFATED: {
     status: false,
-    message: `Error inputs ${error}`,
+    message: "You are not authenticated.",
+  },
+  UNAUTHORIZED: { status: false, message: "You are not authorized." },
+  MSG: (message: string) => ({
+    status: false,
+    message,
   }),
-
-  ERROR_DATABASE: (error: string) => ({
+  ERROR: (error: string) => ({
     status: false,
-    message: `Something unexpected has happened with the database ${error}`,
+    message: `Something unexpected has happened ${error}`,
   }),
 };
-
-// export const errorHandler = (
-//   err: Error,
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   console.error(err.stack);
-//   res.status(500).send("Something broke!");
-// };
-
-export class RepositoryError extends Error {
-  status: number;
-
-  constructor(message: string, status: number) {
-    super(message);
-    this.name = this.constructor.name;
-    this.status = status;
-  }
-}

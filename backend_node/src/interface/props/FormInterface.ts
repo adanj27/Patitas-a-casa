@@ -28,7 +28,7 @@ export interface IForm extends Document {
   address: string;
   reward: number;
   contact: string;
-  loss_date: Date;
+  loss_date?: Date | undefined;
   image_url: mongoose.Types.ObjectId; // ref 'image'
   description: string;
   status: boolean;

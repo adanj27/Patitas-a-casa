@@ -1,16 +1,13 @@
 import { Router } from "express";
-
-import { SchemaValidate } from "../middlware/schemaValidator";
 import { FormController } from "../controllers";
-import { isAuth } from "../middlware/authorization";
 import { ROL_TYPE } from "../interface";
-import { hasRole } from "../middlware/checkroles";
 import {
-  DFormSchema,
-  FormFoundSchema,
-  FormLostSchema,
-  UFormSchema,
+  validateIdSchema,
+  FormFoundPetSchema,
+  FormLostPetSchema,
+  FormUpdateSchema,
 } from "../schema";
+import { SchemaValidate, hasRole, isAuth } from "../middlware";
 
 const router = Router();
 
@@ -22,7 +19,7 @@ router.post(
   "/found",
   isAuth,
   hasRole([ROL_TYPE.user, ROL_TYPE.ghost]),
-  SchemaValidate(FormFoundSchema),
+  SchemaValidate(FormFoundPetSchema),
   FormController.createFound,
 );
 
@@ -30,7 +27,7 @@ router.post(
   "/lost",
   isAuth,
   hasRole([ROL_TYPE.user, ROL_TYPE.ghost]),
-  SchemaValidate(FormLostSchema),
+  SchemaValidate(FormLostPetSchema),
   FormController.createLost,
 );
 
@@ -38,7 +35,7 @@ router.patch(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
-  SchemaValidate(UFormSchema),
+  SchemaValidate(FormUpdateSchema),
   FormController.update,
 );
 
@@ -46,7 +43,7 @@ router.delete(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  SchemaValidate(DFormSchema),
+  SchemaValidate(validateIdSchema),
   FormController.delete,
 );
 

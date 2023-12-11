@@ -6,8 +6,9 @@ import {
   ShelterRepository,
   UserRepository,
 } from "../models/repositorie";
-import { ShelterCreateType } from "../schema";
+import { ShelterCreateType, ShelterUpdateTypeB } from "../schema";
 import { AuthRequest } from "../middlware/authorization";
+import { ValidateIdType } from "../schema/validateIdSchema";
 
 const User = new UserRepository();
 const Shelter = new ShelterRepository();
@@ -29,7 +30,7 @@ export class ShelterController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
@@ -78,12 +79,12 @@ export class ShelterController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
   static async getById(
-    req: Request,
+    req: Request<ValidateIdType, unknown, unknown>,
     res: Response,
   ): Promise<Response<ApiResponse<IShelter>>> {
     const { id } = req.params;
@@ -103,12 +104,13 @@ export class ShelterController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
   static async update(
-    req: Request,
+    req: Request<ValidateIdType, unknown, ShelterUpdateTypeB> &
+      AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IShelter>>> {
     const { id } = req.params;
@@ -147,12 +149,12 @@ export class ShelterController {
 
       return res.status(202).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
   static async delete(
-    req: Request,
+    req: Request<ValidateIdType, unknown, unknown> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<string>>> {
     const { id } = req.params;
@@ -173,7 +175,7 @@ export class ShelterController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 }

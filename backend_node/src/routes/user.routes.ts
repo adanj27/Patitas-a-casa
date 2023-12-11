@@ -1,11 +1,8 @@
 import { Router } from "express";
-
 import { UserController } from "../controllers";
-import { isAuth } from "../middlware/authorization";
-import { hasRole } from "../middlware/checkroles";
 import { ROL_TYPE } from "../interface";
-import { SchemaValidate } from "../middlware/schemaValidator";
-import { DUserSchema, UUserSchema } from "../schema";
+import { validateIdSchema, UserupdateSchema } from "../schema";
+import { SchemaValidate, hasRole, isAuth } from "../middlware";
 
 const router = Router();
 
@@ -13,37 +10,37 @@ router.get(
   "/",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  UserController.getAll,
+  UserController.getAll
 );
 
 router.get(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  UserController.getById,
+  UserController.getById
 );
 
 router.patch(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
-  SchemaValidate(UUserSchema),
-  UserController.update,
+  SchemaValidate(UserupdateSchema),
+  UserController.update
 );
 
 router.delete(
   "/:id/logic",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  SchemaValidate(DUserSchema),
-  UserController.delete,
+  SchemaValidate(validateIdSchema),
+  UserController.delete
 );
 
 router.delete(
   "/:id/destroy",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  SchemaValidate(DUserSchema),
-  UserController.erased,
+  SchemaValidate(validateIdSchema),
+  UserController.erased
 );
 export { router };

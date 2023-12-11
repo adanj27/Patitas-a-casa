@@ -1,9 +1,8 @@
 import { z } from "zod";
-import mongoose from "mongoose";
 import { isValidImageURL, validateImage } from "../helpers/regexFunctions";
 
 // create
-export const BlogSchemaz = z.object({
+export const BlogcreateSchema = z.object({
   body: z
     .object({
       title: z
@@ -31,7 +30,7 @@ export const BlogSchemaz = z.object({
 });
 
 // update
-export const UBlogSchema = z.object({
+export const BlogupdateSchema = z.object({
   body: z
     .object({
       title: z.string().min(10).max(150).optional(),
@@ -46,28 +45,7 @@ export const UBlogSchema = z.object({
       count_view: z.number().optional(),
     })
     .strict(),
-
-  params: z
-    .object({
-      id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
-        message: "Id invalid!",
-      }),
-    })
-    .strict(),
 });
 
-// for getById - Delete
-export const DBlogSchema = z.object({
-  params: z
-    .object({
-      id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
-        message: "Id invalid!",
-      }),
-    })
-    .strict(),
-});
-
-export type BlogCreateType = z.infer<typeof BlogSchemaz>["body"];
-export type BlogUpdateTypeB = z.infer<typeof UBlogSchema>["body"];
-export type BlogUpdateTypeP = z.infer<typeof UBlogSchema>["params"];
-export type BlogDeleteType = z.infer<typeof DBlogSchema>["params"];
+export type BlogCreateType = z.infer<typeof BlogcreateSchema>["body"];
+export type BlogUpdateTypeB = z.infer<typeof BlogupdateSchema>["body"];

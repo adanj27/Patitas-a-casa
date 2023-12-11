@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { ApiResponse, Errors, IUser } from "../interface";
 import {
-  AuthResetTypeB,
-  AuthResetTypeP,
-  AuthType,
-  CreateUserType,
+  AuthLoginType,
+  AuthResetPassType,
+  UserCreateType,
+  ValidateIdType,
 } from "../schema";
-import { UserRepository } from "../models/repositorie/UserRepository";
+import { UserRepository, RolRepository } from "../models/repositorie";
 import {
   BREVO_CONFIG,
   IAuth,
@@ -15,8 +15,7 @@ import {
   setAccessTokenCookie,
 } from "../helpers";
 import { ServiceSMTP } from "../services/sendinblue/service";
-import { RolRepository } from "../models/repositorie";
-import { AuthRequest } from "../middlware/authorization";
+import { AuthRequest, handlerHttpError } from "../middlware";
 
 const User = new UserRepository();
 const Rol = new RolRepository();
@@ -24,7 +23,7 @@ const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
 
 export class AuthController {
   static async Register(
-    req: Request<unknown, unknown, CreateUserType>,
+    req: Request<unknown, unknown, UserCreateType>,
     res: Response,
   ) {
     let result;
@@ -56,10 +55,11 @@ export class AuthController {
         result = await newUser.save();
 
         if (!result) {
-          return res.status(404).json({
-            status: false,
-            message: "Error user dont create",
-          });
+          return handlerHttpError(
+            res,
+            Errors.MSG("Error user dont create").message,
+            404,
+          );
         }
       }
 
@@ -81,35 +81,34 @@ export class AuthController {
           .status(404)
           .json({ status: false, message: "This email or alias alredy exist" });
 
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return handlerHttpError(res, Errors.ERROR(error).message);
     }
   }
 
-  static async login(req: Request<unknown, unknown, AuthType>, res: Response) {
+  static async login(
+    req: Request<unknown, unknown, AuthLoginType>,
+    res: Response,
+  ) {
     try {
-      const validUser = await User.getByOne({ email: req.body.email });
+      const existUser = await User.getByOne({ email: req.body.email });
 
-      if (!validUser) {
-        return res
-          .status(404)
-          .json({ status: false, message: "Error data no valid!" });
+      if (!existUser) {
+        return handlerHttpError(res, Errors.DATA_ERROR.message, 404);
       }
 
       const validPass = await User.ValidatePassword(
         req.body.password,
-        validUser.password,
+        existUser.password,
       );
 
       if (!validPass) {
-        return res
-          .status(404)
-          .json({ status: false, message: "Error data no valid!" });
+        return handlerHttpError(res, Errors.DATA_ERROR.message, 404);
       }
 
       const user: IAuth = {
-        id: validUser._id,
-        alias: validUser.alias,
-        rol: validUser.rol._id,
+        id: existUser._id,
+        alias: existUser.alias,
+        rol: existUser.rol._id,
       };
 
       const mytoken = await JWT.create(user);
@@ -129,7 +128,7 @@ export class AuthController {
       }
       return null;
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return handlerHttpError(res, Errors.ERROR(error).message);
     }
   }
 
@@ -143,23 +142,24 @@ export class AuthController {
   }
 
   static async resetPassword(
-    req: Request<AuthResetTypeP, unknown, AuthResetTypeB> & AuthRequest<IAuth>,
+    req: Request<ValidateIdType, unknown, AuthResetPassType> &
+      AuthRequest<IAuth>,
     res: Response,
   ) {
     const { oldpassword, newpassword } = req.body;
     try {
       if (oldpassword === newpassword) {
-        return res
-          .status(404)
-          .json({ status: false, message: "Try a different password" });
+        return handlerHttpError(
+          res,
+          Errors.MSG("Try a different password").message,
+          404,
+        );
       }
 
       const exist = await User.getById(req.user.id);
 
       if (!exist || !exist.status) {
-        return res
-          .status(404)
-          .json({ status: false, message: "User dont found" });
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       const validPass = await User.ValidatePassword(
@@ -168,9 +168,11 @@ export class AuthController {
       );
 
       if (!validPass) {
-        return res
-          .status(404)
-          .json({ message: "your password does not match" });
+        return handlerHttpError(
+          res,
+          Errors.MSG("your password does not match").message,
+          404,
+        );
       }
 
       const newPass = await User.ResetPass({ password: newpassword });
@@ -181,7 +183,7 @@ export class AuthController {
         .status(200)
         .json({ status: true, message: "Password Update!" });
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return handlerHttpError(res, Errors.ERROR(error).message);
     }
   }
 }

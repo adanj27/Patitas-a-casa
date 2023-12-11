@@ -3,6 +3,7 @@ import { RolRepository, UserRepository } from "../models/repositorie";
 import { AuthRequest } from "./authorization";
 import { IAuth } from "../helpers";
 import { handlerHttpError } from "./handlerHttpError";
+import { Errors } from "../interface";
 
 const User = new UserRepository();
 const Rol = new RolRepository();
@@ -24,11 +25,7 @@ export const hasRole =
       );
 
       if (!checkValueRol) {
-        return handlerHttpError(
-          res,
-          "Dont have authorization for this action!",
-          403,
-        );
+        return handlerHttpError(res, Errors.UNAUTHORIZED.message, 403);
       }
 
       next();

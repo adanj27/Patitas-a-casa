@@ -6,9 +6,14 @@ import {
   ImageRepository,
   UserRepository,
 } from "../models/repositorie";
-import { BlogCreateType } from "../schema";
+import {
+  BlogCreateType,
+  BlogUpdateTypeB,
+  PaginationType,
+  ValidateIdType,
+} from "../schema";
 import { AuthRequest } from "../middlware/authorization";
-import { PaginationType } from "../schema/paginationSchema";
+import { handlerHttpError } from "../middlware/handlerHttpError";
 
 const User = new UserRepository();
 const Blog = new BlogRepository();
@@ -36,7 +41,7 @@ export class BlogController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 
@@ -47,6 +52,12 @@ export class BlogController {
     const { image_url, ...allimput } = req.body;
     let newImg: IImage;
     try {
+      const existBlog = await Blog.getByOne({ title: allimput.title });
+
+      if (existBlog) {
+        return handlerHttpError(res, Errors.ALREADY_EXIST.message, 404);
+      }
+
       const newBlog = await Blog.create({
         ...allimput,
       });
@@ -58,24 +69,21 @@ export class BlogController {
         });
 
         newImg.model_id = newBlog._id;
-
         await newImg.save();
       }
 
       newBlog.image_url = newImg._id;
-
       const result = await newBlog.save();
 
-      // agregar al usuario
       if (result) {
-        const user = await User.addToListUser({
-          auth: req.user,
-          documentId: newBlog._id,
-          modelName: "blogs",
-        });
-
-        if (!user) {
-          throw Error("no se agrego la lista");
+        try {
+          await User.addToListUser({
+            auth: req.user,
+            documentId: newBlog._id,
+            modelName: "blogs",
+          });
+        } catch (error) {
+          console.error(error);
         }
       }
 
@@ -86,47 +94,47 @@ export class BlogController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 
   static async getById(
-    req: Request,
+    req: Request<ValidateIdType, unknown, unknown>,
     res: Response,
   ): Promise<Response<ApiResponse<IBlog>>> {
     const { id } = req.params;
     try {
-      const exist = await Blog.getById(id);
+      const existBlog = await Blog.getById(id);
 
-      if (!exist) {
-        return res.status(404).json(Errors.NOT_FOUND);
+      if (!existBlog) {
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       await Blog.incrementViewCount(id);
 
       const response: ApiResponse<IBlog> = {
         status: true,
-        data: exist,
+        data: existBlog,
       };
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 
   static async update(
-    req: Request,
+    req: Request<ValidateIdType, unknown, BlogUpdateTypeB> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IBlog>>> {
     const { id } = req.params;
     const { image_url, ...input } = req.body;
 
     try {
-      const exist = await Blog.getById(id);
+      const existBlog = await Blog.getById(id);
 
-      if (!exist) {
-        return res.status(404).json(Errors.NOT_FOUND);
+      if (!existBlog) {
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       let result: IBlog;
@@ -143,7 +151,6 @@ export class BlogController {
       if (image_url) {
         const img = await Image.getByOne({ model_id: id });
 
-        // modificar con las clases de cloudinary o de image
         if (img) {
           const newurl = await Image.updateWithCloudinary({
             image_url,
@@ -164,33 +171,32 @@ export class BlogController {
 
       return res.status(202).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 
   static async delete(
-    req: Request,
+    req: Request<ValidateIdType, unknown, unknown> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<string>>> {
     const { id } = req.params;
     try {
-      const exist = await Blog.getById(id);
+      const existBlog = await Blog.getById(id);
 
-      if (!exist) {
+      if (!existBlog) {
         return res.status(404).json(Errors.NOT_FOUND);
       }
 
-      await Blog.delete(id);
-      await Image.deleteWithCloudinary(exist._id);
+      await Blog.deletedLogic({ id });
 
       const response: ApiResponse<string> = {
         status: true,
-        data: `${exist.title} deleted!`,
+        data: `${existBlog.title} deleted!`,
       };
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 }

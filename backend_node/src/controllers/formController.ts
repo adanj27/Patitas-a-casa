@@ -5,8 +5,14 @@ import {
   UserRepository,
 } from "../models/repositorie";
 import { ApiResponse, Errors, IForm, IImage } from "../interface";
-import { FormCreateType, PaginationType } from "../schema";
-import { AuthRequest } from "../middlware/authorization";
+import {
+  FormCreateLostType,
+  FormCreateFoundType,
+  FormUpdateType,
+  PaginationType,
+  ValidateIdType,
+} from "../schema";
+import { AuthRequest, handlerHttpError } from "../middlware";
 import { BREVO_CONFIG, IAuth } from "../helpers";
 import { ServiceSMTP } from "../services/sendinblue/service";
 
@@ -37,12 +43,12 @@ export class FormController {
 
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
   static async getById(
-    req: Request,
+    req: Request<ValidateIdType, unknown, unknown>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { id } = req.params;
@@ -50,7 +56,7 @@ export class FormController {
       const form = await Form.getById(id);
 
       if (!form) {
-        return res.status(404).json(Errors.NOT_FOUND);
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       const response: ApiResponse<IForm> = {
@@ -59,12 +65,12 @@ export class FormController {
       };
       return res.status(200).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
   static async createLost(
-    req: Request<unknown, unknown, FormCreateType> & AuthRequest<IAuth>,
+    req: Request<unknown, unknown, FormCreateLostType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...input } = req.body;
@@ -122,12 +128,12 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 
   static async createFound(
-    req: Request<unknown, unknown, FormCreateType> & AuthRequest<IAuth>,
+    req: Request<unknown, unknown, FormCreateFoundType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { image_url, ...input } = req.body;
@@ -185,12 +191,12 @@ export class FormController {
       };
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error));
+      return res.status(500).json(Errors.ERROR(error));
     }
   }
 
   static async update(
-    req: Request,
+    req: Request<ValidateIdType, unknown, FormUpdateType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { id } = req.params;
@@ -200,10 +206,10 @@ export class FormController {
       const exist = await Form.getById(id);
 
       if (!exist) {
-        return res.status(404).json(Errors.NOT_FOUND);
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
-      const result: IForm = await Form.update(id, input);
+      const result = await Form.update(id, input);
 
       if (image_url) {
         const img = await Image.getByOne({ model_id: id });
@@ -229,12 +235,12 @@ export class FormController {
 
       return res.status(202).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 
   static async delete(
-    req: Request,
+    req: Request<ValidateIdType, unknown, unknown> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<string>>> {
     const { id } = req.params;
@@ -242,7 +248,7 @@ export class FormController {
       const exist = await Form.getById(id);
 
       if (!exist) {
-        return res.status(404).json(Errors.NOT_FOUND);
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
       await Form.delete(id);
@@ -255,7 +261,7 @@ export class FormController {
 
       return res.status(201).json(response);
     } catch (error) {
-      return res.status(500).json(Errors.ERROR_DATABASE(error.message));
+      return res.status(500).json(Errors.ERROR(error.message));
     }
   }
 }

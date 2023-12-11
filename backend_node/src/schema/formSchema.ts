@@ -1,10 +1,9 @@
 import { z } from "zod";
-import mongoose from "mongoose";
 import { validateImage } from "../helpers/regexFunctions";
 import { PETSEARCH_TYPE, PETSIZE_TYPE, PET_TYPE } from "../interface";
 
 // create lost
-export const FormLostSchema = z.object({
+export const FormLostPetSchema = z.object({
   body: z
     .object({
       name: z.string({ required_error: "Name is required!" }),
@@ -35,10 +34,9 @@ export const FormLostSchema = z.object({
 });
 
 // create found
-export const FormFoundSchema = z.object({
+export const FormFoundPetSchema = z.object({
   body: z
     .object({
-      name: z.string().optional(),
       color: z.string({
         required_error: "Color is required!",
       }),
@@ -66,7 +64,7 @@ export const FormFoundSchema = z.object({
 });
 
 // update
-export const UFormSchema = z.object({
+export const FormUpdateSchema = z.object({
   body: z
     .object({
       name: z.string().min(10).max(100).optional(),
@@ -76,7 +74,7 @@ export const UFormSchema = z.object({
       address: z.string().optional(),
       reward: z.number().optional(),
       contact: z.string().optional(),
-      loss_date: z.date().optional(),
+      loss_date: z.string().datetime(),
       image_url: z
         .string()
         .refine((url) => validateImage(url), "this image dont valid!")
@@ -86,29 +84,8 @@ export const UFormSchema = z.object({
       type: z.enum(["DOG", "CAT", "OTHERS"]).optional(),
     })
     .strict(),
-
-  params: z
-    .object({
-      id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
-        message: "Id invalid!",
-      }),
-    })
-    .strict(),
 });
 
-// for getById - Delete
-export const DFormSchema = z.object({
-  params: z
-    .object({
-      id: z.string().refine((value) => mongoose.Types.ObjectId.isValid(value), {
-        message: "Id invalid!",
-      }),
-    })
-    .strict(),
-});
-
-export type FormCreateType = z.infer<typeof FormLostSchema>["body"];
-export type FormFountCreateType = z.infer<typeof FormFoundSchema>["body"];
-export type FormUpdateTypeB = z.infer<typeof UFormSchema>["body"];
-export type FormUpdateTypeP = z.infer<typeof UFormSchema>["params"];
-export type FormDeleteType = z.infer<typeof DFormSchema>["params"];
+export type FormCreateLostType = z.infer<typeof FormLostPetSchema>["body"];
+export type FormCreateFoundType = z.infer<typeof FormFoundPetSchema>["body"];
+export type FormUpdateType = z.infer<typeof FormUpdateSchema>["body"];

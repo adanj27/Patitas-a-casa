@@ -1,10 +1,12 @@
 import { Router } from "express";
 import { BlogController } from "../controllers/blogController";
-import { SchemaValidate } from "../middlware/schemaValidator";
-import { BlogSchemaz, DBlogSchema, UBlogSchema } from "../schema";
-import { isAuth } from "../middlware/authorization";
-import { hasRole } from "../middlware/checkroles";
+import {
+  BlogcreateSchema,
+  BlogupdateSchema,
+  validateIdSchema,
+} from "../schema";
 import { ROL_TYPE } from "../interface/props/RolInterface";
+import { SchemaValidate, hasRole, isAuth } from "../middlware";
 
 const router = Router();
 
@@ -13,17 +15,17 @@ router.post(
   "/",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
-  SchemaValidate(BlogSchemaz),
+  SchemaValidate(BlogcreateSchema),
   BlogController.create,
 );
 
-router.get("/:id", SchemaValidate(DBlogSchema), BlogController.getById);
+router.get("/:id", SchemaValidate(validateIdSchema), BlogController.getById);
 
 router.patch(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
-  SchemaValidate(UBlogSchema),
+  SchemaValidate(BlogupdateSchema),
   BlogController.update,
 );
 
@@ -31,7 +33,7 @@ router.delete(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  SchemaValidate(DBlogSchema),
+  SchemaValidate(validateIdSchema),
   BlogController.delete,
 );
 

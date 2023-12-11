@@ -35,7 +35,7 @@ export class BlogRepository extends BaseRepository<IBlog, string> {
   }
 
   async getAllPagination({ skip = 0, limit = 0 }) {
-    return BlogModel.find({})
+    return BlogModel.find({ isdeleted: false })
       .populate({
         path: "image_url",
         select: "-_id, url",
@@ -44,6 +44,14 @@ export class BlogRepository extends BaseRepository<IBlog, string> {
       .skip(skip)
       .limit(limit)
       .exec();
+  }
+
+  async deletedLogic({ id }) {
+    return BlogModel.findOneAndUpdate({ _id: id }, { isdeleted: true });
+  }
+
+  async getByOne({ title }) {
+    return BlogModel.findOne({ title });
   }
 
   async setConvertId(id: string): Promise<mongoose.Types.ObjectId> {

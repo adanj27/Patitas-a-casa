@@ -1,10 +1,8 @@
 import { Router } from "express";
-import { SchemaValidate } from "../middlware/schemaValidator";
-import { isAuth } from "../middlware/authorization";
-import { hasRole } from "../middlware/checkroles";
-import { ROL_TYPE } from "../interface/props/RolInterface";
 import { DShelterSchema, ShelterSchemaz, UShelterSchema } from "../schema";
 import { ShelterController } from "../controllers/shelterController";
+import { SchemaValidate, hasRole, isAuth } from "../middlware";
+import { ROL_TYPE } from "../interface";
 
 const router = Router();
 
