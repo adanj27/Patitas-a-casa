@@ -10,14 +10,14 @@ router.get(
   "/",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  UserController.getAll
+  UserController.getAll,
 );
 
 router.get(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
-  UserController.getById
+  UserController.getById,
 );
 
 router.patch(
@@ -25,7 +25,7 @@ router.patch(
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
   SchemaValidate(UserupdateSchema),
-  UserController.update
+  UserController.update,
 );
 
 router.delete(
@@ -33,7 +33,7 @@ router.delete(
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(validateIdSchema),
-  UserController.delete
+  UserController.delete,
 );
 
 router.delete(
@@ -41,6 +41,6 @@ router.delete(
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(validateIdSchema),
-  UserController.erased
+  UserController.erased,
 );
 export { router };
