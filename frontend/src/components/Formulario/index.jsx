@@ -52,7 +52,7 @@ export const Formulario = ({ setModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const token = localStorage.getItem('token'); // Reemplaza 'your_token_key' con el nombre de tu clave de token
+    // const token = localStorage.getItem('token');
     // console.log(token)
 
     const formDataToSend = new FormData();
@@ -65,8 +65,7 @@ export const Formulario = ({ setModal }) => {
     try {
       const response = await axios.post('http://localhost:4000/api/form/lost', formDataToSend, {
         headers: {
-          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjNhYjVjODY2NzRmNTQ5MjJkZTMzNSIsImFsaWFzIjoiQWxpYXNVc2VyIiwicm9sIjoiNjU2MmEzOTQ0MjRkYTk5NWE1MGI1YTUxIiwiaWF0IjoxNzAyNzMyOTg1LCJleHAiOjE3MDI4MTkzODV9.fO5uTptqqRJPGTDhfioSOPx14qnFQ-qQZxlrrsp9a0g",
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
 
