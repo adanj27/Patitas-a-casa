@@ -20,7 +20,7 @@ router.post(
   isAuth,
   hasRole([ROL_TYPE.user, ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(FormFoundPetSchema),
-  FormController.createFound
+  FormController.createFound,
 );
 
 router.post(
@@ -28,7 +28,7 @@ router.post(
   isAuth,
   hasRole([ROL_TYPE.user, ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(FormLostPetSchema),
-  FormController.createLost
+  FormController.createLost,
 );
 
 router.patch(
@@ -36,7 +36,7 @@ router.patch(
   isAuth,
   hasRole([ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
   SchemaValidate(FormUpdateSchema),
-  FormController.update
+  FormController.update,
 );
 
 router.delete(
@@ -44,7 +44,7 @@ router.delete(
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(validateIdSchema),
-  FormController.delete
-);|
+  FormController.delete,
+);
 
 export { router };
