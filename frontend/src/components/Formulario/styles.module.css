@@ -27,7 +27,7 @@
   height: auto;
   transition: 0.5s;
   transform: translateY(5%);
-  opacity: 0;
+  opacity: 1;
 }
 
 .form {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios'
 import { useAuth } from '../../context/AuthContext';
 
@@ -8,28 +8,31 @@ const usePost = (url, data) => {
 	const { isAuthenticated } = useAuth(); 
     
 
-    const post = async () => {
-        try {
-            if (!isAuthenticated) {
-                console.error('Usuario no autenticado');
-                setStatus(403);
-                return;
-            }
-
-            const token = localStorage.getItem('token');
-            await axios.post(url, data, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+    useEffect(() => {
+        const post = async () => {
+            try {
+                if (!isAuthenticated) {
+                    console.error('Usuario no autenticado');
+                    setStatus(403);
+                    return;
                 }
-            });
 
-            setStatus(200)
-        } catch (error) {
-            setStatus(403)
-        }
-    }
+                const token = localStorage.getItem('token');
+                await axios.post(url, data, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
-    post()
+                setStatus(200);
+            } catch (error) {
+                setStatus(403);
+            }
+        };
+
+        post(); // Llama a la función post dentro del efecto
+
+    }, [url, data, isAuthenticated]);
 
     return status;
 }

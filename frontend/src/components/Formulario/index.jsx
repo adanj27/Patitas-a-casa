@@ -10,126 +10,136 @@ import close from '/icons/imagenes recursos/close.png';
 
 // hooks
 import usePost from '../../hooks/services/usePost';
+import axios from 'axios';
 /**
  Petype = es un booleano que indica si el formulario es para reportar una mascota
  perdida o si es para reportar una mascota encontrada
  */
 
 export const Formulario = ({ setModal }) => {
-	const [petType, setPetType] = useState(true);
-	const [file, setFile] = useState(false);
-	const [uploadImgHover, setUploadImgHover] = useState(false);
+  const [petType, setPetType] = useState(true);
+	const [formData, setFormData] = useState({
+    name: '',
+    color: '',
+    size: '',
+    city: '',
+    address: '',
+    contact: '',
+    loss_date: '',
+    image_url: null,
+    description: '',
+    type_search: 'LOST',
+  });
 
-	const bodyRef = useRef(null);
-	const reportFormRef = useRef();
+  console.log(formData)
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const data = new FormData(reportFormRef.current);
-		// Descomentarlo cuando haya API de formulario
-		const url = petType ? 'http://localhost:4000/api/form/lost': 'http://localhost:4000/api/form/found';
-		usePost(url, data);
-		return petType ? 1 : 0;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({
+      ...formData,
+      image_url: file,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // const token = localStorage.getItem('token'); // Reemplaza 'your_token_key' con el nombre de tu clave de token
+    // console.log(token)
+
+    const formDataToSend = new FormData();
+  
+    // Loop through existing form data and append each key-value pair
+    for (const key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+    console.log('Form data to send:', formDataToSend);
+    try {
+      const response = await axios.post('http://localhost:4000/api/form/lost', formDataToSend, {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjNhYjVjODY2NzRmNTQ5MjJkZTMzNSIsImFsaWFzIjoiQWxpYXNVc2VyIiwicm9sIjoiNjU2MmEzOTQ0MjRkYTk5NWE1MGI1YTUxIiwiaWF0IjoxNzAyNzMyOTg1LCJleHAiOjE3MDI4MTkzODV9.fO5uTptqqRJPGTDhfioSOPx14qnFQ-qQZxlrrsp9a0g",
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Pet data sent successfully', response.data);
+    } catch (error) {
+      console.error('Error sending pet data', error.response?.data || error.message);
+    }
+  };
+
+  const handleCancel = (e) => {
+    e.preventDefault();
+    setModal(false);
 	};
-
-	//ends the animation
-	const handleCancel = (e) => {
-		e.preventDefault();
-		if (reportFormRef.current) {
-			setTimeout(() => {
-				reportFormRef.current.style.transform = 'translateY(5%)';
-				reportFormRef.current.style.opacity = '0';
-			}, 10);
-		}
-		setTimeout(() => {
-			setModal(false);
-		}, 500);
-	};
-
-	//starts the animation
-	useEffect(() => {
-		if (reportFormRef.current) {
-			setTimeout(() => {
-				reportFormRef.current.style.transform = 'translateY(0)';
-				reportFormRef.current.style.opacity = '1';
-			}, 10);
-		}
-	}, []);
-
-	useEffect(() => {
-		bodyRef.current = document.body;
-		if (bodyRef.current) {
-			bodyRef.current.style.overflowY = 'hidden';
-		}
-		return () => {
-			bodyRef.current.style.overflowY = 'visible';
-		};
-	}, []);
 
 	return (
 		<div className={styles['report-container']}>
-			<div ref={reportFormRef} className={styles.formContainer}>
-				<form
-					action="POST"
-					onSubmit={handleSubmit}
-					className={styles.form}>
-					<div className={styles.headerForm}>
-						<div
-							style={{ borderRadius: '8px 0 0 0' }}
-							className={petType ? styles.petSelected : styles.pet}
-							onClick={() => setPetType(true)}>
-							<img src={dog} alt="dog draw" /> Perdido
-						</div>
-						<div
-							className={!petType ? styles.petSelected : styles.pet}
-							onClick={() => setPetType(false)}>
-							<img src={pet} alt="pet draw" /> Encontrado
-						</div>
-						<button className={styles.cancelButton} onClick={handleCancel}>
-							<img src={close} alt="close-icon" />
-						</button>
-					</div>
-					<div className={styles.mainForm}>
-						<div className={styles.buttonFile}>
-							<label
-								style={
-									uploadImgHover
-										? { backgroundColor: 'rgba(222, 52, 29, 0.5)' }
-										: {}
-								}>
-								{file ? `Foto subida` : `Subir foto`}
-							</label>
-							<input
-								type="file"
-								accept=".jpg, .jpeg, .png"
-								id="petFile"
-								className={styles.buttonFile}
-								onInput={() => setFile(true)}
-								onMouseEnter={() => setUploadImgHover(true)}
-								onMouseLeave={() => setUploadImgHover(false)}
-							/>
-						</div>
-						<section className={styles.form_inputs}>
-							{petType ? <input type="text" name="name" placeholder="Nombre" /> : ''}
-							<input type="text" name="color" placeholder="Color" />
-							<div>
-								<input type="text" name="size" placeholder="Tamaño" />
-								<input type="text" name="city" placeholder="Ciudad" />
-							</div>
-							<input type="text" name="address" placeholder="Dirección" />
-							<div>
-								<input type="tel" name="contact" placeholder="Contacto" />
-								<input type="date" name="date" placeholder="Fecha" />
-							</div>
-						</section>
-						<h3>Descripción</h3>
-						<textarea name="description" cols="30" rows="10"></textarea>
-						<button onClick={handleSubmit} className={styles.submitButon}>
-							Enviar
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
+      <div className={styles.formContainer}>
+        <form action="POST" onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.headerForm}>
+            <div
+              style={{ borderRadius: '8px 0 0 0' }}
+              className={petType ? styles.petSelected : styles.pet}
+              onClick={() => setPetType(true)}
+            >
+              <img src={dog} alt="dog draw" /> Perdido
+            </div>
+            <div className={!petType ? styles.petSelected : styles.pet} onClick={() => setPetType(false)}>
+              <img src={pet} alt="pet draw" /> Encontrado
+            </div>
+            <button className={styles.cancelButton} onClick={handleCancel}>
+              <img src={close} alt="close-icon" />
+            </button>
+          </div>
+
+          <div className={styles.mainForm}>
+            <div className={styles.buttonFile}>
+              <label style={{backgroundColor: 'rgba(222, 52, 29, 0.5)'}}>Foto subida</label>
+              <input
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                id="petFile"
+                className={styles.buttonFile}
+                name="image_url" onChange={handleImageChange}
+              />
+            </div>
+
+            <section className={styles.form_inputs}>
+              {petType ? <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleInputChange} /> : ''}
+              <input type="text" name="color" placeholder="Color" value={formData.color} onChange={handleInputChange} />
+              <div>
+                <input type="text" name="size" placeholder="Tamaño" value={formData.size} onChange={handleInputChange} />
+                <input type="text" name="city" placeholder="Ciudad" value={formData.city} onChange={handleInputChange} />
+              </div>
+              <input type="text" name="address" placeholder="Dirección" value={formData.address} onChange={handleInputChange} />
+              <div>
+                <input type="tel" name="contact" placeholder="Contacto" value={formData.contact} onChange={handleInputChange} />
+                <input type="date" name="lost_date" placeholder="Fecha" value={formData.lost_date} onChange={handleInputChange} />
+              </div>
+            </section>
+
+            <h3>Descripción</h3>
+            <textarea name="description" cols="30" rows="10" value={formData.description} onChange={handleInputChange}></textarea>
+
+            <button
+              onClick={handleSubmit}
+              className={styles.submitButon}
+              // disabled={loading} // Disable the button while the form is submitting
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 	);
 };

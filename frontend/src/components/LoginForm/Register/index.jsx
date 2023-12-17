@@ -7,19 +7,19 @@ import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
 
 export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
-  const { setIsAuthenticated } = useAuth();
+  // const { setIsAuthenticated } = useAuth();
   // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
     alias: '',
-    password: '',
-    email: '',
     phone: '',
+    email: '',
+    password: '',
   });
 
-  // console.log(formData)
+  console.log(formData)
 
   const [errors, setErrors] = useState({});
 
@@ -37,44 +37,47 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validaciones
-    const newErrors = {};
-    if (!formData.first_name.trim()) {
-      newErrors.first_name = 'Nombre es requerido';
-    }
-    if (!formData.last_name.trim()) {
-      newErrors.last_name = 'Apellido es requerido';
-    }
-    if (!formData.alias.trim()) {
-      newErrors.alias = 'Nombre de usuario es requerido';
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Teléfono es requerido';
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = 'Correo es requerido';
-    }
-    if (!formData.password.trim()) {
-      newErrors.password = 'Contraseña es requerida';
-    }
-    setErrors(newErrors);
 
-    // Si no hay errores, puedes manejar los datos
+    // Aquí puedes agregar validaciones adicionales si es necesario
+    const validationErrors = validateFormData();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    // Enviar la solicitud al endpoint de registro
     try {
-      const response = await axios.post(
-        'http://localhost:4000/api/auth/register',
-        formData
-      );
+      const response = await fetch('http://localhost:4000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (response.status === 201) {
-        console.log('Registro exitoso');
-        setIsAuthenticated(true);
+      // Puedes manejar la respuesta del servidor aquí según tus necesidades
+      if (response.ok) {
+        // Registro exitoso, puedes redirigir al usuario o realizar otras acciones
       } else {
-        console.error('Error en el registro');
+        const data = await response.json();
+        setErrors({ serverError: data.message });
       }
     } catch (error) {
-      console.error('Error en el registro:', error);
+      console.error('Error al realizar la solicitud:', error);
     }
+  };
+
+  const validateFormData = () => {
+    // Aquí puedes realizar validaciones personalizadas
+    const errors = {};
+
+    if (!formData.first_name.trim()) {
+      errors.first_name = 'Campo obligatorio';
+    }
+
+    // Agrega más validaciones según tus necesidades
+
+    return errors;
   };
 
   return (
