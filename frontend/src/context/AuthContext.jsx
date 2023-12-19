@@ -5,13 +5,15 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [token, setToken] = useState(null);
 
   // Verificar el token al cargar la aplicación
   useEffect(() => {
     const checkTokenOnLoad = () => {
-      const token = localStorage.getItem('token');
-      if (token) {
+      const storedToken = localStorage.getItem('token');
+      if (storedToken) {
         setIsAuthenticated(true);
+        setToken(storedToken);
       }
     };
 
@@ -28,6 +30,7 @@ const login = async (credentials) => {
       console.log(mytoken)
       localStorage.setItem('token', mytoken);
       setIsAuthenticated(true);
+      setToken(mytoken);
       return true
     } else {
       console.error('Error en el inicio de sesión:', response.status);
@@ -44,10 +47,11 @@ const login = async (credentials) => {
     // Lógica de cierre de sesión
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+    setToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, token }}>
       {children}
     </AuthContext.Provider>
   );
