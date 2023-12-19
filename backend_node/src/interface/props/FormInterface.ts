@@ -1,4 +1,4 @@
-import mongoose, { Date, Document } from "mongoose";
+import { Date, Document } from "mongoose";
 
 export const PETSIZE_TYPE = {
   SMALL: "SMALL",
@@ -29,7 +29,8 @@ export interface IForm extends Document {
   reward: number;
   contact: string;
   loss_date?: Date | undefined;
-  image_url: mongoose.Types.ObjectId; // ref 'image'
+  image_url: string;
+  // image_url: mongoose.Types.ObjectId; // ref 'image'
   description: string;
   status: boolean;
   type: PetType;
