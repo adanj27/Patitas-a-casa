@@ -1,24 +1,26 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
-import styles from "./styles.module.css"
+import styles from './styles.module.css';
 
 import dog from '/icons/imagenes recursos/dog-seating.png';
 import pet from '/icons/imagenes recursos/pet.png';
 import close from '/icons/imagenes recursos/close.png';
 
-
 // hooks
-import usePost from '../../hooks/services/usePost';
+// import usePost from '../../hooks/services/usePost';
+import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
+import { Image } from 'cloudinary-react';
 /**
  Petype = es un booleano que indica si el formulario es para reportar una mascota
  perdida o si es para reportar una mascota encontrada
  */
 
 export const Formulario = ({ setModal }) => {
-  const [petType, setPetType] = useState(true);
-	const [formData, setFormData] = useState({
+  const { token } = useAuth();
+  const [formData, setFormData] = useState({
     name: '',
     color: '',
     size: '',
@@ -26,73 +28,97 @@ export const Formulario = ({ setModal }) => {
     address: '',
     contact: '',
     loss_date: '',
-    image_url: null,
     description: '',
+    type: '',
     type_search: 'LOST',
+    image_url: null,
   });
+  const [formattedLossDate, setFormattedLossDate] = useState('');
 
-  console.log(formData)
-
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    if (name !== 'image_url') {
+      // Si es la propiedad 'loss_date', formatea la fecha
+      const formattedValue = name === 'loss_date' ? new Date(value).toISOString() : value;
+      setFormattedLossDate(formattedValue);
+      console.log(formattedValue)
+  
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: formattedValue,
+      }));
+    }
   };
 
-  const handleImageChange = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    setFormData({
-      ...formData,
-      image_url: file,
-    });
+
+    if (file === null) {
+      console.log('No se ha seleccionado ninguna imagen');
+      return;
+    }
+
+    // Subir la imagen a Cloudinary
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'aqeczzrt');
+
+    try {
+      const response = await axios.post('https://api.cloudinary.com/v1_1/dlfwgaprv/image/upload', formData);
+      const imageUrl = response.data.secure_url;
+
+      setFormData((prevData) => ({
+        ...prevData,
+        image_url: imageUrl,
+      }));
+    } catch (error) {
+      console.error('Error al subir la imagen a Cloudinary:', error);
+  console.error('Cloudinary response:', error.response.data);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // const token = localStorage.getItem('token');
-    // console.log(token)
-
-    const formDataToSend = new FormData();
-  
-    // Loop through existing form data and append each key-value pair
-    for (const key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-    console.log('Form data to send:', formDataToSend);
     try {
-      const response = await axios.post('http://localhost:4000/api/form/lost', formDataToSend, {
+      const response = await axios.post('http://localhost:4000/api/form/lost', formData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`, // Asegúrate de enviar el token en el encabezado
         },
       });
-
-      console.log('Pet data sent successfully', response.data);
+  
+      if (response.status === 200) {
+        console.log('Formulario enviado con éxito:', response.data);
+        // Aquí puedes realizar acciones adicionales después de enviar el formulario con éxito
+      } else {
+        console.error('Error al enviar el formulario:', response.status);
+        // Aquí puedes manejar errores específicos si es necesario
+      }
     } catch (error) {
-      console.error('Error sending pet data', error.response?.data || error.message);
+      console.error('Error al enviar el formulario:', error.response || error);
+      // Aquí puedes manejar errores generales o de red
     }
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
     setModal(false);
-	};
+  };
 
-	return (
-		<div className={styles['report-container']}>
+  return (
+    <div className={styles['report-container']}>
       <div className={styles.formContainer}>
         <form action="POST" onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.headerForm}>
             <div
               style={{ borderRadius: '8px 0 0 0' }}
-              className={petType ? styles.petSelected : styles.pet}
-              onClick={() => setPetType(true)}
+              // className={petType ? styles.petSelected : styles.pet}
+              // onClick={() => setPetType(true)}
             >
               <img src={dog} alt="dog draw" /> Perdido
             </div>
-            <div className={!petType ? styles.petSelected : styles.pet} onClick={() => setPetType(false)}>
+            {/* <div className={!petType ? styles.petSelected : styles.pet} onClick={() => setPetType(false)}> */}
+            <div>
               <img src={pet} alt="pet draw" /> Encontrado
             </div>
             <button className={styles.cancelButton} onClick={handleCancel}>
@@ -102,35 +128,99 @@ export const Formulario = ({ setModal }) => {
 
           <div className={styles.mainForm}>
             <div className={styles.buttonFile}>
-              <label style={{backgroundColor: 'rgba(222, 52, 29, 0.5)'}}>Foto subida</label>
+              <label style={{ backgroundColor: 'rgba(222, 52, 29, 0.5)' }}>
+                Foto subida
+              </label>
+              {/* // accept=".jpg, .jpeg, .png" // id="petFile" */}
               <input
                 type="file"
-                accept=".jpg, .jpeg, .png"
-                id="petFile"
+                name="image_url"
                 className={styles.buttonFile}
-                name="image_url" onChange={handleImageChange}
+                onChange={handleImageUpload}
               />
+              <Image cloudName="dlfwgaprv" publicId={formData.image_url} width="50" height="50" />
             </div>
 
             <section className={styles.form_inputs}>
-              {petType ? <input type="text" name="name" placeholder="Nombre" value={formData.name} onChange={handleInputChange} /> : ''}
-              <input type="text" name="color" placeholder="Color" value={formData.color} onChange={handleInputChange} />
+              <input
+                type="text"
+                name="name"
+                placeholder="Nombre"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="color"
+                placeholder="Color"
+                value={formData.color}
+                onChange={handleChange}
+              />
               <div>
-                <input type="text" name="size" placeholder="Tamaño" value={formData.size} onChange={handleInputChange} />
-                <input type="text" name="city" placeholder="Ciudad" value={formData.city} onChange={handleInputChange} />
+                <select
+                  name="size"
+                  value={formData.size}
+                  onChange={handleChange}
+                >
+                  <option value="">Tamaño</option>
+                  <option value="SMALL">Pequeño</option>
+                  <option value="MEDIUM">Mediano</option>
+                  <option value="LARGE">Grande</option>
+                </select>
+                <input
+                  type="text"
+                  name="city"
+                  placeholder="Departamento"
+                  value={formData.city}
+                  onChange={handleChange}
+                />
               </div>
-              <input type="text" name="address" placeholder="Dirección" value={formData.address} onChange={handleInputChange} />
+              <input
+                type="text"
+                name="address"
+                placeholder="Dirección"
+                value={formData.address}
+                onChange={handleChange}
+              />
               <div>
-                <input type="tel" name="contact" placeholder="Contacto" value={formData.contact} onChange={handleInputChange} />
-                <input type="date" name="lost_date" placeholder="Fecha" value={formData.lost_date} onChange={handleInputChange} />
+                <input
+                  type="text"
+                  name="contact"
+                  placeholder="Contacto"
+                  value={formData.contact}
+                  onChange={handleChange}
+                />
+                <input
+                  type="date"
+                  name="loss_date"
+                  value={formattedLossDate}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <select
+                  name="type"
+                  value={formData.stype}
+                  onChange={handleChange}
+                >
+                  <option value="">Especie</option>
+                  <option value="DOG">Perro</option>
+                  <option value="CAT">Gato</option>
+                </select>
               </div>
             </section>
 
             <h3>Descripción</h3>
-            <textarea name="description" cols="30" rows="10" value={formData.description} onChange={handleInputChange}></textarea>
+            <textarea
+              name="description"
+              cols="30"
+              rows="10"
+              value={formData.description}
+              onChange={handleChange}
+            />
 
             <button
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
               className={styles.submitButon}
               // disabled={loading} // Disable the button while the form is submitting
             >
@@ -140,5 +230,5 @@ export const Formulario = ({ setModal }) => {
         </form>
       </div>
     </div>
-	);
+  );
 };
