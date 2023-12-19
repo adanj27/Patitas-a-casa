@@ -8,10 +8,7 @@ export class FormRepository extends BaseRepository<IForm, string> {
   constructor() {
     super({
       getAll: async (): Promise<IForm[]> => {
-        return FormModel.find({}).populate({
-          path: "image_url",
-          select: "-_id, url",
-        });
+        return FormModel.find({});
       },
       create: async (input: Partial<IForm>) => {
         return FormModel.create(input);
@@ -23,20 +20,13 @@ export class FormRepository extends BaseRepository<IForm, string> {
         return FormModel.findByIdAndDelete(id);
       },
       getById: async (id: string) => {
-        return FormModel.findById(id).populate({
-          path: "image_url",
-          select: "-_id, url",
-        });
+        return FormModel.findById(id);
       },
     });
   }
 
   async getAllPagination({ skip = 0, limit = 0 }) {
     return FormModel.find({})
-      .populate({
-        path: "image_url",
-        select: "-_id, url",
-      })
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
