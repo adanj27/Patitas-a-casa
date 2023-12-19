@@ -33,7 +33,6 @@ export const Formulario = ({ setModal }) => {
     type_search: 'LOST',
     image_url: null,
   });
-  const [formattedLossDate, setFormattedLossDate] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +40,6 @@ export const Formulario = ({ setModal }) => {
     if (name !== 'image_url') {
       // Si es la propiedad 'loss_date', formatea la fecha
       const formattedValue = name === 'loss_date' ? new Date(value).toISOString() : value;
-      setFormattedLossDate(formattedValue);
       console.log(formattedValue)
   
       setFormData((prevData) => ({
@@ -193,7 +191,7 @@ export const Formulario = ({ setModal }) => {
                 <input
                   type="date"
                   name="loss_date"
-                  value={formattedLossDate}
+                  value={formData.loss_date}
                   onChange={handleChange}
                 />
               </div>
