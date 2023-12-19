@@ -4,7 +4,7 @@ import {
   ImageRepository,
   UserRepository,
 } from "../models/repositorie";
-import { ApiResponse, Errors, IForm, IImage } from "../interface";
+import { ApiResponse, Errors, IForm } from "../interface";
 import {
   FormCreateLostType,
   FormCreateFoundType,
@@ -73,11 +73,9 @@ export class FormController {
     req: Request<unknown, unknown, FormCreateLostType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
-    const { image_url, ...input } = req.body;
-    let newImage: IImage;
     try {
-      const newForm = await Form.create({ ...input });
-
+      const newForm = await Form.create(req.body);
+      /* 
       // genera url cloudinary
       if (newForm) {
         newImage = await Image.createWithCloudinary({
@@ -89,7 +87,7 @@ export class FormController {
         await newImage.save();
       }
 
-      newForm.image_url = newImage._id;
+      newForm.image_url = newImage._id; */
       const result = await newForm.save();
 
       // agregar al usuario
@@ -111,7 +109,7 @@ export class FormController {
                 {
                   alias: newForm.name,
                   description: newForm.description,
-                  image: newImage.url,
+                  image: result.image_url,
                 },
               ],
             },
@@ -136,12 +134,10 @@ export class FormController {
     req: Request<unknown, unknown, FormCreateFoundType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
-    const { image_url, ...input } = req.body;
-    let newImage: IImage;
     try {
-      const newForm = await Form.create({ ...input });
+      const newForm = await Form.create(req.body);
 
-      // genera url cloudinary
+      /*  // genera url cloudinary
       if (newForm) {
         newImage = await Image.createWithCloudinary({
           url: image_url,
@@ -152,7 +148,7 @@ export class FormController {
         await newImage.save();
       }
 
-      newForm.image_url = newImage._id;
+      newForm.image_url = newImage._id; */
       const result = await newForm.save();
 
       // agregar al usuario
@@ -174,7 +170,7 @@ export class FormController {
                 {
                   alias: newForm.name,
                   description: newForm.description,
-                  image: newImage.url,
+                  image: result.image_url,
                 },
               ],
             },
