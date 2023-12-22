@@ -1,25 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 const useGet = (url) => {
     const [data, setData] = useState()
     const [status, setStatus] = useState('')
 
-    const fetch = async () => {
-        try {
-          const response = await axios.get(url);
-          setData(response.data);
-          setStatus('200');
-        } catch (error) {
-            setStatus(error)
+    useEffect(() => {
+        const fetch = async () => {
+            try {
+              const response = await axios.get(`http://localhost:4000/api/${url}`);
+              setData(response.data);
+              setStatus('200');
+            } catch (error) {
+                setStatus(error.message || 'Error fetching data');
+            }
         }
-    }
-
-    fetch()
+    
+        fetch()
+    }, [])
 
     return { data, status }
 }
 
 
 
-export default { useGet }
+export default useGet
