@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -21,27 +21,14 @@ import { Image } from 'cloudinary-react';
 export const Formulario = ({ setModal }) => {
   const { token } = useAuth();
   const [petType, setPetType] = useState(true);
-  const [formData, setFormData] = useState({
-    ...(petType ? { name: '' } : {}),
-    color: '',
-    size: '',
-    city: '',
-    address: '',
-    contact: '',
-    loss_date: '',
-    description: '',
-    type: '',
-    type_search: petType ? 'LOST' : 'FOUND',
-    image_url: null,
-  });
-  console.log(formData)
+  console.log(petType);
+  const [formData, setFormData] = useState({})
+  console.log(formData);
   const [file, setFile] = useState(false);
 
-  const handlePetTypeChange = (petType) => {
-    setPetType(false);
-
-    setFormData((prevFormData) => ({
-      ...(petType ? { name: '' } : {}),
+  useEffect(() => {
+    setFormData(petType ? {
+      name: '',
       color: '',
       size: '',
       city: '',
@@ -50,10 +37,22 @@ export const Formulario = ({ setModal }) => {
       loss_date: '',
       description: '',
       type: '',
-      type_search: petType ? 'LOST' : 'FOUND',
+      type_search: 'LOST',
       image_url: null,
-    }));
-  };
+    }
+      : {
+        color: '',
+        size: '',
+        city: '',
+        address: '',
+        contact: '',
+        loss_date: '',
+        description: '',
+        type: '',
+        type_search: 'FOUND',
+        image_url: null,
+      });
+  }, [petType])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -142,13 +141,13 @@ export const Formulario = ({ setModal }) => {
             <div
               style={{ borderRadius: '8px 0 0 0' }}
               className={petType ? styles.petSelected : styles.pet}
-              onClick={() => handlePetTypeChange(true)}
+              onClick={() => setPetType(true)}
             >
               <img src={dog} alt="dog draw" /> Perdido
             </div>
             <div
               className={!petType ? styles.petSelected : styles.pet}
-              onClick={() => handlePetTypeChange(false)}
+              onClick={() => setPetType(false)}
             >
               <img src={pet} alt="pet draw" /> Encontrado
             </div>
@@ -257,14 +256,16 @@ export const Formulario = ({ setModal }) => {
                 <input
                   type="date"
                   name="loss_date"
-                  value={formData.loss_date ? formData.loss_date.split('T')[0] : ''}
+                  value={
+                    formData.loss_date ? formData.loss_date.split('T')[0] : ''
+                  }
                   onChange={handleChange}
                 />
               </div>
               <div>
                 <select
                   name="type"
-                  value={formData.stype}
+                  value={formData.type}
                   onChange={handleChange}
                 >
                   <option value="">Especie</option>

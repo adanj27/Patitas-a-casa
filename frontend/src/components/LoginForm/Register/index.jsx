@@ -7,9 +7,8 @@ import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
 
 export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
-  // const { setIsAuthenticated } = useAuth();
   // const navigate = useNavigate();
-
+  
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -18,8 +17,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     email: '',
     password: '',
   });
-
-  console.log(formData)
+  const { login } = useAuth();
 
   const [errors, setErrors] = useState({});
 
@@ -47,17 +45,14 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Enviar la solicitud al endpoint de registro
     try {
-      const response = await fetch('http://localhost:4000/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await axios.post('http://localhost:4000/api/auth/register', formData);
 
       // Puedes manejar la respuesta del servidor aquí según tus necesidades
-      if (response.ok) {
-        // Registro exitoso, puedes redirigir al usuario o realizar otras acciones
+      if (response) {
+
+        await login({ email: formData.email, password: formData.password });
+        // setLogin(false);
+
       } else {
         const data = await response.json();
         setErrors({ serverError: data.message });
