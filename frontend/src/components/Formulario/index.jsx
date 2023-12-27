@@ -53,6 +53,7 @@ export const Formulario = ({ setModal }) => {
         image_url: null,
       });
   }, [petType])
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,6 +106,7 @@ export const Formulario = ({ setModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const url = petType
         ? 'http://localhost:4000/api/form/lost'
         : 'http://localhost:4000/api/form/found';
@@ -287,7 +289,7 @@ export const Formulario = ({ setModal }) => {
             <button
               // onClick={handleSubmit}
               className={styles.submitButon}
-              // disabled={loading} // Disable the button while the form is submitting
+              disabled={loading} // Disable the button while the form is submitting
             >
               Enviar
             </button>
