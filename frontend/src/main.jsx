@@ -5,8 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 
 import Spinner from './components/Spinner/index';
-import ScrollToTop from './helpers/scrollToTop/scrollToTop';
 import { AuthProvider } from './context/AuthContext';
+import ScrollToTop from './helpers/ScrollToTop/ScrollToTop';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Suspense fallback={<Spinner />}>
