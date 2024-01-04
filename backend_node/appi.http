@@ -118,10 +118,10 @@ POST http://localhost:4000/api/auth/register
 Content-Type: application/json
 
 {
-  "first_name": "usertest",
+  "first_name": "userbrevo",
   "last_name": "apellidotest",
   "phone": "123456789",
-  "email": "test1@gmail.com",
+  "email": "@gmail.com",
   "password": "password1A@",
   "alias": "testing"
 }
@@ -154,3 +154,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2N
 ### delete erased USER
 DELETE http://localhost:4000/api/user/6562bff7e1ec086ac3f8e537/logic
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NjM0NTIsImV4cCI6MTcwMTA0OTg1Mn0.4fhf-ujumz9RDpKrmnQNoZCxhyCvmE3meGAZA5Lqc00
+

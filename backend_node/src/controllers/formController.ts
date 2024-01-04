@@ -75,19 +75,7 @@ export class FormController {
   ): Promise<Response<ApiResponse<IForm>>> {
     try {
       const newForm = await Form.create(req.body);
-      /* 
-      // genera url cloudinary
-      if (newForm) {
-        newImage = await Image.createWithCloudinary({
-          url: image_url,
-          folder: "FORM",
-        });
 
-        newImage.model_id = newForm._id;
-        await newImage.save();
-      }
-
-      newForm.image_url = newImage._id; */
       const result = await newForm.save();
 
       // agregar al usuario

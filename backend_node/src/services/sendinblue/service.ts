@@ -58,7 +58,7 @@ export class ServiceSMTP {
   }
 
   /**
-   * * This method answer test
+   * * this metod extract info account.
    * @returns  void
    */
   private async getInfo() {
@@ -182,11 +182,13 @@ export class ServiceSMTP {
   public async SendEmail({ type, items, email }) {
     this.configApiClient();
     const { data } = await this.getInfo();
+    // verificar el template
     const templateId = await this.getTemplate({ type });
 
     try {
       const api = new Brevo.TransactionalEmailsApi();
       const sendEmail = new Brevo.SendSmtpEmail();
+
       sendEmail.sender = { name: data.name, email: data.email };
       sendEmail.subject = `Ayudanos a encontrar a ${items.items[0].alias}!`;
       sendEmail.to = [{ email }];
