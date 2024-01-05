@@ -29,7 +29,7 @@ export const botones = [
   { texto: 'Encontrados', path: '/encontrados' },
   { texto: 'Adoptar', path: '/adoptar' },
   { texto: 'Blog', path: '/blog' },
-  { texto: 'Refugios', path: '/refugios' },
+  { texto: 'Socios', path: '/socios' },
   { texto: 'Nosotros', path: '/nosotros' },
   { texto: 'Contacto', path: '/contacto' },
 ];

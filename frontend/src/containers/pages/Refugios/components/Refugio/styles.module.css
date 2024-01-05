@@ -9,7 +9,7 @@
     background-color: #e9ecef;
     border-radius: clamp(20px, 3vw, 30px);
 
-    padding: 0.5% 2.5% 0.5% 2.5%;
+    padding: 1.5% 2.5% 1.5% 2.5%;
     margin-inline: auto;
     margin-bottom: 3%;
     margin-top: 4%;
@@ -52,35 +52,34 @@
 
 .container__info>h2 {
     font-size: clamp(20px, 2.5vw, 25px);
+    margin: 0 0 1% 0;
 }
 
 .container__info>h4 {
     font-size: clamp(18px, 2vw, 20px);
+    margin: 0;
 }
 
 .container__info>p {
     font-size: 16px;
+    margin: 0;
 }
 
 .container__info-btn {
     border: 1px solid transparent;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
     gap: 4%;
 }
 
 .container__info-btn>button {
     font-size: 16px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+
     gap: 5%;
 
-    width: 180px;
-    padding: 8%;
+    width: 200px;
+    padding: 5%;
 
     border: transparent;
     border-radius: 8px;
@@ -124,8 +123,6 @@
     }
 
     .container__info-btn {
-        display: flex;
-        flex-direction: row;
         margin-top: 10px;
     }
     .container__info-btn>button {
@@ -160,6 +157,6 @@
     .container__info-btn>button {
         width: 160px;
 
-        padding: 5%;
+        padding: 3%;
     }
 }

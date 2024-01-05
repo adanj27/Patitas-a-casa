@@ -85,7 +85,7 @@ const AppRouter = () => {
         <Route path="nosotros" element={<Nosotros />} />
         <Route path="contacto" element={<Contacto />} />
         <Route path="perdidos" element={<Perdidos />} />
-        <Route path="refugios" element={<Refugios />} />
+        <Route path="socios" element={<Refugios />} />
         <Route path="refugios/informacion/:id" element={<InformacionRefugio />} />
         <Route path="encontrados" element={<Encontrados />} />
         <Route path="terminos-y-condiciones" element={<Terminos />} />

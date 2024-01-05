@@ -36,13 +36,13 @@ const Refugios = () => {
         <header className={styles['refugios-section__title']}>
           <div className={styles["section__title-container"]}>
             <LetraTitulo
-              texto="Refugios"
+              texto="Socios"
               clase="letra-titulo--red"
             />
           </div>
           <div className={styles["texto-container__subtitulo"]}>
             <LetraParrafo
-              texto="Estos son algunos de los refugios con los que trabajamos y apoyamos"
+              texto="Este apartado es para marcas / veterinarias / refugios que forman parte de Patitas a Casa"
               clase="letra-parrafo--black"
             />
           </div>
