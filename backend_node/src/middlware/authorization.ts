@@ -34,6 +34,7 @@ export const isAuth = async (
     const AuthUser = {
       id: validUser._id,
       alias: validUser.alias,
+      email: validUser.email,
       rol: _id,
     };
 
