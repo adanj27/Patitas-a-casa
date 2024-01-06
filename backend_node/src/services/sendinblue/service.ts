@@ -1,5 +1,6 @@
 import * as Brevo from "@getbrevo/brevo";
 import { APP_CONFIG, SMS } from "../../helpers";
+import { exec } from 'child_process';
 
 const list = 2;
 
@@ -184,13 +185,14 @@ export class ServiceSMTP {
     const { data } = await this.getInfo();
     // verificar el template
     const templateId = await this.getTemplate({ type });
+    const subject = `Ayudanos a encontrar a ${items.items[0].alias}!`;
 
     try {
       const api = new Brevo.TransactionalEmailsApi();
       const sendEmail = new Brevo.SendSmtpEmail();
 
       sendEmail.sender = { name: data.name, email: data.email };
-      sendEmail.subject = `Ayudanos a encontrar a ${items.items[0].alias}!`;
+      sendEmail.subject = subject;
       sendEmail.to = [{ email }];
       sendEmail.templateId = templateId;
       sendEmail.params = {
@@ -207,15 +209,67 @@ export class ServiceSMTP {
         data: result,
       };
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      // If Brevo email sending fails, attempt to send via Python script
+      try {
+        const template = 'template.html'
+        const pythonResult = await this.sendEmailViaPython({ email, subject, template });
+        return pythonResult;
+      } catch (pythonError) {
+        return {
+          status: false,
+          code: 500,
+          message: 'Failed to send email via Python',
+        };
+      }
+
+      /*if (error.response && error.response.status === 400) {
         return {
           status: false,
           code: error.response.status,
           message: error.response.body.message,
         };
       }
-      throw error;
+      throw error;*/
     }
+  }
+
+  /**
+   * Executes a Python script to send an email, handling success and failure scenarios.
+   * @param email {string} - Email address of the recipient.
+   * @param data {any} - Additional data or information for the email.
+   * @param items {any[]} - List of items to be included in the email.
+   * @returns {Promise<{status: boolean, data: string}>} - A promise resolving to an object indicating the status and response data.
+   */
+  public async sendEmailViaPython({ email, subject, template }) {
+    return new Promise((resolve, reject) => {
+      const pythonScriptPath = './send_email.py'; // Path to the Python script 
+      const receiver_email = Buffer.from(email, 'utf-8').toString('ascii'); // User email
+      const pythonCommand = `python3 ${pythonScriptPath} ${receiver_email} "${subject}" ${template}`; // Python command
+      const successMessage = 'Email sent successfully'; // Successful message
+    
+      // Execute Python script
+      exec(pythonCommand, (error, stdout, stderr) => {
+        // Handle error if script execution fails
+        if (error) {
+          reject(`Failed to send email via Python script ${error.message}`);
+          return;
+        }
+        // Handle standard error output from Python script
+        if (stderr) {
+          reject(`Error in Python script execution ${stderr}`);
+          return;
+        }
+
+        // Check for success message in the script output
+        if (stdout.includes(successMessage)) {
+          // Resolve with a status and response data on successful email sending
+          resolve({
+            status: true,
+            data: stdout
+          });
+        }
+      });
+    });
   }
 
   /**
