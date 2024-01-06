@@ -10,6 +10,9 @@ import casitaDeLulaPet1 from '/icons/casitaDeLulaPet1.jpg';
 import casitaDeLulaPet2 from '/icons/casitaDeLulaPet2.jpg';
 import casitaDeLulaPet3 from '/icons/casitaDeLulaPet3.jpg';
 import casitaDeLulaPet4 from '/icons/casitaDeLulaPet4.jpg';
+import Instagram from '/icons/svg/instagram.svg'
+import Gmail from '/icons/svg/gmail.svg'
+import Whatsapp from '/icons/svg/whatsapp.svg'
 
 export const refugios = [
     {
@@ -20,12 +23,12 @@ export const refugios = [
         ubicacion: "Mendoza, Argentina",
         socialMedia: [
             //red social userName, url social, fontAwesome class icon
-            // ['@casitadelularefugio','https://www.instagram.com/casitadelularefugio/', 'fa-brands fa-instagram'],
+            // ['@casitadelularefugio','https://www.instagram.com/casitadelularefugio/', Instagram],
             // ['@lacasitadelularefugio','https://www.facebook.com/lacasitadelularefugio/','fa-brands fa-facebook'],
             // ['leticiacristal821','https://www.youtube.com/@leticiacristal821/videos','fa-brands fa-youtube'],
-            // ['lacasitadelularefugio@gmail.com','mailto:lacasitadelularefugio@gmail.com', 'fa-regular fa-envelope'],
+            ['lacasitadelularefugio@gmail.com','mailto:lacasitadelularefugio@gmail.com', Gmail],
             ['+54 261-535-0925','https://wa.link/pd8j00', 'fa-solid fa-phone'],
-            ['+54 261-535-0925','https://wa.link/8ki2yh', 'fa-solid fa-phone'],
+            ['+54 261-535-0925','https://wa.link/8ki2yh', Whatsapp],
         ],
         donar: {
             elementos: [],
