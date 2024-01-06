@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ApiResponse, Errors, IBlog, IImage } from "../interface";
+import { ApiResponse, Errors, IBlog } from "../interface";
 import { IAuth, generateSlug } from "../helpers";
 import {
   BlogRepository,
@@ -49,30 +49,15 @@ export class BlogController {
     req: Request<unknown, unknown, BlogCreateType> & AuthRequest<IAuth>,
     res: Response,
   ): Promise<Response<ApiResponse<IBlog>>> {
-    const { image_url, ...allimput } = req.body;
-    let newImg: IImage;
+    const { title } = req.body;
     try {
-      const existBlog = await Blog.getByOne({ title: allimput.title });
+      const existBlog = await Blog.getByOne({ title });
 
       if (existBlog) {
         return handlerHttpError(res, Errors.ALREADY_EXIST.message, 404);
       }
 
-      const newBlog = await Blog.create({
-        ...allimput,
-      });
-
-      if (newBlog) {
-        newImg = await Image.createWithCloudinary({
-          url: image_url,
-          folder: "BLOG",
-        });
-
-        newImg.model_id = newBlog._id;
-        await newImg.save();
-      }
-
-      newBlog.image_url = newImg._id;
+      const newBlog = await Blog.create(req.body);
       const result = await newBlog.save();
 
       if (result) {
