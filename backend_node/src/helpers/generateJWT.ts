@@ -5,6 +5,7 @@ import { TOKEN } from "./constanst";
 export interface IAuth {
   id: string;
   alias: string;
+  email: string;
   rol: mongoose.Types.ObjectId;
 }
 export class JWT {
@@ -14,6 +15,7 @@ export class JWT {
         {
           id: user.id,
           alias: user.alias,
+          email: user.email,
           rol: user.rol,
         },
         TOKEN.SECRET,

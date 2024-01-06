@@ -7,26 +7,18 @@ import {
   ValidateIdType,
 } from "../schema";
 import { UserRepository, RolRepository } from "../models/repositorie";
-import {
-  BREVO_CONFIG,
-  IAuth,
-  JWT,
-  TOKEN,
-  setAccessTokenCookie,
-} from "../helpers";
-import { ServiceSMTP } from "../services/sendinblue/service";
+import { IAuth, JWT, TOKEN, setAccessTokenCookie } from "../helpers";
 import { AuthRequest, handlerHttpError } from "../middlware";
 
 const User = new UserRepository();
 const Rol = new RolRepository();
-const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
 
 export class AuthController {
   static async Register(
     req: Request<unknown, unknown, UserCreateType>,
     res: Response,
   ) {
-    let result;
+    let result: IUser;
     const { first_name, last_name, alias, email, password, phone } = req.body;
     try {
       const assingRole = await Rol.getByOne({ name: "user" });
@@ -42,16 +34,6 @@ export class AuthController {
       });
 
       if (newUser) {
-        const data = await ServiceEmail.AddContact({
-          email: newUser.email,
-        });
-
-        if (!data.status) {
-          return res
-            .status(404)
-            .json({ status: data.status, message: `Brevo: ${data.message}` });
-        }
-
         result = await newUser.save();
 
         if (!result) {
@@ -61,12 +43,6 @@ export class AuthController {
             404,
           );
         }
-      }
-
-      try {
-        await ServiceEmail.AddContact({ email: newUser.email });
-      } catch (error) {
-        console.error(error);
       }
 
       const response: ApiResponse<IUser> = {
@@ -108,6 +84,7 @@ export class AuthController {
       const user: IAuth = {
         id: existUser._id,
         alias: existUser.alias,
+        email: existUser.email,
         rol: existUser.rol._id,
       };
 
