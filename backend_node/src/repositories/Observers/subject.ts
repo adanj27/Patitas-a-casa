@@ -1,10 +1,10 @@
 /* eslint-disable consistent-return */
-import { Observer, Subject } from "../../../interface";
+import { Observer, Subject } from "../../interface";
 
 export class ConcreteSubject implements Subject {
   public state: number;
 
-  private observers: Observer[] = [];
+  public observers: Observer[] = [];
 
   public attach(observer: Observer): void {
     console.log(this.observers);

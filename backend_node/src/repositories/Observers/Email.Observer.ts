@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import { Observer, Subject } from "../../../interface";
+import { Observer, Subject } from "../../interface";
 import { ConcreteSubject } from "./subject";
 
 export class EmailObserver implements Observer {

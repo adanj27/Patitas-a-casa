@@ -1,11 +1,9 @@
-import mongoose, { Document } from "mongoose";
-
 export interface IBlog extends Document {
   title: string;
   sub_title: string;
   slug: string;
   short_description: string;
-  image_url: mongoose.Types.ObjectId; // ref 'image'
+  image_url: string;
   description: string;
   isdeleted: boolean;
   status: boolean;

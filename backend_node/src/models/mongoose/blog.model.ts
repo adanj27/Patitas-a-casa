@@ -11,7 +11,7 @@ const BlogSchema = new Schema<IBlog>(
     slug: { type: String, slug: "title" },
     description: { type: String, require: true },
     short_description: { type: String },
-    image_url: { type: Schema.Types.ObjectId, ref: "Image" },
+    image_url: { type: String, require: true },
     status: { type: Boolean },
     isdeleted: { type: Boolean, default: false },
     count_view: { type: Number, default: 0 },

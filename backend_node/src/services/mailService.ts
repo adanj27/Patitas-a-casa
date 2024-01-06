@@ -69,7 +69,7 @@ export class MailService {
 
   async sendMail(
     requestId: string | number,
-    options: MailInterface
+    options: MailInterface,
   ): Promise<unknown> {
     if (!this.transporter) {
       throw new Error("No transporter created. Call createConnection() first.");
@@ -77,7 +77,7 @@ export class MailService {
 
     try {
       const info = await this.transporter.sendMail({
-        from: `"chiragmehta900" ${process.env.SMTP_SENDER || options.from}`,
+        from: `${process.env.SMTP_SENDER || options.from}`,
         to: options.to,
         cc: options.cc,
         bcc: options.bcc,
@@ -86,14 +86,14 @@ export class MailService {
         html: options.html,
       });
 
-      console.log(`${requestId} - Mail sent successfully!!`);
+      /* console.log(`${requestId} - Mail sent successfully!!`);
       console.log(
-        `${requestId} - [MailResponse]=${info.response} [MessageID]=${info.messageId}`
-      );
+        `${requestId} - [MailResponse]=${info.response} [MessageID]=${info.messageId}`,
+      ); */
 
       if (process.env.NODE_ENV === "local") {
         console.log(
-          `${requestId} - Nodemailer ethereal URL: ${getTestMessageUrl(info)}`
+          `${requestId} - Nodemailer ethereal URL: ${getTestMessageUrl(info)}`,
         );
       }
 
