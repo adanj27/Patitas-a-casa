@@ -76,7 +76,6 @@ export class FormController {
 
       // agregar al usuario
       if (result) {
-        console.log(req.user);
         const user = await User.addToListUser({
           auth: req.user,
           documentId: newForm._id,
