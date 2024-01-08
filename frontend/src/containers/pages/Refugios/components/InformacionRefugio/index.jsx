@@ -31,9 +31,9 @@ const InformacionRefugio = () => {
   return (
     <section className={styles['information-section']}>
       <header className={styles['information-section__header']}>
-        <a className={styles['back-button']} href="/socios">
+        {/* <a className={styles['back-button']} href="/socios">
           <img src={backIcon} alt="icono atras" />
-        </a>
+        </a> */}
         <div className={styles['information-section__header--banner']}>
           <div></div>
           <div className={styles['information-section__header--banner-title']}>
