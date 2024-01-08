@@ -12,7 +12,5 @@ setTimeout(async () => {
   createSuperAdmin();
 }, 5000);
 
-//
-
 const server = new Server({ config: APP_CONFIG }, app);
 server.start();

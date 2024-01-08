@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
-import {
-  FormRepository,
-  ImageRepository,
-  UserRepository,
-} from "../models/repositorie";
+import { FormRepository, UserRepository } from "../models/repositorie";
 import { ApiResponse, Errors, IForm } from "../interface";
 import {
   FormCreateLostType,
@@ -13,13 +9,13 @@ import {
   ValidateIdType,
 } from "../schema";
 import { AuthRequest, handlerHttpError } from "../middlware";
-import { BREVO_CONFIG, IAuth } from "../helpers";
-import { ServiceSMTP } from "../services/sendinblue/service";
+import { MailInterface, MailService } from "../services/mailService";
+import { htmlContent } from "../services/sendinblue/template";
+import { IAuth } from "../helpers";
 
 const User = new UserRepository();
 const Form = new FormRepository();
-const Image = new ImageRepository();
-const ServiceEmail = new ServiceSMTP(BREVO_CONFIG.APIKEY);
+const Email = MailService.getInstance();
 
 export class FormController {
   static async getAll(
@@ -75,20 +71,8 @@ export class FormController {
   ): Promise<Response<ApiResponse<IForm>>> {
     try {
       const newForm = await Form.create(req.body);
-      /* 
-      // genera url cloudinary
-      if (newForm) {
-        newImage = await Image.createWithCloudinary({
-          url: image_url,
-          folder: "FORM",
-        });
-
-        newImage.model_id = newForm._id;
-        await newImage.save();
-      }
-
-      newForm.image_url = newImage._id; */
       const result = await newForm.save();
+      let send;
 
       // agregar al usuario
       if (result) {
@@ -101,28 +85,42 @@ export class FormController {
         if (!user) {
           throw Error("no se agrego la lista");
         }
+
+        // enviar a correo
+
         try {
-          await ServiceEmail.SendEmail({
-            type: "pets",
-            items: {
-              items: [
-                {
-                  alias: newForm.name,
-                  description: newForm.description,
-                  image: result.image_url,
-                },
-              ],
-            },
-            email: user.email,
-          });
+          // no local
+          await Email.createConnection(false);
+
+          /**
+           *  TODO:  extraer en un archivo diferente para mejor mantenimiento
+           *  !tener template estructurados por defecto
+           *  !controlarlo dentro de un patron de diseño
+           *  @params email
+           *  @params htmlcontent
+           *  @params subject ?
+           *  @params text?
+           */
+          const mailOptionsForm: MailInterface = {
+            from: process.env.SMTP_SENDER,
+            to: req.user.email,
+            subject: "Ayudame a Encontrarlo!",
+            text: "Este es el cuerpo del mensaje en formato texto",
+            html: htmlContent,
+          };
+
+          send = await Email.sendMail("ID_de_la_solicitud", mailOptionsForm);
         } catch (error) {
-          console.error(error);
+          return res
+            .status(404)
+            .json({ message: `Error al enviar el correo ${error} ` });
         }
       }
 
       const response: ApiResponse<IForm> = {
         status: true,
         data: result,
+        message: send.response,
       };
       return res.status(201).json(response);
     } catch (error) {
@@ -136,20 +134,8 @@ export class FormController {
   ): Promise<Response<ApiResponse<IForm>>> {
     try {
       const newForm = await Form.create(req.body);
-
-      /*  // genera url cloudinary
-      if (newForm) {
-        newImage = await Image.createWithCloudinary({
-          url: image_url,
-          folder: "FORM",
-        });
-
-        newImage.model_id = newForm._id;
-        await newImage.save();
-      }
-
-      newForm.image_url = newImage._id; */
       const result = await newForm.save();
+      let send;
 
       // agregar al usuario
       if (result) {
@@ -162,28 +148,42 @@ export class FormController {
         if (!user) {
           throw Error("no se agrego la lista");
         }
+
+        // enviar a correo
+
         try {
-          await ServiceEmail.SendEmail({
-            type: "pets",
-            items: {
-              items: [
-                {
-                  alias: newForm.name,
-                  description: newForm.description,
-                  image: result.image_url,
-                },
-              ],
-            },
-            email: user.email,
-          });
+          // no local
+          await Email.createConnection(false);
+
+          /**
+           *  TODO:  extraer en un archivo diferente para mejor mantenimiento
+           *  !tener template estructurados por defecto
+           *  !controlarlo dentro de un patron de diseño
+           *  @params email
+           *  @params htmlcontent
+           *  @params subject ?
+           *  @params text?
+           */
+          const mailOptionsForm: MailInterface = {
+            from: process.env.SMTP_SENDER,
+            to: req.user.email,
+            subject: "Ayudame a Encontrarlo!",
+            text: "Este es el cuerpo del mensaje en formato texto",
+            html: htmlContent,
+          };
+
+          send = await Email.sendMail("ID_de_la_solicitud", mailOptionsForm);
         } catch (error) {
-          console.error(error);
+          return res
+            .status(404)
+            .json({ message: `Error al enviar el correo ${error} ` });
         }
       }
 
       const response: ApiResponse<IForm> = {
         status: true,
         data: result,
+        message: send,
       };
       return res.status(201).json(response);
     } catch (error) {
@@ -196,7 +196,6 @@ export class FormController {
     res: Response,
   ): Promise<Response<ApiResponse<IForm>>> {
     const { id } = req.params;
-    const { image_url, ...input } = req.body;
 
     try {
       const exist = await Form.getById(id);
@@ -205,24 +204,7 @@ export class FormController {
         return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
       }
 
-      const result = await Form.update(id, input);
-
-      if (image_url) {
-        const img = await Image.getByOne({ model_id: id });
-
-        // modificar con las clases de cloudinary o de image
-        if (img) {
-          const newurl = await Image.updateWithCloudinary({
-            image_url,
-            public_id: img.public_id,
-            folder: "FORM",
-          });
-
-          img.url = newurl.secure_url;
-          img.public_id = newurl.public_id;
-          await img.save();
-        }
-      }
+      const result = await Form.update(exist.id, req.body);
 
       const response: ApiResponse<IForm> = {
         status: true,
@@ -248,7 +230,6 @@ export class FormController {
       }
 
       await Form.delete(id);
-      await Image.deleteWithCloudinary(exist._id);
 
       const response: ApiResponse<string> = {
         status: true,
