@@ -1,0 +1,48 @@
+.terms-and-conditions {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.terms-and-conditions__title {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.terms-and-conditions__section {
+  margin-bottom: 20px;
+}
+
+.terms-and-conditions__section-title {
+  color: #555;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.terms-and-conditions__text {
+  color: #777;
+}
+
+.terms-and-conditions__final-text {
+  color: #444;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .terms-and-conditions__title {
+    font-size: 20px;
+  }
+
+  .terms-and-conditions__section-title {
+    font-size: 18px;
+  }
+
+  .terms-and-conditions__text,
+  .terms-and-conditions__final-text {
+    font-size: 16px;
+  }
+}
