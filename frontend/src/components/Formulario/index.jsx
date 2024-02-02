@@ -281,10 +281,12 @@ export const Formulario = ({ setModal }) => {
             <textarea
               name="description"
               cols="30"
-              rows="10"
+              rows="5"
               value={formData.description}
               onChange={handleChange}
+              maxLength={300}
             />
+            {/* <p>Maximo 300 caracteres</p> */}
 
             <button
               // onClick={handleSubmit}

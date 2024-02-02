@@ -15,8 +15,6 @@
 
 .popup__content {
   background: #fff;
-  border-radius: 8px;
-  border: 1px solid black;
   width: 400px;
   height: 650px;
   overflow: hidden;
