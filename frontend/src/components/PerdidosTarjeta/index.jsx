@@ -1,16 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import shareIcon from '/icons/share-iconSubdata.png';
 import whatsApp from '/icons/whatsAppSubdata.png';
 import twitter from '/icons/twitter-icon.png';
 import facebook from '/icons/facebook-icon.png';
+import Download from '/icons/arrow.png';
 
 import styles from './styles.module.css'
 
 //Animate On Scroll
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { PopupTarjeta } from "../PopupCard";
 
-export const PerdidosTarjeta = ({ url_img, nombre, tam, zona, fecha, contacto, desc, encontrado }) => {
+export const PerdidosTarjeta = ({ url_img, nombre, tam, zona, fecha, contacto, desc, encontrado, onOpen }) => {
 
 	useEffect(() => {
 		AOS.init({
@@ -38,7 +40,7 @@ export const PerdidosTarjeta = ({ url_img, nombre, tam, zona, fecha, contacto, d
 				<SubData className={styles.perdidosTarjeta__subdata} subtitle="Fecha" data={fecha} />
 			</div>
 			<div className={styles.perdidosTarjeta___img__info_container}>
-				<img
+				{/* <img
 					className={styles.perdidosTarjeta__img_info}
 					src={whatsApp}
 					alt="share-icon"
@@ -52,6 +54,14 @@ export const PerdidosTarjeta = ({ url_img, nombre, tam, zona, fecha, contacto, d
 					className={styles.perdidosTarjeta__img_info}
 					src={shareIcon}
 					alt="share-icon"
+				/> */}
+				<img
+					className={styles.perdidosTarjeta__img_info}
+					src={Download}
+					alt="share-icon"
+					title="Ver tarjeta"
+					style={{ border: "1px solid red", borderRadius: "100%" }}
+					onClick={onOpen}
 				/>
 			</div>
 		</div>

@@ -1,0 +1,141 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  gap: 1rem;
+}
+
+.popup__content {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid black;
+  width: 400px;
+  height: 650px;
+  overflow: hidden;
+}
+
+.popup__content__text {
+  position: relative;
+}
+
+
+.popup__content__text:nth-child(1) {
+  z-index: 0;
+}
+
+.popup__content__text:nth-child(2) {
+  z-index: 0;
+}
+
+.popup__text {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  top: 12px;
+  color: #000;
+  z-index: 99;
+  gap: 3rem;
+}
+
+.popup__text__image {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.popup__image {
+  border-radius: 100%;
+  border: 4px solid #fff;
+  width: 16rem;
+  height: 16rem;
+  overflow: hidden;
+}
+
+.popup__image>img {
+  height: 100%;
+}
+
+.popup__text__title {
+  background-color: #D11317;
+  position: absolute;
+  color: #fff;
+  padding: 0.2rem 4rem 0.2rem 4rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  top: 14.5rem;
+}
+
+.popup__content__data {
+  padding-inline: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  color: #343A40;
+}
+
+.popup__dates {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.popup__datos {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.popup__datos__1 {
+  font-weight: 400;
+}
+
+.popup__datos__contact {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.popup__logo {
+  width: 50%;
+}
+
+.popup__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.box {
+  width: 100%;
+  --mask:
+    radial-gradient(287.48px at 50% calc(100% - 394.85px), #000 99%, #0000 101%) calc(50% - 298px) 0/596px 100%,
+    radial-gradient(287.48px at 50% calc(100% + 245.85px), #0000 99%, #000 101%) 50% calc(100% - 149px)/596px 100% repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+}
+
+.popup__download {
+  background-color: #DE341D;
+  border: none;
+  padding: 0.5rem 2rem;
+  color: #fff;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
