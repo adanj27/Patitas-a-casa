@@ -13,7 +13,8 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true
   },
   "include": ["./**/**/*", "src/services/sendinblue/.ts"],
   "exclude": ["node_modules", "build", "src/test"]

@@ -10,8 +10,8 @@ import {
 } from "../schema";
 import { AuthRequest, handlerHttpError } from "../middlware";
 import { MailInterface, MailService } from "../services/mailService";
-import { htmlContent } from "../services/sendinblue/template";
 import { IAuth } from "../helpers";
+import { emailTemplate } from "../services/sendinblue/pet.template";
 
 const User = new UserRepository();
 const Form = new FormRepository();
@@ -86,8 +86,6 @@ export class FormController {
           throw Error("no se agrego la lista");
         }
 
-        // enviar a correo
-
         try {
           // no local
           await Email.createConnection(false);
@@ -101,12 +99,21 @@ export class FormController {
            *  @params subject ?
            *  @params text?
            */
+
           const mailOptionsForm: MailInterface = {
             from: process.env.SMTP_SENDER,
             to: req.user.email,
             subject: "Ayudame a Encontrarlo!",
             text: "Este es el cuerpo del mensaje en formato texto",
-            html: htmlContent,
+            html: emailTemplate(
+              req.body.name,
+              req.body.size,
+              req.body.description,
+              req.body.loos_date,
+              req.body.image_url,
+              req.body.contact,
+              req.body.city,
+            ),
           };
 
           send = await Email.sendMail("ID_de_la_solicitud", mailOptionsForm);
@@ -169,7 +176,15 @@ export class FormController {
             to: req.user.email,
             subject: "Ayudame a Encontrarlo!",
             text: "Este es el cuerpo del mensaje en formato texto",
-            html: htmlContent,
+            html: emailTemplate(
+              req.body.name,
+              req.body.size,
+              req.body.description,
+              req.body.loos_date,
+              req.body.image_url,
+              req.body.contact,
+              req.body.city,
+            ),
           };
 
           send = await Email.sendMail("ID_de_la_solicitud", mailOptionsForm);
@@ -226,7 +241,7 @@ export class FormController {
       const exist = await Form.getById(id);
 
       if (!exist) {
-        return handlerHttpError(res, Errors.NOT_FOUND.message, 404);
+        return handlerHttpError(res, Errors.NOT_FOUND.message, 400);
       }
 
       await Form.delete(id);
@@ -236,7 +251,7 @@ export class FormController {
         data: `${exist.name} deleted!`,
       };
 
-      return res.status(201).json(response);
+      return res.status(202).json(response);
     } catch (error) {
       return res.status(500).json(Errors.ERROR(error.message));
     }
