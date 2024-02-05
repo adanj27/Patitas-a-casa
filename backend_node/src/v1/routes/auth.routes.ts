@@ -13,7 +13,7 @@ const router = Router();
  *          tags:
  *              - Authentification
  *          description: Provide email and password credentials for the purpose of being authenticated and accessing
- *                       advanced features of the Web Server, depending on user's privileges.
+ *                       advanced features of the Web Server, depending on user's privileges. added the token in Authorize
  *          requestBody:
  *              required: true
  *              description: Email and Password
@@ -96,6 +96,8 @@ router.post("/login", SchemaValidate(AuthSchema), AuthController.login);
  *                  content:
  *                      application/json:
  *                          schema:
+ *          security:
+ *            - bearerAuth: []
  */
 router.post("/logout", isAuth, AuthController.logout);
 
@@ -182,7 +184,7 @@ router.post("/logout", isAuth, AuthController.logout);
 router.post(
   "/register",
   SchemaValidate(UsercreateChema),
-  AuthController.Register
+  AuthController.Register,
 );
 
 /**
@@ -237,7 +239,6 @@ router.post(
  *                      application/json:
  *                          schema:
  *                               $ref: '#/components/schemas/serverError'
- *
  *          security:
  *            - bearerAuth: []
  */
@@ -245,7 +246,7 @@ router.post(
   "/:id/reset-password",
   isAuth,
   SchemaValidate(AuthResetPassSchema),
-  AuthController.resetPassword
+  AuthController.resetPassword,
 );
 
 export { router };

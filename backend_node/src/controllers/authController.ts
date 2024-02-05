@@ -69,7 +69,7 @@ export class AuthController {
       const existUser = await User.getByOne({ email: req.body.email });
 
       if (!existUser) {
-        return handlerHttpError(res, Errors.DATA_ERROR.message, 404);
+        return handlerHttpError(res, Errors.DATA_ERROR.message, 400);
       }
 
       const validPass = await User.ValidatePassword(
@@ -78,7 +78,7 @@ export class AuthController {
       );
 
       if (!validPass) {
-        return handlerHttpError(res, Errors.DATA_ERROR.message, 404);
+        return handlerHttpError(res, Errors.DATA_ERROR.message, 400);
       }
 
       const user: IAuth = {

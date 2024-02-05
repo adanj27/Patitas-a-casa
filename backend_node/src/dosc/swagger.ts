@@ -131,9 +131,6 @@ const swaggerDefinition: OAS3Definition = {
           "type_search",
         ],
         properties: {
-          _id: {
-            type: "ObjectId",
-          },
           name: {
             type: "string",
           },
@@ -156,32 +153,29 @@ const swaggerDefinition: OAS3Definition = {
           },
           contact: {
             type: "string",
+            example: "(504) 641-2564",
           },
           loos_date: {
             type: "Date",
+            example: "2023-11-09T12:34:56.789Z",
           },
           image_url: {
             type: "string",
+            example: "https://loremflickr.com/320/240/dog",
           },
           description: {
             type: "string",
           },
           status: {
-            type: "bolean",
+            type: "boolean",
           },
           type: {
             type: "string",
-            enum: ["cat", "dog"],
+            enum: ["CAT", "DOG"],
           },
           type_search: {
             type: "string",
-            enum: ["found", "lost"],
-          },
-          createdAt: {
-            type: "timestamp",
-          },
-          updateAt: {
-            type: "timestamp",
+            enum: ["FOUND", "LOST"],
           },
         },
       },
@@ -267,19 +261,6 @@ const swaggerDefinition: OAS3Definition = {
           error: {
             type: "string",
             example: `something unexpected has happened + error`,
-          },
-        },
-      },
-      messageResponse: {
-        type: "object",
-        properties: {
-          status: {
-            type: "string",
-            example: "true",
-          },
-          error: {
-            type: "string",
-            example: `message description from backend ...`,
           },
         },
       },

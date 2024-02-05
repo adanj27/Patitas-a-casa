@@ -39,7 +39,7 @@ DELETE  http://localhost:4000/api/blog/65584935fcd07652c3e02fae
 
 
 ### GetAll FORM
-GET http://localhost:4000/api/form
+GET http://localhost:8000/api/v1/form
 ### ById FORM
 GET http://localhost:4000/api/form/65584935fcd07652c3e02fae   
 
@@ -102,7 +102,7 @@ Content-Type: application/json
 ### Endpoint AUTH CONNECTION
 
 ## Login AUTH
-POST http://localhost:4000/api/auth/login
+POST http://localhost:8000/api/v1/auth/login
 Content-Type: application/json
 
 {    
@@ -111,7 +111,8 @@ Content-Type: application/json
 }
 
 ### Logout AUTH
-POST http://localhost:4000/api/auth/logout
+POST http://localhost:8000/api/v1/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzMzYzQ3NGNiMWExZDQ2YWQxNjc1OCIsImFsaWFzIjoidGVzdGluZyIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwicm9sIjoiNjU2MmEzOTQ0MjRkYTk5NWE1MGI1YTUxIiwiaWF0IjoxNzA0ODYxMjU3LCJleHAiOjE3MDQ5NDc2NTd9.4Z21h_5BGhFxQbRlDYpTC4v4Qs9NAVPPJzdae043oqI
 
 ### register AUTH
 POST http://localhost:4000/api/auth/register
@@ -129,7 +130,7 @@ Content-Type: application/json
 ### reset-password AUTH
 POST http://localhost:4000/api/auth/656296e9cfb5ee8c58647bd9/reset-password
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJhMzk2NDI0ZGE5OTVhNTBiNWE1YSIsImFsaWFzIjoic3VwZXJtYW4iLCJyb2wiOiI2NTYyYTM5NDQyNGRhOTk1YTUwYjVhNGUiLCJpYXQiOjE3MDA5NjM0NTIsImV4cCI6MTcwMTA0OTg1Mn0.4fhf-ujumz9RDpKrmnQNoZCxhyCvmE3meGAZA5Lqc00
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzMzYzQ3NGNiMWExZDQ2YWQxNjc1OCIsImFsaWFzIjoidGVzdGluZyIsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIiwicm9sIjoiNjU2MmEzOTQ0MjRkYTk5NWE1MGI1YTUxIiwiaWF0IjoxNzA0ODYxMjU3LCJleHAiOjE3MDQ5NDc2NTd9.4Z21h_5BGhFxQbRlDYpTC4v4Qs9NAVPPJzdae043oqI
 
 {
     

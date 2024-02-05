@@ -16,19 +16,37 @@ const router = Router();
  * /api/v1/form:
  *    get:
  *      tags:
- *        - form
- *      summary: "Listar usuario"
- *      description: Este endpoint es para listar los usuario totales
- *      requestBody:
- *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/form"
+ *        - Form
+ *      summary: show all forms
+ *      description: The endpoint will return a list of forms the total number of elements and the pagination within the nextPage field.
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
- *        '422':
- *          description: Error de validacion.
+ *        200:
+ *          description: Success  -
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          status:
+ *                             type: boolean
+ *                             example: true
+ *                          total:
+ *                             type: number
+ *                             example: 0
+ *                          nextPage:
+ *                             type: boolean
+ *                             example: true
+ *                          data:
+ *                             type: array
+ *                             items:
+ *                               type: object
+ *                               $ref: '#/components/schemas/form'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/serverError'
  */
 router.get("/", FormController.getAll);
 
@@ -37,19 +55,44 @@ router.get("/", FormController.getAll);
  * /api/v1/form/{id}:
  *    get:
  *      tags:
- *        - form
- *      summary: "Listar usuario"
- *      description: Este endpoint es para listar los usuario totales
- *      requestBody:
- *          content:
- *            application/json:
+ *        - Form
+ *      summary: Get from by id
+ *      description: This point helps to see the detail of the entity from
+ *      parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              description: insert the id of the form to search
  *              schema:
- *                $ref: "#/components/schemas/form"
+ *               type: string
+ *               format: objectId
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
- *        '422':
- *          description: Error de validacion.
+ *        200:
+ *          description: If the form exists, it will return an object with the status and the corresponding data.
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                           status:
+ *                              type: string
+ *                              example: true
+ *                           data:
+ *                              type: object
+ *                              $ref: '#/components/schemas/form'
+ *
+ *        404:
+ *          description: Not found
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/serverError'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/serverError'
  */
 router.get("/:id", FormController.getById);
 
@@ -58,19 +101,47 @@ router.get("/:id", FormController.getById);
  * /api/v1/form/found:
  *    post:
  *      tags:
- *        - form
- *      summary: "Listar usuario"
- *      description: Este endpoint es para listar los usuario totales
+ *        - Form
+ *      summary: create a form for a found pet
+ *      description:  You must be registered in order to create a form - check if you added the token in Authorize
  *      requestBody:
+ *          required: true
+ *          description: check the schema form to see the required fields *
  *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/form"
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/form'
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
- *        '422':
- *          description: Error de validacion.
+ *        200:
+ *          description: It will return a message with the status, the created form. additional email sending message is added.
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                           status:
+ *                              type: string
+ *                              example: true
+ *                           data:
+ *                              type: object
+ *                              $ref: '#/components/schemas/form'
+ *                           message:
+ *                              type: object
+ *                              example: send message to email - OPTIONAL TO VALIDATE
+ *        404:
+ *          description: invalid fields error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/messageError'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/serverError'
+ *      security:
+ *            - bearerAuth: []
  */
 router.post(
   "/found",
@@ -86,18 +157,46 @@ router.post(
  *    post:
  *      tags:
  *        - Form
- *      summary: "Listar usuario"
- *      description: Este endpoint es para listar los usuario totales
+ *      summary: create a form for a lost pet
+ *      description:  You must be registered in order to create a form - check if you added the token in Authorize
  *      requestBody:
+ *          required: true
+ *          description: check the schema form to see the required fields *
  *          content:
- *            application/json:
- *              schema:
- *                $ref: "#/components/schemas/form"
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/form'
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
- *        '422':
- *          description: Error de validacion.
+ *        200:
+ *          description: It will return a message with the status, the created form. additional email sending message is added.
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                           status:
+ *                              type: string
+ *                              example: true
+ *                           data:
+ *                              type: object
+ *                              $ref: '#/components/schemas/form'
+ *                           message:
+ *                              type: object
+ *                              example: send message to email - OPTIONAL TO VALIDATE
+ *        404:
+ *          description: invalid fields error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/messageError'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/serverError'
+ *      security:
+ *            - bearerAuth: []
  */
 router.post(
   "/lost",
@@ -113,18 +212,55 @@ router.post(
  *    patch:
  *      tags:
  *        - Form
- *      summary: "Listar usuario"
- *      description: Este endpoint es para listar los usuario totales
- *      requestBody:
- *          content:
- *            application/json:
+ *      summary: update a form pet
+ *      description:  
+The enpoint will help users update the created forms - check if you added the token in Authorize
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              description: The ID of the user for form.
  *              schema:
- *                $ref: "#/components/schemas/form"
+ *               type: string
+ *               format: objectId
+ *      requestBody:
+ *          required: true
+ *          description: check the schema form to see the required fields *
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/form'
  *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
- *        '422':
- *          description: Error de validacion.
+ *        200:
+ *          description: It will return a message with the status, the created form. additional email sending message is added.
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                           status:
+ *                              type: string
+ *                              example: true
+ *                           data:
+ *                              type: object
+ *                              $ref: '#/components/schemas/form'
+ *                           message:
+ *                              type: object
+ *                              example: send message to email - OPTIONAL TO VALIDATE
+ *        404:
+ *          description: invalid fields error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/messageError'
+ *        500:
+ *          description: Internal server error
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/serverError'
+ *      security:
+ *            - bearerAuth: []
  */
 router.patch(
   "/:id",
@@ -137,21 +273,39 @@ router.patch(
 /**
  * @swagger
  * /api/v1/form/{id}:
- *    delete:
- *      tags:
- *        - Form
- *      summary: "Listar usuario"
- *      description: Este endpoint es para listar los usuario totales
- *      requestBody:
- *          content:
- *            application/json:
+ *      delete:
+ *          summary: Delete form from list.
+ *          tags:
+ *              - Form
+ *          description: Delete the form from the records. - check if you added the token in Authorize
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              description: The ID of the user for form.
  *              schema:
- *                $ref: "#/components/schemas/form"
- *      responses:
- *        '200':
- *          description: Retorna el objeto insertado en la coleccion.
- *        '422':
- *          description: Error de validacion.
+ *               type: string
+ *               format: objectId
+ *              202:
+ *                  description: Success
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/messageResponse'
+ *              400:
+ *                  description: Not found - return array with fields errors
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                               $ref: '#/components/schemas/messageError'
+ *              500:
+ *                  description: Internal server error
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                               $ref: '#/components/schemas/serverError'
+ *          security:
+ *            - bearerAuth: []
  */
 router.delete(
   "/:id",
