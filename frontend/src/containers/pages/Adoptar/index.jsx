@@ -30,7 +30,8 @@ const Adoptar = () => {
           </article>
           <article className={styles["texto-container__subtitulo"]}>
             <LetraParrafo
-              texto="“Encuentra tu compañero fiel en nuestra lista de mascotas en adopción. Adopta hoy y haz feliz a una mascota.”"
+              // texto="“Encuentra tu compañero fiel en nuestra lista de mascotas en adopción. Adopta hoy y haz feliz a una mascota.”"
+              texto="Este apartado aún no dispone de una interfaz para cargar animales en adopción. Para publicar a tu mascota en adopción aquí, debes escribirnos a nuestro correo electrónico proporcionando el nombre, tamaño, edad (aproximada), raza, ubicación y, en caso de estar en un refugio, el nombre del refugio donde se encuentra la mascota. "
               clase="letra-parrafo--black"
             />
           </article>
