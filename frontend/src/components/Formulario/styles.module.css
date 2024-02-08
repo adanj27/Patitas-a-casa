@@ -26,7 +26,6 @@
   width: 450px;
   height: auto;
   transition: 0.5s;
-  transform: translateY(5%);
   opacity: 1;
 }
 
@@ -274,6 +273,15 @@ select:focus {
   outline: none;
 }
 
+@media (max-height: 820px) {
+  .formContainer {
+    transform: scale(0.95);
+    & textarea {
+      height: 50px;
+    }
+  }
+}
+
 @media (max-width: 600px){
   .form button.cancelButton>img {
     height: 50%;
@@ -313,5 +321,17 @@ select:focus {
   .pet,
   .petSelected {
     padding: 17px 0;
+  }
+}
+@media (max-width: 400px) {
+  .formContainer {
+    width: 320px;
+  }
+}
+
+/* Buscar un diseño para Galaxy Fold por ejemplo */
+@media (max-width: 300px) {
+  .formContainer {
+    width: 250px;
   }
 }
