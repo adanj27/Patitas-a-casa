@@ -9,7 +9,7 @@ import { Logo } from '../Icons';
 
 export const PopupTarjeta = ({ onClose, perdidoData }) => {
   const cardRef = useRef(null);
-  console.log(perdidoData);
+  // console.log(perdidoData);
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 

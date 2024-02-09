@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
@@ -20,6 +20,14 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
   const { login } = useAuth();
 
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, []);
 
   const handleCancel = () => {
     setLogin(false);

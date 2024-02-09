@@ -2,19 +2,23 @@
 
 .loginContainer {
   top: 0;
+  left: 0;
   position: absolute;
   display: flex;
   width: 100%;
   height: 100vh;
   align-items: center;
   justify-content: center;
+  background-color: rgba(75, 75, 75, 0.139); /* Color oscuro con 70% de opacidad */
+  backdrop-filter: blur(3px);
 }
 
 .formContainer {
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  width: 490px;
+  max-width: 490px;
+  min-width: 320px;
   border-radius: 2.5rem;
 }
 
