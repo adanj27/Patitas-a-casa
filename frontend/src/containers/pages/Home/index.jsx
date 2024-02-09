@@ -30,13 +30,16 @@ import headerImg3 from '/icons/imagenes recursos/header-img-3.webp';
 import LogoPatita from "/icons/logo-patita.png"
 
 // Iconos
-import arrowLeft from "/icons/arrow-left.svg"
-import arrowRight from "/icons/arrow-right.svg"
+// import arrowLeft from "/icons/arrow-left.svg"
+// import arrowRight from "/icons/arrow-right.svg"
 
-import sliderStyles from "../../../components/AdopcionesTarjetaContainer/styles.module.css";
+// import sliderStyles from "../../../components/AdopcionesTarjetaContainer/styles.module.css";
 import Loading from "../../../components/Loading/index";
+import { useAuth } from '../../../context/AuthContext';
+import { AuthFormContainer } from '../../../components/LoginForm';
 
 const Home = () => {
+	const { isAuthenticated } = useAuth();
 	const [modal, setModal] = useState(false);
 	const [isLoading, setIsLoading] = useState(getLoading());
 
@@ -191,7 +194,13 @@ const Home = () => {
 				</Link>
 			</section>
 
-			{modal && <Formulario setModal={setModal} />}
+			{isAuthenticated ? (
+        // Si el usuario está autenticado, mostrar el formulario
+        modal && <Formulario setModal={setModal} />
+      ) : (
+        // Si el usuario no está autenticado, mostrar el modal de login
+        modal && <AuthFormContainer setLogin={setModal} />
+      )}
 		</>
 	);
 };
