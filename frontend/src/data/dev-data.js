@@ -5,7 +5,15 @@ export const devsData = [
     img: "/icons/devs/engrohm.jpg",
     position: "ceo",
     linkedin: "https://www.linkedin.com/in/mauricio-hector-medina-4b9048234",
-    // portfolio: ""
+    portfolio: "https://github.com/NegroHm"
+  },
+  {
+    title: "sufyan",
+    name: "Sufy",
+    img: "/icons/devs/sufy.jpg",
+    position: "CTO",
+    linkedin: "https://www.linkedin.com/in/ahmed-sufyan1/",
+    portfolio: "https://github.com/sufyang737"
   },
   {
     title: "zeroz",
@@ -54,14 +62,6 @@ export const devsData = [
     position: "desarrollador",
     linkedin: "https://www.linkedin.com/in/augusto-borromeo-b75255218",
     portfolio: "https://www.augusdev.com/portfolio"
-  },
-  {
-    title: "nombre",
-    name: "Santiago",
-    img: "https://i.pinimg.com/280x280_RS/66/a1/a4/66a1a4a22e271ec3ee3ef35ba0883ca4.jpg",
-    position: "",
-    linkedin: "",
-    portfolio: ""
   },
   {
     title: "sergio",
