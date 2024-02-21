@@ -53,16 +53,19 @@ export const BurgerMenu = () => {
           );
         })}
         <li>
-          {/* {isAuthenticated ? ( */}
+          {isAuthenticated ? (
             <div className={styles['nav__contenedor-boton-user mobile_nav']}>
-              <div onClick={handleLogout} className={styles['mobile_nav__logout']}>
+              <div
+                onClick={handleLogout}
+                className={styles['mobile_nav__logout']}
+              >
                 <LogoutIcon />
               </div>
               <BtnPrincipal texto="Reportar" setModal={setModal} />
             </div>
-         {/* ) : (
+          ) : (
             <BtnPrincipal texto="Iniciar Sesión" setModal={setLogin} />
-          )} */}
+          )}
         </li>
       </ul>
       {login ? <AuthFormContainer setLogin={setLogin} /> : null}
