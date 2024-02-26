@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
+import axios from "../../config"
+// axios.defaults.baseURL = "https://patitas-deploy.onrender.com/api"
 
 const useGet = (url) => {
     const [data, setData] = useState()
