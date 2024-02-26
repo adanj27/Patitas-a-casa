@@ -118,8 +118,8 @@ export const Formulario = ({ setModal }) => {
     try {
       setLoading(true);
       const url = petType
-        ? "http://localhost:4000/api/form/lost"
-        : "http://localhost:4000/api/form/found";
+        ? "/form/lost"
+        : "/form/found";
       const response = await axios.post(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Asegúrate de enviar el token en el encabezado

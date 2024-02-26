@@ -8,7 +8,7 @@ const useGet = (url) => {
     useEffect(() => {
         const fetch = async () => {
             try {
-              const response = await axios.get(`http://localhost:4000/api/v1/${url}`);
+              const response = await axios.get(`/v1/${url}`);
               setData(response.data);
               setStatus('200');
             } catch (error) {
