@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = "https://patitas-deploy.onrender.com/api"
+axios.defaults.baseURL = "https://patitasacasa.org/api"
 
 export default axios
