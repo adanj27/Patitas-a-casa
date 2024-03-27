@@ -23,7 +23,7 @@ export const corsMiddleware = ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) =>
     },
     allowedHeaders:
       "Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method",
-    methods: "GET, POST, OPTIONS, PUT, DELETE",
+    methods: "GET, POST, OPTIONS, PUT, DELETE, PATCH",
     preflightContinue: false,
     optionsSuccessStatus: 204,
     credentials: true, // Habilitar el envío de cookies
