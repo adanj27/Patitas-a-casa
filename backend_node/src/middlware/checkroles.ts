@@ -1,5 +1,5 @@
 import { NextFunction, Response } from "express";
-import { RolRepository, UserRepository } from "../models/repositorie";
+import { RolRepository, UserRepository } from "../models/repository";
 import { AuthRequest } from "./authorization";
 import { IAuth } from "../helpers";
 import { handlerHttpError } from "./handlerHttpError";

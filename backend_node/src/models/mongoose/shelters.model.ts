@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IShelter } from "../../interface/props/ShelterInterface";
+import { IShelter } from "../../interface/props/shelterInterface";
 
 const ShelterSchema = new Schema<IShelter>(
   {

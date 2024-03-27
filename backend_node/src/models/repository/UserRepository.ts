@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import mongoose, { FilterQuery, QueryWithHelpers } from "mongoose";
 import bcrypt from "bcrypt";
-import { IUser, listNameArray } from "../../interface";
-import { BaseRepository } from "../../repositories/BaseRepository";
+import { IUser, listNameArray } from "../../interface/props/userInterface";
+import { BaseRepository } from "../../repository/base-repository";
 import { UserModel } from "../mongoose/user.model";
 import { IAuth } from "../../helpers";
 import { RolRepository } from "./RolRespository";

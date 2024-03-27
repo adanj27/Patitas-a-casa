@@ -148,7 +148,7 @@ router.post(
   isAuth,
   hasRole([ROL_TYPE.user, ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(FormFoundPetSchema),
-  FormController.createFound
+  FormController.createFound,
 );
 
 /**
@@ -203,71 +203,15 @@ router.post(
   isAuth,
   hasRole([ROL_TYPE.user, ROL_TYPE.ghost, ROL_TYPE.admin, ROL_TYPE.editor]),
   SchemaValidate(FormLostPetSchema),
-  FormController.createLost
+  FormController.createLost,
 );
 
-/**
- * @swagger
- * /api/v1/form/{id}:
- *    patch:
- *      tags:
- *        - Form
- *      summary: update a form pet
- *      description:  
-The enpoint will help users update the created forms - check if you added the token in Authorize
- *          parameters:
- *            - in: path
- *              name: id
- *              required: true
- *              description: The ID of the user for form.
- *              schema:
- *               type: string
- *               format: objectId
- *      requestBody:
- *          required: true
- *          description: check the schema form to see the required fields *
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/form'
- *      responses:
- *        200:
- *          description: It will return a message with the status, the created form. additional email sending message is added.
- *          content:
- *              application/json:
- *                  schema:
- *                      type: object
- *                      properties:
- *                           status:
- *                              type: string
- *                              example: true
- *                           data:
- *                              type: object
- *                              $ref: '#/components/schemas/form'
- *                           message:
- *                              type: object
- *                              example: send message to email - OPTIONAL TO VALIDATE
- *        404:
- *          description: invalid fields error
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/messageError'
- *        500:
- *          description: Internal server error
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/serverError'
- *      security:
- *            - bearerAuth: []
- */
 router.patch(
   "/:id",
   isAuth,
   hasRole([ROL_TYPE.admin, ROL_TYPE.editor, ROL_TYPE.user]),
   SchemaValidate(FormUpdateSchema),
-  FormController.update
+  FormController.update,
 );
 
 /**
@@ -312,7 +256,7 @@ router.delete(
   isAuth,
   hasRole([ROL_TYPE.ghost, ROL_TYPE.admin]),
   SchemaValidate(validateIdSchema),
-  FormController.delete
+  FormController.delete,
 );
 
 export { router };

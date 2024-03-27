@@ -5,7 +5,7 @@ import {
   BlogupdateSchema,
   validateIdSchema,
 } from "../../schema";
-import { ROL_TYPE } from "../../interface/props/RolInterface";
+import { ROL_TYPE } from "../../interface/props/rolinterface";
 import { SchemaValidate, hasRole, isAuth } from "../../middlware";
 
 const router = Router();

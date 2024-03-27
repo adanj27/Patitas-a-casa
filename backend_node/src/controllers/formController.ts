@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { FormRepository, UserRepository } from "../models/repositorie";
+import { FormRepository, UserRepository } from "../models/repository";
 import { ApiResponse, Errors, IForm } from "../interface";
 import {
   FormCreateLostType,

@@ -1,6 +1,6 @@
 import slug from "mongoose-slug-generator";
 import mongoose, { Schema, model } from "mongoose";
-import { IBlog } from "../../interface/props/BlogInterface";
+import { IBlog } from "../../interface/props/blogInterface";
 
 mongoose.plugin(slug);
 

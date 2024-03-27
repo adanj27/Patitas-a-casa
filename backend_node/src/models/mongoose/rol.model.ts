@@ -1,5 +1,5 @@
 import { Model, Schema, model } from "mongoose";
-import { IRol, IRolDocument } from "../../interface/props/RolInterface";
+import { IRol, IRolDocument } from "../../interface/props/rolinterface";
 
 const RolSchema = new Schema<IRol>(
   {

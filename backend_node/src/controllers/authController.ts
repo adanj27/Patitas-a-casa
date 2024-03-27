@@ -1,14 +1,18 @@
 import { Request, Response } from "express";
-import { ApiResponse, Errors, IUser } from "../interface";
+
 import {
   AuthLoginType,
   AuthResetPassType,
   UserCreateType,
   ValidateIdType,
 } from "../schema";
-import { UserRepository, RolRepository } from "../models/repositorie";
+import { UserRepository } from "../models/repository/UserRepository";
 import { IAuth, JWT, TOKEN, setAccessTokenCookie } from "../helpers";
 import { AuthRequest, handlerHttpError } from "../middlware";
+import { IUser } from "../interface/props/userInterface";
+import { Errors } from "../interface/errors/errorMessage";
+import { ApiResponse } from "../interface/response/responseApi";
+import { RolRepository } from "../models/repository/RolRespository";
 
 const User = new UserRepository();
 const Rol = new RolRepository();

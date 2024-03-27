@@ -16,6 +16,6 @@
     "strictPropertyInitialization": false,
     "resolveJsonModule": true
   },
-  "include": ["./**/**/*", "src/services/sendinblue/.ts"],
+  "include": ["./**/**/*"],
   "exclude": ["node_modules", "build", "src/test"]
 }

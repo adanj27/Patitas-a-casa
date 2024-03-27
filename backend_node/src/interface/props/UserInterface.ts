@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import mongoose, { Document, Model } from "mongoose";
-import { IForm } from "./FormInterface";
-import { IBlog } from "./BlogInterface";
-import { IShelter } from "./ShelterInterface";
+import { IForm } from "./formInterface";
+import { IBlog } from "./blogInterface";
+import { IShelter } from "./shelterInterface";
 
 export interface listNameArray {
   blogs: string;
