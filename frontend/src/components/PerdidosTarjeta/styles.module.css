@@ -47,6 +47,10 @@
 	cursor: pointer;
 }
 
+.perdidosTarjeta__img_info::after:nth-child(3) {
+  content: 'Ver tarjeta'; /* Texto que se mostrará */
+}
+
 .perdidosTarjeta__h3 {
 	color: #fff;
 	background-color: #DE341D;

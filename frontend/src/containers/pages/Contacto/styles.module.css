@@ -29,9 +29,6 @@
 
 .contacto__information {
   background-color: #ff0004b2;
-
-  height: 100%;
-
   flex: 2;
 }
 
@@ -181,11 +178,11 @@ input[type=number]::-webkit-outer-spin-button {
 @media screen and (max-width:800px) {
   .contenedor-principal {
     min-height: 100vh;
-    margin-top: 20px;
+    margin: 20px 0 200px 0;
   }
 
   .contenedor-principal form {
-    margin-top: 165px;
+    margin-top: 185px;
     margin-bottom: 100px;
 
     flex-direction: column;
@@ -222,6 +219,22 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media (max-width: 600px){
+
+  .contenedor-principal {
+    margin: 120px 0 180px 0;
+  }
+
+  .contacto__information p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 340px){
+
+  .contenedor-principal {
+    margin: 150px 0 320px 0;
+  }
+
   .contacto__information p {
     font-size: 16px;
   }

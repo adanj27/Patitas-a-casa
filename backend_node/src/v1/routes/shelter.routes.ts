@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { DShelterSchema, ShelterSchemaz, UShelterSchema } from "../schema";
-import { ShelterController } from "../controllers/shelterController";
-import { SchemaValidate, hasRole, isAuth } from "../middlware";
-import { ROL_TYPE } from "../interface";
+import { DShelterSchema, ShelterSchemaz, UShelterSchema } from "../../schema";
+import { ShelterController } from "../../controllers/shelterController";
+import { SchemaValidate, hasRole, isAuth } from "../../middlware";
+import { ROL_TYPE } from "../../interface";
 
 const router = Router();
 

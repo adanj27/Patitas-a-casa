@@ -17,6 +17,14 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, []);
+
 
   const handleCancel = () => {
     setLogin(false);
@@ -111,7 +119,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
             )}
           </div>
           <p className={styles.link}>
-            {isRegisterForm ? '¿No tienes una cuenta? ': '¿Ya tienes una cuenta? '}
+            {isRegisterForm ? '¿No tienes una cuenta? ' : '¿Ya tienes una cuenta? '}
             <span onClick={switchForm}>
               {isRegisterForm ? 'Registrarte' : 'Iniciar sesión'}
             </span>

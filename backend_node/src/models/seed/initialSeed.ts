@@ -1,6 +1,6 @@
 import { USERADMIN } from "../../helpers";
-import { ROL_TYPE } from "../../interface/props/RolInterface";
-import { RolRepository, UserRepository } from "../repositorie";
+import { ROL_TYPE } from "../../interface/props/rolinterface";
+import { RolRepository, UserRepository } from "../repository";
 
 const Rol = new RolRepository();
 const User = new UserRepository();

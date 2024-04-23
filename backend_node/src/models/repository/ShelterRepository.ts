@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import mongoose from "mongoose";
-import { BaseRepository } from "../../repositories/BaseRepository";
-import { IShelter } from "../../interface/props/ShelterInterface";
+import { BaseRepository } from "../../repository/base-repository";
+import { IShelter } from "../../interface/props/shelterInterface";
 import { ShelterModel } from "../mongoose/shelters.model";
 
 export class ShelterRepository extends BaseRepository<IShelter, string> {

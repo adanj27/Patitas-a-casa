@@ -5,7 +5,7 @@ import {
   BlogRepository,
   ImageRepository,
   UserRepository,
-} from "../models/repositorie";
+} from "../models/repository";
 import {
   BlogCreateType,
   BlogUpdateTypeB,

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserRepository } from "../models/repositorie/UserRepository";
+import { UserRepository } from "../models/repository/UserRepository";
 import { ApiResponse, Errors, IUser } from "../interface";
 import { ServiceSMTP } from "../services/sendinblue/service";
 import { BREVO_CONFIG, IAuth } from "../helpers";

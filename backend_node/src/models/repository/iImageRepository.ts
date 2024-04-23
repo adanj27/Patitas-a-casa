@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable class-methods-use-this */
 import mongoose, { FilterQuery, QueryWithHelpers } from "mongoose";
-import { BaseRepository } from "../../repositories/BaseRepository";
+import { BaseRepository } from "../../repository/base-repository";
 import { ImageModel } from "../mongoose/image.model";
-import { IImage } from "../../interface";
+import { IImage } from "../../interface/props/imageInterface";
 import { ServiceImage } from "../../services/Image/cloudinary";
 
 export class ImageRepository extends BaseRepository<IImage, string> {

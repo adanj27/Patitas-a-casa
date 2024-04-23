@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   // En el AuthProvider
 const login = async (credentials) => {
   try {
-    const response = await axios.post('http://localhost:4000/api/auth/login', credentials);
+    const response = await axios.post('/v1/auth/login', credentials);
 
     if (response.status === 200) {
       const { mytoken } = response.data;

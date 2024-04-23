@@ -4,7 +4,7 @@ import {
   PETSEARCH_TYPE,
   PETSIZE_TYPE,
   PET_TYPE,
-} from "../../interface/props/FormInterface";
+} from "../../interface/props/formInterface";
 
 const FormSchema = new Schema<IForm>(
   {

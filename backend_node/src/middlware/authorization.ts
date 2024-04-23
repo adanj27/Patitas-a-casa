@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { IAuth, JWT } from "../helpers";
-import { UserRepository } from "../models/repositorie";
+import { UserRepository } from "../models/repository";
 import { handlerHttpError } from "./handlerHttpError";
 import { Errors } from "../interface";
 

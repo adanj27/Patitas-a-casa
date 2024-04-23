@@ -1,6 +1,8 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable prefer-promise-reject-errors */
 import * as Brevo from "@getbrevo/brevo";
+import { exec } from "child_process";
 import { APP_CONFIG, SMS } from "../../helpers";
-import { exec } from 'child_process';
 
 const list = 2;
 
@@ -211,25 +213,29 @@ export class ServiceSMTP {
     } catch (error) {
       // If Brevo email sending fails, attempt to send via Python script
       try {
-        const template = 'template.html'
-        const pythonResult = await this.sendEmailViaPython({ email, subject, template });
+        const template = "template.html";
+        const pythonResult = await this.sendEmailViaPython({
+          email,
+          subject,
+          template,
+        });
         return pythonResult;
       } catch (pythonError) {
         return {
           status: false,
           code: 500,
-          message: 'Failed to send email via Python',
+          message: "Failed to send email via Python",
         };
       }
 
-      /*if (error.response && error.response.status === 400) {
+      /* if (error.response && error.response.status === 400) {
         return {
           status: false,
           code: error.response.status,
           message: error.response.body.message,
         };
       }
-      throw error;*/
+      throw error; */
     }
   }
 
@@ -242,11 +248,11 @@ export class ServiceSMTP {
    */
   public async sendEmailViaPython({ email, subject, template }) {
     return new Promise((resolve, reject) => {
-      const pythonScriptPath = './send_email.py'; // Path to the Python script 
-      const receiver_email = Buffer.from(email, 'utf-8').toString('ascii'); // User email
+      const pythonScriptPath = "./send_email.py"; // Path to the Python script
+      const receiver_email = Buffer.from(email, "utf-8").toString("ascii"); // User email
       const pythonCommand = `python3 ${pythonScriptPath} ${receiver_email} "${subject}" ${template}`; // Python command
-      const successMessage = 'Email sent successfully'; // Successful message
-    
+      const successMessage = "Email sent successfully"; // Successful message
+
       // Execute Python script
       exec(pythonCommand, (error, stdout, stderr) => {
         // Handle error if script execution fails
@@ -265,7 +271,7 @@ export class ServiceSMTP {
           // Resolve with a status and response data on successful email sending
           resolve({
             status: true,
-            data: stdout
+            data: stdout,
           });
         }
       });

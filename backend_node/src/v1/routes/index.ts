@@ -12,7 +12,7 @@ fs.readdirSync(pathRoute).forEach((filename) => {
   const routefile = removeExtends(filename);
   if (routefile !== "index") {
     import(`./${routefile}.routes`).then((moduleRouter) => {
-      apiRoute.use(`/${routefile}`, moduleRouter.router);
+      apiRoute.use(`/api/v1/${routefile}`, moduleRouter.router);
     });
   }
 });
