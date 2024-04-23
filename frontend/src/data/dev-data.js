@@ -3,7 +3,7 @@ export const devsData = [
     title: "engrohm",
     name: "mauricio",
     img: "/icons/devs/engrohm.jpg",
-    position: "ceo",
+    position: "founder",
     linkedin: "https://www.linkedin.com/in/mauricio-hector-medina-4b9048234",
     // portfolio: ""
   },
@@ -55,22 +55,22 @@ export const devsData = [
     linkedin: "https://www.linkedin.com/in/augusto-borromeo-b75255218",
     portfolio: "https://www.augusdev.com/portfolio"
   },
+  {
+    title: "Daniel",
+    name: "daniel",
+    img: "/icons/devs/Dani.jpeg",
+    position: "SRE-DevOps",
+    linkedin: "https://www.linkedin.com/in/danieljpalma",
+    portfolio: ""
+  },
   // {
   //   title: "nombre",
-  //   name: "Santiago",
-  //   img: "https://i.pinimg.com/280x280_RS/66/a1/a4/66a1a4a22e271ec3ee3ef35ba0883ca4.jpg",
-  //   position: "",
+  //   name: "Manzana",
+  //   img: "/icons/devs/manzana.jpg",
+  //   position: "Desarrollador",
   //   linkedin: "",
-  //   portfolio: ""
+  //   portfolio: "https://github.com/levioneyh"
   // },
-  {
-    title: "nombre",
-    name: "Manzana",
-    img: "/icons/devs/manzana.jpg",
-    position: "Desarrollador",
-    linkedin: "",
-    portfolio: "https://github.com/levioneyh"
-  },
   // {
   //   title: "nombre",
   //   name: "",
