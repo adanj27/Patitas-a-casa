@@ -71,6 +71,14 @@ export const devsData = [
     linkedin: "https://www.linkedin.com/in/sergioai93/",
     portfolio: "https://github.com/Spai26"
   },
+  {
+    title: "Daniel",
+    name: "daniel",
+    img: "/icons/devs/dani.jpg",
+    position: "SRE-DevOps",
+    linkedin: "https://www.linkedin.com/in/danieljpalma",
+    portfolio: ""
+  },
   // {
   //   title: "nombre",
   //   name: "",
