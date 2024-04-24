@@ -3,7 +3,7 @@ export const devsData = [
     title: "engrohm",
     name: "mauricio",
     img: "/icons/devs/engrohm.jpg",
-    position: "ceo",
+    position: "founder",
     linkedin: "https://www.linkedin.com/in/mauricio-hector-medina-4b9048234",
     portfolio: "https://github.com/NegroHm"
   },
