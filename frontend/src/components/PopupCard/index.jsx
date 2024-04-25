@@ -36,8 +36,8 @@ export const PopupTarjeta = ({ onClose, perdidoData }) => {
       const canvas = await html2canvas(cardRef.current, {
         useCORS: true,
         scale: 1, // Increase the scale for higher resolution
-      width: 1080, // Adjust width for higher resolution
-      height: 1920, // Adjust height for higher resolution
+        width: 400, // Adjust width for higher resolution
+        height: 600, // Adjust height for higher resolution
       });
 
       const imageData = canvas.toDataURL('image/jpg');
@@ -108,7 +108,9 @@ export const PopupTarjeta = ({ onClose, perdidoData }) => {
           </div>
         </div>
       </div>
-      <button onClick={saveCardAsImage} className={styles.popup__download}>Descargar</button>
+      <button onClick={saveCardAsImage} className={styles.popup__download}>
+        Descargar
+      </button>
     </div>
   );
 };
