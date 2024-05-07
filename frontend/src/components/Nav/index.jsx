@@ -44,6 +44,10 @@ export const Navbar = () => {
     let timeoutId;
 
     function handleScroll() {
+      if (window.scrollY <= 100) {
+        setScrolling(false)
+        return 
+      }
       clearTimeout(timeoutId);
       setScrolling(true);
 

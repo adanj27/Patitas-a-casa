@@ -33,6 +33,18 @@
   display: none;
 }
 
+.mobile_nav {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile_nav__logout {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
 @media (max-width: 1300px) {
   .burger_menu {
     height: 60px;

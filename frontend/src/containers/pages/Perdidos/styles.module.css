@@ -29,3 +29,64 @@
 	gap: 50px 0;
 	padding-bottom: 2rem;
 }
+
+/* --------------- PopUp Card ---------------- */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Asegúrate de que el popup esté por encima del resto del contenido */
+}
+
+.popup__content {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid black;
+  width: 400px; /* O ajusta según tus preferencias */
+  height: 500px; /* O ajusta según tus preferencias */
+  overflow: hidden;
+}
+
+.popup__content__text {
+  position: relative;
+}
+
+.popup__content__text:nth-child(1) {
+  z-index: 0;
+}
+
+.popup__content__text:nth-child(2) {
+  z-index: 0;
+}
+
+.popup__text {
+  position: absolute;
+  top: 12px;
+  color: #000;
+  z-index: 99;
+}
+
+.popup__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.box {
+  width: 100%;
+  --mask:
+    radial-gradient(287.48px at 50% calc(100% - 394.85px),#000 99%,#0000 101%) calc(50% - 298px) 0/596px 100%,
+    radial-gradient(287.48px at 50% calc(100% + 245.85px),#0000 99%,#000 101%) 50% calc(100% - 149px)/596px 100% repeat-x;
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
+}

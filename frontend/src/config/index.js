@@ -1,3 +1,5 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.API | "http://localhost:4000/api"
+axios.defaults.baseURL = "https://pacserver.patitasacasa.org:8001/api"
+
+export default axios

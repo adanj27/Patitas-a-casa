@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
@@ -20,6 +20,14 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
   const { login } = useAuth();
 
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'visible';
+    };
+  }, []);
 
   const handleCancel = () => {
     setLogin(false);
@@ -45,7 +53,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Enviar la solicitud al endpoint de registro
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/register', formData);
+      const response = await axios.post('/auth/register', formData);
 
       // Puedes manejar la respuesta del servidor aquí según tus necesidades
       if (response) {

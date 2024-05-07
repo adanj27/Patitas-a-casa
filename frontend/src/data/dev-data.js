@@ -5,7 +5,15 @@ export const devsData = [
     img: "/icons/devs/engrohm.jpg",
     position: "founder",
     linkedin: "https://www.linkedin.com/in/mauricio-hector-medina-4b9048234",
-    // portfolio: ""
+    portfolio: "https://github.com/NegroHm"
+  },
+  {
+    title: "sufyan",
+    name: "Sufy",
+    img: "/icons/devs/sufy.jpg",
+    position: "CTO",
+    linkedin: "https://www.linkedin.com/in/ahmed-sufyan1/",
+    portfolio: "https://github.com/sufyang737"
   },
   {
     title: "zeroz",
@@ -56,6 +64,7 @@ export const devsData = [
     portfolio: "https://www.augusdev.com/portfolio"
   },
   {
+<<<<<<< HEAD
     title: "Daniel",
     name: "daniel",
     img: "/icons/devs/Dani.jpeg",
@@ -71,6 +80,15 @@ export const devsData = [
   //   linkedin: "",
   //   portfolio: "https://github.com/levioneyh"
   // },
+=======
+    title: "sergio",
+    name: "Sergio",
+    img: "/icons/devs/sergio.jpg",
+    position: "desarrollador",
+    linkedin: "https://www.linkedin.com/in/sergioai93/",
+    portfolio: "https://github.com/Spai26"
+  },
+>>>>>>> 39e314d76cafa01b452e8532a8a35221b08c1384
   // {
   //   title: "nombre",
   //   name: "",

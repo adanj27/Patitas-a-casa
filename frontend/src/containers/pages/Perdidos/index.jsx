@@ -4,6 +4,7 @@ import { LetraParrafo, LetraSubtitulo, LetraTitulo, Paginacion } from '../../../
 import { PerdidosTarjeta } from '../../../components/PerdidosTarjeta';
 import { useEffect, useState } from "react";
 import useGet from '../../../hooks/services/useGet';
+import { PopupTarjeta } from '../../../components/PopupCard';
 
 const Perdidos = () => {
 	const { data, status } = useGet("form")
@@ -34,11 +35,45 @@ const Perdidos = () => {
 	
 	useEffect(() => {
 		if (data) {
-				// Filtrar los elementos con type_search igual a "LOST"
-				const filteredLostPets = data.data.filter(item => item.type_search === 'LOST');
+			// Filtrar los elementos con type_search igual a "LOST"
+			const filteredLostPets = data.data.filter(item => item.type_search === 'LOST');
+	
+			// Actualizar el estado solo si los datos filtrados son diferentes a lostPets
+			if (!areArraysEqual(filteredLostPets, lostPets)) {
 				setLostPets(filteredLostPets);
+			}
 		}
-}, [data]);
+	}, [data, lostPets]);
+	
+	// ...
+	
+	// Función para comparar dos arrays
+	function areArraysEqual(arr1, arr2) {
+		if (arr1.length !== arr2.length) {
+			return false;
+		}
+	
+		for (let i = 0; i < arr1.length; i++) {
+			if (arr1[i] !== arr2[i]) {
+				return false;
+			}
+		}
+	
+		return true;
+	}
+
+	const [mostrarPopup, setMostrarPopup] = useState(false);
+	const [datosPopup, setDatosPopup] = useState();
+
+	const abrirPopup = (id) => {
+		const perdidoData = lostPets.find((pet) => pet._id === id);
+		setMostrarPopup(true);
+		setDatosPopup(perdidoData);
+};
+
+const cerrarPopup = () => {
+	setMostrarPopup(false);
+};
 
 	return (
 		<>
@@ -74,10 +109,12 @@ const Perdidos = () => {
 									nombre={name}
 									tam={TranslateSize(size)}
 									zona={address}
+									onOpen={() => abrirPopup(_id)}
 								/>
 							);
 						}
 					)}
+					{mostrarPopup && <PopupTarjeta onClose={cerrarPopup} perdidoData={datosPopup} />}
 				</section>
 				<Paginacion 
 					totalPosts={lostPets.length}

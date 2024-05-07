@@ -5,7 +5,7 @@ import {
   ImageRepository,
   ShelterRepository,
   UserRepository,
-} from "../models/repositorie";
+} from "../models/repository";
 import { ShelterCreateType, ShelterUpdateTypeB } from "../schema";
 import { AuthRequest } from "../middlware/authorization";
 import { ValidateIdType } from "../schema/validateIdSchema";
