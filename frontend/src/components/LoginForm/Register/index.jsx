@@ -53,7 +53,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Enviar la solicitud al endpoint de registro
     try {
-      const response = await axios.post('/auth/register', formData);
+      const response = await axios.post('/v1/auth/register', formData);
 
       // Puedes manejar la respuesta del servidor aquí según tus necesidades
       if (response) {
