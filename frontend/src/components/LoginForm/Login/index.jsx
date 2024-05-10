@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
-import loginForm from '/icons/imagenes recursos/loginForm.png';
+import form from '/icons/forms_svg.svg';
+import logoWhite from '/icons/pac-logo.png';
 import { useAuth } from '../../../context/AuthContext';
-
+import { SpinnerButton } from '../../SpinnerButton';
+import { toast } from 'sonner';
 
 export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth(); // Usa el hook de autenticación
 
@@ -25,7 +28,6 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
     };
   }, []);
 
-
   const handleCancel = () => {
     setLogin(false);
   };
@@ -39,6 +41,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     // Validaciones
     const newErrors = {};
@@ -58,10 +61,12 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
         if (success) {
           // Redirige al usuario a la página principal después del inicio de sesión exitoso
+          setIsLoading(false);
           window.location.reload();
         } else {
           // Maneja el caso en que la respuesta del servidor no sea exitosa
-          console.error('Error en el inicio de sesión');
+          const data = await success.json();
+          setErrors({ serverError: data.message });
         }
       } catch (error) {
         // Maneja errores de red o problemas con la solicitud
@@ -81,9 +86,20 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
     <div className={styles.loginContainer}>
       <div className={styles.formContainer}>
         <div className={styles.imgContainer}>
-          <img src={loginForm} alt="login-form" className={styles.imgContainerBg} />
+          <div className={styles.bgForm}>
+            <img src={form} alt="login-form" className={styles.imgForm} />
+            <img
+              src={logoWhite}
+              alt="login-form"
+              className={styles.imgContainerBg}
+            />
+          </div>
           <button className={styles.cancelButton} onClick={handleCancel}>
-            <img src={close} alt="close-icon" className={styles.cancelButtonImg} />
+            <img
+              src={close}
+              alt="close-icon"
+              className={styles.cancelButtonImg}
+            />
           </button>
         </div>
         <span className={styles.formTitle}>Iniciar sesión</span>
@@ -119,14 +135,16 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
             )}
           </div>
           <p className={styles.link}>
-            {isRegisterForm ? '¿No tienes una cuenta? ' : '¿Ya tienes una cuenta? '}
+            {isRegisterForm
+              ? '¿No tienes una cuenta? '
+              : '¿Ya tienes una cuenta? '}
             <span onClick={switchForm}>
               {isRegisterForm ? 'Registrarte' : 'Iniciar sesión'}
             </span>
           </p>
           <div className={styles.submitButton}>
-            <button type="submit" className={styles.button}>
-              {isRegisterForm ? 'Iniciar sesión' : 'Registrarse'}
+            <button type="submit" className={styles.button} disabled={isLoading}>
+              {isLoading ? <SpinnerButton /> : 'Iniciar sesión'}
             </button>
           </div>
         </form>
@@ -134,5 +152,3 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
     </div>
   );
 };
-
-
