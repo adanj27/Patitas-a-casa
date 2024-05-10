@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { toast } from 'sonner';
 
 const AuthContext = createContext();
 
@@ -30,6 +31,9 @@ const login = async (credentials) => {
       console.log(mytoken)
       localStorage.setItem('token', mytoken);
       setIsAuthenticated(true);
+      toast.success('Inicio de sesión exitoso', {
+        duration: 10000,
+      });
       setToken(mytoken);
       return true
     } else {
@@ -38,6 +42,7 @@ const login = async (credentials) => {
     }
   } catch (error) {
     console.error('Error al iniciar sesión:', error.response || error);
+    toast.error(error.message);
     return false
   }
 };

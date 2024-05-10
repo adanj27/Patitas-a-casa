@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import styles from '../styles.module.css';
 import close from '/icons/imagenes recursos/close.png';
-import loginForm from '/icons/imagenes recursos/loginForm.png';
+import form from '/icons/forms_svg.svg';
+import logoWhite from '/icons/pac-logo.png';
 import axios from 'axios';
 import { useAuth } from '../../../context/AuthContext';
+import { SpinnerButton } from '../../SpinnerButton/index';
+import { toast } from 'sonner';
 
 export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
   // const navigate = useNavigate();
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -42,6 +46,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     // Aquí puedes agregar validaciones adicionales si es necesario
@@ -57,16 +62,20 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
       // Puedes manejar la respuesta del servidor aquí según tus necesidades
       if (response) {
-
+        toast.success('Registro exitoso', {
+          duration: 10000,
+        });
+        setIsLoading(false);
         await login({ email: formData.email, password: formData.password });
         // setLogin(false);
-
       } else {
         const data = await response.json();
         setErrors({ serverError: data.message });
       }
     } catch (error) {
       console.error('Error al realizar la solicitud:', error);
+      const message = error.message;
+      toast.error(message);
     }
   };
 
@@ -87,11 +96,14 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
     <div className={styles.loginContainer}>
       <div className={styles.formContainer}>
         <div className={styles.imgContainer}>
-          <img
-            src={loginForm}
-            alt="login-form"
-            className={styles.imgContainerBg}
-          />
+        <div className={styles.bgForm}>
+            <img src={form} alt="login-form" className={styles.imgForm} />
+            <img
+              src={logoWhite}
+              alt="login-form"
+              className={styles.imgContainerBg}
+            />
+          </div>
           <button className={styles.cancelButton} onClick={handleCancel}>
             <img
               src={close}
@@ -208,9 +220,9 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
             <button
               type="submit"
               className={styles.button}
-              disabled={Object.keys(errors).length > 0}
+              disabled={isLoading}
             >
-              {isRegisterForm ? 'Iniciar sesión' : 'Registrarse'}
+              {isLoading ? <SpinnerButton /> : 'Registrarse'}
             </button>
           </div>
         </form>

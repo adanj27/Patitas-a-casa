@@ -14,7 +14,7 @@
 }
 
 .formContainer {
-  background-color: #fff;
+  background-color: #DE341D;
   display: flex;
   flex-direction: column;
   max-width: 490px;
@@ -32,8 +32,20 @@
   position: relative;
 }
 
+.bgForm {
+  position: relative;
+  display: flex;
+}
+
+.imgForm {
+position: absolute;
+top: 3rem;
+width: 80px;
+}
+
 .imgContainerBg {
-  width: 100%;
+  width: 200px;
+  padding: 3rem 8rem 4rem 8rem;
 }
 
 .registerForm {
@@ -52,9 +64,11 @@
   cursor: pointer;
   width: 1.5rem;
   height: 1.5rem;
+  filter: invert(1);
 }
 
 .formTitle {
+  color: #fff;
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
@@ -65,6 +79,7 @@
 }
 
 .label {
+  color: #fff;
   display: block;
   margin-bottom: 4px;
 }
@@ -87,20 +102,21 @@
 }
 
 .button {
-  background-color: #DE341D;
-  color: white;
+  background-color: #fff;
+  color: #DE341D;
   padding: 15px 30px;
   border: none;
   cursor: pointer;
 }
 
 .link {
+  color: #fff;
   display: block;
   font-weight: 600;
   margin-top: 12px;
 }
 
 .link span {
-  color: #DE341D;
+  color: #CCCCCC;
   cursor: pointer;
 }
