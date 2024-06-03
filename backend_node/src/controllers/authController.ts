@@ -24,7 +24,12 @@ export class AuthController {
   ) {
     let result: IUser;
     const { first_name, last_name, alias, email, password, phone } = req.body;
+    console.log("Llamado del registro ")
     try {
+      Rol.getByOne({ name: "user" }) //2
+      .then((user) => {
+        console.log(user); //3
+      }).catch(error=>console.error(error.message));
       const assingRole = await Rol.getByOne({ name: "user" });
 
       const newUser = await User.create({
@@ -36,15 +41,16 @@ export class AuthController {
         phone,
         rol: assingRole._id,
       });
-
+      console.log("usuario nuevo: ", newUser)
       if (newUser) {
         result = await newUser.save();
 
         if (!result) {
           return handlerHttpError(
             res,
-            Errors.MSG("Error user dont create").message,
-            404,
+            Errors.MSG("Error user not created").message,
+            //cambio de 404 a 404
+            400,
           );
         }
       }

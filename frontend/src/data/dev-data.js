@@ -64,10 +64,18 @@ export const devsData = [
     portfolio: "https://www.augusdev.com/portfolio"
   },
   {
-<<<<<<< HEAD
+
+    title: "sergio",
+    name: "Sergio",
+    img: "/icons/devs/sergio.jpg",
+    position: "desarrollador",
+    linkedin: "https://www.linkedin.com/in/sergioai93/",
+    portfolio: "https://github.com/Spai26"
+  },
+  { 
     title: "Daniel",
     name: "daniel",
-    img: "/icons/devs/Dani.jpeg",
+    img: "/icons/devs/dani.jpg",
     position: "SRE-DevOps",
     linkedin: "https://www.linkedin.com/in/danieljpalma",
     portfolio: ""
@@ -80,15 +88,6 @@ export const devsData = [
   //   linkedin: "",
   //   portfolio: "https://github.com/levioneyh"
   // },
-=======
-    title: "sergio",
-    name: "Sergio",
-    img: "/icons/devs/sergio.jpg",
-    position: "desarrollador",
-    linkedin: "https://www.linkedin.com/in/sergioai93/",
-    portfolio: "https://github.com/Spai26"
-  },
->>>>>>> 39e314d76cafa01b452e8532a8a35221b08c1384
   // {
   //   title: "nombre",
   //   name: "",

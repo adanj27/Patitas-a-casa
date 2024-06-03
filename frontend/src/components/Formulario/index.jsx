@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
-import dog from "/icons/imagenes recursos/dog-seating.png";
-import pet from "/icons/imagenes recursos/pet.png";
-import close from "/icons/imagenes recursos/close.png";
+import dog from '/icons/imagenes recursos/dog-seating.png';
+import pet from '/icons/imagenes recursos/pet.png';
+import close from '/icons/imagenes recursos/close.png';
 
 // hooks
 // import usePost from '../../hooks/services/usePost';
-import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
-import { useAuth } from "../../context/AuthContext";
-import { Image } from "cloudinary-react";
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+import { useAuth } from '../../context/AuthContext';
+import { Image } from 'cloudinary-react';
 /**
  Petype = es un booleano que indica si el formulario es para reportar una mascota
  perdida o si es para reportar una mascota encontrada
@@ -30,28 +30,28 @@ export const Formulario = ({ setModal }) => {
     setFormData(
       petType
         ? {
-            name: "",
-            color: "",
-            size: "",
-            city: "",
-            address: "",
-            contact: "",
-            loss_date: "",
-            description: "",
-            type: "",
-            type_search: "LOST",
+            name: '',
+            color: '',
+            size: '',
+            city: '',
+            address: '',
+            contact: '',
+            loss_date: '',
+            description: '',
+            type: '',
+            type_search: 'LOST',
             image_url: null,
           }
         : {
-            color: "",
-            size: "",
-            city: "",
-            address: "",
-            contact: "",
-            loss_date: "",
-            description: "",
-            type: "",
-            type_search: "FOUND",
+            color: '',
+            size: '',
+            city: '',
+            address: '',
+            contact: '',
+            loss_date: '',
+            description: '',
+            type: '',
+            type_search: 'FOUND',
             image_url: null,
           }
     );
@@ -59,19 +59,19 @@ export const Formulario = ({ setModal }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = "visible";
+      document.body.style.overflow = 'visible';
     };
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name !== "image_url") {
+    if (name !== 'image_url') {
       // Si es la propiedad 'loss_date', formatea la fecha
       const formattedValue =
-        name === "loss_date" ? `${value}T23:39:49.000000Z` : value;
+        name === 'loss_date' ? `${value}T23:39:49.000000Z` : value;
       console.log(formattedValue);
 
       setFormData((prevData) => ({
@@ -85,18 +85,18 @@ export const Formulario = ({ setModal }) => {
     const file = e.target.files[0];
 
     if (file === null) {
-      console.log("No se ha seleccionado ninguna imagen");
+      console.log('No se ha seleccionado ninguna imagen');
       return;
     }
 
     // Subir la imagen a Cloudinary
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "aqeczzrt");
+    formData.append('file', file);
+    formData.append('upload_preset', 'aqeczzrt');
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dlfwgaprv/image/upload",
+        'https://api.cloudinary.com/v1_1/dlfwgaprv/image/upload',
         formData
       );
       const imageUrl = response.data.secure_url;
@@ -107,8 +107,8 @@ export const Formulario = ({ setModal }) => {
       }));
       setFile(true);
     } catch (error) {
-      console.error("Error al subir la imagen a Cloudinary:", error);
-      console.error("Cloudinary response:", error.response.data);
+      console.error('Error al subir la imagen a Cloudinary:', error);
+      console.error('Cloudinary response:', error.response.data);
       setFile(false);
     }
   };
@@ -117,9 +117,7 @@ export const Formulario = ({ setModal }) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const url = petType
-        ? "/form/lost"
-        : "/form/found";
+      const url = petType ? '/form/lost' : '/form/found';
       const response = await axios.post(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Asegúrate de enviar el token en el encabezado
@@ -127,15 +125,15 @@ export const Formulario = ({ setModal }) => {
       });
 
       if (response) {
-        console.log("Formulario enviado con éxito:", response.data);
+        console.log('Formulario enviado con éxito:', response.data);
         setModal(false);
         // Aquí puedes realizar acciones adicionales después de enviar el formulario con éxito
       } else {
-        console.error("Error al enviar el formulario:", response.status);
+        console.error('Error al enviar el formulario:', response.status);
         // Aquí puedes manejar errores específicos si es necesario
       }
     } catch (error) {
-      console.error("Error al enviar el formulario:", error.response || error);
+      console.error('Error al enviar el formulario:', error.response || error);
       // Aquí puedes manejar errores generales o de red
     }
   };
@@ -147,7 +145,7 @@ export const Formulario = ({ setModal }) => {
 
   return (
     <div
-      className={styles["report-container"]}
+      className={styles['report-container']}
       onClick={() => {
         setModal(false);
       }}
@@ -161,7 +159,7 @@ export const Formulario = ({ setModal }) => {
         <form action="POST" onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.headerForm}>
             <div
-              style={{ borderRadius: "8px 0 0 0" }}
+              style={{ borderRadius: '8px 0 0 0' }}
               className={petType ? styles.petSelected : styles.pet}
               onClick={() => setPetType(true)}
             >
@@ -183,10 +181,10 @@ export const Formulario = ({ setModal }) => {
               style={
                 file
                   ? {
-                      display: "flex",
-                      width: "100%",
-                      gap: "1rem",
-                      alignItems: "center",
+                      display: 'flex',
+                      width: '100%',
+                      gap: '1rem',
+                      alignItems: 'center',
                     }
                   : {}
               }
@@ -197,15 +195,15 @@ export const Formulario = ({ setModal }) => {
                   publicId={formData.image_url}
                   width="100"
                   height="100"
-                  style={{ borderRadius: "1rem" }}
+                  style={{ borderRadius: '1rem' }}
                 />
               ) : (
-                ""
+                ''
               )}
               <div className={styles.buttonFile}>
                 <label
                   style={
-                    file ? { backgroundColor: "rgba(222, 52, 29, 0.5)" } : {}
+                    file ? { backgroundColor: 'rgba(222, 52, 29, 0.5)' } : {}
                   }
                 >
                   {file ? `Foto subida` : `Subir foto`}
@@ -224,7 +222,7 @@ export const Formulario = ({ setModal }) => {
 
             <section className={styles.form_inputs}>
               {!petType ? (
-                ""
+                ''
               ) : (
                 <input
                   type="text"
@@ -279,7 +277,7 @@ export const Formulario = ({ setModal }) => {
                   type="date"
                   name="loss_date"
                   value={
-                    formData.loss_date ? formData.loss_date.split("T")[0] : ""
+                    formData.loss_date ? formData.loss_date.split('T')[0] : ''
                   }
                   onChange={handleChange}
                 />
@@ -306,7 +304,7 @@ export const Formulario = ({ setModal }) => {
               onChange={handleChange}
               maxLength={300}
             />
-            {/* <p>Maximo 300 caracteres</p> */}
+            <p>Maximo 300 caracteres</p>
 
             <button
               // onClick={handleSubmit}

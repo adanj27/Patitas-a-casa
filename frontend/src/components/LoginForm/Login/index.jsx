@@ -65,7 +65,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
         }
       } catch (error) {
         // Maneja errores de red o problemas con la solicitud
-        console.error('Error de red:', error);
+        console.error('Error de red:', error.message);
       }
     }
   };

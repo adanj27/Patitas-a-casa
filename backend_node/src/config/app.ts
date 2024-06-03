@@ -6,14 +6,14 @@ import { swaggerSetup } from "../dosc/swagger";
 import { corsMiddleware } from "./corsOptions";
 
 const app = express();
+app.use(corsMiddleware());        
 
 app.disable("X-Powered-By");
 app.use(express.json());
-app.use(corsMiddleware());
 
 // endpoint test for production
 app.get("/", (req, res) => {
-  return res.json({
+  return res.json({       
     message: `welcome to res-api to project ${APP_CONFIG.NAME}`,
   });
 });

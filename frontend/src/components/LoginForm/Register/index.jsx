@@ -53,7 +53,11 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
 
     // Enviar la solicitud al endpoint de registro
     try {
-      const response = await axios.post('/auth/register', formData);
+     // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    const headers = {
+      'Access-Control-Allow-Origin': 'http://locahost:5173', 'Access-Control-Allow-Headers': 'Origin', 'Content-Type':'application/x-www-form-urlencoded'
+    }; 
+     const response = await axios.post('/v1/auth/register', formData, headers) .catch(error=>{console.log("Error: ",error.message)}) ;//Este nuevo 'Access-Control-Allow-Origin':"http://127.0.0.1:5173/"  
 
       // Puedes manejar la respuesta del servidor aquí según tus necesidades
       if (response) {
@@ -62,6 +66,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
         // setLogin(false);
 
       } else {
+        console.error ("Respuesta del server: ", response.json())
         const data = await response.json();
         setErrors({ serverError: data.message });
       }
