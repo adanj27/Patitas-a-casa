@@ -63,7 +63,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
       // Puedes manejar la respuesta del servidor aquí según tus necesidades
       if (response) {
         toast.success('Registro exitoso', {
-          duration: 10000,
+          duration: 2000,
         });
         setIsLoading(false);
         await login({ email: formData.email, password: formData.password });

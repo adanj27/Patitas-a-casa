@@ -31,7 +31,7 @@ const login = async (credentials) => {
       localStorage.setItem('token', mytoken);
       setIsAuthenticated(true);
       toast.success('Inicio de sesión exitoso', {
-        duration: 10000,
+        duration: 2000,
       });
       setToken(mytoken);
       return true

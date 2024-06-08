@@ -13,6 +13,7 @@ import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { Image } from 'cloudinary-react';
+import { toast } from 'sonner';
 /**
  Petype = es un booleano que indica si el formulario es para reportar una mascota
  perdida o si es para reportar una mascota encontrada
@@ -118,7 +119,7 @@ export const Formulario = ({ setModal }) => {
     try {
       setLoading(true);
       const url = petType ? '/form/lost' : '/form/found';
-      const response = await axios.post(url, formData, {
+      const response = await axios.post(`/v1${url}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`, // Asegúrate de enviar el token en el encabezado
         },
@@ -127,7 +128,9 @@ export const Formulario = ({ setModal }) => {
       if (response) {
         console.log('Formulario enviado con éxito:', response.data);
         setModal(false);
-        // Aquí puedes realizar acciones adicionales después de enviar el formulario con éxito
+        toast.success('Formulario enviado con éxito', {
+          duration: 2000,
+        });
       } else {
         console.error('Error al enviar el formulario:', response.status);
         // Aquí puedes manejar errores específicos si es necesario
