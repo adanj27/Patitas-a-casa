@@ -67,7 +67,7 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
         });
         setIsLoading(false);
         await login({ email: formData.email, password: formData.password });
-        // setLogin(false);
+        setLogin(false);
       } else {
         const data = await response.json();
         setErrors({ serverError: data.message });

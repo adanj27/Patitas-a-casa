@@ -28,7 +28,6 @@ const login = async (credentials) => {
 
     if (response.status === 200) {
       const { mytoken } = response.data;
-      console.log(mytoken)
       localStorage.setItem('token', mytoken);
       setIsAuthenticated(true);
       toast.success('Inicio de sesión exitoso', {
