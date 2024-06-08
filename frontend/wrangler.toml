@@ -7,10 +7,10 @@ compatibility_date = "2023-01-01"
 
 [build]
 command = "npm run build"
-cwd = "frontend"
+cwd = "./"
 
 [site]
-bucket = "./frontend/dist"
+bucket = "./dist"
 entry-point = "workers-site"
 
 [env.production]
