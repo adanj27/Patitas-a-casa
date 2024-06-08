@@ -1,0 +1,19 @@
+name = "patitas-a-casa"
+type = "javascript"
+
+account_id = "cf817629bd2a1a296e37e6d000327c08b4ae2"
+workers_dev = true
+compatibility_date = "2023-01-01"
+
+[build]
+command = "npm run build"
+cwd = "frontend"
+
+[site]
+bucket = "./frontend/dist"
+entry-point = "workers-site"
+
+[env.production]
+name = "patitas-a-casa-production"
+account_id = "Ycf817629bd2a1a296e37e6d000327c08b4ae2"
+route = "patitasacasa.org"
