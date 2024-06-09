@@ -73,8 +73,8 @@ export const RegisterForm = ({ setLogin, isRegisterForm, switchForm }) => {
         setErrors({ serverError: data.message });
       }
     } catch (error) {
-      console.error('Error al realizar la solicitud:', error);
-      const message = error.message;
+      console.error('Error al realizar la solicitud:', error.response.data.message);
+      const message = error.response.data.message;
       toast.error(message);
     }
   };
