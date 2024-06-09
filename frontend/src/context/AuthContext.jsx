@@ -40,8 +40,8 @@ const login = async (credentials) => {
       return false
     }
   } catch (error) {
-    console.error('Error al iniciar sesión:', error.response || error);
-    toast.error(error.message);
+    console.error('Error al iniciar sesión:', error.response.data.error);
+    toast.error(error.response.data.error);
     return false
   }
 };

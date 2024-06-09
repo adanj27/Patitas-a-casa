@@ -58,6 +58,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
       try {
         // Usa la función de login del hook de autenticación
         const success = await login(formData);
+        console.log(success)
 
         if (success) {
           // Redirige al usuario a la página principal después del inicio de sesión exitoso
@@ -65,7 +66,6 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
           window.location.reload();
         } else {
           // Maneja el caso en que la respuesta del servidor no sea exitosa
-          const data = await success.json();
           setErrors({ serverError: data.message });
         }
       } catch (error) {
