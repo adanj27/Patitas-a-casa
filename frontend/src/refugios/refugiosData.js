@@ -57,6 +57,7 @@ export const refugios = [
                 casitaDeLulaPet4
             ],
         },
+        mascotas: 'Brindamos un hogar temporal a una variedad de adorables mascotas que están en busca de una familia amorosa. Cada uno de nuestros residentes tiene una historia única y está esperando encontrar su hogar definitivo donde recibirán el amor y cuidado que merecen. A continuación, te presentamos algunas de las encantadoras mascotas que actualmente residen con nosotros. Cada imagen refleja su personalidad y ternura, y esperamos que puedas ver en ellos a un futuro miembro de tu familia.',
         section1: true,
         section2: true,
         section3: false,

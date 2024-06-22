@@ -58,7 +58,7 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
       try {
         // Usa la función de login del hook de autenticación
         const success = await login(formData);
-        console.log(success)
+        console.log(success);
 
         if (success) {
           // Redirige al usuario a la página principal después del inicio de sesión exitoso
@@ -104,6 +104,10 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
         </div>
         <span className={styles.formTitle}>Iniciar sesión</span>
         <form className={styles.registerForm} onSubmit={handleSubmit}>
+          <div style={{ backgroundColor: '#7d7d7d', color: 'white' }}>
+            <p>Correo: usuario.patitas@gmail.com</p>
+            <p>Contraseña: Pruebas1*</p>
+          </div>
           <div className={styles.field}>
             <label htmlFor="email" className={styles.label}>
               Correo:
@@ -143,7 +147,11 @@ export const LoginForm = ({ setLogin, isRegisterForm, switchForm }) => {
             </span>
           </p>
           <div className={styles.submitButton}>
-            <button type="submit" className={styles.button} disabled={isLoading}>
+            <button
+              type="submit"
+              className={styles.button}
+              disabled={isLoading}
+            >
               {isLoading ? <SpinnerButton /> : 'Iniciar sesión'}
             </button>
           </div>

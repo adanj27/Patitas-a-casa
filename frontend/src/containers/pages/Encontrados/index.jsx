@@ -20,21 +20,21 @@ const Encontrados = () => {
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = foundPets.slice(firstPostIndex, lastPostIndex);
   const totalPosts = foundPets.length;
-	const totalPages = Math.ceil(totalPosts / postsPerPage);
-	
-	const TranslateSize = (size) => {
-		switch (size) {
-			case 'SMALL':
-				return 'Pequeño';
-			case 'MEDIUM':
-				return 'Mediano';
-			case 'LARGE':
-				return 'Grande';
-			// Puedes agregar más casos según tus necesidades
-			default:
-				return size; // Mantén el valor original si no coincide con los casos anteriores
-		}
-	};
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+  const TranslateSize = (size) => {
+    switch (size) {
+      case 'SMALL':
+        return 'Pequeño';
+      case 'MEDIUM':
+        return 'Mediano';
+      case 'LARGE':
+        return 'Grande';
+      // Puedes agregar más casos según tus necesidades
+      default:
+        return size; // Mantén el valor original si no coincide con los casos anteriores
+    }
+  };
 
   useEffect(() => {
     if (data) {
@@ -93,13 +93,17 @@ const Encontrados = () => {
             }
           )}
         </section>
-        <Paginacion
-          totalPosts={Data.length}
-          postsPerPage={postsPerPage}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
+        {data.data.length > 0 ? (
+          <Paginacion
+            totalPosts={Data.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
+        ) : (
+          '1'
+        )}
       </div>
     </>
   );
