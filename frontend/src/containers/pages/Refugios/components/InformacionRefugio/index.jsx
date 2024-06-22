@@ -118,13 +118,7 @@ const InformacionRefugio = () => {
 
           <div className={styles['information-content__pets']}>
             <h3>Las mascotas a las que le dan techo</h3>
-            <p>
-              ros tempus lacinia. Nam bibendum pellentesque quam a convallis.
-              Sed ut vulputate nisi. Integer in felis sed leo vestibulum
-              venenatis. Suspendisse um pellentesque quam a convallis. Sed ut
-              vulputate nisi. Integer in felis sed leo vestibulum venenatis.
-              Suspendisse quis arcu sem. Aenean feugiat ex eu
-            </p>
+            <p>{refugios[id].mascotas}</p>
             <div>
               {refugios[id].pictures.mascotas.map((petImg, id) => {
                 return (
