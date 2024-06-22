@@ -47,7 +47,7 @@ export const BurgerMenu = () => {
       <ul className={`${styles.burger_menu__items} ${isOpen && styles.open}`}>
         {botones.map((btn, indice) => {
           return (
-            <li key={indice}>
+            <li key={indice} onClick={() => setIsOpen(false)}>
               <BurgerItem to={btn.path} texto={btn.texto}></BurgerItem>
             </li>
           );
