@@ -11,10 +11,11 @@ import { useEffect, useState } from 'react';
 import useGet from '../../../hooks/services/useGet';
 
 const Encontrados = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
   const { data, status } = useGet('form');
   const [foundPets, setFoundPets] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -42,9 +43,27 @@ const Encontrados = () => {
       const filteredFoundPets = data.data.filter(
         (item) => item.type_search === 'FOUND'
       );
-      setFoundPets(filteredFoundPets);
+      // Actualizar el estado solo si los datos filtrados son diferentes a lostPets
+      if (!areArraysEqual(filteredFoundPets, foundPets)) {
+        setFoundPets(filteredFoundPets);
+      }
     }
-  }, [data]);
+  }, [data, foundPets]);
+
+  // Función para comparar dos arrays
+  function areArraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   return (
     <>
@@ -93,17 +112,13 @@ const Encontrados = () => {
             }
           )}
         </section>
-        {data.data.length > 0 ? (
-          <Paginacion
-            totalPosts={Data.length}
-            postsPerPage={postsPerPage}
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
-        ) : (
-          '1'
-        )}
+        <Paginacion
+          totalPosts={foundPets.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
       </div>
     </>
   );
