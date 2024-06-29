@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 import emailjs from '@emailjs/browser';
 
-const EMAILJS_USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
+const EMAILJS_PUBLIC_ID = import.meta.env.VITE_EMAILJS_PUBLIC_ID;
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
@@ -68,7 +68,7 @@ const Contacto = () => {
     setShowNotification(true);
     if (check) {
       const emailParams = {
-        to_name: 'patitasacasaorg@gmail.com', // Puedes personalizar el destinatario
+        to_name: 'abdn270594@gmail.com', // Puedes personalizar el destinatario
         from_name: `${firstName} ${lastName}`,
         from_email: email,
         phone_number: phone,
@@ -80,7 +80,7 @@ const Contacto = () => {
           EMAILJS_SERVICE_ID,
           EMAILJS_TEMPLATE_ID,
           emailParams,
-          EMAILJS_USER_ID
+          EMAILJS_PUBLIC_ID
         )
         .then(
           (response) => {
